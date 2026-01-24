@@ -1,0 +1,526 @@
+{
+  "metadata": {
+    "siteName": "Saheeb",
+    "title": "Saheeb | AI-Native Technology Solutions",
+    "description": "Oman-based technology company building AI-native products and B2B services aligned with Oman Vision 2040"
+  },
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "projects": "Projects",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "switchLanguage": "العربية"
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "viewAll": "View All",
+    "comingSoon": "Coming Soon",
+    "readMore": "Read More",
+    "submit": "Submit",
+    "sending": "Sending...",
+    "required": "Required",
+    "optional": "Optional",
+    "success": "Success",
+    "error": "Error",
+    "back": "Back",
+    "close": "Close"
+  },
+  "home": {
+    "hero": {
+      "badge": "From Oman, For Oman",
+      "titleLine1": "Powering",
+      "titleHighlight": "Oman's Digital Future",
+      "title": "Powering Oman's Digital Future",
+      "subtitle": "AI-native products. Digital infrastructure. Vision 2040.",
+      "cta": "Explore Our Services",
+      "ctaSecondary": "Discover Saheeb Drive"
+    },
+    "about": {
+      "title": "About Saheeb",
+      "subtitle": "Your Technology Partner in Oman",
+      "description": "Saheeb is an Oman-registered technology company dedicated to building AI-native products and providing comprehensive B2B services. We specialize in engineering, artificial intelligence, research, digital marketing, and localization services.",
+      "mission": "Our mission is to empower Omani businesses and contribute to the nation's digital transformation in alignment with Oman Vision 2040.",
+      "values": {
+        "globalTalent": {
+          "title": "Global Expertise",
+          "description": "We bring world-class specialists from Europe and beyond to deliver cutting-edge AI solutions in Oman"
+        },
+        "localImpact": {
+          "title": "Local Impact",
+          "description": "Every project we build stays in Oman—technology, IP, and infrastructure that belongs to the nation"
+        },
+        "knowledgeTransfer": {
+          "title": "Knowledge Transfer",
+          "description": "We train and mentor Omani talent, ensuring skills and expertise grow within the local workforce"
+        }
+      }
+    },
+    "services": {
+      "title": "Our Services",
+      "subtitle": "Comprehensive technology solutions for modern businesses"
+    },
+    "vision2040": {
+      "title": "Aligned with Oman Vision 2040",
+      "subtitle": "Contributing to Oman's national development across all four pillars",
+      "pillars": {
+        "peopleSociety": {
+          "title": "People and Society",
+          "description": "Building a knowledge-based society through education, skills development, and competitive capabilities for Omani talent"
+        },
+        "economyDevelopment": {
+          "title": "Economy and Development",
+          "description": "Creating digital infrastructure and AI solutions that drive economic diversification and private sector growth"
+        },
+        "governance": {
+          "title": "Governance and Institutional Performance",
+          "description": "Developing smart government solutions that enhance efficiency, transparency, and citizen experience"
+        },
+        "environment": {
+          "title": "Environment and Natural Resources",
+          "description": "Building sustainable technology solutions that optimize resource usage and protect Oman's natural heritage"
+        }
+      }
+    },
+    "featured": {
+      "title": "Featured Project",
+      "saheebDrive": {
+        "title": "Saheeb Drive",
+        "subtitle": "Your Next Car is One Conversation Away",
+        "description": "Tell us what you want in Arabic or English. Our AI finds it, verifies it, and handles everything—from search to keys in hand.",
+        "cta": "Join the Waitlist",
+        "badge": "Coming Soon"
+      }
+    },
+    "cta": {
+      "title": "Ready to Transform Your Business?",
+      "subtitle": "Let's discuss how Saheeb can help you achieve your digital goals.",
+      "button": "Get in Touch"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "We Build. We Scale. We Deliver.",
+    "list": {
+      "build": {
+        "title": "We Build Products",
+        "shortDescription": "From Zero to Market Leader",
+        "tagline": "From Zero to Market Leader",
+        "description": "Full-stack product development—web, mobile, cloud. We don't just write code, we ship products that win. MVP in weeks, scale-up support for years.",
+        "points": [
+          "Web, iOS, Android—one team, any stack",
+          "MVP in 4-8 weeks, not months",
+          "Your IP, your code, your product",
+          "Post-launch growth & iteration"
+        ]
+      },
+      "ai": {
+        "title": "We Add Intelligence",
+        "shortDescription": "AI That Actually Works",
+        "tagline": "AI That Actually Works",
+        "description": "GPT integrations, custom ML models, Arabic NLP, automation pipelines. We turn AI hype into real business value—measurable ROI, not buzzwords.",
+        "points": [
+          "LLM & GPT integration experts",
+          "Custom model training & fine-tuning",
+          "Arabic NLP & voice AI",
+          "Process automation at scale"
+        ]
+      },
+      "grow": {
+        "title": "We Drive Growth",
+        "shortDescription": "Global Reach. Real Results.",
+        "tagline": "Global Reach. Real Results.",
+        "description": "Performance marketing with firepower. Google & Meta certified, influencer networks across GCC, SEO that ranks. Research-backed strategies, campaigns that convert.",
+        "points": [
+          "Google & Meta certified partners",
+          "Influencer marketing across GCC",
+          "SEO, content & paid ads",
+          "Market research & go-to-market"
+        ]
+      },
+      "localize": {
+        "title": "We Go Local",
+        "shortDescription": "Speak Arabic. Think Gulf.",
+        "tagline": "Speak Arabic. Think Gulf.",
+        "description": "Native Arabic specialists, RTL-first design, cultural adaptation. We don't just translate—we make your product feel like it was built here.",
+        "points": [
+          "Native Arabic content & UX",
+          "RTL-first interface design",
+          "GCC cultural adaptation",
+          "Regional compliance & standards"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "title": "What We're Building",
+    "subtitle": "Our flagship product is reshaping an entire industry",
+    "saheebDrive": {
+      "title": "Saheeb Drive",
+      "category": "AI-Native Car Marketplace",
+      "status": "Coming Soon",
+      "heroTagline": "The Future of Car Buying in Oman",
+      "heroDescription": "We're not improving the car market—we're replacing it. AI-first. Trust-built. Completely reimagined from the ground up.",
+      "problemTitle": "The Problem",
+      "problemDescription": "Oman's car market is broken. Scams, fake listings, price manipulation, wasted weekends. Buyers don't trust sellers. Sellers don't reach buyers. Everyone loses.",
+      "solutionTitle": "Our Solution",
+      "solutionDescription": "One conversation. That's all it takes. Tell our AI what you want—in Arabic or English—and we handle everything else. Search, verification, negotiation, paperwork, delivery.",
+      "techHighlights": [
+        "Custom ML models trained on GCC automotive data",
+        "Arabic NLP that actually understands dialects",
+        "Real-time fraud detection that catches what humans miss",
+        "Built on Oman's digital infrastructure from day one"
+      ],
+      "cta": "Discover Saheeb Drive"
+    },
+    "moreComing": {
+      "title": "More Projects",
+      "description": "Saheeb Drive is just the beginning. We're building more AI-powered solutions for Oman. Stay tuned."
+    }
+  },
+  "saheebDrive": {
+    "hero": {
+      "badge": "Coming Q3 2026",
+      "title": "Your Next Car.",
+      "titleHighlight": "One Chat Away.",
+      "cta": "Get Early Access",
+      "appStore": "Coming to App Store",
+      "playStore": "Coming to Google Play"
+    },
+    "howItWorks": {
+      "title": "Skip the Hassle",
+      "subtitle": "Buying a car in Oman shouldn't mean endless scrolling, shady sellers, or wasted weekends. We built something smarter—an AI that learns what YOU want and finds it.",
+      "steps": [
+        {
+          "number": "1",
+          "title": "Just Tell Us",
+          "description": "\"I need a family SUV under 5000 OMR\" — type it in Arabic or English. Our AI understands context, preferences, and exactly what matters to you. The more you use it, the better it knows your taste."
+        },
+        {
+          "number": "2",
+          "title": "AI Does the Heavy Lifting",
+          "description": "Deep analysis of every listing. Price history, seller verification, fraud detection—all cross-checked against ROP records and official Omani databases. Only cars that match YOUR criteria make it through."
+        },
+        {
+          "number": "3",
+          "title": "End-to-End, All Local",
+          "description": "Pick your car. We handle inspection, paperwork, ROP transfer—everything through official channels. Safe, transparent, fully integrated with Oman's systems. You just show up and drive."
+        }
+      ],
+      "cta": "Join the Waitlist"
+    },
+    "waitlist": {
+      "title": "Be the First to Try It",
+      "subtitle": "We're launching in Muscat Q3 2026. Early access members get priority.",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "your@email.com",
+      "phonePlaceholder": "+968",
+      "buyOrSell": "I want to",
+      "buy": "Buy a Car",
+      "sell": "Sell My Car",
+      "consent": "I agree to receive updates about Saheeb Drive. You can unsubscribe anytime.",
+      "consentRequired": "Please agree to continue",
+      "submit": "Get Early Access",
+      "submitting": "Joining...",
+      "success": {
+        "title": "You're on the list!",
+        "message": "We'll reach out before launch. Check your email for confirmation."
+      },
+      "error": {
+        "title": "Something went wrong",
+        "message": "Please try again or contact us directly."
+      }
+    },
+    "faq": {
+      "title": "Questions People Ask",
+      "items": [
+        {
+          "question": "When and where does it launch?",
+          "answer": "We're starting in Muscat, Q3 2026. Waitlist members get early access before the public launch. We'll expand to other cities based on demand."
+        },
+        {
+          "question": "Can I sell my car through Saheeb Drive?",
+          "answer": "Yes! Sellers get AI-powered pricing (so you know exactly what your car is worth), professional photos, and access to verified buyers. No more haggling with lowballers."
+        },
+        {
+          "question": "How do you verify cars and sellers?",
+          "answer": "We check against ROP records, insurance history, and our own fraud detection system. Suspicious listings get flagged before you ever see them. Only verified sellers make it to the platform."
+        },
+        {
+          "question": "What does it cost to use?",
+          "answer": "Browsing and searching is free. We charge a small service fee only when a deal is completed successfully. Sellers pay a listing fee. Full pricing will be announced at launch."
+        },
+        {
+          "question": "Is my data safe?",
+          "answer": "All your data stays in Oman, processed according to Omani privacy regulations. We never sell your information. You can delete your account and data anytime."
+        }
+      ]
+    },
+    "footer": {
+      "launching": "Launching Q3 2026 · Muscat, Oman",
+      "privacy": "Privacy Policy"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Let's discuss your next project",
+    "description": "Whether you have a question about our services, need a custom solution, or want to explore partnership opportunities, we're here to help.",
+    "form": {
+      "name": "Your Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email Address",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+968 XXXX XXXX",
+      "subject": "Subject",
+      "subjectPlaceholder": "What is this about?",
+      "message": "Message",
+      "messagePlaceholder": "Tell us about your project or inquiry...",
+      "consent": "I agree to the processing of my data according to the Privacy Policy",
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "success": {
+        "title": "Message Sent!",
+        "message": "Thank you for reaching out. We'll get back to you within 24 hours."
+      },
+      "error": {
+        "title": "Something went wrong",
+        "message": "Please try again or contact us directly via WhatsApp or email."
+      }
+    },
+    "info": {
+      "title": "Other Ways to Reach Us",
+      "email": {
+        "label": "Email",
+        "value": "contact@saheeb.com"
+      },
+      "whatsapp": {
+        "label": "WhatsApp",
+        "value": "Chat with us",
+        "cta": "Open WhatsApp"
+      },
+      "location": {
+        "label": "Location",
+        "value": "Muscat, Oman"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "metaDescription": "Learn how Saheeb collects, uses, and protects your personal data in compliance with Omani privacy regulations.",
+    "lastUpdated": "Last updated",
+    "subtitle": "This Privacy Policy explains how Saheeb collects, uses, and protects your personal information in compliance with Omani data protection regulations.",
+    "companyInfo": {
+      "title": "Data Controller",
+      "name": "Saheeb",
+      "address": "Muscat, Sultanate of Oman",
+      "emailLabel": "Privacy Inquiries"
+    },
+    "sections": {
+      "intro": {
+        "title": "Introduction and Scope",
+        "content": "This Privacy Policy applies to all personal data collected through saheeb.com, our mobile applications, and any services we provide (collectively, the \"Services\"). By using our Services, you acknowledge that you have read and understood this Privacy Policy.\n\nSaheeb is committed to protecting your privacy and handling your personal data in accordance with the laws of the Sultanate of Oman, including applicable data protection regulations. This policy describes our practices regarding the collection, use, storage, and disclosure of your information."
+      },
+      "dataController": {
+        "title": "Data Controller Information",
+        "content": "Saheeb acts as the data controller for personal data collected through our Services. As the data controller, we determine the purposes and means of processing your personal data.\n\nFor any questions about this Privacy Policy or our data practices, or to exercise your data rights, please contact us at privacy@saheeb.com. We aim to respond to all legitimate requests within 30 days."
+      },
+      "dataCollection": {
+        "title": "Information We Collect",
+        "content": "We collect information in the following categories:\n\n• Contact Information: Name, email address, phone number, and any details you provide when contacting us or submitting forms.\n\n• Waitlist Information: Name, email, phone number, and preferences (such as buyer/seller status for Saheeb Drive).\n\n• Device Information: Browser type, operating system, IP address, device identifiers, and general location data derived from IP address.\n\n• Usage Data: Pages visited, time spent on pages, links clicked, and interaction patterns with our website.\n\n• Cookies and Similar Technologies: Information collected through cookies, pixels, and similar tracking technologies (see Cookies section below).\n\n• Saheeb Drive Specific Data: If you join the Saheeb Drive waitlist, we collect car preferences, location preferences, and whether you intend to buy or sell vehicles.\n\nWe do not collect sensitive personal data such as health information, religious beliefs, or government-issued identification numbers unless specifically required and with your explicit consent."
+      },
+      "legalBasis": {
+        "title": "Legal Basis for Processing",
+        "content": "We process your personal data based on the following legal grounds under Omani law:\n\n• Consent: When you voluntarily provide information through forms with an explicit consent checkbox, or when you opt-in to marketing communications. You may withdraw consent at any time.\n\n• Legitimate Interests: For business operations, security, fraud prevention, and improving our services, where such interests are not overridden by your rights.\n\n• Contractual Necessity: When processing is necessary to provide services you have requested or to take steps at your request before entering into a contract.\n\n• Legal Obligations: When we are required to process data to comply with Omani laws and regulations, or to respond to lawful requests from authorities."
+      },
+      "dataUse": {
+        "title": "How We Use Your Information",
+        "content": "We use your personal data for the following purposes:\n\n• Service Delivery: To respond to your inquiries, process your requests, and provide our services.\n\n• Communications: To send you service-related notifications and, with your consent, marketing communications about our products and services.\n\n• Improvement: To analyze usage patterns, improve our website and services, and develop new features.\n\n• Security: To protect against fraud, unauthorized access, and other security threats to our services and users.\n\n• Legal Compliance: To comply with applicable laws, regulations, and legal processes in the Sultanate of Oman.\n\n• Business Operations: For internal administration, record-keeping, and business planning purposes."
+      },
+      "dataSharing": {
+        "title": "Information Sharing and Disclosure",
+        "content": "We do not sell, rent, or trade your personal information to third parties for their marketing purposes.\n\nWe may share your information in the following circumstances:\n\n• Service Providers: With trusted third-party service providers who assist us in operating our website, conducting our business, or servicing you, provided they agree to keep your information confidential.\n\n• Legal Requirements: When required by law, court order, or governmental authority in the Sultanate of Oman, or when we believe disclosure is necessary to protect our rights, your safety, or the safety of others.\n\n• Business Transfers: In connection with a merger, acquisition, or sale of assets, your information may be transferred to the acquiring entity, subject to this Privacy Policy.\n\n• With Your Consent: In any other circumstances where you have provided explicit consent to share your information.\n\nAll third parties with whom we share data are contractually obligated to protect your information and use it only for the purposes for which it was shared."
+      },
+      "internationalTransfers": {
+        "title": "International Data Transfers",
+        "content": "Your personal data is primarily stored and processed in the Sultanate of Oman. We are committed to keeping your data within Oman wherever possible.\n\nIn some cases, we may need to transfer data to service providers located outside of Oman for technical or operational reasons. When such transfers occur, we ensure appropriate safeguards are in place, including:\n\n• Contractual clauses requiring the recipient to protect your data to standards equivalent to those in Oman.\n\n• Ensuring transfers are only to countries with adequate data protection frameworks.\n\n• Obtaining your explicit consent where required.\n\nIf you have questions about international transfers, please contact us at privacy@saheeb.com."
+      },
+      "dataRetention": {
+        "title": "Data Retention",
+        "content": "We retain your personal data only for as long as necessary to fulfill the purposes for which it was collected, or as required by applicable law. Our retention periods are as follows:\n\n• Contact Form Submissions: 2 years from the date of submission, unless an ongoing business relationship exists.\n\n• Waitlist Registrations: Until product launch plus 1 year, or until you request removal.\n\n• Marketing Consent Records: Until consent is withdrawn, plus records retained for 5 years for compliance purposes.\n\n• Website Analytics Data: 26 months in aggregate/anonymized form.\n\n• Legal and Compliance Records: As required by Omani law.\n\nAfter the retention period expires, we securely delete or anonymize your personal data."
+      },
+      "yourRights": {
+        "title": "Your Rights",
+        "content": "Under Omani data protection regulations, you have the following rights regarding your personal data:\n\n• Right to Access: You may request a copy of the personal data we hold about you.\n\n• Right to Rectification: You may request that we correct inaccurate or incomplete personal data.\n\n• Right to Erasure: You may request deletion of your personal data, subject to certain legal exceptions.\n\n• Right to Restrict Processing: You may request that we limit how we use your data in certain circumstances.\n\n• Right to Data Portability: Where technically feasible, you may request your data in a structured, commonly used format.\n\n• Right to Object: You may object to processing based on legitimate interests or for direct marketing purposes.\n\n• Right to Withdraw Consent: Where processing is based on consent, you may withdraw consent at any time.\n\nTo exercise any of these rights, please contact us at privacy@saheeb.com. We will respond within 30 days. We may require verification of your identity before processing your request."
+      },
+      "cookies": {
+        "title": "Cookies and Tracking Technologies",
+        "content": "We use cookies and similar technologies to enhance your experience on our website. These include:\n\n• Essential Cookies: Necessary for the website to function properly. These cannot be disabled.\n\n• Analytics Cookies: Help us understand how visitors interact with our website by collecting information anonymously. Used only with your consent.\n\n• Preference Cookies: Remember your settings and preferences (such as language choice).\n\nWe do not use advertising or tracking cookies that follow you across other websites.\n\nYou can manage cookie preferences through your browser settings. Please note that disabling certain cookies may affect website functionality. Most browsers allow you to:\n\n• View cookies stored on your device\n• Accept or reject cookies (either all or certain types)\n• Delete cookies"
+      },
+      "childrenPrivacy": {
+        "title": "Children's Privacy",
+        "content": "Our Services are not directed at individuals under the age of 18 (\"minors\"). We do not knowingly collect personal data from minors.\n\nIf you are a parent or guardian and believe your child has provided us with personal information without your consent, please contact us immediately at privacy@saheeb.com. If we become aware that we have collected personal data from a minor without parental consent, we will take steps to delete that information promptly.\n\nFor Saheeb Drive and other products requiring account creation, users must be 18 years or older."
+      },
+      "security": {
+        "title": "Security Measures",
+        "content": "We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. These measures include:\n\n• Encryption: All data transmitted between your device and our servers is encrypted using TLS/SSL protocols.\n\n• Access Controls: Personal data is accessible only to authorized personnel on a need-to-know basis.\n\n• Security Assessments: We conduct regular security reviews and vulnerability assessments.\n\n• Incident Response: We maintain procedures for detecting, reporting, and responding to data security incidents.\n\nWhile we strive to protect your personal data, no method of transmission over the internet or electronic storage is 100% secure. We cannot guarantee absolute security of your information."
+      },
+      "changes": {
+        "title": "Changes to This Policy",
+        "content": "We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors.\n\nWhen we make changes, we will:\n\n• Update the \"Last Updated\" date at the top of this policy.\n• Post the updated policy on our website.\n• For material changes that significantly affect your rights, we will provide prominent notice or seek your consent where required by law.\n\nWe encourage you to review this Privacy Policy periodically. Your continued use of our Services after changes are posted constitutes your acceptance of the updated policy."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "content": "If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:\n\nEmail: privacy@saheeb.com\nAddress: Muscat, Sultanate of Oman\n\nWe aim to respond to all inquiries within 30 days. If you are not satisfied with our response, you may have the right to lodge a complaint with the relevant regulatory authority in Oman."
+      }
+    }
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "metaDescription": "Read Saheeb's Terms of Service governing your use of our website and services under Omani law.",
+    "lastUpdated": "Last updated",
+    "subtitle": "These Terms of Service govern your access to and use of Saheeb's website and services. Please read them carefully before using our services.",
+    "importantNotice": "PLEASE READ THESE TERMS CAREFULLY. BY USING OUR SERVICES, YOU AGREE TO BE BOUND BY THESE TERMS AND OUR PRIVACY POLICY.",
+    "legalContact": {
+      "title": "Legal Inquiries",
+      "name": "Saheeb",
+      "address": "Muscat, Sultanate of Oman",
+      "emailLabel": "Legal Contact"
+    },
+    "sections": {
+      "acceptance": {
+        "title": "Agreement to Terms",
+        "content": "By accessing or using the Saheeb website (saheeb.com), mobile applications, or any of our services (collectively, the \"Services\"), you agree to be bound by these Terms of Service (\"Terms\").\n\nIf you do not agree to these Terms, you must not access or use our Services.\n\nYou must be at least 18 years of age to use our Services. By using our Services, you represent and warrant that you are at least 18 years old and have the legal capacity to enter into these Terms.\n\nThese Terms constitute a legally binding agreement between you and Saheeb. We encourage you to print or save a copy of these Terms for your records."
+      },
+      "companyInfo": {
+        "title": "Company Information",
+        "content": "Saheeb is a technology company registered and operating in the Sultanate of Oman.\n\nCompany Name: Saheeb\nRegistered Address: Muscat, Sultanate of Oman\nContact Email: contact@saheeb.com\nLegal Inquiries: legal@saheeb.com\n\nAll references to \"Saheeb,\" \"we,\" \"us,\" or \"our\" in these Terms refer to Saheeb and its affiliates."
+      },
+      "servicesDescription": {
+        "title": "Description of Services",
+        "content": "Saheeb provides technology services including but not limited to:\n\n• Website and Information: Our website provides general information about our company and services. Website content is for informational purposes only.\n\n• Products: Including Saheeb Drive (AI-powered car marketplace, coming soon) and other products we may develop.\n\n• B2B Services: Technology consulting, software development, AI solutions, digital marketing, and localization services.\n\nIMPORTANT: Our Services are provided on an \"AS IS\" and \"AS AVAILABLE\" basis. We reserve the right to modify, suspend, or discontinue any part of our Services at any time without prior notice.\n\nService descriptions on our website are general in nature and do not constitute binding offers. Actual services are subject to separate written agreements."
+      },
+      "userAccounts": {
+        "title": "User Accounts",
+        "content": "Certain features of our Services may require you to create an account. When creating an account, you agree to:\n\n• Provide accurate, current, and complete information during registration.\n• Maintain the security and confidentiality of your account credentials.\n• Notify us immediately of any unauthorized access to your account.\n• Accept responsibility for all activities that occur under your account.\n\nWe reserve the right to suspend or terminate your account at our sole discretion if we believe you have violated these Terms or engaged in fraudulent, abusive, or illegal activity.\n\nYou may delete your account at any time by contacting us at contact@saheeb.com."
+      },
+      "acceptableUse": {
+        "title": "Acceptable Use Policy",
+        "content": "You agree to use our Services only for lawful purposes and in accordance with these Terms. You must NOT:\n\n• Violate any applicable local, national, or international law or regulation.\n• Infringe upon the intellectual property rights of Saheeb or any third party.\n• Transmit any malicious code, viruses, or harmful content.\n• Attempt to gain unauthorized access to our systems, servers, or networks.\n• Interfere with or disrupt the integrity or performance of our Services.\n• Use automated systems (bots, scrapers, etc.) to access our Services without permission.\n• Impersonate any person or entity, or misrepresent your affiliation.\n• Engage in fraudulent, deceptive, or misleading practices.\n• Collect or harvest personal data of other users without consent.\n• Use our Services to send spam or unsolicited communications.\n\nWe reserve the right to investigate and take appropriate legal action against anyone who violates these prohibitions."
+      },
+      "intellectualProperty": {
+        "title": "Intellectual Property Rights",
+        "content": "All content, features, and functionality of our Services are owned by Saheeb and are protected by intellectual property laws of the Sultanate of Oman and international conventions.\n\nThis includes but is not limited to:\n\n• Trademarks: \"Saheeb,\" \"Saheeb Drive,\" our logo, and any other marks are trademarks of Saheeb. You may not use these marks without our prior written permission.\n\n• Content: All text, graphics, images, videos, software, and other materials on our website.\n\n• Technology: Our proprietary software, algorithms, AI models, and technical infrastructure.\n\nLimited License: We grant you a limited, non-exclusive, non-transferable, revocable license to access and use our Services for personal, non-commercial purposes, subject to these Terms.\n\nYou may NOT:\n• Copy, modify, or create derivative works from our content.\n• Distribute, publicly display, or publicly perform our content.\n• Reverse engineer, decompile, or disassemble our software.\n• Remove or alter any proprietary notices or labels."
+      },
+      "thirdPartyContent": {
+        "title": "Third-Party Links and Content",
+        "content": "Our Services may contain links to third-party websites, services, or content that are not owned or controlled by Saheeb.\n\nWe do not:\n• Endorse or assume responsibility for any third-party content.\n• Control the content, privacy policies, or practices of third parties.\n• Guarantee the accuracy, reliability, or completeness of third-party information.\n\nYour interactions with third parties are solely between you and the third party. We encourage you to review the terms and privacy policies of any third-party services you access through our platform.\n\nSaheeb shall not be liable for any damage or loss caused by your reliance on any third-party content or services."
+      },
+      "disclaimerWarranties": {
+        "title": "Disclaimer of Warranties",
+        "content": "TO THE MAXIMUM EXTENT PERMITTED BY OMANI LAW, OUR SERVICES ARE PROVIDED \"AS IS\" AND \"AS AVAILABLE\" WITHOUT ANY WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED, OR STATUTORY.\n\nWE SPECIFICALLY DISCLAIM ALL WARRANTIES INCLUDING BUT NOT LIMITED TO:\n\n• MERCHANTABILITY: No warranty that our Services are fit for sale or commercial use.\n\n• FITNESS FOR A PARTICULAR PURPOSE: No warranty that our Services will meet your specific requirements.\n\n• NON-INFRINGEMENT: No warranty that our Services do not infringe any third-party rights.\n\n• ACCURACY: No warranty that information on our website is accurate, complete, or current.\n\n• AVAILABILITY: No warranty of uninterrupted, timely, secure, or error-free service.\n\n• RESULTS: No warranty regarding any results from using our Services.\n\nAny reliance you place on information provided through our Services is strictly at your own risk."
+      },
+      "limitationLiability": {
+        "title": "Limitation of Liability",
+        "content": "TO THE MAXIMUM EXTENT PERMITTED BY OMANI LAW:\n\nSaheeb, its directors, employees, agents, partners, and affiliates shall NOT be liable for any:\n\n• Indirect, incidental, special, consequential, or punitive damages.\n• Loss of profits, revenue, data, or business opportunities.\n• Damages arising from your use or inability to use our Services.\n• Damages arising from any content posted by users or third parties.\n• Damages arising from unauthorized access to your data.\n\nOUR TOTAL LIABILITY TO YOU FOR ALL CLAIMS ARISING FROM OR RELATING TO THESE TERMS OR OUR SERVICES SHALL NOT EXCEED THE GREATER OF:\n\n(a) The amount you paid to Saheeb in the 12 months preceding the claim, or\n(b) OMR 100 (One Hundred Omani Rials).\n\nThese limitations apply regardless of the theory of liability (contract, tort, negligence, strict liability, or otherwise) and even if we have been advised of the possibility of such damages.\n\nSome jurisdictions do not allow the exclusion of certain warranties or limitations of liability. In such cases, our liability shall be limited to the maximum extent permitted by applicable law."
+      },
+      "indemnification": {
+        "title": "Indemnification",
+        "content": "You agree to indemnify, defend, and hold harmless Saheeb and its officers, directors, employees, agents, affiliates, and partners from and against any and all claims, liabilities, damages, losses, costs, and expenses (including reasonable legal fees) arising from or relating to:\n\n• Your use of or access to our Services.\n• Your violation of these Terms.\n• Your violation of any applicable law or regulation.\n• Any content you submit, post, or transmit through our Services.\n• Your infringement of any third-party rights, including intellectual property rights.\n• Any dispute between you and any third party.\n\nWe reserve the right, at your expense, to assume the exclusive defense and control of any matter for which you are required to indemnify us, and you agree to cooperate with our defense of such claims."
+      },
+      "governingLaw": {
+        "title": "Governing Law and Jurisdiction",
+        "content": "These Terms shall be governed by and construed in accordance with the laws of the Sultanate of Oman, without regard to its conflict of law provisions.\n\nAny dispute arising out of or relating to these Terms or our Services shall be subject to the exclusive jurisdiction of the courts located in Muscat, Sultanate of Oman.\n\nYou hereby:\n\n• Consent to the personal jurisdiction of such courts.\n• Waive any objection to venue in such courts.\n• Waive any claim that such courts constitute an inconvenient forum.\n\nNotwithstanding the foregoing, Saheeb may seek injunctive or other equitable relief in any court of competent jurisdiction to protect its intellectual property rights."
+      },
+      "disputeResolution": {
+        "title": "Dispute Resolution",
+        "content": "Before initiating any formal legal proceedings, you agree to first attempt to resolve any dispute with Saheeb through informal negotiation.\n\nInformal Resolution: Contact us at legal@saheeb.com with a description of your concern. We will attempt to resolve the matter within 30 days.\n\nArbitration: If informal resolution is unsuccessful, any dispute shall be resolved through binding arbitration administered under the rules of Oman Commercial Arbitration in Muscat. The arbitration shall be conducted in English (or Arabic upon mutual agreement).\n\nClass Action Waiver: YOU AGREE THAT ANY DISPUTE RESOLUTION PROCEEDINGS WILL BE CONDUCTED ONLY ON AN INDIVIDUAL BASIS AND NOT IN A CLASS, CONSOLIDATED, OR REPRESENTATIVE ACTION.\n\nSmall Claims: Notwithstanding the above, either party may bring an individual action in small claims court for disputes within the court's jurisdictional limits."
+      },
+      "forceMajeure": {
+        "title": "Force Majeure",
+        "content": "Saheeb shall not be liable for any failure or delay in performing our obligations under these Terms where such failure or delay results from events beyond our reasonable control (\"Force Majeure Events\").\n\nForce Majeure Events include but are not limited to:\n\n• Natural disasters (earthquakes, floods, storms, etc.)\n• Acts of war, terrorism, or civil unrest\n• Government actions, laws, or regulations\n• Epidemics, pandemics, or public health emergencies\n• Power outages or telecommunications failures\n• Cyberattacks or system failures beyond our control\n• Labor disputes or strikes\n\nIf a Force Majeure Event continues for more than 60 days, either party may terminate these Terms without liability."
+      },
+      "severability": {
+        "title": "Severability and Waiver",
+        "content": "Severability: If any provision of these Terms is found to be invalid, illegal, or unenforceable by a court of competent jurisdiction, such provision shall be modified to the minimum extent necessary to make it valid and enforceable, or if modification is not possible, shall be severed from these Terms. The remaining provisions shall continue in full force and effect.\n\nNo Waiver: Our failure to enforce any right or provision of these Terms shall not constitute a waiver of such right or provision. Any waiver must be in writing and signed by an authorized representative of Saheeb.\n\nEntire Agreement: These Terms, together with our Privacy Policy and any other agreements expressly incorporated by reference, constitute the entire agreement between you and Saheeb regarding our Services.\n\nAssignment: You may not assign or transfer these Terms or your rights hereunder without our prior written consent. Saheeb may assign these Terms without restriction."
+      },
+      "changes": {
+        "title": "Changes to Terms",
+        "content": "We reserve the right to modify these Terms at any time at our sole discretion.\n\nWhen we make changes:\n\n• We will update the \"Last Updated\" date at the top of these Terms.\n• We will post the revised Terms on our website.\n• For material changes, we may provide additional notice (such as a prominent notice on our website or email notification to registered users).\n\nYour continued use of our Services after the revised Terms are posted constitutes your acceptance of the changes. If you do not agree to the modified Terms, you must discontinue use of our Services.\n\nWe encourage you to review these Terms periodically to stay informed of any updates."
+      },
+      "contact": {
+        "title": "Contact Information",
+        "content": "If you have any questions about these Terms of Service, please contact us:\n\nGeneral Inquiries: contact@saheeb.com\nLegal Inquiries: legal@saheeb.com\nAddress: Muscat, Sultanate of Oman\n\nWe aim to respond to all inquiries within a reasonable timeframe."
+      }
+    },
+    "saheebDrive": {
+      "title": "Saheeb Drive: Product-Specific Terms",
+      "intro": "The following additional terms apply specifically to Saheeb Drive, our AI-powered car marketplace. These terms supplement and are in addition to the general Terms of Service above.",
+      "sections": {
+        "platformDescription": {
+          "title": "Platform Description",
+          "content": "Saheeb Drive is an AI-powered car marketplace that connects car buyers and sellers in Oman. The platform provides:\n\n• AI-assisted car search and matching\n• Listing services for sellers\n• Verification and fraud detection tools\n• Transaction facilitation services\n\nIMPORTANT: Saheeb Drive operates as a PLATFORM ONLY. We are NOT a party to any transaction between buyers and sellers. We do not own, sell, or purchase vehicles."
+        },
+        "userResponsibilities": {
+          "title": "User Responsibilities",
+          "content": "Sellers agree to:\n• Provide accurate and truthful information about vehicles listed.\n• Ensure they have legal authority to sell the vehicle.\n• Comply with all applicable Omani laws regarding vehicle sales and transfers.\n• Respond promptly to buyer inquiries.\n• Complete ROP vehicle transfer procedures properly.\n\nBuyers agree to:\n• Verify vehicle information independently before purchase.\n• Conduct physical inspections of vehicles before finalizing transactions.\n• Comply with all applicable Omani laws regarding vehicle purchases.\n• Arrange appropriate insurance and registration.\n\nAll users must verify information against official ROP (Royal Oman Police) records."
+        },
+        "platformRole": {
+          "title": "Saheeb Drive's Role",
+          "content": "Saheeb Drive provides:\n\n• Information services: AI-powered search, matching, and recommendations.\n• Verification assistance: Cross-referencing with available databases (informational only, not guaranteed).\n• Fraud detection: AI-based detection of suspicious listings (not 100% accurate).\n• Transaction facilitation: Tools to help complete transactions (optional services).\n\nSaheeb Drive does NOT:\n\n• Guarantee the accuracy of any listing information.\n• Warrant the condition, history, or legality of any vehicle.\n• Guarantee transaction completion or satisfaction.\n• Assume responsibility for buyer-seller disputes.\n• Provide legal, financial, or mechanical advice."
+        },
+        "feesPayments": {
+          "title": "Fees and Payments",
+          "content": "Saheeb Drive fee structure (to be announced at launch) may include:\n\n• Listing fees for sellers\n• Service fees upon successful transaction completion\n• Premium feature subscriptions\n• Transaction processing fees\n\nAll fees are non-refundable unless otherwise specified. Payment processing is handled by third-party payment providers subject to their own terms.\n\nEscrow services, if offered, are provided by licensed third-party escrow providers. Saheeb Drive does not hold funds directly.\n\nFull pricing details will be published before the platform launch."
+        },
+        "listingStandards": {
+          "title": "Listing Standards",
+          "content": "All vehicle listings must:\n\n• Contain accurate and truthful information.\n• Include genuine photographs of the actual vehicle.\n• Disclose known defects, damage, or issues.\n• Comply with Omani vehicle regulations.\n• Not advertise stolen, illegally imported, or encumbered vehicles.\n\nSaheeb Drive reserves the right to:\n\n• Remove listings that violate these standards without notice.\n• Suspend or terminate accounts of repeat violators.\n• Report suspected illegal activity to authorities.\n• Modify listing content for clarity or compliance (with notice to seller)."
+        },
+        "verificationServices": {
+          "title": "Verification Services",
+          "content": "Saheeb Drive provides verification assistance through:\n\n• AI-based analysis of listing information.\n• Cross-referencing with available public databases.\n• Historical data analysis where available.\n• User verification processes.\n\nLIMITATIONS:\n\n• Verification is INFORMATIONAL ONLY and not guaranteed.\n• AI systems may produce errors or miss issues.\n• Database information may be incomplete or outdated.\n• Verification does not replace independent due diligence.\n\nUsers MUST independently verify all information through official channels including ROP vehicle records, licensed mechanics, and insurance providers before completing any transaction."
+        },
+        "disclaimers": {
+          "title": "Saheeb Drive Disclaimers",
+          "content": "TO THE MAXIMUM EXTENT PERMITTED BY LAW, SAHEEB DRIVE AND SAHEEB:\n\n• Make no representations or warranties about any vehicle listed.\n• Assume no responsibility for vehicle condition, history, or legality.\n• Are not liable for disputes between buyers and sellers.\n• Are not liable for failed transactions or deal breakdowns.\n• Are not liable for inaccurate listing information provided by users.\n• Are not liable for any loss or damage resulting from platform use.\n• Are not responsible for pricing accuracy or market valuations.\n• Are not responsible for delivery, inspection, or transfer issues.\n\nBy using Saheeb Drive, you acknowledge that:\n\n• Vehicle transactions carry inherent risks.\n• You are solely responsible for your due diligence.\n• Physical inspection by a qualified mechanic is strongly recommended.\n• All transactions are between buyers and sellers directly.\n• Saheeb Drive is a facilitator, not a party to transactions."
+        }
+      }
+    },
+    "b2bDisclaimer": {
+      "title": "B2B Services Disclaimer",
+      "content": "Information About Our B2B Services:\n\nThe service descriptions on our website are for general informational purposes only and do not constitute binding contractual offers.\n\n• All B2B engagements (technology consulting, software development, AI solutions, digital marketing, localization services) require separate written agreements.\n\n• Terms, pricing, deliverables, and timelines vary by project and are negotiated individually.\n\n• No binding commitment is created by browsing our website or expressing interest in our services.\n\n• Actual service scope and terms are governed exclusively by signed contracts between Saheeb and the client.\n\n• Website content including timelines, capabilities, and outcomes are illustrative only.\n\nFor B2B inquiries, please contact us at contact@saheeb.com to discuss your specific requirements."
+    }
+  },
+  "footer": {
+    "tagline": "AI-native technology solutions for Oman",
+    "navigation": "Navigation",
+    "legal": "Legal",
+    "connect": "Connect",
+    "rights": "All rights reserved",
+    "madeIn": "Made with care in Oman"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "The page you're looking for doesn't exist or has been moved.",
+      "cta": "Go Home"
+    },
+    "generic": {
+      "title": "Something Went Wrong",
+      "description": "An unexpected error occurred. Please try again later.",
+      "cta": "Try Again"
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "phone": "Please enter a valid phone number",
+    "minLength": "Must be at least {min} characters",
+    "maxLength": "Must be no more than {max} characters",
+    "consent": "You must agree to continue"
+  }
+}
