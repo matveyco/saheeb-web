@@ -149,10 +149,6 @@ export default async function LocaleLayout({
       addressLocality: 'Muscat',
       addressCountry: 'OM',
     },
-    sameAs: [
-      'https://linkedin.com/company/saheeb',
-      'https://twitter.com/saheeb',
-    ],
     contactPoint: {
       '@type': 'ContactPoint',
       email: 'contact@saheeb.com',

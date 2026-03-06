@@ -79,7 +79,9 @@ export function Footer() {
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
-                {isArabic ? SITE_CONFIG.address.ar : SITE_CONFIG.address.en}
+                {isArabic
+                  ? SITE_CONFIG.address.operational.ar
+                  : SITE_CONFIG.address.operational.en}
               </p>
             </div>
 
@@ -128,6 +130,11 @@ export function Footer() {
                   >
                     {SITE_CONFIG.email}
                   </a>
+                </li>
+                <li className="text-xs text-white/40">
+                  {isArabic
+                    ? `${SITE_CONFIG.legalEntityName} · السجل التجاري ${SITE_CONFIG.crNumber}`
+                    : `${SITE_CONFIG.legalEntityName} · CR ${SITE_CONFIG.crNumber}`}
                 </li>
               </ul>
             </div>

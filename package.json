@@ -6,31 +6,34 @@
     "dev": "next dev -p 3333",
     "build": "next build",
     "start": "next start -p 3333",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:assets": "node scripts/check-asset-sizes.mjs"
   },
   "dependencies": {
-    "@vercel/postgres": "^0.10.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.1",
     "framer-motion": "^12.28.1",
-    "next": "16.1.4",
+    "next": "^16.1.6",
     "next-intl": "^4.7.0",
+    "pg": "^8.16.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "resend": "^6.8.0",
+    "resend": "^6.9.3",
     "tailwind-merge": "^3.4.0",
-    "zod": "^4.3.5"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.15.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "drizzle-kit": "^0.31.8",
+    "drizzle-kit": "^0.31.9",
     "eslint": "^9",
-    "eslint-config-next": "16.1.4",
+    "eslint-config-next": "^16.1.6",
     "prettier": "^3.8.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
+    "sharp": "^0.34.4",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

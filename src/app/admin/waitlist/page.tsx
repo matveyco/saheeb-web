@@ -102,12 +102,18 @@ export default function AdminWaitlistPage() {
                     <td className="py-3 px-4">
                       <span
                         className={`inline-block px-2 py-1 rounded text-xs font-medium ${
-                          entry.userType === 'buy'
+                          entry.userType === 'buyer'
                             ? 'bg-blue-500/20 text-blue-400'
-                            : 'bg-emerald-500/20 text-emerald-400'
+                            : entry.userType === 'seller'
+                              ? 'bg-emerald-500/20 text-emerald-400'
+                              : 'bg-amber-500/20 text-amber-300'
                         }`}
                       >
-                        {entry.userType === 'buy' ? 'Buyer' : 'Seller'}
+                        {entry.userType === 'buyer'
+                          ? 'Buyer'
+                          : entry.userType === 'seller'
+                            ? 'Seller'
+                            : 'Dealer'}
                       </span>
                     </td>
                     <td className="py-3 px-4 text-white/80">{entry.city}</td>

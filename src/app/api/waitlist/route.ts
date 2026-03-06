@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimit, getClientIP } from '@/lib/rate-limit';
 import { validateOrigin, csrfErrorResponse } from '@/lib/csrf';
-import { db, waitlistEntries } from '@/db';
+import { getDb, waitlistEntries } from '@/db';
+import {
+  getFirstValidationError,
+  waitlistSubmissionSchema,
+} from '@/lib/validation';
 
 // Rate limit: 3 requests per minute per IP (stricter for waitlist)
 const RATE_LIMIT = { limit: 3, windowSeconds: 60 };
@@ -31,36 +35,20 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-
-    // Validate required fields
-    const { name, phone, userType, city, consent, locale, consentTimestamp } = body;
-
-    if (!name || !phone || !userType || !city || !consent || !locale || !consentTimestamp) {
+    const parsed = waitlistSubmissionSchema.safeParse(body);
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: getFirstValidationError(parsed.error) },
         { status: 400 }
       );
     }
 
-    // Validate consent
-    if (consent !== true) {
-      return NextResponse.json(
-        { error: 'Consent is required' },
-        { status: 400 }
-      );
-    }
+    const waitlistData = parsed.data;
+
+    const db = getDb();
 
     // Insert into database
-    await db.insert(waitlistEntries).values({
-      name: String(name).trim(),
-      phone: String(phone).trim(),
-      email: body.email ? String(body.email).trim() : null,
-      userType: String(userType),
-      city: String(city),
-      consent: true,
-      locale: String(locale),
-      consentTimestamp: new Date(consentTimestamp),
-    });
+    await db.insert(waitlistEntries).values(waitlistData);
 
     return NextResponse.json(
       { success: true, message: 'Successfully added to waitlist' },

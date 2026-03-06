@@ -89,7 +89,7 @@ export default function ContactPage() {
 
                 <span className="hidden md:block text-white/20">|</span>
 
-                {/* Location with pin */}
+                {/* Operational location */}
                 <span className="flex items-center gap-2 text-white/60">
                   <svg
                     width="14"
@@ -105,11 +105,19 @@ export default function ContactPage() {
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                     <circle cx="12" cy="10" r="3" />
                   </svg>
-                  {isArabic ? SITE_CONFIG.address.ar : SITE_CONFIG.address.en}
+                  {isArabic
+                    ? SITE_CONFIG.address.operational.ar
+                    : SITE_CONFIG.address.operational.en}
                 </span>
               </div>
 
-              <p className="text-sm text-white/30 mt-6">
+              <p className="text-sm text-white/30 mt-4">
+                {isArabic
+                  ? `المقر القانوني: ${SITE_CONFIG.address.registered.ar}`
+                  : `Registered HQ: ${SITE_CONFIG.address.registered.en}`}
+              </p>
+
+              <p className="text-sm text-white/30 mt-2">
                 {isArabic
                   ? 'الأحد - الخميس: 9:00 صباحاً - 6:00 مساءً'
                   : 'Sun - Thu: 9 AM - 6 PM (Oman)'}

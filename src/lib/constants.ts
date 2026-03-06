@@ -1,14 +1,35 @@
 export const SITE_CONFIG = {
   name: 'Saheeb',
   nameAr: 'صاحب',
+  legalEntityName: 'SAHEEB TECH VENTURES LLC',
+  crNumber: '1642589',
+  legalType: {
+    en: 'Limited Liability Company (LLC)',
+    ar: 'شركة ذات مسؤولية محدودة',
+  },
+  registration: {
+    establishmentDate: '2026-02-01',
+    registrationDate: '2026-02-04',
+    expiryDate: '2031-02-01',
+    status: {
+      en: 'Active',
+      ar: 'نشط',
+    },
+  },
   domain: 'saheeb.com',
   url: 'https://saheeb.com',
   email: 'contact@saheeb.com',
   // phone: '+968 9000 0000', // Placeholder - uncomment when available
   // whatsapp: 'https://wa.me/96890000000', // Placeholder - uncomment when available
   address: {
-    en: 'Muscat, Oman',
-    ar: 'مسقط، عمان',
+    registered: {
+      en: 'Special Economic Zone at Duqm, Al Wusta Governorate, Oman',
+      ar: 'المنطقة الاقتصادية الخاصة بالدقم، محافظة الوسطى، سلطنة عمان',
+    },
+    operational: {
+      en: 'Muscat, Oman',
+      ar: 'مسقط، عمان',
+    },
   },
   // social: {
   //   linkedin: 'https://linkedin.com/company/saheeb',

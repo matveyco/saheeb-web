@@ -12,7 +12,7 @@ export const waitlistEntries = pgTable('waitlist_entries', {
   name: varchar('name', { length: 255 }).notNull(),
   email: varchar('email', { length: 255 }),
   phone: varchar('phone', { length: 50 }).notNull(),
-  userType: varchar('user_type', { length: 20 }).notNull(), // 'buy' | 'sell'
+  userType: varchar('user_type', { length: 20 }).notNull(), // 'buyer' | 'seller' | 'dealer'
   city: varchar('city', { length: 100 }).notNull(),
   consent: boolean('consent').notNull().default(false),
   locale: varchar('locale', { length: 10 }).notNull(),

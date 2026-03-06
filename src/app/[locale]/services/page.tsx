@@ -205,6 +205,9 @@ export default function ServicesPage() {
                   ? 'تواصل معنا لمناقشة مشروعك واحتياجاتك.'
                   : "Let's discuss your project and requirements."}
               </p>
+              <p className="text-sm text-white/40 max-w-2xl mx-auto mb-8">
+                {t('licenseDisclaimer')}
+              </p>
               <Link href="/contact">
                 <Button size="lg" variant="gold">
                   {tCommon('contactUs')}

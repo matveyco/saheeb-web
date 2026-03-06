@@ -187,7 +187,7 @@ export function AboutSection() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
         >
-          {values.map((value, index) => (
+          {values.map((value) => (
             <motion.div key={value.key} variants={itemVariants}>
               <Card
                 variant="glass"

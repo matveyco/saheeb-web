@@ -1,41 +1,67 @@
-/**
- * CSRF Protection - Origin validation
- * Validates that requests come from allowed origins
- */
-
-// Allowed origins - add your production domain
-const ALLOWED_ORIGINS = [
+const DEFAULT_ALLOWED_ORIGINS = [
   'https://saheeb.com',
   'https://www.saheeb.com',
-  // Development
   'http://localhost:3333',
   'http://127.0.0.1:3333',
 ];
 
-/**
- * Validate request origin for CSRF protection
- * Returns true if the request origin is valid
- */
-export function validateOrigin(request: Request): boolean {
-  const origin = request.headers.get('origin');
-  const referer = request.headers.get('referer');
-
-  // If no origin header, check referer
-  const requestOrigin = origin || (referer ? new URL(referer).origin : null);
-
-  // Allow requests without origin in development (e.g., Postman, curl)
-  if (!requestOrigin) {
-    // In production, you might want to reject these
-    // For now, allow for API testing flexibility
-    return process.env.NODE_ENV === 'development';
-  }
-
-  return ALLOWED_ORIGINS.includes(requestOrigin);
+interface ParsedOrigin {
+  origin: string | null;
+  invalid: boolean;
+  present: boolean;
 }
 
-/**
- * Create a CSRF validation error response
- */
+function parseOrigin(value: string | null): ParsedOrigin {
+  if (!value) {
+    return {
+      origin: null,
+      invalid: false,
+      present: false,
+    };
+  }
+
+  try {
+    return {
+      origin: new URL(value).origin,
+      invalid: false,
+      present: true,
+    };
+  } catch {
+    return {
+      origin: null,
+      invalid: true,
+      present: true,
+    };
+  }
+}
+
+function getAllowedOrigins(): Set<string> {
+  const envOrigins = process.env.ALLOWED_ORIGINS?.split(',')
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+
+  return new Set(envOrigins?.length ? envOrigins : DEFAULT_ALLOWED_ORIGINS);
+}
+
+export function validateOrigin(request: Request): boolean {
+  const directOrigin = parseOrigin(request.headers.get('origin'));
+  const refererOrigin = parseOrigin(request.headers.get('referer'));
+
+  // Reject malformed origin/referer values deterministically.
+  if (directOrigin.invalid || refererOrigin.invalid) {
+    return false;
+  }
+
+  const requestOrigin = directOrigin.origin || refererOrigin.origin;
+
+  if (!requestOrigin) {
+    // Local non-browser calls in development may not send origin headers.
+    return process.env.NODE_ENV === 'development' && !directOrigin.present && !refererOrigin.present;
+  }
+
+  return getAllowedOrigins().has(requestOrigin);
+}
+
 export function csrfErrorResponse() {
   return new Response(
     JSON.stringify({ error: 'Invalid request origin' }),

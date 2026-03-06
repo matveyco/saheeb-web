@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Container, Card } from '@/components/ui';
+import { Container } from '@/components/ui';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 

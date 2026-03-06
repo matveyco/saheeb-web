@@ -26,7 +26,8 @@ export default function SaheebDrivePage() {
     name: '',
     email: '',
     phone: '',
-    userType: 'buy',
+    userType: 'buyer',
+    city: 'muscat',
     consent: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -52,8 +53,10 @@ export default function SaheebDrivePage() {
           email: formData.email,
           phone: formData.phone,
           userType: formData.userType,
+          city: formData.city,
           consent: formData.consent,
           locale,
+          consentTimestamp: new Date().toISOString(),
         }),
       });
 
@@ -330,9 +333,9 @@ export default function SaheebDrivePage() {
                       <div className="flex rounded-xl overflow-hidden border border-white/10">
                         <button
                           type="button"
-                          onClick={() => setFormData({ ...formData, userType: 'buy' })}
+                          onClick={() => setFormData({ ...formData, userType: 'buyer' })}
                           className={`px-5 py-2 text-sm font-medium transition-colors ${
-                            formData.userType === 'buy'
+                            formData.userType === 'buyer'
                               ? 'bg-[#D4AF37] text-[#0A0E1A]'
                               : 'bg-white/5 text-white/60 hover:text-white'
                           }`}
@@ -341,9 +344,9 @@ export default function SaheebDrivePage() {
                         </button>
                         <button
                           type="button"
-                          onClick={() => setFormData({ ...formData, userType: 'sell' })}
+                          onClick={() => setFormData({ ...formData, userType: 'seller' })}
                           className={`px-5 py-2 text-sm font-medium transition-colors ${
-                            formData.userType === 'sell'
+                            formData.userType === 'seller'
                               ? 'bg-[#D4AF37] text-[#0A0E1A]'
                               : 'bg-white/5 text-white/60 hover:text-white'
                           }`}

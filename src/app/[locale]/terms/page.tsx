@@ -50,7 +50,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
     'contact',
   ];
 
-  const lastUpdated = new Date('2026-01-22').toLocaleDateString(
+  const lastUpdated = new Date('2026-03-06').toLocaleDateString(
     locale === 'ar' ? 'ar-OM' : 'en-US',
     { year: 'numeric', month: 'long', day: 'numeric' }
   );

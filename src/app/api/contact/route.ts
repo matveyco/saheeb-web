@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimit, getClientIP } from '@/lib/rate-limit';
 import { validateOrigin, csrfErrorResponse } from '@/lib/csrf';
-import { db, contactSubmissions } from '@/db';
+import { getDb, contactSubmissions } from '@/db';
 import { sendContactNotification } from '@/lib/email';
+import {
+  contactSubmissionSchema,
+  getFirstValidationError,
+} from '@/lib/validation';
 
 // Rate limit: 5 requests per minute per IP
 const RATE_LIMIT = { limit: 5, windowSeconds: 60 };
@@ -32,43 +36,17 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-
-    // Validate required fields
-    const { name, email, message, consent, locale, consentTimestamp } = body;
-
-    if (!name || !email || !message || !consent || !locale || !consentTimestamp) {
+    const parsed = contactSubmissionSchema.safeParse(body);
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: getFirstValidationError(parsed.error) },
         { status: 400 }
       );
     }
 
-    // Validate email format
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json(
-        { error: 'Invalid email format' },
-        { status: 400 }
-      );
-    }
+    const contactData = parsed.data;
 
-    // Validate consent
-    if (consent !== true) {
-      return NextResponse.json(
-        { error: 'Consent is required' },
-        { status: 400 }
-      );
-    }
-
-    const contactData = {
-      name: String(name).trim(),
-      email: String(email).trim(),
-      phone: body.phone ? String(body.phone).trim() : null,
-      subject: body.subject ? String(body.subject).trim() : null,
-      message: String(message).trim(),
-      consent: true,
-      locale: String(locale),
-      consentTimestamp: new Date(consentTimestamp),
-    };
+    const db = getDb();
 
     // Insert into database
     await db.insert(contactSubmissions).values(contactData);
