@@ -36,7 +36,7 @@ export async function generateMetadata({
       type: 'website',
       images: [
         {
-          url: '/og-image.svg',
+          url: '/images/og-image.png',
           width: 1200,
           height: 630,
           alt: isArabic ? 'قائمة انتظار صاحب درايف' : 'Saheeb Drive Waitlist',
@@ -49,7 +49,7 @@ export async function generateMetadata({
         ? 'قائمة انتظار صاحب درايف | صاحب'
         : 'Saheeb Drive Waitlist | Saheeb',
       description,
-      images: ['/og-image.svg'],
+      images: ['/images/og-image.png'],
     },
   };
 }

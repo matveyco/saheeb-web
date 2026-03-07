@@ -18,7 +18,7 @@ export default function ContactPage() {
       <Header />
       <main className="pt-16 md:pt-20 lg:pt-24">
         {/* Contact Section - Hero + Form combined */}
-        <section className="py-20 lg:py-28 bg-[#0A0E1A] relative overflow-hidden">
+        <section className="py-20 lg:py-28 bg-[#09090B] relative overflow-hidden">
           {/* Layer 1: Background image at opacity-20 */}
           <div className="absolute inset-0 z-0" aria-hidden="true">
             <Image
@@ -35,32 +35,22 @@ export default function ContactPage() {
             className="absolute inset-0 z-[1]"
             style={{
               background:
-                'linear-gradient(to bottom, rgba(10,14,26,0.6), rgba(10,14,26,0.4), rgba(10,14,26,1))',
-            }}
-            aria-hidden="true"
-          />
-
-          {/* Layer 3: Radial gold glow */}
-          <div
-            className="absolute inset-0 z-[2]"
-            style={{
-              background:
-                'radial-gradient(ellipse 80% 60% at 50% 30%, rgba(212,175,55,0.12), transparent 60%)',
+                'linear-gradient(to bottom, rgba(9,9,11,0.6), rgba(9,9,11,0.4), rgba(9,9,11,1))',
             }}
             aria-hidden="true"
           />
 
           <Container size="sm" className="relative z-10">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.4 }}
               className="text-center"
             >
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#EDEDEF] mb-3">
                 {t('title')}
               </h1>
-              <p className="text-lg text-white/60 mb-10">{t('subtitle')}</p>
+              <p className="text-lg text-[#8F8F96] mb-10">{t('subtitle')}</p>
 
               <div className="max-w-md mx-auto">
                 <ContactForm />
@@ -70,27 +60,27 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Info Section - Simple inline */}
-        <section className="py-16 bg-[#0A0E1A] border-t border-white/5">
+        <section className="py-16 bg-[#09090B] border-t border-[#1A1A1D]">
           <Container size="sm">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
               className="text-center"
             >
               <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 text-sm">
                 {/* Email */}
                 <a
                   href={`mailto:${SITE_CONFIG.email}`}
-                  className="text-[#D4AF37] hover:text-[#F4D03F] transition-colors"
+                  className="text-[#C9A87C] hover:text-[#EDEDEF] transition-colors"
                 >
                   {t('info.email.value')}
                 </a>
 
-                <span className="hidden md:block text-white/20">|</span>
+                <span className="hidden md:block text-[#333338]">|</span>
 
                 {/* Operational location */}
-                <span className="flex items-center gap-2 text-white/60">
+                <span className="flex items-center gap-2 text-[#8F8F96]">
                   <svg
                     width="14"
                     height="14"
@@ -111,13 +101,13 @@ export default function ContactPage() {
                 </span>
               </div>
 
-              <p className="text-sm text-white/30 mt-4">
+              <p className="text-sm text-[#5C5C63] mt-4">
                 {isArabic
                   ? `المقر القانوني: ${SITE_CONFIG.address.registered.ar}`
                   : `Registered HQ: ${SITE_CONFIG.address.registered.en}`}
               </p>
 
-              <p className="text-sm text-white/30 mt-2">
+              <p className="text-sm text-[#5C5C63] mt-2">
                 {isArabic
                   ? 'الأحد - الخميس: 9:00 صباحاً - 6:00 مساءً'
                   : 'Sun - Thu: 9 AM - 6 PM (Oman)'}

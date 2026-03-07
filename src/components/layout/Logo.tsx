@@ -12,9 +12,9 @@ export function Logo({ className }: LogoProps) {
   return (
     <Link
       href="/"
-      className={`flex items-center gap-3 font-bold text-xl text-white hover:text-[#D4AF37] transition-colors duration-200 ${className}`}
+      className={`flex items-center gap-3 font-bold text-xl text-[#EDEDEF] hover:text-[#C9A87C] transition-colors duration-200 ${className}`}
     >
-      <div className="w-9 h-9 bg-gradient-to-br from-[#D4AF37] to-[#B8860B] rounded-xl flex items-center justify-center shadow-[0_4px_15px_rgba(212,175,55,0.3)]">
+      <div className="w-9 h-9 bg-[#C9A87C] rounded-xl flex items-center justify-center">
         <svg
           width="20"
           height="20"
@@ -25,11 +25,11 @@ export function Logo({ className }: LogoProps) {
         >
           <path
             d="M8 16C8 11.5817 11.5817 8 16 8C20.4183 8 24 11.5817 24 16"
-            stroke="#0A0E1A"
+            stroke="#09090B"
             strokeWidth="2.5"
             strokeLinecap="round"
           />
-          <circle cx="16" cy="20" r="4" fill="#0A0E1A" />
+          <circle cx="16" cy="20" r="4" fill="#09090B" />
         </svg>
       </div>
       <span>{isArabic ? 'صاحب' : 'Saheeb'}</span>

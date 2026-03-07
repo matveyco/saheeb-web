@@ -46,7 +46,7 @@ export async function sendContactNotification(data: ContactNotificationData) {
       subject: data.subject || `New Contact Form Submission from ${safeName}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #D4AF37;">New Contact Form Submission</h2>
+          <h2 style="color: #C9A87C;">New Contact Form Submission</h2>
 
           <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
             <tr>
@@ -56,7 +56,7 @@ export async function sendContactNotification(data: ContactNotificationData) {
             <tr>
               <td style="padding: 10px; border-bottom: 1px solid #eee; color: #666;">Email:</td>
               <td style="padding: 10px; border-bottom: 1px solid #eee;">
-                <a href="mailto:${safeEmail}" style="color: #D4AF37;">${safeEmail}</a>
+                <a href="mailto:${safeEmail}" style="color: #C9A87C;">${safeEmail}</a>
               </td>
             </tr>
             ${safePhone ? `

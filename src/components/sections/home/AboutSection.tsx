@@ -73,23 +73,23 @@ export function AboutSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 12 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0, 0, 0.58, 1] as const },
+      transition: { duration: 0.4, ease: [0, 0, 0.58, 1] as const },
     },
   };
 
   return (
     <section
-      className="py-24 lg:py-32 bg-gradient-to-b from-[#0F1629] to-[#0A0E1A] relative overflow-hidden"
+      className="py-24 lg:py-32 bg-[#09090B] relative overflow-hidden"
       id="about"
     >
       {/* Omani geometric pattern - subtle centered background */}
@@ -98,85 +98,36 @@ export function AboutSection() {
           src="/images/About-section.png"
           alt=""
           fill
-          className="object-cover object-center opacity-[0.04]"
+          className="object-cover object-center opacity-[0.03]"
           sizes="100vw"
         />
-        {/* Radial gradient to fade edges and focus center */}
+        {/* Radial gradient to fade edges */}
         <div
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(ellipse 70% 60% at 50% 50%, transparent 0%, #0F1629 70%)'
+            background: 'radial-gradient(ellipse 70% 60% at 50% 50%, transparent 0%, #09090B 70%)'
           }}
         />
       </div>
 
-      {/* Background decorations */}
-      <div
-        className="absolute top-0 start-1/4 w-[600px] h-[600px] rounded-full opacity-30 z-[1]"
-        style={{
-          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%)',
-          filter: 'blur(80px)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Floating gold orb */}
-      <motion.div
-        className="absolute top-[20%] end-[10%] w-[300px] h-[300px] rounded-full z-[1]"
-        style={{
-          background: 'radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%)',
-          filter: 'blur(50px)',
-        }}
-        animate={{
-          y: [0, -25, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Secondary floating orb */}
-      <motion.div
-        className="absolute bottom-[15%] start-[5%] w-[250px] h-[250px] rounded-full z-[1]"
-        style={{
-          background: 'radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%)',
-          filter: 'blur(40px)',
-        }}
-        animate={{
-          y: [0, 20, 0],
-          x: [0, 15, 0],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 3,
-        }}
-        aria-hidden="true"
-      />
-
       <Container className="relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
           className="max-w-3xl mx-auto text-center mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] backdrop-blur-sm border border-white/10 text-white/70 text-sm font-medium mb-6">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#111113] border border-[#222225] text-[#8F8F96] text-sm font-medium mb-6">
             {t('subtitle')}
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#EDEDEF] mb-6">
             {t('title')}
           </h2>
-          <p className="text-lg text-white/60 leading-relaxed mb-4">
+          <p className="text-lg text-[#8F8F96] leading-relaxed mb-4">
             {t('description')}
           </p>
-          <p className="text-lg text-white/60 leading-relaxed">{t('mission')}</p>
+          <p className="text-lg text-[#8F8F96] leading-relaxed">{t('mission')}</p>
         </motion.div>
 
         {/* Values Grid */}
@@ -190,21 +141,17 @@ export function AboutSection() {
           {values.map((value) => (
             <motion.div key={value.key} variants={itemVariants}>
               <Card
-                variant="glass"
+                variant="outline"
                 padding="lg"
-                className="text-center h-full group hover:border-[#D4AF37]/30 transition-all duration-500"
+                className="text-center h-full group bg-[#111113] border-[#222225] hover:border-[#333338] transition-colors duration-300"
               >
-                <motion.div
-                  className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#D4AF37]/20 to-[#D4AF37]/5 text-[#D4AF37] rounded-2xl mb-6 border border-[#D4AF37]/20 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-500"
-                  whileHover={{ rotate: [0, -5, 5, 0] }}
-                  transition={{ duration: 0.5 }}
-                >
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#19191B] text-[#C9A87C] rounded-2xl mb-6 border border-[#222225]">
                   {value.icon}
-                </motion.div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors duration-300">
+                </div>
+                <h3 className="text-xl font-bold text-[#EDEDEF] mb-3">
                   {t(`values.${value.key}.title`)}
                 </h3>
-                <p className="text-white/60 leading-relaxed">
+                <p className="text-[#8F8F96] leading-relaxed">
                   {t(`values.${value.key}.description`)}
                 </p>
               </Card>

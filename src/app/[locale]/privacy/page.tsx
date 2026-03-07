@@ -58,7 +58,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
       <Header />
       <main className="pt-20 lg:pt-24">
         {/* Hero Section */}
-        <section className="py-16 lg:py-20 bg-[#0A0E1A] relative overflow-hidden">
+        <section className="py-16 lg:py-20 bg-[#09090B] relative overflow-hidden">
           {/* Decorative glow */}
           <div
             className="hidden md:block absolute top-1/2 -translate-y-1/2 end-[10%] w-[300px] h-[300px] rounded-full"
@@ -73,26 +73,26 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
               {t('title')}
             </h1>
-            <p className="text-white/60">
+            <p className="text-[#8F8F96]">
               {t('lastUpdated')}: {lastUpdated}
             </p>
-            <p className="text-white/70 mt-4 text-lg max-w-2xl">
+            <p className="text-[#8F8F96] mt-4 text-lg max-w-2xl">
               {t('subtitle')}
             </p>
           </Container>
         </section>
 
         {/* Content */}
-        <section className="py-12 lg:py-16 bg-[#0F1629]">
+        <section className="py-12 lg:py-16 bg-[#111113]">
           <Container size="md">
             <div className="space-y-12">
               {sections.map((section, index) => (
                 <div
                   key={section}
-                  className="pb-10 border-b border-white/10 last:border-b-0"
+                  className="pb-10 border-b border-[#222225] last:border-b-0"
                 >
                   <div className="flex items-start gap-4 mb-4">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37] text-sm font-semibold">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#C9A87C]/10 flex items-center justify-center text-[#C9A87C] text-sm font-semibold">
                       {index + 1}
                     </span>
                     <h2 className="text-2xl font-bold text-white">
@@ -100,7 +100,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
                     </h2>
                   </div>
                   <div className="ps-12">
-                    <div className="text-white/70 leading-relaxed whitespace-pre-line">
+                    <div className="text-[#8F8F96] leading-relaxed whitespace-pre-line">
                       {t(`sections.${section}.content`)}
                     </div>
                   </div>
@@ -109,12 +109,12 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
             </div>
 
             {/* Company Info Footer */}
-            <div className="mt-16 pt-8 border-t border-white/10">
-              <div className="bg-white/5 rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-[#D4AF37] mb-4">
+            <div className="mt-16 pt-8 border-t border-[#222225]">
+              <div className="bg-[#19191B] rounded-xl p-6">
+                <h3 className="text-lg font-semibold text-[#C9A87C] mb-4">
                   {t('companyInfo.title')}
                 </h3>
-                <div className="text-white/70 space-y-2">
+                <div className="text-[#8F8F96] space-y-2">
                   <p>
                     <strong className="text-white">{t('companyInfo.name')}</strong>
                   </p>
@@ -123,7 +123,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
                     {t('companyInfo.emailLabel')}:{' '}
                     <a
                       href="mailto:privacy@saheeb.com"
-                      className="text-[#D4AF37] hover:text-[#B8860B] transition-colors"
+                      className="text-[#C9A87C] hover:text-[#C9A87C] transition-colors"
                     >
                       privacy@saheeb.com
                     </a>

@@ -2,52 +2,28 @@ import { forwardRef, HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: 'glass' | 'solid' | 'gradient' | 'bordered';
+  variant?: 'default' | 'outline';
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
   hover?: boolean;
-  glow?: boolean;
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
   (
     {
       className,
-      variant = 'glass',
+      variant = 'default',
       padding = 'md',
       hover = true,
-      glow = false,
       children,
       ...props
     },
     ref
   ) => {
-    const baseStyles = [
-      'rounded-2xl',
-      'transition-all duration-400 ease-out',
-    ].join(' ');
+    const baseStyles = 'rounded-2xl transition-colors duration-200';
 
     const variants = {
-      glass: [
-        'bg-white/[0.03]',
-        'backdrop-blur-xl',
-        'border border-white/[0.08]',
-        'shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.05)]',
-      ].join(' '),
-      solid: [
-        'bg-[#0F1629]',
-        'border border-white/[0.05]',
-        'shadow-[0_8px_32px_rgba(0,0,0,0.4)]',
-      ].join(' '),
-      gradient: [
-        'bg-gradient-to-br from-[#0F1629] via-[#1A2744] to-[#0F1629]',
-        'border border-[#D4AF37]/20',
-        'shadow-[0_8px_32px_rgba(0,0,0,0.4)]',
-      ].join(' '),
-      bordered: [
-        'bg-transparent',
-        'border-2 border-[#D4AF37]/30',
-        'shadow-none',
-      ].join(' '),
+      default: 'bg-[#111113] border border-[#222225]',
+      outline: 'bg-transparent border border-[#222225]',
     };
 
     const paddings = {
@@ -59,16 +35,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     };
 
     const hoverStyles = hover
-      ? [
-          'hover:border-[#D4AF37]/30',
-          'hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_60px_rgba(212,175,55,0.1)]',
-          'hover:-translate-y-1',
-          'cursor-pointer',
-        ].join(' ')
-      : '';
-
-    const glowStyles = glow
-      ? 'shadow-[0_0_40px_rgba(212,175,55,0.15)]'
+      ? 'hover:border-[#333338]'
       : '';
 
     return (
@@ -79,7 +46,6 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
           variants[variant],
           paddings[padding],
           hoverStyles,
-          glowStyles,
           className
         )}
         {...props}
@@ -116,7 +82,7 @@ const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
   ({ className, as: Tag = 'h3', children, ...props }, ref) => (
     <Tag
       ref={ref}
-      className={cn('text-xl font-bold text-white', className)}
+      className={cn('text-xl font-bold text-[#EDEDEF]', className)}
       {...props}
     >
       {children}
@@ -132,7 +98,7 @@ const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
   ({ className, children, ...props }, ref) => (
     <p
       ref={ref}
-      className={cn('text-white/60 mt-2 leading-relaxed', className)}
+      className={cn('text-[#8F8F96] mt-2 leading-relaxed', className)}
       {...props}
     >
       {children}

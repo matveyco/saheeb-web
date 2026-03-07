@@ -1,10 +1,17 @@
 import type { Metadata } from 'next';
-import { Inter, IBM_Plex_Sans_Arabic } from 'next/font/google';
+import { Inter, Plus_Jakarta_Sans, IBM_Plex_Sans_Arabic } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import '../globals.css';
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['500', '600', '700', '800'],
+  variable: '--font-plus-jakarta',
+  display: 'swap',
+});
 
 const inter = Inter({
   subsets: ['latin'],
@@ -85,7 +92,7 @@ export async function generateMetadata({
       url: 'https://saheeb.com',
       images: [
         {
-          url: '/og-image.svg',
+          url: '/images/og-image.png',
           width: 1200,
           height: 630,
           alt: isArabic ? 'صاحب' : 'Saheeb',
@@ -96,7 +103,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: ['/og-image.svg'],
+      images: ['/images/og-image.png'],
     },
     robots: {
       index: true,
@@ -140,7 +147,7 @@ export default async function LocaleLayout({
     name: 'Saheeb',
     alternateName: 'صاحب',
     url: 'https://saheeb.com',
-    logo: 'https://saheeb.com/og-image.svg',
+    logo: 'https://saheeb.com/images/og-image.png',
     description: isArabic
       ? 'شركة تقنية عمانية تبني منتجات وخدمات للشركات تعتمد على الذكاء الاصطناعي'
       : 'Oman-based technology company building AI-native products and B2B services',
@@ -169,7 +176,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={direction}
-      className={`${inter.variable} ${ibmPlexArabic.variable}`}
+      className={`${plusJakarta.variable} ${inter.variable} ${ibmPlexArabic.variable}`}
     >
       <head>
         <script
@@ -186,7 +193,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body
-        className={`${isArabic ? 'font-arabic' : 'font-sans'} antialiased bg-neutral-50 text-neutral-900`}
+        className={`${isArabic ? 'font-arabic' : 'font-sans'} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
           {children}

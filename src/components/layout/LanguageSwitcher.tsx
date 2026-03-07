@@ -10,15 +10,14 @@ export function LanguageSwitcher() {
 
   const switchLocale = () => {
     const newLocale = locale === 'ar' ? 'en' : 'ar';
-    // Save preference to cookie (accessible by middleware for root redirect)
-    document.cookie = `preferred-locale=${newLocale}; path=/; max-age=31536000`; // 1 year
+    document.cookie = `preferred-locale=${newLocale}; path=/; max-age=31536000`;
     router.replace(pathname, { locale: newLocale });
   };
 
   return (
     <button
       onClick={switchLocale}
-      className="px-4 py-2 text-sm font-medium text-white/70 hover:text-[#D4AF37] hover:bg-white/5 rounded-xl transition-all duration-200 border border-white/10 hover:border-[#D4AF37]/30"
+      className="px-4 py-2 text-sm font-medium text-[#8F8F96] hover:text-[#EDEDEF] hover:bg-[#19191B] rounded-xl transition-colors duration-200 border border-[#222225] hover:border-[#333338]"
       aria-label={locale === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'}
     >
       {locale === 'ar' ? 'English' : 'العربية'}

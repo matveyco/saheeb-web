@@ -48,54 +48,54 @@ export default function AdminWaitlistPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0A0E1A] flex items-center justify-center">
-        <div className="text-white/60">Loading...</div>
+      <div className="min-h-screen bg-[#09090B] flex items-center justify-center">
+        <div className="text-[#8F8F96]">Loading...</div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#0A0E1A] flex items-center justify-center">
+      <div className="min-h-screen bg-[#09090B] flex items-center justify-center">
         <div className="text-red-400">{error}</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0E1A] p-8">
+    <div className="min-h-screen bg-[#09090B] p-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-white mb-2">Waitlist Entries</h1>
-        <p className="text-white/60 mb-8">
+        <p className="text-[#8F8F96] mb-8">
           Total entries: {entries.length}
         </p>
 
         {entries.length === 0 ? (
-          <div className="bg-white/5 rounded-xl p-8 text-center">
-            <p className="text-white/60">No waitlist entries yet.</p>
+          <div className="bg-[#19191B] rounded-xl p-8 text-center">
+            <p className="text-[#8F8F96]">No waitlist entries yet.</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-white/10">
-                  <th className="text-left py-3 px-4 text-white/60 font-medium text-sm">ID</th>
-                  <th className="text-left py-3 px-4 text-white/60 font-medium text-sm">Name</th>
-                  <th className="text-left py-3 px-4 text-white/60 font-medium text-sm">Email</th>
-                  <th className="text-left py-3 px-4 text-white/60 font-medium text-sm">Phone</th>
-                  <th className="text-left py-3 px-4 text-white/60 font-medium text-sm">Type</th>
-                  <th className="text-left py-3 px-4 text-white/60 font-medium text-sm">City</th>
-                  <th className="text-left py-3 px-4 text-white/60 font-medium text-sm">Locale</th>
-                  <th className="text-left py-3 px-4 text-white/60 font-medium text-sm">Created</th>
+                <tr className="border-b border-[#222225]">
+                  <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">ID</th>
+                  <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">Name</th>
+                  <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">Email</th>
+                  <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">Phone</th>
+                  <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">Type</th>
+                  <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">City</th>
+                  <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">Locale</th>
+                  <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">Created</th>
                 </tr>
               </thead>
               <tbody>
                 {entries.map((entry) => (
                   <tr
                     key={entry.id}
-                    className="border-b border-white/5 hover:bg-white/5 transition-colors"
+                    className="border-b border-[#1A1A1D] hover:bg-[#19191B] transition-colors"
                   >
-                    <td className="py-3 px-4 text-white/40 text-sm">{entry.id}</td>
+                    <td className="py-3 px-4 text-[#5C5C63] text-sm">{entry.id}</td>
                     <td className="py-3 px-4 text-white">{entry.name}</td>
                     <td className="py-3 px-4 text-white/80">{entry.email || '-'}</td>
                     <td className="py-3 px-4 text-white/80">{entry.phone}</td>
@@ -117,8 +117,8 @@ export default function AdminWaitlistPage() {
                       </span>
                     </td>
                     <td className="py-3 px-4 text-white/80">{entry.city}</td>
-                    <td className="py-3 px-4 text-white/60">{entry.locale}</td>
-                    <td className="py-3 px-4 text-white/60 text-sm">
+                    <td className="py-3 px-4 text-[#8F8F96]">{entry.locale}</td>
+                    <td className="py-3 px-4 text-[#8F8F96] text-sm">
                       {new Date(entry.createdAt).toLocaleDateString()}
                     </td>
                   </tr>

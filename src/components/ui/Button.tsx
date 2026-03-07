@@ -2,7 +2,7 @@ import { forwardRef, ButtonHTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'gold' | 'glass' | 'ghost' | 'white';
+  variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
 }
@@ -11,7 +11,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
-      variant = 'gold',
+      variant = 'primary',
       size = 'md',
       isLoading = false,
       disabled,
@@ -21,37 +21,22 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0E1A] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none';
+      'inline-flex items-center justify-center font-semibold rounded-xl transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A87C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#09090B] disabled:opacity-50 disabled:cursor-not-allowed';
 
     const variants = {
-      gold: [
-        'bg-gradient-to-r from-[#D4AF37] via-[#F4D03F] to-[#D4AF37]',
-        'text-[#0A0E1A]',
-        'shadow-[0_4px_20px_rgba(212,175,55,0.4)]',
-        'hover:shadow-[0_8px_30px_rgba(212,175,55,0.6)]',
-        'hover:-translate-y-0.5',
-        'active:translate-y-0',
+      primary: [
+        'bg-[#C9A87C] text-[#09090B]',
+        'hover:bg-[#D4B78E]',
+        'active:bg-[#BF9D71]',
       ].join(' '),
-      glass: [
-        'bg-white/5',
-        'backdrop-blur-md',
-        'border border-[#D4AF37]/30',
-        'text-[#D4AF37]',
-        'hover:bg-[#D4AF37]/10',
-        'hover:border-[#D4AF37]',
-        'hover:shadow-[0_0_30px_rgba(212,175,55,0.2)]',
+      secondary: [
+        'bg-transparent',
+        'border border-[#333338] text-[#EDEDEF]',
+        'hover:bg-[#19191B] hover:border-[#444]',
       ].join(' '),
       ghost: [
-        'text-white/70',
-        'hover:text-white',
-        'hover:bg-white/5',
-      ].join(' '),
-      white: [
-        'bg-white',
-        'text-[#0A0E1A]',
-        'shadow-[0_4px_20px_rgba(255,255,255,0.2)]',
-        'hover:shadow-[0_8px_30px_rgba(255,255,255,0.3)]',
-        'hover:-translate-y-0.5',
+        'text-[#8F8F96]',
+        'hover:text-[#EDEDEF] hover:bg-[#19191B]',
       ].join(' '),
     };
 

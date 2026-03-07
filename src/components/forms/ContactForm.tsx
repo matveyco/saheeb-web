@@ -123,10 +123,10 @@ export function ContactForm() {
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">
+        <h3 className="text-xl font-bold text-[#EDEDEF] mb-2">
           {t('success.title')}
         </h3>
-        <p className="text-white/60">{t('success.message')}</p>
+        <p className="text-[#8F8F96]">{t('success.message')}</p>
       </div>
     );
   }
@@ -146,7 +146,6 @@ export function ContactForm() {
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         error={errors.name}
         required
-        variant="dark"
       />
 
       <Input
@@ -157,7 +156,6 @@ export function ContactForm() {
         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         error={errors.email}
         required
-        variant="dark"
         dir="ltr"
       />
 
@@ -168,7 +166,6 @@ export function ContactForm() {
         value={formData.phone}
         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
         error={errors.phone}
-        variant="dark"
         dir="ltr"
       />
 
@@ -180,7 +177,6 @@ export function ContactForm() {
         error={errors.message}
         required
         rows={4}
-        variant="dark"
       />
 
       {/* Consent with inline privacy link */}
@@ -191,20 +187,20 @@ export function ContactForm() {
             name="consent"
             checked={formData.consent}
             onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-            className="mt-0.5 w-5 h-5 rounded border-white/20 bg-white/5 text-[#D4AF37] focus:ring-[#D4AF37]/50 focus:ring-offset-0"
+            className="mt-0.5 w-5 h-5 rounded border-[#222225] bg-[#111113] text-[#C9A87C] focus:ring-[#C9A87C]/50 focus:ring-offset-0"
           />
-          <span className="text-sm text-white/50">
+          <span className="text-sm text-[#5C5C63]">
             {isArabic ? (
               <>
                 أوافق على معالجة بياناتي وفقًا لـ{' '}
-                <Link href="/privacy" className="text-[#D4AF37] hover:text-[#F4D03F] transition-colors">
+                <Link href="/privacy" className="text-[#C9A87C] hover:text-[#EDEDEF] transition-colors">
                   سياسة الخصوصية
                 </Link>
               </>
             ) : (
               <>
                 I agree to the{' '}
-                <Link href="/privacy" className="text-[#D4AF37] hover:text-[#F4D03F] transition-colors">
+                <Link href="/privacy" className="text-[#C9A87C] hover:text-[#EDEDEF] transition-colors">
                   Privacy Policy
                 </Link>
               </>
@@ -216,7 +212,7 @@ export function ContactForm() {
         )}
       </div>
 
-      <Button type="submit" variant="gold" className="w-full" isLoading={isSubmitting}>
+      <Button type="submit" variant="primary" className="w-full" isLoading={isSubmitting}>
         {isSubmitting ? t('submitting') : t('submit')}
       </Button>
     </form>

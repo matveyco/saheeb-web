@@ -5,7 +5,7 @@ import { Container, Button, Badge, Card, Input, Textarea } from '@/components/ui
 import { useState } from 'react';
 
 // Color swatch component with copy functionality
-function ColorSwatch({ name, hex, usage }: { name: string; hex: string; usage: string }) {
+function ColorSwatch({ name, hex, cssVar, usage }: { name: string; hex: string; cssVar?: string; usage: string }) {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
@@ -20,19 +20,20 @@ function ColorSwatch({ name, hex, usage }: { name: string; hex: string; usage: s
       onClick={copyToClipboard}
     >
       <div
-        className="h-20 rounded-xl mb-2 border border-white/10 transition-transform group-hover:scale-105"
+        className="h-20 rounded-xl mb-2 border border-[#222225] transition-transform group-hover:scale-105"
         style={{ backgroundColor: hex }}
       />
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-white">{name}</p>
-          <p className="text-xs text-white/50 font-mono">{hex}</p>
+          <p className="text-sm font-medium text-[#EDEDEF]">{name}</p>
+          <p className="text-xs text-[#5C5C63] font-mono">{hex}</p>
+          {cssVar && <p className="text-xs text-[#5C5C63] font-mono">{cssVar}</p>}
         </div>
-        <span className="text-xs text-[#D4AF37] opacity-0 group-hover:opacity-100 transition-opacity">
+        <span className="text-xs text-[#C9A87C] opacity-0 group-hover:opacity-100 transition-opacity">
           {copied ? 'Copied!' : 'Click to copy'}
         </span>
       </div>
-      <p className="text-xs text-white/40 mt-1">{usage}</p>
+      <p className="text-xs text-[#5C5C63] mt-1">{usage}</p>
     </div>
   );
 }
@@ -41,8 +42,8 @@ function ColorSwatch({ name, hex, usage }: { name: string; hex: string; usage: s
 function SectionHeader({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div className="mb-8">
-      <h2 className="text-2xl font-bold text-white mb-2">{title}</h2>
-      {subtitle && <p className="text-white/60">{subtitle}</p>}
+      <h2 className="text-2xl font-bold text-[#EDEDEF] mb-2">{title}</h2>
+      {subtitle && <p className="text-[#8F8F96]">{subtitle}</p>}
     </div>
   );
 }
@@ -53,21 +54,21 @@ export default function StyleGuidePage() {
       <Header />
       <main className="pt-16 md:pt-20 lg:pt-24">
         {/* Hero */}
-        <section className="py-16 lg:py-20 bg-[#0A0E1A] border-b border-white/5">
+        <section className="py-16 lg:py-20 bg-[#09090B] border-b border-[#1A1A1D]">
           <Container>
-            <Badge variant="glow" className="mb-4">Internal Use Only</Badge>
-            <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
-              Saheeb Drive
-              <span className="block text-[#D4AF37]">Design System</span>
+            <Badge variant="accent" className="mb-4">Design System</Badge>
+            <h1 className="text-4xl lg:text-5xl font-bold text-[#EDEDEF] mb-4">
+              Saheeb
+              <span className="block text-[#C9A87C]">Style Guide</span>
             </h1>
-            <p className="text-lg text-white/60 max-w-2xl">
-              Style guide for mobile app developers and UI/UX designers building the AI-powered car marketplace.
+            <p className="text-lg text-[#8F8F96] max-w-2xl">
+              Design system and style guide for developers, designers, and journalists working with the Saheeb brand and Saheeb Drive product.
             </p>
           </Container>
         </section>
 
         {/* Product Brief */}
-        <section className="py-16 bg-[#0F1629]">
+        <section className="py-16 bg-[#111113]">
           <Container>
             <SectionHeader
               title="1. Product Brief"
@@ -75,51 +76,45 @@ export default function StyleGuidePage() {
             />
 
             <div className="grid md:grid-cols-2 gap-8">
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">What is Saheeb Drive?</h3>
-                <ul className="space-y-2 text-white/70 text-sm">
-                  <li>• AI-powered car marketplace for Oman</li>
-                  <li>• Launching Q3 2026, starting in Muscat</li>
-                  <li>• Web + iOS + Android apps</li>
-                  <li>• Conversational AI search (Arabic & English)</li>
-                  <li>• AI verification & fraud detection</li>
-                  <li>• ROP integration for vehicle records</li>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">What is Saheeb Drive?</h3>
+                <ul className="space-y-2 text-[#8F8F96] text-sm">
+                  <li>- AI-powered car marketplace for Oman</li>
+                  <li>- Launching Q3 2026, starting in Muscat</li>
+                  <li>- Web + iOS + Android apps</li>
+                  <li>- Conversational AI search (Arabic & English)</li>
+                  <li>- AI verification & fraud detection</li>
+                  <li>- ROP integration for vehicle records</li>
                 </ul>
               </Card>
 
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Core Problem</h3>
-                <p className="text-white/70 text-sm mb-4">
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Core Problem</h3>
+                <p className="text-[#8F8F96] text-sm mb-4">
                   Oman&apos;s car market is broken: scams, fake listings, price manipulation.
                   Buyers don&apos;t trust sellers, and sellers can&apos;t reach qualified buyers.
                 </p>
-                <h4 className="text-sm font-semibold text-[#D4AF37] mb-2">Target Users</h4>
-                <ul className="space-y-1 text-white/70 text-sm">
-                  <li><strong>Buyers:</strong> People looking for verified, trusted listings</li>
-                  <li><strong>Sellers:</strong> Car owners wanting qualified buyers</li>
-                  <li><strong>Dealers:</strong> Automotive businesses</li>
+                <h4 className="text-sm font-semibold text-[#C9A87C] mb-2">Target Users</h4>
+                <ul className="space-y-1 text-[#8F8F96] text-sm">
+                  <li><strong className="text-[#EDEDEF]">Buyers:</strong> People looking for verified, trusted listings</li>
+                  <li><strong className="text-[#EDEDEF]">Sellers:</strong> Car owners wanting qualified buyers</li>
+                  <li><strong className="text-[#EDEDEF]">Dealers:</strong> Automotive businesses</li>
                 </ul>
               </Card>
 
-              <Card variant="glass" padding="lg" className="md:col-span-2">
-                <h3 className="text-lg font-bold text-white mb-4">Brand Values</h3>
+              <Card variant="default" padding="lg" className="md:col-span-2">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Brand Values</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="text-center p-4 bg-white/5 rounded-xl">
-                    <div className="text-2xl mb-2">🛡️</div>
-                    <p className="text-sm font-medium text-white">Trust & Transparency</p>
-                  </div>
-                  <div className="text-center p-4 bg-white/5 rounded-xl">
-                    <div className="text-2xl mb-2">🤖</div>
-                    <p className="text-sm font-medium text-white">AI-Native Experience</p>
-                  </div>
-                  <div className="text-center p-4 bg-white/5 rounded-xl">
-                    <div className="text-2xl mb-2">🇴🇲</div>
-                    <p className="text-sm font-medium text-white">Local First (Oman)</p>
-                  </div>
-                  <div className="text-center p-4 bg-white/5 rounded-xl">
-                    <div className="text-2xl mb-2">✨</div>
-                    <p className="text-sm font-medium text-white">Premium & Modern</p>
-                  </div>
+                  {[
+                    { icon: 'shield', label: 'Trust & Transparency' },
+                    { icon: 'cpu', label: 'AI-Native Experience' },
+                    { icon: 'flag', label: 'Local First (Oman)' },
+                    { icon: 'sparkle', label: 'Premium & Modern' },
+                  ].map((item) => (
+                    <div key={item.label} className="text-center p-4 bg-[#19191B] rounded-xl border border-[#222225]">
+                      <p className="text-sm font-medium text-[#EDEDEF]">{item.label}</p>
+                    </div>
+                  ))}
                 </div>
               </Card>
             </div>
@@ -127,60 +122,74 @@ export default function StyleGuidePage() {
         </section>
 
         {/* Color Palette */}
-        <section className="py-16 bg-[#0A0E1A]">
+        <section className="py-16 bg-[#09090B]">
           <Container>
             <SectionHeader
               title="2. Color Palette"
               subtitle="Click any swatch to copy hex value"
             />
 
-            {/* Primary Colors */}
-            <h3 className="text-lg font-semibold text-[#D4AF37] mb-4">Primary Colors</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10">
-              <ColorSwatch name="Gold Primary" hex="#D4AF37" usage="CTAs, highlights, accents" />
-              <ColorSwatch name="Gold Light" hex="#F4D03F" usage="Hover states, gradients" />
-              <ColorSwatch name="Gold Dark" hex="#B8860B" usage="Shadows, darker accents" />
-            </div>
-
             {/* Background Colors */}
-            <h3 className="text-lg font-semibold text-white mb-4">Background Colors</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10">
-              <ColorSwatch name="Luxury Dark" hex="#0A0E1A" usage="Primary background" />
-              <ColorSwatch name="Luxury Darker" hex="#050810" usage="Footer, deepest sections" />
-              <ColorSwatch name="Luxury Navy" hex="#0F1629" usage="Section alternates" />
-              <ColorSwatch name="Navy Light" hex="#1A2744" usage="Card backgrounds" />
+            <h3 className="text-lg font-semibold text-[#EDEDEF] mb-4">Backgrounds</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+              <ColorSwatch name="Primary" hex="#09090B" cssVar="--bg-primary" usage="Main background" />
+              <ColorSwatch name="Surface" hex="#111113" cssVar="--bg-surface" usage="Cards, elevated elements" />
+              <ColorSwatch name="Elevated" hex="#19191B" cssVar="--bg-elevated" usage="Hover states, active elements" />
+              <ColorSwatch name="Subtle" hex="#222225" cssVar="--bg-subtle" usage="Secondary surfaces" />
             </div>
 
-            {/* Accent Colors */}
-            <h3 className="text-lg font-semibold text-white mb-4">Accent Colors</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10">
-              <ColorSwatch name="Blue" hex="#3B82F6" usage="Links, info states" />
-              <ColorSwatch name="Emerald" hex="#10B981" usage="Success, verified states" />
-              <ColorSwatch name="Red" hex="#EF4444" usage="Error states" />
-              <ColorSwatch name="Purple" hex="#A855F7" usage="AI/special features" />
+            {/* Border Colors */}
+            <h3 className="text-lg font-semibold text-[#EDEDEF] mb-4">Borders</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+              <ColorSwatch name="Default" hex="#222225" cssVar="--border-default" usage="Standard borders" />
+              <ColorSwatch name="Subtle" hex="#1A1A1D" cssVar="--border-subtle" usage="Section dividers" />
+              <ColorSwatch name="Hover" hex="#333338" cssVar="--border-hover" usage="Hover & focus borders" />
             </div>
 
-            {/* Glass Effects */}
-            <h3 className="text-lg font-semibold text-white mb-4">Glass Effects</h3>
+            {/* Text Colors */}
+            <h3 className="text-lg font-semibold text-[#EDEDEF] mb-4">Text</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+              <ColorSwatch name="Primary" hex="#EDEDEF" cssVar="--text-primary" usage="Headings, body text (never pure #FFF)" />
+              <ColorSwatch name="Secondary" hex="#8F8F96" cssVar="--text-secondary" usage="Descriptions, muted text" />
+              <ColorSwatch name="Tertiary" hex="#5C5C63" cssVar="--text-tertiary" usage="Hints, captions, placeholders" />
+            </div>
+
+            {/* Accent */}
+            <h3 className="text-lg font-semibold text-[#C9A87C] mb-4">Accent (use sparingly)</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+              <ColorSwatch name="Accent" hex="#C9A87C" cssVar="--accent" usage="CTAs, key highlights (max 2-3 per screen)" />
+              <ColorSwatch name="Accent Hover" hex="#D4B78E" cssVar="--accent-hover" usage="Hover state for accent elements" />
+              <ColorSwatch name="Accent Muted" hex="rgba(201,168,124,0.15)" cssVar="--accent-muted" usage="Subtle accent backgrounds" />
+            </div>
+
+            {/* Functional */}
+            <h3 className="text-lg font-semibold text-[#EDEDEF] mb-4">Functional</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+              <ColorSwatch name="Success" hex="#34D399" usage="Verified, confirmed states" />
+              <ColorSwatch name="Error" hex="#F87171" usage="Error states, destructive actions" />
+            </div>
+
+            {/* Surface Examples */}
+            <h3 className="text-lg font-semibold text-[#EDEDEF] mb-4">Surface Examples</h3>
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="p-6 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl">
-                <p className="text-sm font-medium text-white mb-2">Glass Background</p>
-                <code className="text-xs text-[#D4AF37] font-mono">bg-white/[0.03]</code>
+              <div className="p-6 rounded-2xl bg-[#111113] border border-[#222225]">
+                <p className="text-sm font-medium text-[#EDEDEF] mb-2">Default Card</p>
+                <code className="text-xs text-[#C9A87C] font-mono">bg-[#111113] border-[#222225]</code>
               </div>
-              <div className="p-6 rounded-xl bg-white/[0.05] border border-white/[0.10]">
-                <p className="text-sm font-medium text-white mb-2">Glass Border</p>
-                <code className="text-xs text-[#D4AF37] font-mono">border-white/[0.08-0.10]</code>
+              <div className="p-6 rounded-2xl bg-[#111113] border border-[#333338]">
+                <p className="text-sm font-medium text-[#EDEDEF] mb-2">Hovered Card</p>
+                <code className="text-xs text-[#C9A87C] font-mono">hover:border-[#333338]</code>
               </div>
-              <div className="p-6 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/[0.08]">
-                <p className="text-sm font-medium text-white mb-2">Backdrop Blur</p>
-                <code className="text-xs text-[#D4AF37] font-mono">backdrop-blur-xl</code>
+              <div className="p-6 rounded-2xl bg-[#19191B] border border-[#222225]">
+                <p className="text-sm font-medium text-[#EDEDEF] mb-2">Elevated Surface</p>
+                <code className="text-xs text-[#C9A87C] font-mono">bg-[#19191B]</code>
               </div>
             </div>
           </Container>
         </section>
 
         {/* Typography */}
-        <section className="py-16 bg-[#0F1629]">
+        <section className="py-16 bg-[#111113]">
           <Container>
             <SectionHeader
               title="3. Typography"
@@ -188,68 +197,74 @@ export default function StyleGuidePage() {
             />
 
             <div className="grid md:grid-cols-2 gap-8 mb-10">
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Fonts</h3>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Fonts</h3>
                 <div className="space-y-4">
                   <div>
-                    <p className="text-sm text-white/50 mb-1">English</p>
-                    <p className="text-2xl font-medium text-white" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <p className="text-sm text-[#5C5C63] mb-1">Display (Headings)</p>
+                    <p className="text-2xl font-bold text-[#EDEDEF]" style={{ fontFamily: 'var(--font-plus-jakarta), Plus Jakarta Sans, sans-serif' }}>
+                      Plus Jakarta Sans — Aa Bb Cc 123
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-[#5C5C63] mb-1">Body (English)</p>
+                    <p className="text-2xl font-medium text-[#EDEDEF]" style={{ fontFamily: 'Inter, sans-serif' }}>
                       Inter — Aa Bb Cc 123
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-white/50 mb-1">Arabic</p>
-                    <p className="text-2xl font-medium text-white" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }} dir="rtl">
-                      IBM Plex Sans Arabic — أ ب ج ١٢٣
+                    <p className="text-sm text-[#5C5C63] mb-1">Arabic</p>
+                    <p className="text-2xl font-medium text-[#EDEDEF]" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }} dir="rtl">
+                      IBM Plex Sans Arabic — Aa Bb Cc 123
                     </p>
                   </div>
                 </div>
               </Card>
 
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Font Weights</h3>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Font Weights</h3>
                 <div className="space-y-2">
-                  <p className="text-white font-light">Light (300)</p>
-                  <p className="text-white font-normal">Regular (400)</p>
-                  <p className="text-white font-medium">Medium (500)</p>
-                  <p className="text-white font-semibold">Semibold (600)</p>
-                  <p className="text-white font-bold">Bold (700)</p>
+                  <p className="text-[#EDEDEF] font-normal">Regular (400) — body text</p>
+                  <p className="text-[#EDEDEF] font-medium">Medium (500) — labels, emphasis</p>
+                  <p className="text-[#EDEDEF] font-semibold">Semibold (600) — subheadings</p>
+                  <p className="text-[#EDEDEF] font-bold">Bold (700) — headings</p>
+                  <p className="text-[#EDEDEF] font-extrabold">Extrabold (800) — hero display</p>
                 </div>
               </Card>
             </div>
 
-            <h3 className="text-lg font-semibold text-white mb-4">Type Scale</h3>
-            <div className="space-y-4 p-6 bg-white/[0.03] rounded-xl border border-white/[0.08]">
+            <h3 className="text-lg font-semibold text-[#EDEDEF] mb-4">Type Scale</h3>
+            <div className="space-y-4 p-6 bg-[#09090B] rounded-2xl border border-[#222225]">
               <div className="flex items-baseline gap-4">
-                <code className="text-xs text-[#D4AF37] font-mono w-24 shrink-0">text-5xl</code>
-                <p className="text-5xl font-bold text-white">Heading 1</p>
+                <code className="text-xs text-[#C9A87C] font-mono w-24 shrink-0">text-5xl</code>
+                <p className="text-5xl font-bold text-[#EDEDEF]">Heading 1</p>
               </div>
               <div className="flex items-baseline gap-4">
-                <code className="text-xs text-[#D4AF37] font-mono w-24 shrink-0">text-3xl</code>
-                <p className="text-3xl font-bold text-white">Heading 2</p>
+                <code className="text-xs text-[#C9A87C] font-mono w-24 shrink-0">text-3xl</code>
+                <p className="text-3xl font-bold text-[#EDEDEF]">Heading 2</p>
               </div>
               <div className="flex items-baseline gap-4">
-                <code className="text-xs text-[#D4AF37] font-mono w-24 shrink-0">text-xl</code>
-                <p className="text-xl font-semibold text-white">Heading 3</p>
+                <code className="text-xs text-[#C9A87C] font-mono w-24 shrink-0">text-xl</code>
+                <p className="text-xl font-semibold text-[#EDEDEF]">Heading 3</p>
               </div>
               <div className="flex items-baseline gap-4">
-                <code className="text-xs text-[#D4AF37] font-mono w-24 shrink-0">text-base</code>
-                <p className="text-base text-white">Body text (16px)</p>
+                <code className="text-xs text-[#C9A87C] font-mono w-24 shrink-0">text-base</code>
+                <p className="text-base text-[#EDEDEF]">Body text (16px)</p>
               </div>
               <div className="flex items-baseline gap-4">
-                <code className="text-xs text-[#D4AF37] font-mono w-24 shrink-0">text-sm</code>
-                <p className="text-sm text-white/70">Small text (14px)</p>
+                <code className="text-xs text-[#C9A87C] font-mono w-24 shrink-0">text-sm</code>
+                <p className="text-sm text-[#8F8F96]">Small text (14px)</p>
               </div>
               <div className="flex items-baseline gap-4">
-                <code className="text-xs text-[#D4AF37] font-mono w-24 shrink-0">text-xs</code>
-                <p className="text-xs text-white/50">Extra small (12px)</p>
+                <code className="text-xs text-[#C9A87C] font-mono w-24 shrink-0">text-xs</code>
+                <p className="text-xs text-[#5C5C63]">Extra small (12px)</p>
               </div>
             </div>
           </Container>
         </section>
 
         {/* Components */}
-        <section className="py-16 bg-[#0A0E1A]">
+        <section className="py-16 bg-[#09090B]">
           <Container>
             <SectionHeader
               title="4. Component Library"
@@ -257,75 +272,67 @@ export default function StyleGuidePage() {
             />
 
             {/* Buttons */}
-            <h3 className="text-lg font-semibold text-white mb-4">Buttons</h3>
-            <div className="p-6 bg-white/[0.03] rounded-xl border border-white/[0.08] mb-8">
+            <h3 className="text-lg font-semibold text-[#EDEDEF] mb-4">Buttons</h3>
+            <div className="p-6 bg-[#111113] rounded-2xl border border-[#222225] mb-8">
+              <p className="text-xs text-[#5C5C63] mb-4">Variants</p>
               <div className="flex flex-wrap gap-4 mb-6">
-                <Button variant="gold">Gold (Primary)</Button>
-                <Button variant="glass">Glass</Button>
+                <Button variant="primary">Primary (Accent)</Button>
+                <Button variant="secondary">Secondary (Outline)</Button>
                 <Button variant="ghost">Ghost</Button>
-                <Button variant="white">White</Button>
               </div>
+              <p className="text-xs text-[#5C5C63] mb-4">Sizes</p>
               <div className="flex flex-wrap gap-4 mb-6">
-                <Button variant="gold" size="sm">Small</Button>
-                <Button variant="gold" size="md">Medium</Button>
-                <Button variant="gold" size="lg">Large</Button>
+                <Button variant="primary" size="sm">Small</Button>
+                <Button variant="primary" size="md">Medium</Button>
+                <Button variant="primary" size="lg">Large</Button>
               </div>
+              <p className="text-xs text-[#5C5C63] mb-4">States</p>
               <div className="flex flex-wrap gap-4">
-                <Button variant="gold" isLoading>Loading</Button>
-                <Button variant="gold" disabled>Disabled</Button>
+                <Button variant="primary" isLoading>Loading</Button>
+                <Button variant="primary" disabled>Disabled</Button>
               </div>
             </div>
 
             {/* Badges */}
-            <h3 className="text-lg font-semibold text-white mb-4">Badges</h3>
-            <div className="p-6 bg-white/[0.03] rounded-xl border border-white/[0.08] mb-8">
+            <h3 className="text-lg font-semibold text-[#EDEDEF] mb-4">Badges</h3>
+            <div className="p-6 bg-[#111113] rounded-2xl border border-[#222225] mb-8">
               <div className="flex flex-wrap gap-4">
-                <Badge variant="gold">Gold</Badge>
-                <Badge variant="glass">Glass</Badge>
-                <Badge variant="glow">Glow</Badge>
-                <Badge variant="outline">Outline</Badge>
+                <Badge variant="default">Default</Badge>
+                <Badge variant="accent">Accent</Badge>
                 <Badge variant="success">Success</Badge>
               </div>
             </div>
 
             {/* Cards */}
-            <h3 className="text-lg font-semibold text-white mb-4">Cards</h3>
-            <div className="grid md:grid-cols-4 gap-4 mb-8">
-              <Card variant="glass" padding="md">
-                <p className="text-sm font-medium text-white">Glass</p>
-                <p className="text-xs text-white/50 mt-1">variant=&quot;glass&quot;</p>
+            <h3 className="text-lg font-semibold text-[#EDEDEF] mb-4">Cards</h3>
+            <div className="grid md:grid-cols-2 gap-4 mb-8">
+              <Card variant="default" padding="md">
+                <p className="text-sm font-medium text-[#EDEDEF]">Default</p>
+                <p className="text-xs text-[#5C5C63] mt-1">variant=&quot;default&quot; — bg-[#111113] border-[#222225]</p>
               </Card>
-              <Card variant="solid" padding="md">
-                <p className="text-sm font-medium text-white">Solid</p>
-                <p className="text-xs text-white/50 mt-1">variant=&quot;solid&quot;</p>
-              </Card>
-              <Card variant="gradient" padding="md">
-                <p className="text-sm font-medium text-white">Gradient</p>
-                <p className="text-xs text-white/50 mt-1">variant=&quot;gradient&quot;</p>
-              </Card>
-              <Card variant="bordered" padding="md">
-                <p className="text-sm font-medium text-white">Bordered</p>
-                <p className="text-xs text-white/50 mt-1">variant=&quot;bordered&quot;</p>
+              <Card variant="outline" padding="md">
+                <p className="text-sm font-medium text-[#EDEDEF]">Outline</p>
+                <p className="text-xs text-[#5C5C63] mt-1">variant=&quot;outline&quot; — transparent border-[#222225]</p>
               </Card>
             </div>
 
             {/* Inputs */}
-            <h3 className="text-lg font-semibold text-white mb-4">Form Inputs</h3>
-            <div className="grid md:grid-cols-2 gap-6 p-6 bg-white/[0.03] rounded-xl border border-white/[0.08]">
+            <h3 className="text-lg font-semibold text-[#EDEDEF] mb-4">Form Inputs</h3>
+            <div className="grid md:grid-cols-2 gap-6 p-6 bg-[#111113] rounded-2xl border border-[#222225]">
               <div className="space-y-4">
-                <Input variant="dark" placeholder="Default input" />
-                <Input variant="dark" placeholder="With error" error="This field is required" />
-                <Input variant="dark" placeholder="Disabled" disabled />
+                <Input placeholder="Default input" />
+                <Input placeholder="With error" error="This field is required" />
+                <Input placeholder="Disabled" disabled />
               </div>
               <div>
-                <Textarea variant="dark" placeholder="Textarea input..." rows={5} />
+                <Textarea placeholder="Textarea input..." rows={5} />
               </div>
             </div>
           </Container>
         </section>
 
         {/* Mobile Guidelines */}
-        <section className="py-16 bg-[#0F1629]">
+        <section className="py-16 bg-[#111113]">
           <Container>
             <SectionHeader
               title="5. Mobile App Guidelines"
@@ -333,60 +340,61 @@ export default function StyleGuidePage() {
             />
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Screen Sizes</h3>
-                <ul className="space-y-2 text-sm text-white/70">
-                  <li><strong className="text-white">iOS:</strong> 375px → 430px</li>
-                  <li><strong className="text-white">Android:</strong> 360px → 412px</li>
-                  <li className="text-white/50">Respect safe areas (notches, home indicators)</li>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Screen Sizes</h3>
+                <ul className="space-y-2 text-sm text-[#8F8F96]">
+                  <li><strong className="text-[#EDEDEF]">iOS:</strong> 375px - 430px</li>
+                  <li><strong className="text-[#EDEDEF]">Android:</strong> 360px - 412px</li>
+                  <li className="text-[#5C5C63]">Respect safe areas (notches, home indicators)</li>
                 </ul>
               </Card>
 
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Touch Targets</h3>
-                <ul className="space-y-2 text-sm text-white/70">
-                  <li><strong className="text-white">Minimum:</strong> 44×44pt (iOS) / 48×48dp (Android)</li>
-                  <li><strong className="text-white">Comfortable:</strong> 48×48pt / 56×56dp</li>
-                  <li><strong className="text-white">Spacing:</strong> 8px minimum between targets</li>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Touch Targets</h3>
+                <ul className="space-y-2 text-sm text-[#8F8F96]">
+                  <li><strong className="text-[#EDEDEF]">Minimum:</strong> 44x44pt (iOS) / 48x48dp (Android)</li>
+                  <li><strong className="text-[#EDEDEF]">Comfortable:</strong> 48x48pt / 56x56dp</li>
+                  <li><strong className="text-[#EDEDEF]">Spacing:</strong> 8px minimum between targets</li>
                 </ul>
               </Card>
 
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Bottom Navigation</h3>
-                <ul className="space-y-2 text-sm text-white/70">
-                  <li>• 4-5 tabs maximum</li>
-                  <li>• Icons + labels</li>
-                  <li><strong className="text-[#D4AF37]">Active:</strong> Gold highlight</li>
-                  <li><strong className="text-white/50">Inactive:</strong> white/50</li>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Bottom Navigation</h3>
+                <ul className="space-y-2 text-sm text-[#8F8F96]">
+                  <li>- 4-5 tabs maximum</li>
+                  <li>- Icons + labels always</li>
+                  <li><strong className="text-[#C9A87C]">Active:</strong> Accent highlight (#C9A87C)</li>
+                  <li><strong className="text-[#5C5C63]">Inactive:</strong> Tertiary (#5C5C63)</li>
                 </ul>
               </Card>
 
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Gestures</h3>
-                <ul className="space-y-2 text-sm text-white/70">
-                  <li><strong className="text-white">Swipe L/R:</strong> Image carousel</li>
-                  <li><strong className="text-white">Pull down:</strong> Refresh</li>
-                  <li><strong className="text-white">Long press:</strong> Quick actions</li>
-                  <li><strong className="text-white">Swipe:</strong> Delete/archive</li>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Gestures</h3>
+                <ul className="space-y-2 text-sm text-[#8F8F96]">
+                  <li><strong className="text-[#EDEDEF]">Swipe L/R:</strong> Image carousel</li>
+                  <li><strong className="text-[#EDEDEF]">Pull down:</strong> Refresh</li>
+                  <li><strong className="text-[#EDEDEF]">Long press:</strong> Quick actions</li>
+                  <li><strong className="text-[#EDEDEF]">Swipe:</strong> Delete/archive</li>
                 </ul>
               </Card>
 
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Border Radius</h3>
-                <ul className="space-y-2 text-sm text-white/70">
-                  <li><strong className="text-white">Buttons/Inputs:</strong> 12px (rounded-xl)</li>
-                  <li><strong className="text-white">Cards:</strong> 16px (rounded-2xl)</li>
-                  <li><strong className="text-white">Badges:</strong> Full (rounded-full)</li>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Border Radius</h3>
+                <ul className="space-y-2 text-sm text-[#8F8F96]">
+                  <li><strong className="text-[#EDEDEF]">Buttons/Inputs:</strong> 12px (rounded-xl)</li>
+                  <li><strong className="text-[#EDEDEF]">Cards:</strong> 16px (rounded-2xl)</li>
+                  <li><strong className="text-[#EDEDEF]">Badges:</strong> Full (rounded-full)</li>
                 </ul>
               </Card>
 
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Shadows</h3>
-                <ul className="space-y-2 text-sm text-white/70">
-                  <li><strong className="text-[#D4AF37]">Gold glow:</strong></li>
-                  <li className="font-mono text-xs">0 0 40px rgba(212,175,55,0.3)</li>
-                  <li><strong className="text-white">Card shadow:</strong></li>
-                  <li className="font-mono text-xs">0 8px 32px rgba(0,0,0,0.3)</li>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Elevation</h3>
+                <ul className="space-y-2 text-sm text-[#8F8F96]">
+                  <li><strong className="text-[#EDEDEF]">Default:</strong> No shadow, border only</li>
+                  <li><strong className="text-[#EDEDEF]">Hover:</strong></li>
+                  <li className="font-mono text-xs">hover:border-[#333338]</li>
+                  <li><strong className="text-[#EDEDEF]">Elevated hover:</strong></li>
+                  <li className="font-mono text-xs">shadow-[0_4px_24px_rgba(0,0,0,0.4)]</li>
                 </ul>
               </Card>
             </div>
@@ -394,7 +402,7 @@ export default function StyleGuidePage() {
         </section>
 
         {/* Car Marketplace Components */}
-        <section className="py-16 bg-[#0A0E1A]">
+        <section className="py-16 bg-[#09090B]">
           <Container>
             <SectionHeader
               title="6. Car Marketplace Components"
@@ -402,62 +410,62 @@ export default function StyleGuidePage() {
             />
 
             <div className="grid md:grid-cols-2 gap-8">
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Car Listing Card</h3>
-                <ul className="space-y-2 text-sm text-white/70">
-                  <li>• Image carousel with dots indicator</li>
-                  <li>• <span className="text-[#D4AF37]">Price badge (gold, prominent)</span></li>
-                  <li>• <span className="text-emerald-400">Verified badge (emerald)</span></li>
-                  <li>• Key specs: year | mileage | transmission</li>
-                  <li>• Seller type: Private / Dealer</li>
-                  <li>• Favorite heart icon (top right)</li>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Car Listing Card</h3>
+                <ul className="space-y-2 text-sm text-[#8F8F96]">
+                  <li>- Image carousel with dots indicator</li>
+                  <li>- <span className="text-[#C9A87C]">Price badge (accent, prominent)</span></li>
+                  <li>- <span className="text-emerald-400">Verified badge (success green)</span></li>
+                  <li>- Key specs: year | mileage | transmission</li>
+                  <li>- Seller type: Private / Dealer</li>
+                  <li>- Favorite heart icon (top right)</li>
                 </ul>
               </Card>
 
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Search & Filters</h3>
-                <ul className="space-y-2 text-sm text-white/70">
-                  <li>• AI chat input (hero, prominent)</li>
-                  <li>• Filter chips: scrollable horizontal</li>
-                  <li>• <span className="text-[#D4AF37]">Active filters: gold background</span></li>
-                  <li>• Sort: bottom sheet on mobile</li>
-                  <li>• Results count + clear all</li>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Search & Filters</h3>
+                <ul className="space-y-2 text-sm text-[#8F8F96]">
+                  <li>- AI chat input (hero, prominent)</li>
+                  <li>- Filter chips: scrollable horizontal</li>
+                  <li>- <span className="text-[#C9A87C]">Active filters: accent background</span></li>
+                  <li>- Sort: bottom sheet on mobile</li>
+                  <li>- Results count + clear all</li>
                 </ul>
               </Card>
 
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Car Detail Screen</h3>
-                <ul className="space-y-2 text-sm text-white/70">
-                  <li>• Full-width image gallery</li>
-                  <li>• Sticky price bar at bottom</li>
-                  <li>• Specs grid (2 columns)</li>
-                  <li>• Seller card with contact CTA</li>
-                  <li>• Similar listings carousel</li>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Car Detail Screen</h3>
+                <ul className="space-y-2 text-sm text-[#8F8F96]">
+                  <li>- Full-width image gallery</li>
+                  <li>- Sticky price bar at bottom</li>
+                  <li>- Specs grid (2 columns)</li>
+                  <li>- Seller card with contact CTA</li>
+                  <li>- Similar listings carousel</li>
                 </ul>
               </Card>
 
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">User States</h3>
-                <ul className="space-y-2 text-sm text-white/70">
-                  <li>• <span className="text-white/50">Loading:</span> Skeleton cards with pulse</li>
-                  <li>• <span className="text-white/50">Empty:</span> Illustration + &quot;No results&quot; + CTA</li>
-                  <li>• <span className="text-red-400">Error:</span> Red banner + retry button</li>
-                  <li>• <span className="text-emerald-400">Success:</span> Checkmark animation</li>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">User States</h3>
+                <ul className="space-y-2 text-sm text-[#8F8F96]">
+                  <li>- <span className="text-[#5C5C63]">Loading:</span> Skeleton cards with pulse</li>
+                  <li>- <span className="text-[#5C5C63]">Empty:</span> Illustration + &quot;No results&quot; + CTA</li>
+                  <li>- <span className="text-[#F87171]">Error:</span> Red banner + retry button</li>
+                  <li>- <span className="text-[#34D399]">Success:</span> Checkmark animation</li>
                 </ul>
               </Card>
 
-              <Card variant="glass" padding="lg" className="md:col-span-2">
-                <h3 className="text-lg font-bold text-white mb-4">Forms (Listing Creation)</h3>
+              <Card variant="default" padding="lg" className="md:col-span-2">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Forms (Listing Creation)</h3>
                 <div className="grid md:grid-cols-2 gap-6">
-                  <ul className="space-y-2 text-sm text-white/70">
-                    <li>• Multi-step wizard with progress</li>
-                    <li>• Image upload: camera + gallery</li>
-                    <li>• Price input with OMR currency</li>
+                  <ul className="space-y-2 text-sm text-[#8F8F96]">
+                    <li>- Multi-step wizard with progress</li>
+                    <li>- Image upload: camera + gallery</li>
+                    <li>- Price input with OMR currency</li>
                   </ul>
-                  <ul className="space-y-2 text-sm text-white/70">
-                    <li>• City picker (Omani cities dropdown)</li>
-                    <li>• Inline validation (real-time)</li>
-                    <li>• Required field indicators</li>
+                  <ul className="space-y-2 text-sm text-[#8F8F96]">
+                    <li>- City picker (Omani cities dropdown)</li>
+                    <li>- Inline validation (real-time)</li>
+                    <li>- Required field indicators</li>
                   </ul>
                 </div>
               </Card>
@@ -466,7 +474,7 @@ export default function StyleGuidePage() {
         </section>
 
         {/* Iconography */}
-        <section className="py-16 bg-[#0F1629] border-b border-white/5">
+        <section className="py-16 bg-[#111113] border-b border-[#1A1A1D]">
           <Container>
             <SectionHeader
               title="7. Iconography"
@@ -474,57 +482,94 @@ export default function StyleGuidePage() {
             />
 
             <div className="grid md:grid-cols-2 gap-8">
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Icon Library</h3>
-                <ul className="space-y-2 text-sm text-white/70">
-                  <li>• <strong className="text-white">Primary:</strong> Lucide React icons</li>
-                  <li>• Custom car-related icons where needed</li>
-                  <li>• Consistent stroke width (2px default)</li>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Icon Library</h3>
+                <ul className="space-y-2 text-sm text-[#8F8F96]">
+                  <li>- <strong className="text-[#EDEDEF]">Primary:</strong> Lucide React icons</li>
+                  <li>- Custom car-related icons where needed</li>
+                  <li>- Consistent stroke width (2px default)</li>
                 </ul>
               </Card>
 
-              <Card variant="glass" padding="lg">
-                <h3 className="text-lg font-bold text-white mb-4">Icon Sizes</h3>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Icon Sizes</h3>
                 <div className="flex items-end gap-6">
                   <div className="text-center">
-                    <div className="w-4 h-4 bg-white/20 rounded mb-2 mx-auto" />
-                    <p className="text-xs text-white/50">16px</p>
+                    <div className="w-4 h-4 bg-[#8F8F96] rounded mb-2 mx-auto" />
+                    <p className="text-xs text-[#5C5C63]">16px</p>
                   </div>
                   <div className="text-center">
-                    <div className="w-5 h-5 bg-white/20 rounded mb-2 mx-auto" />
-                    <p className="text-xs text-white/50">20px</p>
+                    <div className="w-5 h-5 bg-[#8F8F96] rounded mb-2 mx-auto" />
+                    <p className="text-xs text-[#5C5C63]">20px</p>
                   </div>
                   <div className="text-center">
-                    <div className="w-6 h-6 bg-white/20 rounded mb-2 mx-auto" />
-                    <p className="text-xs text-white/50">24px</p>
+                    <div className="w-6 h-6 bg-[#8F8F96] rounded mb-2 mx-auto" />
+                    <p className="text-xs text-[#5C5C63]">24px</p>
                   </div>
                   <div className="text-center">
-                    <div className="w-8 h-8 bg-white/20 rounded mb-2 mx-auto" />
-                    <p className="text-xs text-white/50">32px</p>
+                    <div className="w-8 h-8 bg-[#8F8F96] rounded mb-2 mx-auto" />
+                    <p className="text-xs text-[#5C5C63]">32px</p>
                   </div>
                 </div>
               </Card>
 
-              <Card variant="glass" padding="lg" className="md:col-span-2">
-                <h3 className="text-lg font-bold text-white mb-4">Icon Colors</h3>
+              <Card variant="default" padding="lg" className="md:col-span-2">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-4">Icon Colors</h3>
                 <div className="flex flex-wrap gap-6">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-white/60 rounded" />
-                    <span className="text-sm text-white/70">Default (white/60)</span>
+                    <div className="w-6 h-6 bg-[#8F8F96] rounded" />
+                    <span className="text-sm text-[#8F8F96]">Default (#8F8F96)</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-[#D4AF37] rounded" />
-                    <span className="text-sm text-white/70">Gold (active)</span>
+                    <div className="w-6 h-6 bg-[#C9A87C] rounded" />
+                    <span className="text-sm text-[#8F8F96]">Accent (#C9A87C)</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-emerald-400 rounded" />
-                    <span className="text-sm text-white/70">Emerald (success)</span>
+                    <div className="w-6 h-6 bg-[#34D399] rounded" />
+                    <span className="text-sm text-[#8F8F96]">Success (#34D399)</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-red-400 rounded" />
-                    <span className="text-sm text-white/70">Red (error)</span>
+                    <div className="w-6 h-6 bg-[#F87171] rounded" />
+                    <span className="text-sm text-[#8F8F96]">Error (#F87171)</span>
                   </div>
                 </div>
+              </Card>
+            </div>
+          </Container>
+        </section>
+
+        {/* Design Principles */}
+        <section className="py-16 bg-[#09090B]">
+          <Container>
+            <SectionHeader
+              title="8. Design Principles"
+              subtitle="Rules for maintaining visual consistency"
+            />
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-3">Restraint</h3>
+                <p className="text-sm text-[#8F8F96]">
+                  The accent color (#C9A87C) appears in max 2-3 elements per screen — a CTA button, one heading, maybe a small indicator. Everything else is grayscale. This makes the accent feel intentional, not decorative.
+                </p>
+              </Card>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-3">No Gradients</h3>
+                <p className="text-sm text-[#8F8F96]">
+                  Solid colors only. No gradient text, no gradient backgrounds on cards, no glow effects. Use border color changes and subtle shadows for elevation.
+                </p>
+              </Card>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-3">Minimal Animation</h3>
+                <p className="text-sm text-[#8F8F96]">
+                  Scroll animations: simple opacity 0 to 1 + y: 12 to 0 over 0.4s. No bouncing, no floating orbs, no stagger delay over 0.08s. No pulse-glow or shimmer.
+                </p>
+              </Card>
+              <Card variant="default" padding="lg">
+                <h3 className="text-lg font-bold text-[#EDEDEF] mb-3">Typography Hierarchy</h3>
+                <p className="text-sm text-[#8F8F96]">
+                  Use font-weight contrast for hierarchy, not color contrast. Headings are bold #EDEDEF, body is regular #8F8F96, hints are #5C5C63. Never use pure white (#FFF).
+                </p>
               </Card>
             </div>
           </Container>

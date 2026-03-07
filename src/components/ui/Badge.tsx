@@ -2,43 +2,19 @@ import { forwardRef, HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
-  variant?: 'gold' | 'glass' | 'glow' | 'outline' | 'success';
+  variant?: 'default' | 'accent' | 'success';
   size?: 'sm' | 'md' | 'lg';
 }
 
 const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ className, variant = 'gold', size = 'md', children, ...props }, ref) => {
+  ({ className, variant = 'default', size = 'md', children, ...props }, ref) => {
     const baseStyles =
-      'inline-flex items-center font-semibold rounded-full transition-all duration-300';
+      'inline-flex items-center font-semibold rounded-full transition-colors duration-200';
 
     const variants = {
-      gold: [
-        'bg-gradient-to-r from-[#D4AF37] via-[#F4D03F] to-[#D4AF37]',
-        'text-[#0A0E1A]',
-        'shadow-[0_2px_10px_rgba(212,175,55,0.3)]',
-      ].join(' '),
-      glass: [
-        'bg-white/[0.05]',
-        'backdrop-blur-md',
-        'text-white/90',
-        'border border-white/10',
-      ].join(' '),
-      glow: [
-        'bg-[#D4AF37]/10',
-        'text-[#D4AF37]',
-        'border border-[#D4AF37]/30',
-        'shadow-[0_0_15px_rgba(212,175,55,0.2)]',
-      ].join(' '),
-      outline: [
-        'bg-transparent',
-        'text-[#D4AF37]',
-        'border border-[#D4AF37]/50',
-      ].join(' '),
-      success: [
-        'bg-emerald-500/10',
-        'text-emerald-400',
-        'border border-emerald-500/30',
-      ].join(' '),
+      default: 'bg-[#19191B] text-[#8F8F96] border border-[#222225]',
+      accent: 'bg-[#C9A87C]/10 text-[#C9A87C] border border-[#C9A87C]/20',
+      success: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
     };
 
     const sizes = {

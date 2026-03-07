@@ -4,7 +4,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#0A0E1A',
+  themeColor: '#09090B',
 };
 
 export default function RootLayout({
@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body style={{ margin: 0, backgroundColor: '#0A0E1A' }}>
+      <body style={{ margin: 0, backgroundColor: '#09090B' }}>
         {children}
       </body>
     </html>

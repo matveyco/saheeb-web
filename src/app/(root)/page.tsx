@@ -29,7 +29,7 @@ export default function RootPage() {
     <div style={{
       position: 'fixed',
       inset: 0,
-      backgroundColor: '#0A0E1A',
+      backgroundColor: '#09090B',
     }} />
   );
 }

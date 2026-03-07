@@ -30,7 +30,7 @@ export async function generateMetadata({
       type: 'website',
       images: [
         {
-          url: '/og-image.svg',
+          url: '/images/og-image.png',
           width: 1200,
           height: 630,
           alt: isArabic ? 'صاحب' : 'Saheeb',
@@ -41,7 +41,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: isArabic ? 'مشاريعنا | صاحب' : 'Our Projects | Saheeb',
       description,
-      images: ['/og-image.svg'],
+      images: ['/images/og-image.png'],
     },
   };
 }

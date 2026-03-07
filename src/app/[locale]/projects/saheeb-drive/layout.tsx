@@ -87,7 +87,7 @@ export async function generateMetadata({
       type: 'website',
       images: [
         {
-          url: '/og-image.svg',
+          url: '/images/og-image.png',
           width: 1200,
           height: 630,
           alt: isArabic ? 'صاحب درايف' : 'Saheeb Drive',
@@ -98,7 +98,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: isArabic ? 'صاحب درايف | صاحب' : 'Saheeb Drive | Saheeb',
       description,
-      images: ['/og-image.svg'],
+      images: ['/images/og-image.png'],
     },
   };
 }

@@ -62,30 +62,6 @@ const serviceKeys: Record<string, string> = {
   'localize': 'localize',
 };
 
-// Service-specific accent colors for visual variety
-const serviceAccents: Record<string, { gradient: string; glow: string; border: string }> = {
-  'build': {
-    gradient: 'from-[#D4AF37]/20 to-[#D4AF37]/5',
-    glow: 'group-hover:shadow-[0_0_30px_rgba(212,175,55,0.25)]',
-    border: 'group-hover:border-[#D4AF37]/50',
-  },
-  'ai': {
-    gradient: 'from-purple-500/20 to-purple-500/5',
-    glow: 'group-hover:shadow-[0_0_30px_rgba(168,85,247,0.25)]',
-    border: 'group-hover:border-purple-500/50',
-  },
-  'grow': {
-    gradient: 'from-emerald-500/20 to-emerald-500/5',
-    glow: 'group-hover:shadow-[0_0_30px_rgba(16,185,129,0.25)]',
-    border: 'group-hover:border-emerald-500/50',
-  },
-  'localize': {
-    gradient: 'from-blue-500/20 to-blue-500/5',
-    glow: 'group-hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]',
-    border: 'group-hover:border-blue-500/50',
-  },
-};
-
 export function ServicesGrid() {
   const t = useTranslations('home.services');
   const tServices = useTranslations('services.list');
@@ -96,96 +72,34 @@ export function ServicesGrid() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 12 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: [0, 0, 0.58, 1] as const },
+      transition: { duration: 0.4, ease: [0, 0, 0.58, 1] as const },
     },
   };
 
   return (
-    <section className="py-24 lg:py-32 bg-[#0A0E1A] relative overflow-hidden" id="services">
-      {/* Background decoration - hidden on mobile for performance */}
-      <div
-        className="hidden md:block absolute bottom-0 end-0 w-[500px] h-[500px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Floating blue orb - hidden on mobile for performance */}
-      <motion.div
-        className="hidden md:block absolute top-[15%] start-[5%] w-[350px] h-[350px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-        }}
-        animate={{
-          y: [0, 30, 0],
-          x: [0, -20, 0],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Floating purple orb - hidden on mobile for performance */}
-      <motion.div
-        className="hidden md:block absolute top-[50%] end-[8%] w-[280px] h-[280px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.06) 0%, transparent 70%)',
-          filter: 'blur(50px)',
-        }}
-        animate={{
-          y: [0, -25, 0],
-          scale: [1, 1.15, 1],
-        }}
-        transition={{
-          duration: 16,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 2,
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Grid pattern */}
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
-        }}
-        aria-hidden="true"
-      />
-
+    <section className="py-24 lg:py-32 bg-[#09090B] relative overflow-hidden" id="services">
       <Container className="relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#EDEDEF] mb-4">
             {t('title')}
           </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+          <p className="text-lg text-[#8F8F96] max-w-2xl mx-auto">
             {t('subtitle')}
           </p>
         </motion.div>
@@ -199,25 +113,20 @@ export function ServicesGrid() {
         >
           {SERVICES.map((service) => {
             const key = serviceKeys[service.id];
-            const accent = serviceAccents[service.id] || serviceAccents['product-mvp'];
             return (
               <motion.div key={service.id} variants={itemVariants}>
                 <Card
-                  variant="glass"
+                  variant="outline"
                   padding="lg"
-                  className={`group h-full ${accent.border} ${accent.glow} transition-all duration-500`}
+                  className="group h-full bg-[#111113] border-[#222225] hover:border-[#333338] transition-colors duration-300"
                 >
-                  <motion.div
-                    className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${accent.gradient} text-[#D4AF37] rounded-xl mb-5 border border-white/10 group-hover:scale-110 transition-all duration-500`}
-                    whileHover={{ rotate: [0, -8, 8, 0] }}
-                    transition={{ duration: 0.6 }}
-                  >
+                  <div className="inline-flex items-center justify-center w-14 h-14 bg-[#19191B] text-[#C9A87C] rounded-xl mb-5 border border-[#222225]">
                     {icons[service.icon]}
-                  </motion.div>
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors duration-300">
+                  </div>
+                  <h3 className="text-xl font-bold text-[#EDEDEF] mb-3">
                     {tServices(`${key}.title`)}
                   </h3>
-                  <p className="text-white/60 leading-relaxed">
+                  <p className="text-[#8F8F96] leading-relaxed">
                     {tServices(`${key}.shortDescription`)}
                   </p>
                 </Card>
@@ -227,14 +136,14 @@ export function ServicesGrid() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
           className="text-center mt-12"
         >
           <Link href="/services">
-            <Button variant="glass" size="lg">
+            <Button variant="secondary" size="lg">
               {tCommon('viewAll')}
             </Button>
           </Link>

@@ -52,11 +52,11 @@ export function Navigation({
             href={item.href}
             onClick={onItemClick}
             className={cn(
-              'px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200',
+              'px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-200',
               vertical ? 'w-full' : '',
               isActive
-                ? 'text-[#D4AF37] bg-[#D4AF37]/10'
-                : 'text-white/70 hover:text-white hover:bg-white/5'
+                ? 'text-[#EDEDEF] bg-[#19191B]'
+                : 'text-[#8F8F96] hover:text-[#EDEDEF] hover:bg-[#19191B]'
             )}
             aria-current={isActive ? 'page' : undefined}
           >
