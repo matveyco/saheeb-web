@@ -228,7 +228,7 @@
       "submitting": "Joining...",
       "success": {
         "title": "You're on the list!",
-        "message": "We'll reach out before launch. Check your email for confirmation."
+        "message": "Request received. We'll contact you before launch."
       },
       "error": {
         "title": "Something went wrong",

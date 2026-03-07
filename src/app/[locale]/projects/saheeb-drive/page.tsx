@@ -6,7 +6,6 @@ import { Container, Badge, Button } from '@/components/ui';
 import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useState } from 'react';
 
 export default function SaheebDrivePage() {
   const t = useTranslations('saheebDrive');
@@ -21,65 +20,12 @@ export default function SaheebDrivePage() {
   }>;
   const faqItems = t.raw('faq.items') as Array<{ question: string; answer: string }>;
 
-  // Form state
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    userType: 'buyer',
-    city: 'muscat',
-    consent: false,
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [consentError, setConsentError] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!formData.consent) {
-      setConsentError(true);
-      return;
-    }
-    setConsentError(false);
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch('/api/waitlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          userType: formData.userType,
-          city: formData.city,
-          consent: formData.consent,
-          locale,
-          consentTimestamp: new Date().toISOString(),
-        }),
-      });
-
-      if (response.ok) {
-        setIsSuccess(true);
-      }
-    } catch {
-      // Handle error silently
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const scrollToWaitlist = () => {
-    document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <>
       <Header />
       <main className="pt-20 lg:pt-24">
         {/* Hero Section - App Focus */}
-        <section className="py-16 lg:py-24 bg-[#0A0E1A] relative overflow-hidden">
+        <section className="py-12 lg:py-24 bg-[#0A0E1A] relative overflow-hidden">
           {/* Background Image - faded */}
           <div className="absolute inset-0 z-0" aria-hidden="true">
             <Image
@@ -122,9 +68,11 @@ export default function SaheebDrivePage() {
                   {t('hero.titleHighlight')}
                 </p>
 
-                <Button variant="gold" size="lg" onClick={scrollToWaitlist} className="mb-6">
-                  {t('hero.cta')}
-                </Button>
+                <Link href="/projects/saheeb-drive/waitlist">
+                  <Button variant="gold" size="lg" className="mb-6">
+                    {t('hero.cta')}
+                  </Button>
+                </Link>
 
                 {/* App Store Badges */}
                 <div className="flex items-center justify-center lg:justify-start gap-4 opacity-60">
@@ -181,7 +129,7 @@ export default function SaheebDrivePage() {
         </section>
 
         {/* How It Works - Merged meaningful section */}
-        <section className="py-20 lg:py-28 bg-gradient-to-b from-[#0F1629] to-[#0A0E1A]">
+        <section className="py-12 lg:py-28 bg-gradient-to-b from-[#0F1629] to-[#0A0E1A]">
           <Container>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -258,146 +206,42 @@ export default function SaheebDrivePage() {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="pt-4"
                 >
-                  <Button variant="gold" size="lg" onClick={scrollToWaitlist}>
-                    {t('howItWorks.cta')}
-                  </Button>
+                  <Link href="/projects/saheeb-drive/waitlist">
+                    <Button variant="gold" size="lg">
+                      {t('howItWorks.cta')}
+                    </Button>
+                  </Link>
                 </motion.div>
               </div>
             </div>
           </Container>
         </section>
-
-        {/* Waitlist - Form with email + consent */}
-        <section className="py-20 lg:py-28 bg-[#0A0E1A]" id="waitlist">
+        <section className="py-10 lg:py-14 bg-[#0A0E1A] border-t border-white/[0.06]">
           <Container size="sm">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.5 }}
               className="text-center"
             >
-              {isSuccess ? (
-                <div className="py-12">
-                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-emerald-400">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                  </div>
-                  <h2 className="text-3xl font-bold text-white mb-2">{t('waitlist.success.title')}</h2>
-                  <p className="text-white/60">{t('waitlist.success.message')}</p>
-                </div>
-              ) : (
-                <>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-white mb-2">
-                    {t('waitlist.title')}
-                  </h2>
-                  <p className="text-white/60 mb-10">{t('waitlist.subtitle')}</p>
-
-                  <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
-                    {/* Name */}
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder={t('waitlist.namePlaceholder')}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4AF37]/50 transition-colors"
-                    />
-
-                    {/* Email */}
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder={t('waitlist.emailPlaceholder')}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4AF37]/50 transition-colors"
-                      dir="ltr"
-                    />
-
-                    {/* Phone */}
-                    <input
-                      type="tel"
-                      required
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder={t('waitlist.phonePlaceholder')}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4AF37]/50 transition-colors"
-                      dir="ltr"
-                    />
-
-                    {/* Buy or Sell Toggle */}
-                    <div className="flex items-center justify-center gap-4">
-                      <span className="text-white/60">{t('waitlist.buyOrSell')}</span>
-                      <div className="flex rounded-xl overflow-hidden border border-white/10">
-                        <button
-                          type="button"
-                          onClick={() => setFormData({ ...formData, userType: 'buyer' })}
-                          className={`px-5 py-2 text-sm font-medium transition-colors ${
-                            formData.userType === 'buyer'
-                              ? 'bg-[#D4AF37] text-[#0A0E1A]'
-                              : 'bg-white/5 text-white/60 hover:text-white'
-                          }`}
-                        >
-                          {t('waitlist.buy')}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setFormData({ ...formData, userType: 'seller' })}
-                          className={`px-5 py-2 text-sm font-medium transition-colors ${
-                            formData.userType === 'seller'
-                              ? 'bg-[#D4AF37] text-[#0A0E1A]'
-                              : 'bg-white/5 text-white/60 hover:text-white'
-                          }`}
-                        >
-                          {t('waitlist.sell')}
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Consent Checkbox */}
-                    <div className="pt-2">
-                      <label className="flex items-start gap-3 cursor-pointer text-start">
-                        <input
-                          type="checkbox"
-                          checked={formData.consent}
-                          onChange={(e) => {
-                            setFormData({ ...formData, consent: e.target.checked });
-                            if (e.target.checked) setConsentError(false);
-                          }}
-                          className="mt-0.5 w-5 h-5 rounded border-white/20 bg-white/5 text-[#D4AF37] focus:ring-[#D4AF37]/50 focus:ring-offset-0"
-                        />
-                        <span className="text-sm text-white/50">
-                          {t('waitlist.consent')}
-                        </span>
-                      </label>
-                      {consentError && (
-                        <p className="text-red-400 text-sm mt-2 text-start ps-7">
-                          {t('waitlist.consentRequired')}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Submit */}
-                    <Button
-                      type="submit"
-                      variant="gold"
-                      size="lg"
-                      disabled={isSubmitting}
-                      className="w-full"
-                    >
-                      {isSubmitting ? t('waitlist.submitting') : t('waitlist.submit')}
-                    </Button>
-                  </form>
-                </>
-              )}
+              <h2 className="text-2xl lg:text-3xl font-bold text-white mb-3">
+                {t('waitlist.title')}
+              </h2>
+              <p className="text-white/60 mb-6">
+                {t('waitlist.subtitle')}
+              </p>
+              <Link href="/projects/saheeb-drive/waitlist">
+                <Button variant="gold" size="lg">
+                  {t('waitlist.submit')}
+                </Button>
+              </Link>
             </motion.div>
           </Container>
         </section>
 
         {/* FAQ Section */}
-        <section className="py-16 lg:py-24 bg-gradient-to-b from-[#0F1629] to-[#0A0E1A]">
+        <section className="py-12 lg:py-24 bg-gradient-to-b from-[#0F1629] to-[#0A0E1A]">
           <Container size="md">
             <motion.div
               initial={{ opacity: 0, y: 30 }}

@@ -7,6 +7,7 @@ const staticPages = [
   '/services',
   '/projects',
   '/projects/saheeb-drive',
+  '/projects/saheeb-drive/waitlist',
   '/contact',
   '/privacy',
   '/terms',
