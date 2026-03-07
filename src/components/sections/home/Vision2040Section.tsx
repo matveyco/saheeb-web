@@ -76,12 +76,11 @@ export function Vision2040Section() {
           src="/images/vision-2040.png"
           alt=""
           fill
-          className="object-cover object-center opacity-20"
+          className="object-cover object-center opacity-40"
           sizes="100vw"
         />
-        {/* Gradient overlays for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#09090B] via-[#09090B]/80 to-[#09090B]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#09090B]/50 via-transparent to-[#09090B]/50" />
+        {/* Gradient overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#09090B] via-[#09090B]/60 to-[#09090B]" />
       </div>
 
       <Container className="relative z-10">

@@ -25,10 +25,10 @@ export default function ProjectsPage() {
               src="/images/saheeb-project-hero.png"
               alt=""
               fill
-              className="object-cover object-center opacity-25"
+              className="object-cover object-center opacity-45"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#09090B]/60 via-[#09090B]/40 to-[#09090B]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#09090B]/40 via-[#09090B]/20 to-[#09090B]" />
           </div>
 
           <Container className="relative z-10">

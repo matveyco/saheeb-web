@@ -17,11 +17,11 @@ export function HeroSection() {
           src="/images/Muscat-BG-1.png"
           alt=""
           fill
-          className="object-cover object-bottom opacity-40"
+          className="object-cover object-bottom opacity-60"
           priority
         />
         {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#09090B] via-[#09090B]/90 to-[#09090B]/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#09090B] via-[#09090B]/70 to-[#09090B]/30" />
       </div>
 
       <Container className="relative z-10 pt-20 lg:pt-28">

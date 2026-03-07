@@ -98,14 +98,14 @@ export function AboutSection() {
           src="/images/About-section.png"
           alt=""
           fill
-          className="object-cover object-center opacity-[0.03]"
+          className="object-cover object-center opacity-[0.15]"
           sizes="100vw"
         />
         {/* Radial gradient to fade edges */}
         <div
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(ellipse 70% 60% at 50% 50%, transparent 0%, #09090B 70%)'
+            background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 0%, #09090B 80%)'
           }}
         />
       </div>

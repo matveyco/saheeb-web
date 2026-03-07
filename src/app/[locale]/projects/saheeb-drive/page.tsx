@@ -32,11 +32,11 @@ export default function SaheebDrivePage() {
               src="/images/saheeb-drive-hero-bg.png"
               alt=""
               fill
-              className="object-cover object-center opacity-20"
+              className="object-cover object-center opacity-40"
               sizes="100vw"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#09090B]/60 via-[#09090B]/40 to-[#09090B]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#09090B]/40 via-[#09090B]/20 to-[#09090B]" />
           </div>
 
           <Container className="relative z-10">

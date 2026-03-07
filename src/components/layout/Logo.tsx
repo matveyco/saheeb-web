@@ -23,13 +23,34 @@ export function Logo({ className }: LogoProps) {
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
         >
+          {/* Gauge outer arc */}
           <path
-            d="M8 16C8 11.5817 11.5817 8 16 8C20.4183 8 24 11.5817 24 16"
+            d="M10 23 A9 9 0 1 1 22 11"
+            stroke="#09090B"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+          />
+          {/* Needle */}
+          <line
+            x1="16"
+            y1="17"
+            x2="22"
+            y2="11"
             stroke="#09090B"
             strokeWidth="2.5"
             strokeLinecap="round"
           />
-          <circle cx="16" cy="20" r="4" fill="#09090B" />
+          {/* Pivot dot */}
+          <circle cx="16" cy="17" r="2.5" fill="#09090B" />
+          {/* Inner lower arc */}
+          <path
+            d="M12 23 A5 5 0 0 1 20 23"
+            stroke="#09090B"
+            strokeWidth="2.5"
+            fill="none"
+            strokeLinecap="round"
+          />
         </svg>
       </div>
       <span>{isArabic ? 'صاحب' : 'Saheeb'}</span>

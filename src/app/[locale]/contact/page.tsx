@@ -25,7 +25,7 @@ export default function ContactPage() {
               src="/images/contact-hero-bg.png"
               alt=""
               fill
-              className="object-cover object-center opacity-20"
+              className="object-cover object-center opacity-40"
               priority
             />
           </div>
@@ -35,7 +35,7 @@ export default function ContactPage() {
             className="absolute inset-0 z-[1]"
             style={{
               background:
-                'linear-gradient(to bottom, rgba(9,9,11,0.6), rgba(9,9,11,0.4), rgba(9,9,11,1))',
+                'linear-gradient(to bottom, rgba(9,9,11,0.4), rgba(9,9,11,0.2), rgba(9,9,11,0.9))',
             }}
             aria-hidden="true"
           />

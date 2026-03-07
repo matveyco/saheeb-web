@@ -26,13 +26,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const variants = {
       primary: [
         'bg-[#C9A87C] text-[#09090B]',
-        'hover:bg-[#D4B78E]',
-        'active:bg-[#BF9D71]',
+        'shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.15)]',
+        'hover:bg-[#D4B78E] hover:shadow-[0_2px_8px_rgba(201,168,124,0.25)]',
+        'active:bg-[#BF9D71] active:shadow-none active:translate-y-[0.5px]',
       ].join(' '),
       secondary: [
         'bg-transparent',
         'border border-[#333338] text-[#EDEDEF]',
         'hover:bg-[#19191B] hover:border-[#444]',
+        'active:bg-[#111113] active:border-[#333338]',
       ].join(' '),
       ghost: [
         'text-[#8F8F96]',
@@ -41,9 +43,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const sizes = {
-      sm: 'px-4 py-2 text-sm gap-2',
-      md: 'px-6 py-3 text-base gap-2',
-      lg: 'px-8 py-4 text-lg gap-3',
+      sm: 'px-4 py-2.5 text-sm gap-2 min-h-[40px]',
+      md: 'px-6 py-3 text-base gap-2 min-h-[44px]',
+      lg: 'px-8 py-4 text-lg gap-3 min-h-[52px]',
     };
 
     return (

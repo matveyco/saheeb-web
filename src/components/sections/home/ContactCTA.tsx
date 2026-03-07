@@ -19,12 +19,11 @@ export function ContactCTA() {
           src="/images/Contact-CTA.png"
           alt=""
           fill
-          className="object-cover object-center opacity-15"
+          className="object-cover object-center opacity-40"
           sizes="100vw"
         />
-        {/* Gradient overlays for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#09090B]/90 via-[#09090B]/70 to-[#09090B]/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#09090B]/40 via-transparent to-[#09090B]/40" />
+        {/* Gradient overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#09090B]/70 via-[#09090B]/40 to-[#09090B]/70" />
       </div>
 
       <Container size="md" className="relative z-10">

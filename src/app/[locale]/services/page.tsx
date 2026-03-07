@@ -40,10 +40,10 @@ export default function ServicesPage() {
               src="/images/services-hero.png"
               alt=""
               fill
-              className="object-cover object-center opacity-30"
+              className="object-cover object-center opacity-50"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#09090B]/70 via-[#09090B]/50 to-[#09090B]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#09090B]/50 via-[#09090B]/30 to-[#09090B]" />
           </div>
 
           <Container className="relative z-10">
