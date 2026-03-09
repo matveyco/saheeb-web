@@ -184,52 +184,52 @@
   },
   "saheebDrive": {
     "hero": {
-      "badge": "Coming Q3 2026",
+      "badge": "Launching in Muscat",
       "title": "Your Next Car.",
       "titleHighlight": "One Chat Away.",
-      "cta": "Get Early Access",
-      "appStore": "Coming to App Store",
-      "playStore": "Coming to Google Play",
-      "socialProof": "{count} people already signed up"
+      "subtitle": "Tell our AI what you want. It searches every listing in Oman, verifies sellers, and handles everything — inspection to ROP transfer.",
+      "cta": "Claim Your Spot — It's Free",
+      "socialProof": "{count}+ people already joined"
     },
     "painPoints": {
+      "title": "Buying a Car in Oman?",
       "scrolling": "200 listings. 3 decent cars. Sound familiar?",
       "trust": "Was it in a flood? The seller won't tell you. We will.",
       "weekends": "Drove across Muscat for a car that looked nothing like the photos."
     },
     "earlyAccess": {
-      "title": "Early Access Has Its Perks",
+      "title": "First 1,000 Members Get More",
       "spotsLabel": "{count} of 1,000 spots claimed",
       "perk1Title": "Free Premium",
-      "perk1Desc": "First 1,000 members get premium features free for the first year",
+      "perk1Desc": "Premium features free for the first year — no card required",
       "perk2Title": "Founding Member Pricing",
       "perk2Desc": "Lock in the lowest rates — before public pricing kicks in",
       "perk3Title": "Shape the Product",
       "perk3Desc": "Direct line to our team. Your feedback decides what we build next",
       "cta": "Claim Your Spot"
     },
-    "stickyCta": "Claim Your Spot",
+    "stickyCta": "Claim Your Spot — Free",
     "howItWorks": {
-      "title": "Skip the Hassle",
-      "subtitle": "Buying a car in Oman shouldn't mean endless scrolling, shady sellers, or wasted weekends. We built something smarter—an AI that learns what YOU want and finds it.",
+      "title": "How It Works",
+      "subtitle": "An AI that learns what you want — and finds it across every listing in Oman.",
       "steps": [
         {
           "number": "1",
-          "title": "Just Tell Us",
-          "description": "\"I need a family SUV under 5000 OMR\" — type it in Arabic or English. Our AI understands context, preferences, and exactly what matters to you. The more you use it, the better it knows your taste."
+          "title": "Tell Us What You Need",
+          "description": "\"Family SUV under 5000 OMR\" — type it in Arabic or English. Our AI understands exactly what you mean."
         },
         {
           "number": "2",
-          "title": "AI Does the Heavy Lifting",
-          "description": "Deep analysis of every listing. Price history, seller verification, fraud detection—all cross-checked against ROP records and official Omani databases. Only cars that match YOUR criteria make it through."
+          "title": "AI Verifies Everything",
+          "description": "Price history, seller checks, fraud detection — cross-referenced with ROP records. Only verified matches reach you."
         },
         {
           "number": "3",
-          "title": "End-to-End, All Local",
-          "description": "Pick your car. We handle inspection, paperwork, ROP transfer—everything through official channels. Safe, transparent, fully integrated with Oman's systems. You just show up and drive."
+          "title": "We Handle the Rest",
+          "description": "Inspection, paperwork, ROP transfer — all through official channels. You just show up and drive."
         }
       ],
-      "cta": "Join the Waitlist"
+      "cta": "Claim Your Spot"
     },
     "waitlist": {
       "title": "Be the First to Try It",

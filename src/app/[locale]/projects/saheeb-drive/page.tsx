@@ -79,26 +79,24 @@ export default function SaheebDrivePage() {
                 transition={{ duration: 0.4 }}
                 className={`text-center lg:text-start ${isArabic ? 'lg:order-2' : ''}`}
               >
-                <Badge variant="accent" className="mb-6">
+                <Badge variant="accent" className="mb-4 lg:mb-6">
                   {t('hero.badge')}
                 </Badge>
 
-                <h1 className="text-5xl lg:text-7xl font-bold text-[#EDEDEF] mb-2">
+                <h1 className="text-4xl lg:text-7xl font-bold text-[#EDEDEF] mb-1 lg:mb-2">
                   {t('hero.title')}
                 </h1>
-                <p className="text-5xl lg:text-7xl font-bold text-[#C9A87C] mb-8">
+                <p className="text-4xl lg:text-7xl font-bold text-[#C9A87C] mb-4 lg:mb-6">
                   {t('hero.titleHighlight')}
                 </p>
 
-                <Link href="/projects/saheeb-drive/waitlist">
-                  <Button variant="primary" size="lg" className="mb-4">
-                    {t('hero.cta')}
-                  </Button>
-                </Link>
+                <p className="text-[#8F8F96] text-base lg:text-lg mb-6 lg:mb-8 max-w-lg mx-auto lg:mx-0">
+                  {t('hero.subtitle')}
+                </p>
 
-                {/* Social proof counter */}
+                {/* Social proof — above CTA for trust */}
                 {count !== null && count > 0 && (
-                  <p className="text-[#8F8F96] text-sm mb-6 flex items-center justify-center lg:justify-start gap-2">
+                  <p className="text-[#8F8F96] text-sm mb-3 flex items-center justify-center lg:justify-start gap-2">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[#C9A87C]">
                       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                       <circle cx="9" cy="7" r="4" />
@@ -109,21 +107,11 @@ export default function SaheebDrivePage() {
                   </p>
                 )}
 
-                {/* App Store Badges */}
-                <div className="flex items-center justify-center lg:justify-start gap-4 opacity-60">
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#111113] border border-[#222225]">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-[#8F8F96]">
-                      <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-                    </svg>
-                    <span className="text-[#8F8F96] text-sm">{t('hero.appStore')}</span>
-                  </div>
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#111113] border border-[#222225]">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-[#8F8F96]">
-                      <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
-                    </svg>
-                    <span className="text-[#8F8F96] text-sm">{t('hero.playStore')}</span>
-                  </div>
-                </div>
+                <Link href="/projects/saheeb-drive/waitlist">
+                  <Button variant="primary" size="lg">
+                    {t('hero.cta')}
+                  </Button>
+                </Link>
               </motion.div>
 
               {/* Phone Mockup */}
@@ -155,6 +143,15 @@ export default function SaheebDrivePage() {
         {/* ==================== PAIN POINTS ==================== */}
         <section className="py-12 lg:py-20 bg-[#09090B] border-t border-[#1A1A1D]">
           <Container>
+            <motion.h2
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="text-2xl lg:text-3xl font-bold text-[#EDEDEF] text-center mb-8 lg:mb-10"
+            >
+              {t('painPoints.title')}
+            </motion.h2>
             <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
               {[
                 {
