@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Header, Footer } from '@/components/layout';
 import { Container, Button } from '@/components/ui';
 import { Link } from '@/i18n/navigation';
+import { trackEvent } from '@/lib/analytics';
 import { motion } from 'framer-motion';
 
 type WaitlistUserType = 'buyer' | 'seller';
@@ -36,11 +37,33 @@ export default function WaitlistClientPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const hasTrackedFormStart = useRef(false);
+
+  const trackFormStart = () => {
+    if (hasTrackedFormStart.current) {
+      return;
+    }
+
+    hasTrackedFormStart.current = true;
+    trackEvent('form_start', {
+      form_name: 'saheeb_drive_waitlist',
+      page_group: 'saheeb_drive_waitlist',
+      project: 'saheeb_drive',
+      site_locale: locale,
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!formData.consent) {
+      trackEvent('form_submit_error', {
+        error_stage: 'validation',
+        form_name: 'saheeb_drive_waitlist',
+        page_group: 'saheeb_drive_waitlist',
+        project: 'saheeb_drive',
+        site_locale: locale,
+      });
       setSubmitError(t('waitlist.consentRequired'));
       return;
     }
@@ -63,12 +86,32 @@ export default function WaitlistClientPage() {
         const payload = (await response.json().catch(() => null)) as
           | { error?: string }
           | null;
+        trackEvent('form_submit_error', {
+          error_stage: 'response',
+          form_name: 'saheeb_drive_waitlist',
+          page_group: 'saheeb_drive_waitlist',
+          project: 'saheeb_drive',
+          site_locale: locale,
+        });
         setSubmitError(payload?.error ?? t('waitlist.error.message'));
         return;
       }
 
+      trackEvent('waitlist_submit_success', {
+        form_name: 'saheeb_drive_waitlist',
+        page_group: 'saheeb_drive_waitlist',
+        project: 'saheeb_drive',
+        site_locale: locale,
+      });
       setIsSuccess(true);
     } catch {
+      trackEvent('form_submit_error', {
+        error_stage: 'network',
+        form_name: 'saheeb_drive_waitlist',
+        page_group: 'saheeb_drive_waitlist',
+        project: 'saheeb_drive',
+        site_locale: locale,
+      });
       setSubmitError(t('waitlist.error.message'));
     } finally {
       setIsSubmitting(false);
@@ -131,7 +174,11 @@ export default function WaitlistClientPage() {
                     {t('waitlist.subtitle')}
                   </p>
 
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form
+                    onSubmit={handleSubmit}
+                    onFocusCapture={trackFormStart}
+                    className="space-y-4"
+                  >
                     <input
                       type="text"
                       required

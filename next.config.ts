@@ -9,11 +9,11 @@ const contentSecurityPolicy = [
   "frame-ancestors 'self'",
   "object-src 'none'",
   "form-action 'self'",
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https://www.google-analytics.com https://region1.google-analytics.com",
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
-  "script-src 'self' 'unsafe-inline'",
-  "connect-src 'self'",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+  "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com",
   'upgrade-insecure-requests',
 ].join('; ');
 

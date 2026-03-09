@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Input, Textarea, Button } from '@/components/ui';
 import { Link } from '@/i18n/navigation';
+import { trackEvent } from '@/lib/analytics';
 
 interface FormData {
   name: string;
@@ -38,6 +39,20 @@ export function ContactForm() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const hasTrackedFormStart = useRef(false);
+
+  const trackFormStart = () => {
+    if (hasTrackedFormStart.current) {
+      return;
+    }
+
+    hasTrackedFormStart.current = true;
+    trackEvent('form_start', {
+      form_name: 'contact_inquiry',
+      page_group: 'contact',
+      site_locale: locale,
+    });
+  };
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -63,6 +78,16 @@ export function ContactForm() {
     }
 
     setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
+      trackEvent('form_submit_error', {
+        error_stage: 'validation',
+        form_name: 'contact_inquiry',
+        page_group: 'contact',
+        site_locale: locale,
+      });
+    }
+
     return Object.keys(newErrors).length === 0;
   };
 
@@ -87,6 +112,11 @@ export function ContactForm() {
       });
 
       if (response.ok) {
+        trackEvent('contact_submit_success', {
+          form_name: 'contact_inquiry',
+          page_group: 'contact',
+          site_locale: locale,
+        });
         setSubmitStatus('success');
         setFormData({
           name: '',
@@ -96,9 +126,21 @@ export function ContactForm() {
           consent: false,
         });
       } else {
+        trackEvent('form_submit_error', {
+          error_stage: 'response',
+          form_name: 'contact_inquiry',
+          page_group: 'contact',
+          site_locale: locale,
+        });
         setSubmitStatus('error');
       }
     } catch {
+      trackEvent('form_submit_error', {
+        error_stage: 'network',
+        form_name: 'contact_inquiry',
+        page_group: 'contact',
+        site_locale: locale,
+      });
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -132,7 +174,11 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form
+      onSubmit={handleSubmit}
+      onFocusCapture={trackFormStart}
+      className="space-y-4"
+    >
       {submitStatus === 'error' && (
         <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
           {t('error.message')}

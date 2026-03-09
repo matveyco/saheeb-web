@@ -1,4 +1,5 @@
 import { useTranslations, useLocale } from 'next-intl';
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton';
 import { Link } from '@/i18n/navigation';
 import { Container } from '@/components/ui';
 import { SITE_CONFIG } from '@/lib/constants';
@@ -106,6 +107,7 @@ export function Footer() {
                     </Link>
                   </li>
                 ))}
+                <CookieSettingsButton />
               </ul>
             </div>
 

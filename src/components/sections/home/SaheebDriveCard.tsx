@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/navigation';
+import { TrackedLink } from '@/components/analytics/TrackedLink';
 import { Container, Button, Badge } from '@/components/ui';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -52,11 +52,16 @@ export function SaheebDriveCard() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Link href="/projects/saheeb-drive">
+                  <TrackedLink
+                    href="/projects/saheeb-drive"
+                    ctaLocation="home_featured_saheeb_drive"
+                    destinationPath="/projects/saheeb-drive"
+                    project="saheeb_drive"
+                  >
                     <Button variant="primary" size="lg">
                       {t('saheebDrive.cta')}
                     </Button>
-                  </Link>
+                  </TrackedLink>
                 </div>
               </div>
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
+import { TrackedLink } from '@/components/analytics/TrackedLink';
 import { Link } from '@/i18n/navigation';
 import { Container, Button } from '@/components/ui';
 import { motion } from 'framer-motion';
@@ -61,11 +62,15 @@ export function ContactCTA() {
             transition={{ duration: 0.4, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Link href="/contact">
+            <TrackedLink
+              href="/contact"
+              ctaLocation="home_contact_primary"
+              destinationPath="/contact"
+            >
               <Button size="lg" variant="primary">
                 {t('button')}
               </Button>
-            </Link>
+            </TrackedLink>
             <Link href="/services">
               <Button size="lg" variant="secondary">
                 {t('button') === 'Get in Touch' ? 'View Services' : '\u0639\u0631\u0636 \u0627\u0644\u062E\u062F\u0645\u0627\u062A'}

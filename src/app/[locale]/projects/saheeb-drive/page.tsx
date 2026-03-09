@@ -2,8 +2,10 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
+import { TrackedLink } from '@/components/analytics/TrackedLink';
 import { Header, Footer } from '@/components/layout';
 import { Container, Badge, Button } from '@/components/ui';
+import { trackEvent } from '@/lib/analytics';
 import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -107,11 +109,16 @@ export default function SaheebDrivePage() {
                   </p>
                 )}
 
-                <Link href="/projects/saheeb-drive/waitlist">
+                <TrackedLink
+                  href="/projects/saheeb-drive/waitlist"
+                  ctaLocation="saheeb_drive_hero"
+                  destinationPath="/projects/saheeb-drive/waitlist"
+                  project="saheeb_drive"
+                >
                   <Button variant="primary" size="lg">
                     {t('hero.cta')}
                   </Button>
-                </Link>
+                </TrackedLink>
               </motion.div>
 
               {/* Phone Mockup */}
@@ -269,11 +276,16 @@ export default function SaheebDrivePage() {
                   transition={{ duration: 0.4, delay: 0.4 }}
                   className="pt-4"
                 >
-                  <Link href="/projects/saheeb-drive/waitlist">
+                  <TrackedLink
+                    href="/projects/saheeb-drive/waitlist"
+                    ctaLocation="saheeb_drive_how_it_works"
+                    destinationPath="/projects/saheeb-drive/waitlist"
+                    project="saheeb_drive"
+                  >
                     <Button variant="primary" size="lg">
                       {t('howItWorks.cta')}
                     </Button>
-                  </Link>
+                  </TrackedLink>
                 </motion.div>
               </div>
             </div>
@@ -374,11 +386,16 @@ export default function SaheebDrivePage() {
               transition={{ duration: 0.4 }}
               className="text-center"
             >
-              <Link href="/projects/saheeb-drive/waitlist">
+              <TrackedLink
+                href="/projects/saheeb-drive/waitlist"
+                ctaLocation="saheeb_drive_early_access"
+                destinationPath="/projects/saheeb-drive/waitlist"
+                project="saheeb_drive"
+              >
                 <Button variant="primary" size="lg">
                   {t('earlyAccess.cta')}
                 </Button>
-              </Link>
+              </TrackedLink>
             </motion.div>
           </Container>
         </section>
@@ -405,6 +422,19 @@ export default function SaheebDrivePage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   className="group bg-[#111113] rounded-xl border border-[#222225] overflow-hidden"
+                  onToggle={(event) => {
+                    const element = event.currentTarget;
+                    if (!element.open) {
+                      return;
+                    }
+
+                    trackEvent('faq_expand', {
+                      page_group: 'saheeb_drive',
+                      project: 'saheeb_drive',
+                      question_index: String(index + 1),
+                      site_locale: locale,
+                    });
+                  }}
                 >
                   <summary className="flex items-center justify-between p-5 hover:bg-[#19191B] transition-colors">
                     <span className="font-medium text-[#EDEDEF]">{item.question}</span>
@@ -454,11 +484,17 @@ export default function SaheebDrivePage() {
         }`}
       >
         <div className="bg-[#09090B] border-t border-[#222225] shadow-[0_-4px_12px_rgba(0,0,0,0.3)] px-4 py-3">
-          <Link href="/projects/saheeb-drive/waitlist" className="block">
+          <TrackedLink
+            href="/projects/saheeb-drive/waitlist"
+            className="block"
+            ctaLocation="saheeb_drive_sticky_mobile"
+            destinationPath="/projects/saheeb-drive/waitlist"
+            project="saheeb_drive"
+          >
             <Button variant="primary" size="md" className="w-full">
               {t('stickyCta')}
             </Button>
-          </Link>
+          </TrackedLink>
         </div>
       </div>
 

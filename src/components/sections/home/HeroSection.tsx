@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { TrackedLink } from '@/components/analytics/TrackedLink';
 import { Link } from '@/i18n/navigation';
 import { Container, Button } from '@/components/ui';
 import { motion } from 'framer-motion';
@@ -61,11 +62,16 @@ export function HeroSection() {
                 {t('cta')}
               </Button>
             </Link>
-            <Link href="/projects/saheeb-drive">
+            <TrackedLink
+              href="/projects/saheeb-drive"
+              ctaLocation="home_hero_secondary"
+              destinationPath="/projects/saheeb-drive"
+              project="saheeb_drive"
+            >
               <Button size="lg" variant="secondary">
                 {t('ctaSecondary')}
               </Button>
-            </Link>
+            </TrackedLink>
           </motion.div>
         </div>
       </Container>

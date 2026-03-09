@@ -3,6 +3,7 @@ import { Inter, Plus_Jakarta_Sans, IBM_Plex_Sans_Arabic } from 'next/font/google
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
+import { AnalyticsProvider } from '@/components/analytics/AnalyticsProvider';
 import { routing } from '@/i18n/routing';
 import '../globals.css';
 
@@ -196,7 +197,7 @@ export default async function LocaleLayout({
         className={`${isArabic ? 'font-arabic' : 'font-sans'} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <AnalyticsProvider>{children}</AnalyticsProvider>
         </NextIntlClientProvider>
       </body>
     </html>
