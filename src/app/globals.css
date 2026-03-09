@@ -79,6 +79,15 @@ html[dir='rtl'] body {
   color: var(--bg-primary);
 }
 
+/* Interactive elements */
+button:not(:disabled),
+a,
+[role="button"]:not(:disabled),
+select:not(:disabled),
+summary {
+  cursor: pointer;
+}
+
 /* ========================================
    SCROLLBAR
    ======================================== */
