@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Plus_Jakarta_Sans, IBM_Plex_Sans_Arabic } from 'next/font/google';
+import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
@@ -140,6 +141,9 @@ export default async function LocaleLayout({
   const messages = await getMessages();
   const isArabic = locale === 'ar';
   const direction = isArabic ? 'rtl' : 'ltr';
+  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
+  const shouldRenderGa =
+    process.env.NODE_ENV === 'production' && Boolean(gaMeasurementId);
 
   // JSON-LD Structured Data
   const organizationSchema = {
@@ -192,6 +196,36 @@ export default async function LocaleLayout({
             __html: JSON.stringify(websiteSchema),
           }}
         />
+        {shouldRenderGa && gaMeasurementId ? (
+          <>
+            <Script
+              id="ga4-src"
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+              strategy="afterInteractive"
+            />
+            <Script
+              id="ga4-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  window.gtag = window.gtag || function(){dataLayer.push(arguments);};
+                  if (!window.__saheebAnalyticsInitialized) {
+                    window.gtag('consent', 'default', { analytics_storage: 'denied' });
+                    window.gtag('js', new Date());
+                    window.gtag('config', '${gaMeasurementId}', {
+                      send_page_view: false,
+                      anonymize_ip: true,
+                      allow_google_signals: false,
+                      allow_ad_personalization_signals: false
+                    });
+                    window.__saheebAnalyticsInitialized = true;
+                  }
+                `,
+              }}
+            />
+          </>
+        ) : null}
       </head>
       <body
         className={`${isArabic ? 'font-arabic' : 'font-sans'} antialiased`}

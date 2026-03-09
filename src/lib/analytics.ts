@@ -108,32 +108,22 @@ export function persistAnalyticsConsent(consent: AnalyticsConsent) {
   window.localStorage.setItem(ANALYTICS_CONSENT_STORAGE_KEY, consent);
 }
 
+export function shouldAutoShowAnalyticsBanner(
+  consent: AnalyticsConsent | null
+) {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  return consent === null;
+}
+
 export function setAnalyticsDisabled(disabled: boolean) {
   if (typeof window === 'undefined' || !GA_MEASUREMENT_ID) {
     return;
   }
 
   getAnalyticsWindow()[`ga-disable-${GA_MEASUREMENT_ID}`] = disabled;
-}
-
-export function ensureAnalyticsScript() {
-  if (!canUseAnalyticsRuntime()) {
-    return;
-  }
-
-  const existingScript = document.querySelector(
-    `script[data-saheeb-ga="${GA_MEASUREMENT_ID}"]`
-  );
-
-  if (existingScript) {
-    return;
-  }
-
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-  script.dataset.saheebGa = GA_MEASUREMENT_ID;
-  document.head.appendChild(script);
 }
 
 export function ensureGtagBootstrap() {
@@ -157,9 +147,7 @@ export function initializeAnalytics() {
     return;
   }
 
-  ensureAnalyticsScript();
   ensureGtagBootstrap();
-  setAnalyticsDisabled(false);
 
   if (!window.__saheebAnalyticsInitialized) {
     window.gtag?.('consent', 'default', { analytics_storage: 'denied' });
@@ -173,6 +161,7 @@ export function initializeAnalytics() {
     window.__saheebAnalyticsInitialized = true;
   }
 
+  setAnalyticsDisabled(false);
   window.gtag?.('consent', 'update', { analytics_storage: 'granted' });
 }
 

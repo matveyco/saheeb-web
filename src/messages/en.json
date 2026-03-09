@@ -30,10 +30,10 @@
     "close": "Close"
   },
   "analyticsConsent": {
-    "title": "Analytics preferences",
-    "description": "We use optional Google Analytics cookies to measure traffic and improve saheeb.com. Analytics stays off unless you accept, and you can change your choice any time through Cookie Settings.",
-    "accept": "Accept analytics",
-    "decline": "Decline"
+    "title": "Accept cookies for a better experience",
+    "description": "We use optional cookies to understand what works best, improve the website, and keep your Saheeb experience smoother. You can change this any time in Cookie Settings.",
+    "accept": "Accept cookies",
+    "decline": "Not now"
   },
   "home": {
     "hero": {

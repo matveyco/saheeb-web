@@ -17,6 +17,7 @@ import {
   initializeAnalytics,
   persistAnalyticsConsent,
   readAnalyticsConsent,
+  shouldAutoShowAnalyticsBanner,
   shouldTrackPath,
   trackPageView,
   type AnalyticsConsent,
@@ -97,10 +98,12 @@ export function AnalyticsProvider({
   const [consent, setConsent] = useState<AnalyticsConsent | null>(() =>
     typeof window === 'undefined' ? null : readAnalyticsConsent()
   );
-  const [isBannerOpen, setIsBannerOpen] = useState(
-    () => typeof window !== 'undefined' && readAnalyticsConsent() === null
-  );
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const isAvailable = isHydrated && canUseAnalyticsRuntime();
+  const isBannerOpen =
+    isAvailable &&
+    shouldTrackPath(pathname) &&
+    (isSettingsOpen || shouldAutoShowAnalyticsBanner(consent));
 
   useEffect(() => {
     if (!isAvailable) {
@@ -128,14 +131,14 @@ export function AnalyticsProvider({
   const acceptAnalytics = useCallback(() => {
     persistAnalyticsConsent('accepted');
     setConsent('accepted');
-    setIsBannerOpen(false);
+    setIsSettingsOpen(false);
   }, []);
 
   const declineAnalytics = useCallback(() => {
     persistAnalyticsConsent('declined');
     disableAnalytics();
     setConsent('declined');
-    setIsBannerOpen(false);
+    setIsSettingsOpen(false);
   }, []);
 
   const openSettings = useCallback(() => {
@@ -143,7 +146,7 @@ export function AnalyticsProvider({
       return;
     }
 
-    setIsBannerOpen(true);
+    setIsSettingsOpen(true);
   }, [isAvailable, pathname]);
 
   const contextValue = useMemo(
@@ -161,7 +164,7 @@ export function AnalyticsProvider({
     <AnalyticsConsentContext.Provider value={contextValue}>
       {children}
       <AnalyticsConsentBanner
-        isOpen={isAvailable && shouldTrackPath(pathname) && isBannerOpen}
+        isOpen={isBannerOpen}
         onAccept={acceptAnalytics}
         onDecline={declineAnalytics}
       />
