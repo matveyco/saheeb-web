@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Header, Footer } from '@/components/layout';
 import { Container, Badge, Button } from '@/components/ui';
@@ -7,12 +8,42 @@ import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
+const EARLY_ACCESS_LIMIT = 1000;
+
+function useWaitlistCount() {
+  const [count, setCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch('/api/waitlist/count')
+      .then((res) => res.json())
+      .then((data: { count: number }) => setCount(data.count))
+      .catch(() => {});
+  }, []);
+
+  return count;
+}
+
 export default function SaheebDrivePage() {
   const t = useTranslations('saheebDrive');
   const locale = useLocale();
   const isArabic = locale === 'ar';
+  const count = useWaitlistCount();
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [showStickyCta, setShowStickyCta] = useState(false);
 
-  // Get arrays from translations
+  // Show sticky CTA after scrolling past hero
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowStickyCta(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
   const howItWorksSteps = t.raw('howItWorks.steps') as Array<{
     number: string;
     title: string;
@@ -20,13 +51,14 @@ export default function SaheebDrivePage() {
   }>;
   const faqItems = t.raw('faq.items') as Array<{ question: string; answer: string }>;
 
+  const progressPercent = count !== null ? Math.min((count / EARLY_ACCESS_LIMIT) * 100, 100) : 0;
+
   return (
     <>
       <Header />
       <main className="pt-20 lg:pt-24">
-        {/* Hero Section - App Focus */}
-        <section className="py-12 lg:py-24 bg-[#09090B] relative overflow-hidden">
-          {/* Background Image - faded */}
+        {/* ==================== HERO ==================== */}
+        <section ref={heroRef} className="py-12 lg:py-24 bg-[#09090B] relative overflow-hidden">
           <div className="absolute inset-0 z-0" aria-hidden="true">
             <Image
               src="/images/saheeb-drive-hero-bg.png"
@@ -41,7 +73,6 @@ export default function SaheebDrivePage() {
 
           <Container className="relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Content */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -60,10 +91,23 @@ export default function SaheebDrivePage() {
                 </p>
 
                 <Link href="/projects/saheeb-drive/waitlist">
-                  <Button variant="primary" size="lg" className="mb-6">
+                  <Button variant="primary" size="lg" className="mb-4">
                     {t('hero.cta')}
                   </Button>
                 </Link>
+
+                {/* Social proof counter */}
+                {count !== null && count > 0 && (
+                  <p className="text-[#8F8F96] text-sm mb-6 flex items-center justify-center lg:justify-start gap-2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[#C9A87C]">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                    {t('hero.socialProof', { count })}
+                  </p>
+                )}
 
                 {/* App Store Badges */}
                 <div className="flex items-center justify-center lg:justify-start gap-4 opacity-60">
@@ -90,7 +134,6 @@ export default function SaheebDrivePage() {
                 className={isArabic ? 'lg:order-1' : ''}
               >
                 <div className="relative mx-auto max-w-[320px]">
-                  {/* Phone frame */}
                   <div className="relative bg-[#19191B] rounded-[1.5rem] p-[6px] shadow-2xl border border-[#333338]">
                     <div className="relative aspect-[9/19] rounded-[1.25rem] overflow-hidden bg-[#111113]">
                       <Image
@@ -109,7 +152,59 @@ export default function SaheebDrivePage() {
           </Container>
         </section>
 
-        {/* How It Works - Merged meaningful section */}
+        {/* ==================== PAIN POINTS ==================== */}
+        <section className="py-12 lg:py-20 bg-[#09090B] border-t border-[#1A1A1D]">
+          <Container>
+            <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
+              {[
+                {
+                  key: 'scrolling' as const,
+                  icon: (
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[#C9A87C]">
+                      <rect x="5" y="2" width="14" height="20" rx="2" />
+                      <line x1="12" y1="18" x2="12" y2="18.01" strokeWidth="2" strokeLinecap="round" />
+                      <path d="M9 8l3-2 3 2M9 12l3 2 3-2" />
+                    </svg>
+                  ),
+                },
+                {
+                  key: 'trust' as const,
+                  icon: (
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[#C9A87C]">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <path d="M12 8v4M12 16h.01" strokeLinecap="round" />
+                    </svg>
+                  ),
+                },
+                {
+                  key: 'weekends' as const,
+                  icon: (
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[#C9A87C]">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                  ),
+                },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.key}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="bg-[#111113] rounded-2xl border border-[#222225] p-6 lg:p-8 text-center"
+                >
+                  <div className="flex justify-center mb-4">{item.icon}</div>
+                  <p className="text-[#EDEDEF] font-semibold leading-relaxed">
+                    {t(`painPoints.${item.key}`)}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </Container>
+        </section>
+
+        {/* ==================== HOW IT WORKS ==================== */}
         <section className="py-12 lg:py-28 bg-[#09090B] border-t border-[#1A1A1D]">
           <Container>
             <motion.div
@@ -128,7 +223,6 @@ export default function SaheebDrivePage() {
             </motion.div>
 
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* Phone mockup on one side */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -151,7 +245,6 @@ export default function SaheebDrivePage() {
                 </div>
               </motion.div>
 
-              {/* Steps on the other side */}
               <div className={`space-y-8 ${isArabic ? 'lg:order-1' : ''}`}>
                 {howItWorksSteps.map((step, index) => (
                   <motion.div
@@ -189,8 +282,94 @@ export default function SaheebDrivePage() {
             </div>
           </Container>
         </section>
-        <section className="py-10 lg:py-14 bg-[#09090B] border-t border-[#1A1A1D]">
-          <Container size="sm">
+
+        {/* ==================== EARLY ACCESS PERKS ==================== */}
+        <section className="py-12 lg:py-20 bg-[#09090B] border-t border-[#1A1A1D]">
+          <Container size="md">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="text-center mb-10"
+            >
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#EDEDEF] mb-6">
+                {t('earlyAccess.title')}
+              </h2>
+
+              {/* Progress bar */}
+              {count !== null && (
+                <div className="max-w-md mx-auto mb-8">
+                  <div className="h-2 bg-[#222225] rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${progressPercent}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, ease: 'easeOut' }}
+                      className="h-full bg-[#C9A87C] rounded-full"
+                    />
+                  </div>
+                  <p className="text-[#5C5C63] text-sm mt-2">
+                    {t('earlyAccess.spotsLabel', { count })}
+                  </p>
+                </div>
+              )}
+            </motion.div>
+
+            {/* Perks grid */}
+            <div className="grid md:grid-cols-3 gap-6 mb-10">
+              {[
+                {
+                  titleKey: 'perk1Title' as const,
+                  descKey: 'perk1Desc' as const,
+                  icon: (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z" />
+                    </svg>
+                  ),
+                },
+                {
+                  titleKey: 'perk2Title' as const,
+                  descKey: 'perk2Desc' as const,
+                  icon: (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <line x1="12" y1="1" x2="12" y2="23" />
+                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                    </svg>
+                  ),
+                },
+                {
+                  titleKey: 'perk3Title' as const,
+                  descKey: 'perk3Desc' as const,
+                  icon: (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                  ),
+                },
+              ].map((perk, index) => (
+                <motion.div
+                  key={perk.titleKey}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="bg-[#111113] rounded-2xl border border-[#222225] p-6 text-center"
+                >
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#C9A87C]/10 flex items-center justify-center text-[#C9A87C]">
+                    {perk.icon}
+                  </div>
+                  <h3 className="text-lg font-bold text-[#EDEDEF] mb-2">
+                    {t(`earlyAccess.${perk.titleKey}`)}
+                  </h3>
+                  <p className="text-[#8F8F96] text-sm leading-relaxed">
+                    {t(`earlyAccess.${perk.descKey}`)}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -198,22 +377,16 @@ export default function SaheebDrivePage() {
               transition={{ duration: 0.4 }}
               className="text-center"
             >
-              <h2 className="text-2xl lg:text-3xl font-bold text-[#EDEDEF] mb-3">
-                {t('waitlist.title')}
-              </h2>
-              <p className="text-[#8F8F96] mb-6">
-                {t('waitlist.subtitle')}
-              </p>
               <Link href="/projects/saheeb-drive/waitlist">
                 <Button variant="primary" size="lg">
-                  {t('waitlist.submit')}
+                  {t('earlyAccess.cta')}
                 </Button>
               </Link>
             </motion.div>
           </Container>
         </section>
 
-        {/* FAQ Section */}
+        {/* ==================== FAQ ==================== */}
         <section className="py-12 lg:py-24 bg-[#09090B] border-t border-[#1A1A1D]">
           <Container size="md">
             <motion.div
@@ -236,7 +409,7 @@ export default function SaheebDrivePage() {
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   className="group bg-[#111113] rounded-xl border border-[#222225] overflow-hidden"
                 >
-                  <summary className="flex items-center justify-between p-5 cursor-pointer hover:bg-[#19191B] transition-colors">
+                  <summary className="flex items-center justify-between p-5 hover:bg-[#19191B] transition-colors">
                     <span className="font-medium text-[#EDEDEF]">{item.question}</span>
                     <svg
                       width="24"
@@ -276,6 +449,22 @@ export default function SaheebDrivePage() {
           </Container>
         </section>
       </main>
+
+      {/* ==================== STICKY MOBILE CTA ==================== */}
+      <div
+        className={`fixed bottom-0 inset-x-0 z-40 lg:hidden transition-transform duration-300 ${
+          showStickyCta ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
+        <div className="bg-[#09090B] border-t border-[#222225] shadow-[0_-4px_12px_rgba(0,0,0,0.3)] px-4 py-3">
+          <Link href="/projects/saheeb-drive/waitlist" className="block">
+            <Button variant="primary" size="md" className="w-full">
+              {t('stickyCta')}
+            </Button>
+          </Link>
+        </div>
+      </div>
+
       <Footer />
     </>
   );

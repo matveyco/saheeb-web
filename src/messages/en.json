@@ -189,8 +189,26 @@
       "titleHighlight": "One Chat Away.",
       "cta": "Get Early Access",
       "appStore": "Coming to App Store",
-      "playStore": "Coming to Google Play"
+      "playStore": "Coming to Google Play",
+      "socialProof": "{count} people already signed up"
     },
+    "painPoints": {
+      "scrolling": "200 listings. 3 decent cars. Sound familiar?",
+      "trust": "Was it in a flood? The seller won't tell you. We will.",
+      "weekends": "Drove across Muscat for a car that looked nothing like the photos."
+    },
+    "earlyAccess": {
+      "title": "Early Access Has Its Perks",
+      "spotsLabel": "{count} of 1,000 spots claimed",
+      "perk1Title": "Free Premium",
+      "perk1Desc": "First 1,000 members get premium features free for the first year",
+      "perk2Title": "Founding Member Pricing",
+      "perk2Desc": "Lock in the lowest rates — before public pricing kicks in",
+      "perk3Title": "Shape the Product",
+      "perk3Desc": "Direct line to our team. Your feedback decides what we build next",
+      "cta": "Claim Your Spot"
+    },
+    "stickyCta": "Claim Your Spot",
     "howItWorks": {
       "title": "Skip the Hassle",
       "subtitle": "Buying a car in Oman shouldn't mean endless scrolling, shady sellers, or wasted weekends. We built something smarter—an AI that learns what YOU want and finds it.",
