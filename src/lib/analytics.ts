@@ -278,16 +278,18 @@ function trackMetaEvent(eventName: string, params: AnalyticsEventParams = {}) {
         content_category: 'saheeb_drive',
         content_name: 'Saheeb Drive Waitlist',
       });
-      return;
+      break;
     case 'contact_submit_success':
       trackMetaStandardEvent('Contact', {
         content_category: 'contact',
         content_name: 'Saheeb Contact Inquiry',
       });
-      return;
+      break;
     default:
-      trackMetaCustomEvent(eventName, params);
+      break;
   }
+
+  trackMetaCustomEvent(eventName, params);
 }
 
 export function trackEvent(
