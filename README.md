@@ -84,4 +84,4 @@ npm run check:assets
 
 For production readiness, ensure `DATABASE_URL`, admin credentials, and origin allowlist are correctly configured for the deployment domain.
 
-If GA4 is enabled, also set `NEXT_PUBLIC_GA_MEASUREMENT_ID` in the production build environment and confirm the privacy page reflects the live analytics configuration.
+If GA4 or Meta Pixel is enabled, also set `NEXT_PUBLIC_GA_MEASUREMENT_ID` and/or `NEXT_PUBLIC_META_PIXEL_ID` in the production build environment and confirm the privacy page reflects the live tracking configuration.

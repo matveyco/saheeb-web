@@ -142,8 +142,11 @@ export default async function LocaleLayout({
   const isArabic = locale === 'ar';
   const direction = isArabic ? 'rtl' : 'ltr';
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
+  const metaPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim();
   const shouldRenderGa =
     process.env.NODE_ENV === 'production' && Boolean(gaMeasurementId);
+  const shouldRenderMeta =
+    process.env.NODE_ENV === 'production' && Boolean(metaPixelId);
 
   // JSON-LD Structured Data
   const organizationSchema = {
@@ -220,6 +223,37 @@ export default async function LocaleLayout({
                       allow_ad_personalization_signals: false
                     });
                     window.__saheebAnalyticsInitialized = true;
+                  }
+                `,
+              }}
+            />
+          </>
+        ) : null}
+        {shouldRenderMeta && metaPixelId ? (
+          <>
+            <Script
+              id="meta-pixel-src"
+              src="https://connect.facebook.net/en_US/fbevents.js"
+              strategy="afterInteractive"
+            />
+            <Script
+              id="meta-pixel-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.fbq = window.fbq || function(){window.fbq.callMethod ?
+                  window.fbq.callMethod.apply(window.fbq, arguments) : window.fbq.queue.push(arguments)};
+                  if (!window._fbq) {
+                    window._fbq = window.fbq;
+                  }
+                  window.fbq.push = window.fbq;
+                  window.fbq.loaded = true;
+                  window.fbq.version = '2.0';
+                  window.fbq.queue = window.fbq.queue || [];
+                  if (!window.__saheebMetaPixelInitialized) {
+                    window.fbq('consent', 'revoke');
+                    window.fbq('init', '${metaPixelId}');
+                    window.__saheebMetaPixelInitialized = true;
                   }
                 `,
               }}

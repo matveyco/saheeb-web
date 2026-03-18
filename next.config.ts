@@ -9,11 +9,11 @@ const contentSecurityPolicy = [
   "frame-ancestors 'self'",
   "object-src 'none'",
   "form-action 'self'",
-  "img-src 'self' data: blob: https://www.google-analytics.com https://region1.google-analytics.com",
+  "img-src 'self' data: blob: https://www.google-analytics.com https://region1.google-analytics.com https://www.facebook.com",
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
-  "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net",
+  "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.facebook.com https://connect.facebook.net",
   'upgrade-insecure-requests',
 ].join('; ');
 
