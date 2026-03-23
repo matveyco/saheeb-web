@@ -21,7 +21,10 @@ Copy `.env.example` to `.env.local` and configure:
 - `ADMIN_USERNAME` (required)
 - `ADMIN_PASSWORD` (required, minimum 12 chars)
 - `RESEND_API_KEY` (optional; if omitted, email notifications are skipped)
-- `NEXT_PUBLIC_GA_MEASUREMENT_ID` (optional; public GA4 measurement ID, loaded only on approved production hosts after analytics consent)
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID` (optional; public GA4 measurement ID for limited landing/conversion attribution plus consented behavioral analytics)
+- `NEXT_PUBLIC_META_PIXEL_ID` (optional; public Meta Pixel ID for landing/conversion attribution plus consented behavioral analytics)
+- `GOOGLE_SITE_VERIFICATION` (optional; Google Search Console verification token)
+- `META_DOMAIN_VERIFICATION` (optional; Meta domain verification token)
 - `ALLOWED_ORIGINS` (optional, comma-separated CSRF allowlist override)
 
 ## Scripts
@@ -41,7 +44,8 @@ Copy `.env.example` to `.env.local` and configure:
 - CSP and hardening response headers in `next.config.ts`
 - HTML escaping for outbound contact email templates
 - Shared Zod request schemas for contact/waitlist APIs
-- Consent-gated GA4 analytics with manual page views and non-PII funnel events
+- Server-side locale redirects for the root URL plus canonical host/protocol middleware
+- Limited pre-consent attribution measurement with consent-gated behavioral analytics
 
 ## API Contracts
 
@@ -84,4 +88,4 @@ npm run check:assets
 
 For production readiness, ensure `DATABASE_URL`, admin credentials, and origin allowlist are correctly configured for the deployment domain.
 
-If GA4 or Meta Pixel is enabled, also set `NEXT_PUBLIC_GA_MEASUREMENT_ID` and/or `NEXT_PUBLIC_META_PIXEL_ID` in the production build environment and confirm the privacy page reflects the live tracking configuration.
+If GA4 or Meta Pixel is enabled, also set `NEXT_PUBLIC_GA_MEASUREMENT_ID` and/or `NEXT_PUBLIC_META_PIXEL_ID` in the production build environment and confirm the privacy page reflects the live tracking configuration. Set `GOOGLE_SITE_VERIFICATION` and `META_DOMAIN_VERIFICATION` when webmaster verification tags are needed.

@@ -63,7 +63,7 @@ export default function SaheebDrivePage() {
         <section ref={heroRef} className="py-12 lg:py-24 bg-[#09090B] relative overflow-hidden">
           <div className="absolute inset-0 z-0" aria-hidden="true">
             <Image
-              src="/images/saheeb-drive-hero-bg.png"
+              src="/images/saheeb-drive-hero-bg.jpg"
               alt=""
               fill
               className="object-cover object-center opacity-40"
@@ -132,12 +132,11 @@ export default function SaheebDrivePage() {
                   <div className="relative bg-[#19191B] rounded-[1.5rem] p-[6px] shadow-2xl border border-[#333338]">
                     <div className="relative aspect-[9/19] rounded-[1.25rem] overflow-hidden bg-[#111113]">
                       <Image
-                        src="/images/saheeb-drive-app-chat.png"
+                        src="/images/saheeb-drive-app-chat.jpg"
                         alt="Saheeb Drive App - Chat Interface"
                         fill
                         className="object-contain"
                         sizes="320px"
-                        priority
                       />
                     </div>
                   </div>
@@ -238,7 +237,7 @@ export default function SaheebDrivePage() {
                   <div className="relative bg-[#19191B] rounded-[1.25rem] p-[5px] shadow-xl border border-[#333338]">
                     <div className="relative aspect-[9/19] rounded-[1rem] overflow-hidden bg-[#111113]">
                       <Image
-                        src="/images/saheeb-drive-app-details.png"
+                        src="/images/saheeb-drive-app-details.jpg"
                         alt="Saheeb Drive App - Car Details"
                         fill
                         className="object-contain"

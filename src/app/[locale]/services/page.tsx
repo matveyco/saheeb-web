@@ -16,10 +16,10 @@ const serviceKeys: Record<string, string> = {
 };
 
 const serviceImages: Record<string, string> = {
-  build: '/images/service-build.png',
-  ai: '/images/service-ai.png',
-  grow: '/images/service-grow.png',
-  localize: '/images/service-localize.png',
+  build: '/images/service-build.jpg',
+  ai: '/images/service-ai.jpg',
+  grow: '/images/service-grow.jpg',
+  localize: '/images/service-localize.jpg',
 };
 
 export default function ServicesPage() {
@@ -37,7 +37,7 @@ export default function ServicesPage() {
           {/* Hero Background Image */}
           <div className="absolute inset-0 z-0" aria-hidden="true">
             <Image
-              src="/images/services-hero.png"
+              src="/images/services-hero.jpg"
               alt=""
               fill
               className="object-cover object-center opacity-50"

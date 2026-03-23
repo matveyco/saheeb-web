@@ -17,7 +17,7 @@ export function ContactCTA() {
       {/* Sultan Qaboos Mosque background */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
         <Image
-          src="/images/Contact-CTA.png"
+          src="/images/Contact-CTA.jpg"
           alt=""
           fill
           className="object-cover object-center opacity-40"

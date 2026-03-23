@@ -47,6 +47,10 @@ export async function generateMetadata({
   const description = isArabic
     ? 'شركة تقنية عمانية تبني منتجات وخدمات للشركات تعتمد على الذكاء الاصطناعي بما يتوافق مع رؤية عمان 2040'
     : "Oman-based technology company building AI-native products and B2B services aligned with Oman Vision 2040";
+  const googleSiteVerification =
+    process.env.GOOGLE_SITE_VERIFICATION?.trim() || undefined;
+  const metaDomainVerification =
+    process.env.META_DOMAIN_VERIFICATION?.trim() || undefined;
 
   return {
     title: {
@@ -91,7 +95,7 @@ export async function generateMetadata({
       siteName: isArabic ? 'صاحب' : 'Saheeb',
       title,
       description,
-      url: 'https://saheeb.com',
+      url: `https://saheeb.com/${locale}`,
       images: [
         {
           url: '/images/og-image.png',
@@ -118,6 +122,21 @@ export async function generateMetadata({
         'max-snippet': -1,
       },
     },
+    verification:
+      googleSiteVerification || metaDomainVerification
+        ? {
+            ...(googleSiteVerification
+              ? { google: googleSiteVerification }
+              : {}),
+            ...(metaDomainVerification
+              ? {
+                  other: {
+                    'facebook-domain-verification': metaDomainVerification,
+                  },
+                }
+              : {}),
+          }
+        : undefined,
   };
 }
 
@@ -251,7 +270,6 @@ export default async function LocaleLayout({
                   window.fbq.version = '2.0';
                   window.fbq.queue = window.fbq.queue || [];
                   if (!window.__saheebMetaPixelInitialized) {
-                    window.fbq('consent', 'revoke');
                     window.fbq('init', '${metaPixelId}');
                     window.__saheebMetaPixelInitialized = true;
                   }

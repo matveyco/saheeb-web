@@ -73,7 +73,7 @@ export function Vision2040Section() {
       {/* Futuristic Muscat skyline background */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
         <Image
-          src="/images/vision-2040.png"
+          src="/images/vision-2040.jpg"
           alt=""
           fill
           className="object-cover object-center opacity-40"

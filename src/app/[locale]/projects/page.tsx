@@ -22,7 +22,7 @@ export default function ProjectsPage() {
           {/* Hero Background Image */}
           <div className="absolute inset-0 z-0" aria-hidden="true">
             <Image
-              src="/images/saheeb-project-hero.png"
+              src="/images/saheeb-project-hero.jpg"
               alt=""
               fill
               className="object-cover object-center opacity-45"
@@ -114,7 +114,7 @@ export default function ProjectsPage() {
               >
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[#222225]">
                   <Image
-                    src="/images/saheeb-drive-hero.png"
+                    src="/images/saheeb-drive-hero.jpg"
                     alt={t('saheebDrive.title')}
                     fill
                     className="object-cover opacity-90"

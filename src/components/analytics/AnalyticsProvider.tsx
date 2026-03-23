@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   useSyncExternalStore,
 } from 'react';
@@ -13,7 +14,6 @@ import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from '@/i18n/navigation';
 import {
   canUseAnalyticsRuntime,
-  disableAnalytics,
   initializeAnalytics,
   persistAnalyticsConsent,
   readAnalyticsConsent,
@@ -99,6 +99,7 @@ export function AnalyticsProvider({
     typeof window === 'undefined' ? null : readAnalyticsConsent()
   );
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const hasTrackedLandingPageView = useRef(false);
   const isAvailable = isHydrated && canUseAnalyticsRuntime();
   const isBannerOpen =
     isAvailable &&
@@ -110,22 +111,25 @@ export function AnalyticsProvider({
       return;
     }
 
-    if (consent === 'accepted') {
-      initializeAnalytics();
-      return;
-    }
-
-    if (consent === 'declined') {
-      disableAnalytics();
-    }
+    initializeAnalytics(consent);
   }, [consent, isAvailable]);
 
   useEffect(() => {
-    if (!isAvailable || consent !== 'accepted') {
+    if (!isAvailable || !shouldTrackPath(pathname)) {
       return;
     }
 
-    trackPageView({ locale, pathname });
+    if (consent === 'accepted') {
+      trackPageView({ locale, pathname, mode: 'full' });
+      return;
+    }
+
+    if (hasTrackedLandingPageView.current) {
+      return;
+    }
+
+    trackPageView({ locale, pathname, mode: 'landing' });
+    hasTrackedLandingPageView.current = true;
   }, [consent, isAvailable, locale, pathname]);
 
   const acceptAnalytics = useCallback(() => {
@@ -136,7 +140,6 @@ export function AnalyticsProvider({
 
   const declineAnalytics = useCallback(() => {
     persistAnalyticsConsent('declined');
-    disableAnalytics();
     setConsent('declined');
     setIsSettingsOpen(false);
   }, []);

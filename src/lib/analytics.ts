@@ -6,12 +6,17 @@ export const META_PIXEL_ID =
 
 const PRODUCTION_HOSTS = new Set(['saheeb.com', 'www.saheeb.com']);
 const EXCLUDED_PATH_PREFIXES = ['/admin', '/style-guide'];
+const ALWAYS_ON_CONVERSION_EVENTS = new Set([
+  'waitlist_submit_success',
+  'contact_submit_success',
+]);
 
 export type AnalyticsConsent = 'accepted' | 'declined';
 export type AnalyticsEventParams = Record<
   string,
   string | number | boolean | undefined
 >;
+export type PageViewTrackingMode = 'landing' | 'full';
 
 declare global {
   interface MetaPixelFunction {
@@ -31,10 +36,6 @@ declare global {
     __saheebAnalyticsInitialized?: boolean;
     __saheebMetaPixelInitialized?: boolean;
   }
-}
-
-function getAnalyticsWindow() {
-  return window as unknown as Window & Record<string, unknown>;
 }
 
 function sanitizeParams(params: AnalyticsEventParams) {
@@ -132,12 +133,18 @@ export function shouldAutoShowAnalyticsBanner(
   return consent === null;
 }
 
-export function setAnalyticsDisabled(disabled: boolean) {
+function hasBehavioralAnalyticsConsent() {
+  return readAnalyticsConsent() === 'accepted';
+}
+
+function updateGoogleAnalyticsConsent(consent: AnalyticsConsent | null) {
   if (typeof window === 'undefined' || !GA_MEASUREMENT_ID) {
     return;
   }
 
-  getAnalyticsWindow()[`ga-disable-${GA_MEASUREMENT_ID}`] = disabled;
+  window.gtag?.('consent', 'update', {
+    analytics_storage: consent === 'accepted' ? 'granted' : 'denied',
+  });
 }
 
 export function ensureGtagBootstrap() {
@@ -183,7 +190,7 @@ export function ensureFbqBootstrap() {
   }
 }
 
-export function initializeAnalytics() {
+export function initializeAnalytics(consent: AnalyticsConsent | null) {
   if (!canUseAnalyticsRuntime()) {
     return;
   }
@@ -203,20 +210,16 @@ export function initializeAnalytics() {
       window.__saheebAnalyticsInitialized = true;
     }
 
-    setAnalyticsDisabled(false);
-    window.gtag?.('consent', 'update', { analytics_storage: 'granted' });
+    updateGoogleAnalyticsConsent(consent);
   }
 
   if (META_PIXEL_ID) {
     ensureFbqBootstrap();
 
     if (!window.__saheebMetaPixelInitialized) {
-      window.fbq?.('consent', 'revoke');
       window.fbq?.('init', META_PIXEL_ID);
       window.__saheebMetaPixelInitialized = true;
     }
-
-    window.fbq?.('consent', 'grant');
   }
 }
 
@@ -225,14 +228,7 @@ export function disableAnalytics() {
     return;
   }
 
-  if (GA_MEASUREMENT_ID) {
-    setAnalyticsDisabled(true);
-    window.gtag?.('consent', 'update', { analytics_storage: 'denied' });
-  }
-
-  if (META_PIXEL_ID) {
-    window.fbq?.('consent', 'revoke');
-  }
+  updateGoogleAnalyticsConsent('declined');
 }
 
 function trackGoogleEvent(
@@ -271,7 +267,10 @@ function trackMetaCustomEvent(
   window.fbq?.('trackCustom', eventName, sanitizeParams(params));
 }
 
-function trackMetaEvent(eventName: string, params: AnalyticsEventParams = {}) {
+function trackMetaConversionEvent(
+  eventName: string,
+  params: AnalyticsEventParams = {}
+) {
   switch (eventName) {
     case 'waitlist_submit_success':
       trackMetaStandardEvent('Lead', {
@@ -289,33 +288,58 @@ function trackMetaEvent(eventName: string, params: AnalyticsEventParams = {}) {
       break;
   }
 
-  trackMetaCustomEvent(eventName, params);
+  if (hasBehavioralAnalyticsConsent()) {
+    trackMetaCustomEvent(eventName, params);
+  }
+}
+
+function trackConversionEvent(
+  eventName: string,
+  params: AnalyticsEventParams = {}
+) {
+  trackGoogleEvent(eventName, params);
+  trackMetaConversionEvent(eventName, params);
 }
 
 export function trackEvent(
   eventName: string,
   params: AnalyticsEventParams = {}
 ) {
-  if (!canUseAnalyticsRuntime() || readAnalyticsConsent() !== 'accepted') {
+  if (!canUseAnalyticsRuntime()) {
+    return;
+  }
+
+  if (ALWAYS_ON_CONVERSION_EVENTS.has(eventName)) {
+    trackConversionEvent(eventName, params);
+    return;
+  }
+
+  if (!hasBehavioralAnalyticsConsent()) {
     return;
   }
 
   trackGoogleEvent(eventName, params);
-  trackMetaEvent(eventName, params);
+  trackMetaCustomEvent(eventName, params);
 }
 
 export function trackPageView({
   locale,
   pathname,
+  mode = 'full',
 }: {
   locale: string;
   pathname: string;
+  mode?: PageViewTrackingMode;
 }) {
-  if (!canUseAnalyticsRuntime() || readAnalyticsConsent() !== 'accepted') {
+  if (!canUseAnalyticsRuntime()) {
     return;
   }
 
   if (!shouldTrackPath(pathname)) {
+    return;
+  }
+
+  if (mode === 'full' && !hasBehavioralAnalyticsConsent()) {
     return;
   }
 

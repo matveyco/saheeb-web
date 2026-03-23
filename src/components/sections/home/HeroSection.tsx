@@ -15,10 +15,11 @@ export function HeroSection() {
       {/* Muscat background image */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
         <Image
-          src="/images/Muscat-BG-1.png"
+          src="/images/Muscat-BG-1.jpg"
           alt=""
           fill
           className="object-cover object-bottom opacity-60"
+          sizes="100vw"
           priority
         />
         {/* Dark gradient overlay */}

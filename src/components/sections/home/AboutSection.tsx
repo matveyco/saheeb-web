@@ -95,7 +95,7 @@ export function AboutSection() {
       {/* Omani geometric pattern - subtle centered background */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
         <Image
-          src="/images/About-section.png"
+          src="/images/About-section.jpg"
           alt=""
           fill
           className="object-cover object-center opacity-[0.15]"

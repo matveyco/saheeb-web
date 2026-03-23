@@ -68,7 +68,7 @@ export function SaheebDriveCard() {
               {/* Visual Side - Coastal Highway Image */}
               <div className="relative min-h-[300px] md:min-h-[400px] overflow-hidden">
                 <Image
-                  src="/images/Saheeb-drive-card.png"
+                  src="/images/Saheeb-drive-card.jpg"
                   alt="Coastal highway in Oman at night with city lights"
                   fill
                   className="object-cover"

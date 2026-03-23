@@ -22,10 +22,11 @@ export default function ContactPage() {
           {/* Layer 1: Background image at opacity-20 */}
           <div className="absolute inset-0 z-0" aria-hidden="true">
             <Image
-              src="/images/contact-hero-bg.png"
+              src="/images/contact-hero-bg.jpg"
               alt=""
               fill
               className="object-cover object-center opacity-40"
+              sizes="100vw"
               priority
             />
           </div>
