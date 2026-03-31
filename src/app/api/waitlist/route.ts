@@ -6,6 +6,10 @@ import {
   getFirstValidationError,
   waitlistSubmissionSchema,
 } from '@/lib/validation';
+import {
+  getRequestCountryCode,
+  writeFunnelEvent,
+} from '@/lib/funnel-server';
 
 // Rate limit: 3 requests per minute per IP (stricter for waitlist)
 const RATE_LIMIT = { limit: 3, windowSeconds: 60 };
@@ -44,11 +48,41 @@ export async function POST(request: NextRequest) {
     }
 
     const waitlistData = parsed.data;
+    const countryCode = getRequestCountryCode(request);
 
     const db = getDb();
 
     // Insert into database
-    await db.insert(waitlistEntries).values(waitlistData);
+    await db.insert(waitlistEntries).values({
+      ...waitlistData,
+      countryCode,
+    });
+
+    void writeFunnelEvent({
+      eventName: 'waitlist_submit_success',
+      path: '/projects/saheeb-drive',
+      pageGroup: 'saheeb_drive',
+      project: 'saheeb_drive',
+      siteLocale: waitlistData.locale,
+      userType: waitlistData.userType,
+      formName: 'saheeb_drive_waitlist',
+      errorStage: null,
+      ctaLocation: null,
+      destinationPath: null,
+      utmSource: waitlistData.utmSource,
+      utmMedium: waitlistData.utmMedium,
+      utmCampaign: waitlistData.utmCampaign,
+      utmContent: waitlistData.utmContent,
+      referrer: waitlistData.referrer,
+      landingPath: waitlistData.landingPath,
+      countryCode,
+      payload: {
+        form_name: 'saheeb_drive_waitlist',
+        project: 'saheeb_drive',
+        site_locale: waitlistData.locale,
+        user_type: waitlistData.userType,
+      },
+    });
 
     return NextResponse.json(
       { success: true, message: 'Successfully added to waitlist' },

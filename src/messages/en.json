@@ -9,6 +9,7 @@
     "services": "Services",
     "projects": "Projects",
     "contact": "Contact",
+    "joinWaitlist": "Join Waitlist",
     "privacy": "Privacy",
     "terms": "Terms",
     "switchLanguage": "العربية"
@@ -43,7 +44,7 @@
       "title": "Powering Oman's Digital Future",
       "subtitle": "AI-native products. Digital infrastructure. Vision 2040.",
       "cta": "Explore Our Services",
-      "ctaSecondary": "Discover Saheeb Drive"
+      "ctaSecondary": "Join Saheeb Drive Waitlist"
     },
     "about": {
       "title": "About Saheeb",
@@ -95,10 +96,10 @@
       "title": "Featured Project",
       "saheebDrive": {
         "title": "Saheeb Drive",
-        "subtitle": "Your Next Car is One Conversation Away",
-        "description": "Tell us what you want in Arabic or English. Our AI finds it, verifies it, and handles everything—from search to keys in hand.",
+        "subtitle": "Buy with Clarity. Sell with Confidence.",
+        "description": "A smarter car marketplace for Oman with seller verification, deeper car insights, and an AI assistant that keeps the whole process clear.",
         "cta": "Join the Waitlist",
-        "badge": "Coming Soon"
+        "badge": "Priority Launch"
       }
     },
     "cta": {
@@ -190,77 +191,106 @@
   },
   "saheebDrive": {
     "hero": {
-      "badge": "Launching in Muscat",
-      "title": "Your Next Car.",
-      "titleHighlight": "One Chat Away.",
-      "subtitle": "Tell our AI what you want. It searches every listing in Oman, verifies sellers, and handles everything — inspection to ROP transfer.",
-      "cta": "Claim Your Spot — It's Free",
-      "socialProof": "{count}+ people already joined"
+      "badge": "Priority Early Access · Muscat",
+      "title": "Buy with Clarity.",
+      "titleHighlight": "Sell with Confidence.",
+      "subtitle": "Saheeb Drive is a smart car marketplace that helps buyers and sellers make more confident decisions through verification, deeper car insights, and a personal AI assistant.",
+      "supportLine": "Founding waitlist now open for Muscat · Launching Q3 2026",
+      "buyCta": "I'm Buying",
+      "sellCta": "I'm Selling",
+      "proofItems": [
+        "Verified Sellers",
+        "Detailed car specs & insights",
+        "Accident History"
+      ],
+      "visualEyebrow": "What buyers and sellers get",
+      "visualBody": "Verification before guesswork, clearer car intelligence, and a guided path from shortlist to transfer."
     },
-    "painPoints": {
-      "title": "Buying a Car in Oman?",
-      "scrolling": "200 listings. 3 decent cars. Sound familiar?",
-      "trust": "Was it in a flood? The seller won't tell you. We will.",
-      "weekends": "Drove across Muscat for a car that looked nothing like the photos."
+    "trust": {
+      "title": "Confidence, not guesswork",
+      "subtitle": "The strongest trust questions now sit higher on the page, before the form ask.",
+      "cards": [
+        {
+          "title": "Verified Sellers",
+          "description": "Listings go through identity and fraud checks so buyers spend less time chasing risky ads."
+        },
+        {
+          "title": "Detailed Specs & Insights",
+          "description": "See more than the headline. Better specs, better pricing context, and clearer signals before you message."
+        },
+        {
+          "title": "Accident History & Red Flags",
+          "description": "Surface the issues people worry about early, before they waste a call, a drive, or a weekend."
+        }
+      ]
     },
-    "earlyAccess": {
-      "title": "First 1,000 Members Get More",
-      "spotsLabel": "{count} of 1,000 spots claimed",
-      "perk1Title": "Free Premium",
-      "perk1Desc": "Premium features free for the first year — no card required",
-      "perk2Title": "Founding Member Pricing",
-      "perk2Desc": "Lock in the lowest rates — before public pricing kicks in",
-      "perk3Title": "Shape the Product",
-      "perk3Desc": "Direct line to our team. Your feedback decides what we build next",
-      "cta": "Claim Your Spot"
+    "stickyCta": {
+      "title": "Join the founding waitlist",
+      "buy": "Buying",
+      "sell": "Selling"
     },
-    "stickyCta": "Claim Your Spot — Free",
     "howItWorks": {
       "title": "How It Works",
-      "subtitle": "An AI that learns what you want — and finds it across every listing in Oman.",
+      "subtitle": "A clearer path from intent to transfer, built for the way Oman actually buys and sells cars.",
       "steps": [
         {
           "number": "1",
           "title": "Tell Us What You Need",
-          "description": "\"Family SUV under 5000 OMR\" — type it in Arabic or English. Our AI understands exactly what you mean."
+          "description": "\"Family SUV under 5,000 OMR\" — in Arabic or English. The assistant understands what matters, not just keywords."
         },
         {
           "number": "2",
-          "title": "AI Verifies Everything",
-          "description": "Price history, seller checks, fraud detection — cross-referenced with ROP records. Only verified matches reach you."
+          "title": "See the Right Signals Early",
+          "description": "Verification cues, clearer specs, pricing context, and risk flags show up before you waste time on the wrong listing."
         },
         {
           "number": "3",
-          "title": "We Handle the Rest",
-          "description": "Inspection, paperwork, ROP transfer — all through official channels. You just show up and drive."
+          "title": "Move Forward With More Confidence",
+          "description": "When the match is right, you move into inspection, paperwork, and transfer with a much clearer starting point."
         }
-      ],
-      "cta": "Claim Your Spot"
+      ]
     },
     "waitlist": {
-      "title": "Be the First to Try It",
-      "subtitle": "We're launching in Muscat Q3 2026. Early access members get priority.",
+      "sectionEyebrow": "Founding Waitlist",
+      "sectionTitle": "Join before the public launch",
+      "sectionSubtitle": "Get early access, priority updates, and a direct line into the first Muscat launch wave.",
+      "benefits": [
+        "Early access before the public rollout in Muscat.",
+        "Launch updates matched to whether you're buying or selling.",
+        "A chance to shape the product before the market sees it."
+      ],
+      "footnote": "We only ask for what we need to reach you. Phone is optional. Buyer/seller intent helps us tailor launch updates.",
+      "eyebrow": "Start in under 30 seconds",
+      "title": "Save your spot",
+      "subtitle": "Name, email, and what side of the market you're on. We'll handle the rest closer to launch.",
       "namePlaceholder": "Your name",
       "emailPlaceholder": "your@email.com",
       "phonePlaceholder": "+968",
-      "buyOrSell": "I want to",
-      "buy": "Buy a Car",
-      "sell": "Sell My Car",
-      "consent": "I agree to receive updates about Saheeb Drive. You can unsubscribe anytime.",
-      "consentRequired": "Please agree to continue",
-      "submit": "Get Early Access",
+      "buyOrSell": "Which side of the market are you on?",
+      "buy": "I'm buying",
+      "sell": "I'm selling",
+      "consentPrefix": "I agree to receive Saheeb Drive updates according to the",
+      "privacy": "Privacy Policy",
+      "privacyNote": "We use this information to contact you about launch access and product updates.",
+      "submit": "Join the Waitlist",
       "submitting": "Joining...",
       "success": {
-        "title": "You're on the list!",
-        "message": "Request received. We'll contact you before launch."
+        "title": "You're on the list.",
+        "message": "We've saved your early-access request for the Muscat launch wave.",
+        "launchNote": "Help us build momentum: share the waitlist with one friend who is buying or selling soon.",
+        "shareText": "Saheeb Drive is launching in Muscat. Join the waitlist:",
+        "shareWhatsapp": "Share on WhatsApp",
+        "copyLink": "Copy link",
+        "copied": "Copied"
       },
       "error": {
         "title": "Something went wrong",
-        "message": "Please try again or contact us directly."
+        "message": "Please try again in a moment or contact us directly."
       }
     },
     "faq": {
       "title": "Questions People Ask",
+      "subtitle": "The questions that usually decide whether someone joins the waitlist or keeps scrolling.",
       "items": [
         {
           "question": "When and where does it launch?",

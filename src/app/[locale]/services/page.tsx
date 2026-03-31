@@ -121,9 +121,9 @@ export default function ServicesPage() {
                         )}
                       </ul>
 
-                      <Link href="/contact">
-                        <Button variant="primary">{tCommon('contactUs')}</Button>
-                      </Link>
+                      <Button asChild variant="primary">
+                        <Link href="/contact">{tCommon('contactUs')}</Link>
+                      </Button>
                     </div>
 
                     {/* Visual - Image */}
@@ -166,11 +166,11 @@ export default function ServicesPage() {
               <p className="text-sm text-[#5C5C63] max-w-2xl mx-auto mb-8">
                 {t('licenseDisclaimer')}
               </p>
-              <Link href="/contact">
-                <Button size="lg" variant="primary">
+              <Button asChild size="lg" variant="primary">
+                <Link href="/contact">
                   {tCommon('contactUs')}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </motion.div>
           </Container>
         </section>

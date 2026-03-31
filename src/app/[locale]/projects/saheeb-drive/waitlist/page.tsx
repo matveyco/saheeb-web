@@ -1,59 +1,42 @@
-import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
-import WaitlistClientPage from './waitlist-client';
+import { permanentRedirect } from 'next/navigation';
 
-interface WaitlistPageProps {
+interface WaitlistAliasPageProps {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
-export async function generateMetadata({
+function appendSearchParam(
+  query: URLSearchParams,
+  key: string,
+  value: string | string[] | undefined
+) {
+  if (!value) {
+    return;
+  }
+
+  if (Array.isArray(value)) {
+    value.forEach((entry) => query.append(key, entry));
+    return;
+  }
+
+  query.set(key, value);
+}
+
+export default async function WaitlistAliasPage({
   params,
-}: WaitlistPageProps): Promise<Metadata> {
+  searchParams,
+}: WaitlistAliasPageProps) {
   const { locale } = await params;
-  const isArabic = locale === 'ar';
-  const t = await getTranslations({ locale, namespace: 'saheebDrive.waitlist' });
+  const resolvedSearchParams = await searchParams;
+  const query = new URLSearchParams();
 
-  const title = isArabic ? 'قائمة انتظار صاحب درايف' : 'Saheeb Drive Waitlist';
-  const description = t('subtitle');
-  const path = `/${locale}/projects/saheeb-drive/waitlist`;
+  Object.entries(resolvedSearchParams).forEach(([key, value]) => {
+    appendSearchParam(query, key, value);
+  });
 
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: path,
-      languages: {
-        en: '/en/projects/saheeb-drive/waitlist',
-        ar: '/ar/projects/saheeb-drive/waitlist',
-      },
-    },
-    openGraph: {
-      title: isArabic
-        ? 'قائمة انتظار صاحب درايف | صاحب'
-        : 'Saheeb Drive Waitlist | Saheeb',
-      description,
-      url: `https://saheeb.com${path}`,
-      type: 'website',
-      images: [
-        {
-          url: '/images/og-image.png',
-          width: 1200,
-          height: 630,
-          alt: isArabic ? 'قائمة انتظار صاحب درايف' : 'Saheeb Drive Waitlist',
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: isArabic
-        ? 'قائمة انتظار صاحب درايف | صاحب'
-        : 'Saheeb Drive Waitlist | Saheeb',
-      description,
-      images: ['/images/og-image.png'],
-    },
-  };
-}
+  query.set('focus', 'waitlist');
 
-export default function WaitlistPage() {
-  return <WaitlistClientPage />;
+  permanentRedirect(
+    `/${locale}/projects/saheeb-drive?${query.toString()}#drive-waitlist`
+  );
 }

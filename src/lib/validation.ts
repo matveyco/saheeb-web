@@ -1,6 +1,15 @@
 import { z } from 'zod';
 
 const localeSchema = z.enum(['ar', 'en']);
+const waitlistUserTypeSchema = z.enum(['buyer', 'seller']);
+const funnelEventNameSchema = z.enum([
+  'drive_page_view',
+  'waitlist_view',
+  'cta_click',
+  'form_start',
+  'validation_error',
+  'waitlist_submit_success',
+]);
 
 const phoneRegex = /^\+?[0-9\s\-()]{8,20}$/;
 
@@ -44,6 +53,14 @@ const messageSchema = z
   .min(10, 'Message must be at least 10 characters')
   .max(5000, 'Message must be at most 5000 characters');
 
+const optionalTrimmedString = (max: number) =>
+  z.union([z.string().trim().min(1).max(max), z.literal('')]).optional();
+
+const funnelPayloadSchema = z.record(
+  z.string(),
+  z.union([z.string(), z.number(), z.boolean(), z.null()])
+);
+
 export const contactSubmissionSchema = z
   .object({
     name: nameSchema,
@@ -71,33 +88,116 @@ export const contactSubmissionSchema = z
 export const waitlistSubmissionSchema = z
   .object({
     name: nameSchema,
-    phone: phoneSchema,
-    email: z.union([emailSchema, z.literal('')]).optional(),
-    userType: z.enum(['buyer', 'seller', 'dealer']),
-    city: z
-      .string()
-      .trim()
-      .min(2, 'City is required')
-      .max(100, 'City must be at most 100 characters'),
+    email: emailSchema,
+    phone: z.union([phoneSchema, z.literal('')]).optional(),
+    userType: waitlistUserTypeSchema,
     consent: z.literal(true, {
       error: 'Consent is required',
     }),
     locale: localeSchema,
+    utmSource: optionalTrimmedString(255),
+    utmMedium: optionalTrimmedString(255),
+    utmCampaign: optionalTrimmedString(255),
+    utmContent: optionalTrimmedString(255),
+    referrer: optionalTrimmedString(2048),
+    landingPath: optionalTrimmedString(255),
     consentTimestamp: consentTimestampSchema,
   })
   .transform((value) => ({
     name: value.name,
-    phone: value.phone,
-    email: value.email && value.email.length > 0 ? value.email : null,
+    email: value.email,
+    phone: value.phone && value.phone.length > 0 ? value.phone : null,
     userType: value.userType,
-    city: value.city,
+    city: 'muscat',
     consent: value.consent,
     locale: value.locale,
+    utmSource:
+      value.utmSource && value.utmSource.length > 0 ? value.utmSource : null,
+    utmMedium:
+      value.utmMedium && value.utmMedium.length > 0 ? value.utmMedium : null,
+    utmCampaign:
+      value.utmCampaign && value.utmCampaign.length > 0
+        ? value.utmCampaign
+        : null,
+    utmContent:
+      value.utmContent && value.utmContent.length > 0
+        ? value.utmContent
+        : null,
+    referrer:
+      value.referrer && value.referrer.length > 0 ? value.referrer : null,
+    landingPath:
+      value.landingPath && value.landingPath.length > 0
+        ? value.landingPath
+        : null,
     consentTimestamp: value.consentTimestamp,
+  }));
+
+export const funnelEventSchema = z
+  .object({
+    eventName: funnelEventNameSchema,
+    path: z.string().trim().min(1, 'path is required').max(255),
+    pageGroup: optionalTrimmedString(80),
+    project: optionalTrimmedString(80),
+    siteLocale: localeSchema,
+    userType: waitlistUserTypeSchema.optional(),
+    ctaLocation: optionalTrimmedString(120),
+    destinationPath: optionalTrimmedString(255),
+    formName: optionalTrimmedString(120),
+    errorStage: optionalTrimmedString(80),
+    utmSource: optionalTrimmedString(255),
+    utmMedium: optionalTrimmedString(255),
+    utmCampaign: optionalTrimmedString(255),
+    utmContent: optionalTrimmedString(255),
+    referrer: optionalTrimmedString(2048),
+    landingPath: optionalTrimmedString(255),
+    payload: funnelPayloadSchema.optional(),
+  })
+  .transform((value) => ({
+    eventName: value.eventName,
+    path: value.path,
+    pageGroup:
+      value.pageGroup && value.pageGroup.length > 0 ? value.pageGroup : null,
+    project: value.project && value.project.length > 0 ? value.project : null,
+    siteLocale: value.siteLocale,
+    userType: value.userType ?? null,
+    ctaLocation:
+      value.ctaLocation && value.ctaLocation.length > 0
+        ? value.ctaLocation
+        : null,
+    destinationPath:
+      value.destinationPath && value.destinationPath.length > 0
+        ? value.destinationPath
+        : null,
+    formName:
+      value.formName && value.formName.length > 0 ? value.formName : null,
+    errorStage:
+      value.errorStage && value.errorStage.length > 0
+        ? value.errorStage
+        : null,
+    utmSource:
+      value.utmSource && value.utmSource.length > 0 ? value.utmSource : null,
+    utmMedium:
+      value.utmMedium && value.utmMedium.length > 0 ? value.utmMedium : null,
+    utmCampaign:
+      value.utmCampaign && value.utmCampaign.length > 0
+        ? value.utmCampaign
+        : null,
+    utmContent:
+      value.utmContent && value.utmContent.length > 0
+        ? value.utmContent
+        : null,
+    referrer:
+      value.referrer && value.referrer.length > 0 ? value.referrer : null,
+    landingPath:
+      value.landingPath && value.landingPath.length > 0
+        ? value.landingPath
+        : null,
+    payload: value.payload ?? {},
   }));
 
 export type ContactSubmissionInput = z.infer<typeof contactSubmissionSchema>;
 export type WaitlistSubmissionInput = z.infer<typeof waitlistSubmissionSchema>;
+export type FunnelEventInput = z.infer<typeof funnelEventSchema>;
 
 export function getFirstValidationError(error: z.ZodError): string {
   return error.issues[0]?.message ?? 'Invalid request payload';

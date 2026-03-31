@@ -25,7 +25,7 @@ const faqDataEn = [
   {
     question: 'Is my data safe?',
     answer:
-      'All your data stays in Oman, processed according to Omani privacy regulations. We never sell your information. You can delete your account and data anytime.',
+      'We apply strong data protection controls aligned with Omani regulations. Some processing may involve vetted service providers outside Oman with contractual safeguards.',
   },
 ];
 
@@ -53,7 +53,7 @@ const faqDataAr = [
   {
     question: 'بياناتي آمنة؟',
     answer:
-      'كل بياناتك تبقى في عمان، تُعالج حسب قوانين الخصوصية العمانية. ما نبيع معلوماتك أبداً. تقدر تحذف حسابك وبياناتك في أي وقت.',
+      'نطبّق ضوابط حماية بيانات قوية بما يتوافق مع اللوائح العُمانية. وقد تتضمن بعض عمليات المعالجة مزوّدي خدمات موثوقين خارج عُمان مع ضمانات تعاقدية.',
   },
 ];
 
@@ -67,8 +67,14 @@ export async function generateMetadata({
 
   const title = isArabic ? 'صاحب درايف' : 'Saheeb Drive';
   const description = isArabic
-    ? 'سيارتك القادمة على بُعد محادثة واحدة. سوق السيارات بالذكاء الاصطناعي المبني لعمان. قل لنا ما تريد بالعربي أو الإنجليزي، ونتولى الباقي.'
-    : 'Your next car is one chat away. The AI-native car marketplace built for Oman. Tell us what you want in Arabic or English, and we handle everything.';
+    ? 'اشترِ بوضوح. وبِع بثقة. صاحب درايف سوق سيارات ذكي لعمان يجمع بين التحقق ورؤى أعمق للسيارة ومساعد ذكاء اصطناعي شخصي.'
+    : 'Buy with Clarity. Sell with Confidence. Saheeb Drive is a smart car marketplace for Oman with verification, deeper car insights, and a personal AI assistant.';
+  const socialImage = {
+    url: '/images/Saheeb-drive-card.jpg',
+    width: 1264,
+    height: 848,
+    alt: isArabic ? 'صاحب درايف' : 'Saheeb Drive',
+  };
 
   return {
     title,
@@ -78,6 +84,7 @@ export async function generateMetadata({
       languages: {
         en: '/en/projects/saheeb-drive',
         ar: '/ar/projects/saheeb-drive',
+        'x-default': '/ar/projects/saheeb-drive',
       },
     },
     openGraph: {
@@ -85,20 +92,16 @@ export async function generateMetadata({
       description,
       url: `https://saheeb.com/${locale}/projects/saheeb-drive`,
       type: 'website',
-      images: [
-        {
-          url: '/images/og-image.png',
-          width: 1200,
-          height: 630,
-          alt: isArabic ? 'صاحب درايف' : 'Saheeb Drive',
-        },
-      ],
+      locale: isArabic ? 'ar_OM' : 'en_US',
+      alternateLocale: isArabic ? 'en_US' : 'ar_OM',
+      siteName: isArabic ? 'صاحب' : 'Saheeb',
+      images: [socialImage],
     },
     twitter: {
       card: 'summary_large_image',
       title: isArabic ? 'صاحب درايف | صاحب' : 'Saheeb Drive | Saheeb',
       description,
-      images: ['/images/og-image.png'],
+      images: [socialImage.url],
     },
   };
 }

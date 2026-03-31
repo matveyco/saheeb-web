@@ -22,10 +22,12 @@ import {
   trackPageView,
   type AnalyticsConsent,
 } from '@/lib/analytics';
+import { captureAttribution } from '@/lib/attribution';
 
 interface AnalyticsConsentContextValue {
   consent: AnalyticsConsent | null;
   isAvailable: boolean;
+  isBannerOpen: boolean;
   openSettings: () => void;
   acceptAnalytics: () => void;
   declineAnalytics: () => void;
@@ -99,12 +101,20 @@ export function AnalyticsProvider({
     typeof window === 'undefined' ? null : readAnalyticsConsent()
   );
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const hasTrackedLandingPageView = useRef(false);
+  const lastTrackedLandingPath = useRef<string | null>(null);
   const isAvailable = isHydrated && canUseAnalyticsRuntime();
   const isBannerOpen =
     isAvailable &&
     shouldTrackPath(pathname) &&
     (isSettingsOpen || shouldAutoShowAnalyticsBanner(consent));
+
+  useEffect(() => {
+    if (!isHydrated) {
+      return;
+    }
+
+    captureAttribution(pathname);
+  }, [isHydrated, pathname]);
 
   useEffect(() => {
     if (!isAvailable) {
@@ -124,12 +134,12 @@ export function AnalyticsProvider({
       return;
     }
 
-    if (hasTrackedLandingPageView.current) {
+    if (lastTrackedLandingPath.current === pathname) {
       return;
     }
 
     trackPageView({ locale, pathname, mode: 'landing' });
-    hasTrackedLandingPageView.current = true;
+    lastTrackedLandingPath.current = pathname;
   }, [consent, isAvailable, locale, pathname]);
 
   const acceptAnalytics = useCallback(() => {
@@ -156,11 +166,19 @@ export function AnalyticsProvider({
     () => ({
       consent,
       isAvailable,
+      isBannerOpen,
       openSettings,
       acceptAnalytics,
       declineAnalytics,
     }),
-    [acceptAnalytics, consent, declineAnalytics, isAvailable, openSettings]
+    [
+      acceptAnalytics,
+      consent,
+      declineAnalytics,
+      isAvailable,
+      isBannerOpen,
+      openSettings,
+    ]
   );
 
   return (

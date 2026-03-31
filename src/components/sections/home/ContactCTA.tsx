@@ -62,20 +62,20 @@ export function ContactCTA() {
             transition={{ duration: 0.4, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <TrackedLink
-              href="/contact"
-              ctaLocation="home_contact_primary"
-              destinationPath="/contact"
-            >
-              <Button size="lg" variant="primary">
+            <Button asChild size="lg" variant="primary">
+              <TrackedLink
+                href="/contact"
+                ctaLocation="home_contact_primary"
+                destinationPath="/contact"
+              >
                 {t('button')}
-              </Button>
-            </TrackedLink>
-            <Link href="/services">
-              <Button size="lg" variant="secondary">
+              </TrackedLink>
+            </Button>
+            <Button asChild size="lg" variant="secondary">
+              <Link href="/services">
                 {t('button') === 'Get in Touch' ? 'View Services' : '\u0639\u0631\u0636 \u0627\u0644\u062E\u062F\u0645\u0627\u062A'}
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </motion.div>
 
           {/* Trust indicators */}

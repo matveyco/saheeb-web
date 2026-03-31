@@ -21,11 +21,11 @@ export default function NotFoundPage() {
             <p className="text-lg text-[#8F8F96] mb-10 max-w-md mx-auto">
               {t('description')}
             </p>
-            <Link href="/">
-              <Button variant="primary" size="lg">
+            <Button asChild variant="primary" size="lg">
+              <Link href="/">
                 {t('cta')}
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </Container>
       </main>

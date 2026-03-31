@@ -3,7 +3,7 @@
 import { ComponentProps } from 'react';
 import { useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { trackEvent } from '@/lib/analytics';
+import { recordFunnelEvent } from '@/lib/funnel';
 
 interface TrackedLinkProps extends ComponentProps<typeof Link> {
   ctaLocation: string;
@@ -30,11 +30,18 @@ export function TrackedLink({
           return;
         }
 
-        trackEvent('cta_click', {
-          cta_location: ctaLocation,
-          destination_path: destinationPath,
+        recordFunnelEvent({
+          eventName: 'cta_click',
+          siteLocale: locale,
+          ctaLocation,
+          destinationPath,
           project,
-          site_locale: locale,
+          payload: {
+            cta_location: ctaLocation,
+            destination_path: destinationPath,
+            project: project ?? null,
+            site_locale: locale,
+          },
         });
       }}
     />

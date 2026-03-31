@@ -6,10 +6,14 @@ import { Logo } from './Logo';
 import { Navigation } from './Navigation';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { MobileMenu } from './MobileMenu';
+import { TrackedLink } from '@/components/analytics/TrackedLink';
+import { Button } from '@/components/ui';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const tNavigation = useTranslations('navigation');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +39,16 @@ export function Header() {
 
           <div className="hidden lg:flex items-center gap-3">
             <Navigation />
+            <Button asChild size="sm">
+              <TrackedLink
+                href="/projects/saheeb-drive?focus=waitlist"
+                ctaLocation="header_join_waitlist"
+                destinationPath="/projects/saheeb-drive?focus=waitlist"
+                project="saheeb_drive"
+              >
+                {tNavigation('joinWaitlist')}
+              </TrackedLink>
+            </Button>
             <div className="w-px h-5 bg-[#222225] mx-2" aria-hidden="true" />
             <LanguageSwitcher />
           </div>

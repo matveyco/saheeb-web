@@ -5,9 +5,11 @@ import { TrackedLink } from '@/components/analytics/TrackedLink';
 import { Container, Button, Badge } from '@/components/ui';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { Link } from '@/i18n/navigation';
 
 export function SaheebDriveCard() {
   const t = useTranslations('home.featured');
+  const tCommon = useTranslations('common');
 
   return (
     <section className="py-24 lg:py-32 bg-[#09090B] relative overflow-hidden">
@@ -52,16 +54,21 @@ export function SaheebDriveCard() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <TrackedLink
-                    href="/projects/saheeb-drive"
-                    ctaLocation="home_featured_saheeb_drive"
-                    destinationPath="/projects/saheeb-drive"
-                    project="saheeb_drive"
-                  >
-                    <Button variant="primary" size="lg">
+                  <Button asChild variant="primary" size="lg">
+                    <TrackedLink
+                      href="/projects/saheeb-drive?focus=waitlist"
+                      ctaLocation="home_featured_saheeb_drive"
+                      destinationPath="/projects/saheeb-drive?focus=waitlist"
+                      project="saheeb_drive"
+                    >
                       {t('saheebDrive.cta')}
-                    </Button>
-                  </TrackedLink>
+                    </TrackedLink>
+                  </Button>
+                  <Button asChild variant="secondary" size="lg">
+                    <Link href="/projects/saheeb-drive">
+                      {tCommon('learnMore')}
+                    </Link>
+                  </Button>
                 </div>
               </div>
 

@@ -6,11 +6,18 @@ interface WaitlistEntry {
   id: number;
   name: string;
   email: string | null;
-  phone: string;
+  phone: string | null;
   userType: string;
   city: string;
   consent: boolean;
   locale: string;
+  utmSource: string | null;
+  utmMedium: string | null;
+  utmCampaign: string | null;
+  utmContent: string | null;
+  referrer: string | null;
+  landingPath: string | null;
+  countryCode: string | null;
   consentTimestamp: string;
   createdAt: string;
 }
@@ -84,7 +91,8 @@ export default function AdminWaitlistPage() {
                   <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">Email</th>
                   <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">Phone</th>
                   <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">Type</th>
-                  <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">City</th>
+                  <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">Attribution</th>
+                  <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">Country</th>
                   <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">Locale</th>
                   <th className="text-left py-3 px-4 text-[#8F8F96] font-medium text-sm">Created</th>
                 </tr>
@@ -98,7 +106,7 @@ export default function AdminWaitlistPage() {
                     <td className="py-3 px-4 text-[#5C5C63] text-sm">{entry.id}</td>
                     <td className="py-3 px-4 text-white">{entry.name}</td>
                     <td className="py-3 px-4 text-white/80">{entry.email || '-'}</td>
-                    <td className="py-3 px-4 text-white/80">{entry.phone}</td>
+                    <td className="py-3 px-4 text-white/80">{entry.phone || '-'}</td>
                     <td className="py-3 px-4">
                       <span
                         className={`inline-block px-2 py-1 rounded text-xs font-medium ${
@@ -113,10 +121,18 @@ export default function AdminWaitlistPage() {
                           ? 'Buyer'
                           : entry.userType === 'seller'
                             ? 'Seller'
-                            : 'Dealer'}
+                            : 'Legacy'}
                       </span>
                     </td>
-                    <td className="py-3 px-4 text-white/80">{entry.city}</td>
+                    <td className="py-3 px-4 text-white/80 text-sm">
+                      <div>{entry.utmSource || '-'}</div>
+                      <div className="text-[#5C5C63]">
+                        {entry.utmCampaign || entry.landingPath || entry.city}
+                      </div>
+                    </td>
+                    <td className="py-3 px-4 text-white/80">
+                      {entry.countryCode || '-'}
+                    </td>
                     <td className="py-3 px-4 text-[#8F8F96]">{entry.locale}</td>
                     <td className="py-3 px-4 text-[#8F8F96] text-sm">
                       {new Date(entry.createdAt).toLocaleDateString()}

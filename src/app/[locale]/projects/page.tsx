@@ -6,10 +6,11 @@ import { Container, Badge, Button } from '@/components/ui';
 import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { TrackedLink } from '@/components/analytics/TrackedLink';
 
 export default function ProjectsPage() {
   const t = useTranslations('projects');
-  const tCommon = useTranslations('common');
+  const tNavigation = useTranslations('navigation');
   const locale = useLocale();
   const isArabic = locale === 'ar';
 
@@ -47,11 +48,16 @@ export default function ProjectsPage() {
               <p className="text-xl lg:text-2xl text-[#C9A87C] font-semibold mb-8">
                 {t('subtitle')}
               </p>
-              <Link href="/projects/saheeb-drive">
-                <Button variant="primary" size="lg">
-                  {t('saheebDrive.cta')}
-                </Button>
-              </Link>
+              <Button asChild variant="primary" size="lg">
+                <TrackedLink
+                  href="/projects/saheeb-drive?focus=waitlist"
+                  ctaLocation="projects_hero_join_waitlist"
+                  destinationPath="/projects/saheeb-drive?focus=waitlist"
+                  project="saheeb_drive"
+                >
+                  {tNavigation('joinWaitlist')}
+                </TrackedLink>
+              </Button>
             </motion.div>
           </Container>
         </section>
@@ -98,11 +104,23 @@ export default function ProjectsPage() {
                   {t('saheebDrive.heroDescription')}
                 </p>
 
-                <Link href="/projects/saheeb-drive">
-                  <Button variant="primary" size="lg">
-                    {t('saheebDrive.cta')}
+                <div className="flex flex-col gap-4 sm:flex-row">
+                  <Button asChild variant="primary" size="lg">
+                    <TrackedLink
+                      href="/projects/saheeb-drive?focus=waitlist"
+                      ctaLocation="projects_showcase_join_waitlist"
+                      destinationPath="/projects/saheeb-drive?focus=waitlist"
+                      project="saheeb_drive"
+                    >
+                      {tNavigation('joinWaitlist')}
+                    </TrackedLink>
                   </Button>
-                </Link>
+                  <Button asChild variant="secondary" size="lg">
+                    <Link href="/projects/saheeb-drive">
+                      {t('saheebDrive.cta')}
+                    </Link>
+                  </Button>
+                </div>
               </motion.div>
 
               {/* Visual */}
@@ -172,18 +190,25 @@ export default function ProjectsPage() {
               className="text-center"
             >
               <h2 className="text-4xl lg:text-5xl font-bold text-[#EDEDEF] mb-6">
-                {isArabic ? 'هل لديك فكرة مشروع؟' : 'Have a Project Idea?'}
+                {isArabic
+                  ? 'انضم لقائمة انتظار صاحب درايف'
+                  : 'Join the Saheeb Drive Waitlist'}
               </h2>
               <p className="text-xl text-[#8F8F96] max-w-xl mx-auto mb-10">
                 {isArabic
-                  ? 'نحب سماع أفكارك. تواصل معنا لمناقشة كيف يمكننا مساعدتك.'
-                  : "We'd love to hear your ideas. Get in touch to discuss how we can help."}
+                  ? 'منتجنا الأولوي الآن. سجّل مبكراً إذا كنت تنوي الشراء أو البيع في مسقط.'
+                  : 'Saheeb Drive is our priority launch right now. Join early if you plan to buy or sell in Muscat.'}
               </p>
-              <Link href="/contact">
-                <Button size="lg" variant="primary">
-                  {tCommon('contactUs')}
-                </Button>
-              </Link>
+              <Button asChild size="lg" variant="primary">
+                <TrackedLink
+                  href="/projects/saheeb-drive?focus=waitlist"
+                  ctaLocation="projects_footer_join_waitlist"
+                  destinationPath="/projects/saheeb-drive?focus=waitlist"
+                  project="saheeb_drive"
+                >
+                  {tNavigation('joinWaitlist')}
+                </TrackedLink>
+              </Button>
             </motion.div>
           </Container>
         </section>

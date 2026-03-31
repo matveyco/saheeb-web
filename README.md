@@ -63,17 +63,31 @@ Optional:
 
 Required:
 
-- `name`, `phone`, `userType`, `city`, `consent=true`, `locale`, `consentTimestamp`
+- `name`, `email`, `userType`, `consent=true`, `locale`, `consentTimestamp`
 
 Optional:
 
-- `email`
+- `phone`
+- `utmSource`, `utmMedium`, `utmCampaign`, `utmContent`
+- `referrer`, `landingPath`
 
 `userType` accepted values:
 
 - `buyer`
 - `seller`
-- `dealer`
+
+### `POST /api/funnel`
+
+Internal first-party funnel logging endpoint for anonymous Drive conversion events.
+
+Accepted `eventName` values:
+
+- `drive_page_view`
+- `waitlist_view`
+- `cta_click`
+- `form_start`
+- `validation_error`
+- `waitlist_submit_success`
 
 ## Pre-Deploy Checks
 
@@ -89,3 +103,5 @@ npm run check:assets
 For production readiness, ensure `DATABASE_URL`, admin credentials, and origin allowlist are correctly configured for the deployment domain.
 
 If GA4 or Meta Pixel is enabled, also set `NEXT_PUBLIC_GA_MEASUREMENT_ID` and/or `NEXT_PUBLIC_META_PIXEL_ID` in the production build environment and confirm the privacy page reflects the live tracking configuration. Set `GOOGLE_SITE_VERIFICATION` and `META_DOMAIN_VERIFICATION` when webmaster verification tags are needed.
+
+After deploying the current Saheeb Drive funnel, mark `waitlist_submit_success` as a GA4 key event in the GA4 UI and verify Meta `Lead` fires from the live site.

@@ -142,11 +142,11 @@ export function ServicesGrid() {
           transition={{ duration: 0.4, delay: 0.3 }}
           className="text-center mt-12"
         >
-          <Link href="/services">
-            <Button variant="secondary" size="lg">
+          <Button asChild variant="secondary" size="lg">
+            <Link href="/services">
               {tCommon('viewAll')}
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </motion.div>
       </Container>
     </section>

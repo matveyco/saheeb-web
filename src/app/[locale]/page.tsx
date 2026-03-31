@@ -22,10 +22,10 @@ export default async function HomePage({ params }: HomePageProps) {
       <Header />
       <main>
         <HeroSection />
+        <SaheebDriveCard />
         <AboutSection />
         <ServicesGrid />
         <Vision2040Section />
-        <SaheebDriveCard />
         <ContactCTA />
       </main>
       <Footer />

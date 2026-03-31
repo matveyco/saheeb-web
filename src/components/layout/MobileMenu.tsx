@@ -4,11 +4,14 @@ import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Navigation } from './Navigation';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { TrackedLink } from '@/components/analytics/TrackedLink';
+import { Button } from '@/components/ui';
 import { cn } from '@/lib/utils';
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations('common');
+  const tNavigation = useTranslations('navigation');
   const locale = useLocale();
   const isArabic = locale === 'ar';
 
@@ -110,6 +113,19 @@ export function MobileMenu() {
 
           <div className="flex-1 overflow-y-auto p-5">
             <Navigation vertical onItemClick={() => setIsOpen(false)} />
+            <div className="mt-5 border-t border-[#1A1A1D] pt-5">
+              <Button asChild className="w-full">
+                <TrackedLink
+                  href="/projects/saheeb-drive?focus=waitlist"
+                  ctaLocation="mobile_menu_join_waitlist"
+                  destinationPath="/projects/saheeb-drive?focus=waitlist"
+                  project="saheeb_drive"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {tNavigation('joinWaitlist')}
+                </TrackedLink>
+              </Button>
+            </div>
           </div>
 
           <div className="p-5 border-t border-[#1A1A1D]">
