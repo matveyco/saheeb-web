@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { eq, sql } from 'drizzle-orm';
 import { checkRateLimit, getClientIP } from '@/lib/rate-limit';
 import { validateOrigin, csrfErrorResponse } from '@/lib/csrf';
 import { getDb, waitlistEntries } from '@/db';
@@ -51,6 +52,42 @@ export async function POST(request: NextRequest) {
     const countryCode = getRequestCountryCode(request);
 
     const db = getDb();
+
+    const [existingEntry] = await db
+      .select({ id: waitlistEntries.id })
+      .from(waitlistEntries)
+      .where(sql`lower(${waitlistEntries.email}) = lower(${waitlistData.email})`)
+      .limit(1);
+
+    if (existingEntry) {
+      await db
+        .update(waitlistEntries)
+        .set({
+          phone: waitlistData.phone ?? undefined,
+          userType: waitlistData.userType,
+          locale: waitlistData.locale,
+          consent: waitlistData.consent,
+          city: waitlistData.city,
+          countryCode: countryCode ?? undefined,
+          utmSource: waitlistData.utmSource ?? undefined,
+          utmMedium: waitlistData.utmMedium ?? undefined,
+          utmCampaign: waitlistData.utmCampaign ?? undefined,
+          utmContent: waitlistData.utmContent ?? undefined,
+          referrer: waitlistData.referrer ?? undefined,
+          landingPath: waitlistData.landingPath ?? undefined,
+          consentTimestamp: waitlistData.consentTimestamp,
+        })
+        .where(eq(waitlistEntries.id, existingEntry.id));
+
+      return NextResponse.json(
+        {
+          success: true,
+          duplicate: true,
+          message: 'Already on waitlist',
+        },
+        { status: 200 }
+      );
+    }
 
     // Insert into database
     await db.insert(waitlistEntries).values({

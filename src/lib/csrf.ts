@@ -43,6 +43,11 @@ function getAllowedOrigins(): Set<string> {
   return new Set(envOrigins?.length ? envOrigins : DEFAULT_ALLOWED_ORIGINS);
 }
 
+function hasTrustedFetchSite(request: Request) {
+  const fetchSite = request.headers.get('sec-fetch-site');
+  return fetchSite === 'same-origin' || fetchSite === 'same-site';
+}
+
 export function validateOrigin(request: Request): boolean {
   const directOrigin = parseOrigin(request.headers.get('origin'));
   const refererOrigin = parseOrigin(request.headers.get('referer'));
@@ -55,6 +60,10 @@ export function validateOrigin(request: Request): boolean {
   const requestOrigin = directOrigin.origin || refererOrigin.origin;
 
   if (!requestOrigin) {
+    if (hasTrustedFetchSite(request)) {
+      return true;
+    }
+
     // Local non-browser calls in development may not send origin headers.
     return process.env.NODE_ENV === 'development' && !directOrigin.present && !refererOrigin.present;
   }

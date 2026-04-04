@@ -72,13 +72,16 @@ function normalizeLocalePath(pathname: string, siteLocale: string) {
 function sendFirstPartyEvent(body: Record<string, unknown>) {
   const serialized = JSON.stringify(body);
 
-  if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
+  const sendBeaconFallback = () => {
+    if (typeof navigator === 'undefined' || !navigator.sendBeacon) {
+      return;
+    }
+
     const blob = new Blob([serialized], {
       type: 'application/json',
     });
     navigator.sendBeacon('/api/funnel', blob);
-    return;
-  }
+  };
 
   void fetch('/api/funnel', {
     method: 'POST',
@@ -87,7 +90,16 @@ function sendFirstPartyEvent(body: Record<string, unknown>) {
     },
     body: serialized,
     keepalive: true,
-  }).catch(() => {});
+    credentials: 'same-origin',
+  })
+    .then((response) => {
+      if (!response.ok) {
+        sendBeaconFallback();
+      }
+    })
+    .catch(() => {
+      sendBeaconFallback();
+    });
 }
 
 export function recordFunnelEvent({

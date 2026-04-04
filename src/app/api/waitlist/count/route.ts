@@ -1,14 +1,24 @@
 import { NextResponse } from 'next/server';
-import { getDb, waitlistEntries } from '@/db';
-import { count } from 'drizzle-orm';
+import { getDb } from '@/db';
+import { sql } from 'drizzle-orm';
 
 export async function GET() {
   try {
     const db = getDb();
-    const [result] = await db.select({ count: count() }).from(waitlistEntries);
+    const result = await db.execute(sql<{ count: number }>`
+      select
+        count(
+          distinct coalesce(
+            'email:' || lower(nullif(btrim(email), '')),
+            'phone:' || nullif(regexp_replace(coalesce(phone, ''), '\D', '', 'g'), '')
+          )
+        )::int as count
+      from waitlist_entries
+    `);
+    const count = result.rows[0]?.count ?? 0;
 
     return NextResponse.json(
-      { count: result.count },
+      { count },
       {
         headers: {
           'Cache-Control': 'public, max-age=300',

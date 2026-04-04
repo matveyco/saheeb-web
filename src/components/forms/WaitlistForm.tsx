@@ -264,11 +264,11 @@ export function WaitlistForm({
         }),
       });
 
-      if (!response.ok) {
-        const payload = (await response.json().catch(() => null)) as
-          | { error?: string }
-          | null;
+      const payload = (await response.json().catch(() => null)) as
+        | { error?: string; duplicate?: boolean; message?: string }
+        | null;
 
+      if (!response.ok) {
         recordFunnelEvent({
           eventName: 'validation_error',
           siteLocale: locale,
@@ -288,13 +288,15 @@ export function WaitlistForm({
         return;
       }
 
-      trackEvent('waitlist_submit_success', {
-        form_name: FORM_NAME,
-        page_group: 'saheeb_drive',
-        project: 'saheeb_drive',
-        site_locale: locale,
-        user_type: formData.userType,
-      });
+      if (!payload?.duplicate) {
+        trackEvent('waitlist_submit_success', {
+          form_name: FORM_NAME,
+          page_group: 'saheeb_drive',
+          project: 'saheeb_drive',
+          site_locale: locale,
+          user_type: formData.userType,
+        });
+      }
 
       setIsSuccess(true);
     } catch {
