@@ -1,8 +1,12 @@
+import { getPageVariant } from '@/lib/page-variant';
+
 export const ANALYTICS_CONSENT_STORAGE_KEY = 'saheeb-analytics-consent';
 export const GA_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() ?? '';
 export const META_PIXEL_ID =
   process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim() ?? '';
+export const CLARITY_PROJECT_ID =
+  process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID?.trim() ?? '';
 
 const PRODUCTION_HOSTS = new Set(['saheeb.com', 'www.saheeb.com']);
 const EXCLUDED_PATH_PREFIXES = ['/admin', '/style-guide'];
@@ -33,8 +37,10 @@ declare global {
     gtag?: (...args: unknown[]) => void;
     fbq?: MetaPixelFunction;
     _fbq?: MetaPixelFunction;
+    clarity?: ((...args: unknown[]) => void) & { q?: unknown[][] };
     __saheebAnalyticsInitialized?: boolean;
     __saheebMetaPixelInitialized?: boolean;
+    __saheebClarityInitialized?: boolean;
   }
 }
 
@@ -44,6 +50,29 @@ function sanitizeParams(params: AnalyticsEventParams) {
   );
 }
 
+function sanitizeMetaParams(params: AnalyticsEventParams = {}) {
+  return Object.fromEntries(
+    Object.entries(params).filter(
+      ([key, value]) => key !== 'event_id' && value !== undefined
+    )
+  );
+}
+
+function getMetaEventOptions(params: AnalyticsEventParams = {}) {
+  const eventId = params.event_id;
+  if (
+    typeof eventId !== 'string' &&
+    typeof eventId !== 'number' &&
+    typeof eventId !== 'boolean'
+  ) {
+    return undefined;
+  }
+
+  return {
+    eventID: String(eventId),
+  };
+}
+
 export function canUseAnalyticsRuntime() {
   if (typeof window === 'undefined') {
     return false;
@@ -51,7 +80,7 @@ export function canUseAnalyticsRuntime() {
 
   return (
     process.env.NODE_ENV === 'production' &&
-    Boolean(GA_MEASUREMENT_ID || META_PIXEL_ID) &&
+    Boolean(GA_MEASUREMENT_ID || META_PIXEL_ID || CLARITY_PROJECT_ID) &&
     PRODUCTION_HOSTS.has(window.location.hostname)
   );
 }
@@ -190,7 +219,41 @@ export function ensureFbqBootstrap() {
   }
 }
 
-export function initializeAnalytics(consent: AnalyticsConsent | null) {
+export function ensureClarityBootstrap() {
+  if (!CLARITY_PROJECT_ID || typeof window === 'undefined') {
+    return;
+  }
+
+  if (window.__saheebClarityInitialized) {
+    return;
+  }
+
+  window.__saheebClarityInitialized = true;
+
+  window.clarity =
+    window.clarity ||
+    function (...args: unknown[]) {
+      const clarity = window.clarity as ((...args: unknown[]) => void) & {
+        q?: unknown[][];
+      };
+      clarity.q = clarity.q || [];
+      clarity.q.push(args);
+    };
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.clarity.ms/tag/${CLARITY_PROJECT_ID}`;
+  document.head.appendChild(script);
+}
+
+function shouldEnableClarity(pathname?: string) {
+  return Boolean(pathname?.startsWith('/projects/saheeb-drive'));
+}
+
+export function initializeAnalytics(
+  consent: AnalyticsConsent | null,
+  pathname?: string
+) {
   if (!canUseAnalyticsRuntime()) {
     return;
   }
@@ -220,6 +283,14 @@ export function initializeAnalytics(consent: AnalyticsConsent | null) {
       window.fbq?.('init', META_PIXEL_ID);
       window.__saheebMetaPixelInitialized = true;
     }
+  }
+
+  if (
+    consent === 'accepted' &&
+    CLARITY_PROJECT_ID &&
+    shouldEnableClarity(pathname)
+  ) {
+    ensureClarityBootstrap();
   }
 }
 
@@ -252,7 +323,12 @@ function trackMetaStandardEvent(
   }
 
   ensureFbqBootstrap();
-  window.fbq?.('track', eventName, sanitizeParams(params));
+  window.fbq?.(
+    'track',
+    eventName,
+    sanitizeMetaParams(params),
+    getMetaEventOptions(params)
+  );
 }
 
 function trackMetaCustomEvent(
@@ -264,7 +340,12 @@ function trackMetaCustomEvent(
   }
 
   ensureFbqBootstrap();
-  window.fbq?.('trackCustom', eventName, sanitizeParams(params));
+  window.fbq?.(
+    'trackCustom',
+    eventName,
+    sanitizeMetaParams(params),
+    getMetaEventOptions(params)
+  );
 }
 
 function trackMetaConversionEvent(
@@ -276,12 +357,14 @@ function trackMetaConversionEvent(
       trackMetaStandardEvent('Lead', {
         content_category: 'saheeb_drive',
         content_name: 'Saheeb Drive Waitlist',
+        event_id: params.event_id,
       });
       break;
     case 'contact_submit_success':
       trackMetaStandardEvent('Contact', {
         content_category: 'contact',
         content_name: 'Saheeb Contact Inquiry',
+        event_id: params.event_id,
       });
       break;
     default:
@@ -348,6 +431,7 @@ export function trackPageView({
     page_location: window.location.href,
     page_path: getLocalePath(locale, pathname),
     page_group: getPageGroup(pathname),
+    page_variant: getPageVariant(pathname) ?? 'other',
     project: getProjectName(pathname),
     site_locale: locale,
   };

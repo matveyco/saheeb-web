@@ -16,6 +16,9 @@ const envSchema = z.object({
     .trim()
     .min(12, 'ADMIN_PASSWORD must be at least 12 characters'),
   RESEND_API_KEY: z.string().trim().optional(),
+  CLARITY_DATA_EXPORT_API_TOKEN: z.string().trim().optional(),
+  META_CAPI_ACCESS_TOKEN: z.string().trim().optional(),
+  META_CAPI_TEST_EVENT_CODE: z.string().trim().optional(),
 });
 
 export type ServerEnv = z.infer<typeof envSchema>;

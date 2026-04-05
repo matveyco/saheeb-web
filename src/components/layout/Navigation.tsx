@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { usePathname } from '@/i18n/navigation';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
+import { TrackedLink } from '@/components/analytics/TrackedLink';
 
 interface NavItem {
   href: string;
@@ -30,6 +31,7 @@ export function Navigation({
 }: NavigationProps) {
   const t = useTranslations('navigation');
   const pathname = usePathname();
+  const isDrivePage = pathname.startsWith('/projects/saheeb-drive');
 
   return (
     <nav
@@ -46,18 +48,38 @@ export function Navigation({
             ? pathname === '/'
             : pathname.startsWith(item.href);
 
+        const className = cn(
+          'px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-200',
+          vertical ? 'w-full' : '',
+          isActive
+            ? 'text-[#EDEDEF] bg-[#19191B]'
+            : 'text-[#8F8F96] hover:text-[#EDEDEF] hover:bg-[#19191B]'
+        );
+
+        if (isDrivePage) {
+          return (
+            <TrackedLink
+              key={item.href}
+              href={item.href}
+              onClick={onItemClick}
+              eventName="nav_exit"
+              ctaLocation={`site_nav_${item.labelKey}`}
+              destinationPath={item.href}
+              project="saheeb_drive"
+              className={className}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {t(item.labelKey)}
+            </TrackedLink>
+          );
+        }
+
         return (
           <Link
             key={item.href}
             href={item.href}
             onClick={onItemClick}
-            className={cn(
-              'px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-200',
-              vertical ? 'w-full' : '',
-              isActive
-                ? 'text-[#EDEDEF] bg-[#19191B]'
-                : 'text-[#8F8F96] hover:text-[#EDEDEF] hover:bg-[#19191B]'
-            )}
+            className={className}
             aria-current={isActive ? 'page' : undefined}
           >
             {t(item.labelKey)}

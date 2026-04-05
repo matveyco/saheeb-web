@@ -2,17 +2,23 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
 import { Input, Button } from '@/components/ui';
 import { Link } from '@/i18n/navigation';
 import { useAnalyticsConsent } from '@/components/analytics/AnalyticsProvider';
 import { readAttributionSnapshot } from '@/lib/attribution';
+import {
+  createAnalyticsEventId,
+  ensureAnalyticsIdentity,
+} from '@/lib/analytics-identity';
 import { recordFunnelEvent } from '@/lib/funnel';
+import { getPageVariant, type PageVariant } from '@/lib/page-variant';
 import { trackEvent } from '@/lib/analytics';
 import {
+  dispatchDriveWaitlistEvent,
   DRIVE_WAITLIST_EVENT,
   type DriveWaitlistEventDetail,
 } from '@/components/sections/drive/events';
+import type { DriveIntent } from '@/lib/drive-search-params';
 import { cn } from '@/lib/utils';
 
 type WaitlistUserType = 'buyer' | 'seller';
@@ -35,33 +41,51 @@ interface WaitlistFormErrors {
 interface WaitlistFormProps {
   sectionId?: string;
   className?: string;
+  pageVariant?: PageVariant;
+  initialIntent?: DriveIntent;
+  hasPresetIntent?: boolean;
+  shouldFocusWaitlist?: boolean;
 }
 
 const FORM_NAME = 'saheeb_drive_waitlist';
 const PHONE_REGEX = /^\+?[0-9\s\-()]{8,20}$/;
 
-function getIntentFromSearchParams(searchParams: URLSearchParams | null) {
-  return searchParams?.get('intent') === 'seller' ? 'seller' : 'buyer';
+function getResolvedPageVariant(pageVariant?: PageVariant) {
+  if (pageVariant) {
+    return pageVariant;
+  }
+
+  if (typeof window === 'undefined') {
+    return 'organic_main';
+  }
+
+  return getPageVariant(window.location.pathname) ?? 'organic_main';
 }
 
 export function WaitlistForm({
   sectionId = 'drive-waitlist',
   className,
+  pageVariant,
+  initialIntent = 'buyer',
+  hasPresetIntent = false,
+  shouldFocusWaitlist = false,
 }: WaitlistFormProps) {
   const t = useTranslations('saheebDrive.waitlist');
   const tValidation = useTranslations('validation');
   const locale = useLocale();
-  const isArabic = locale === 'ar';
-  const searchParams = useSearchParams();
   const { isBannerOpen } = useAnalyticsConsent();
 
   const [formData, setFormData] = useState<WaitlistFormData>({
     name: '',
     email: '',
     phone: '',
-    userType: getIntentFromSearchParams(searchParams),
+    userType: initialIntent,
     consent: false,
   });
+  const [intentSource, setIntentSource] = useState<string>(
+    hasPresetIntent ? 'query_param' : 'direct_view'
+  );
+  const [isIntentChooserOpen, setIsIntentChooserOpen] = useState(!hasPresetIntent);
   const [errors, setErrors] = useState<WaitlistFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -73,9 +97,31 @@ export function WaitlistForm({
   const hasTrackedFormStart = useRef(false);
   const hasTrackedWaitlistView = useRef(false);
 
-  const openWaitlist = (intent?: WaitlistUserType) => {
+  const resolvedPageVariant = getResolvedPageVariant(pageVariant);
+
+  const updateField = (field: keyof WaitlistFormData, value: string | boolean) => {
+    setFormData((current) => ({
+      ...current,
+      [field]: value,
+    }));
+
+    setErrors((current) => {
+      if (!current[field as keyof WaitlistFormErrors]) {
+        return current;
+      }
+
+      return {
+        ...current,
+        [field]: undefined,
+      };
+    });
+  };
+
+  const openWaitlist = (intent?: WaitlistUserType, source?: string) => {
     if (intent) {
       setFormData((current) => ({ ...current, userType: intent }));
+      setIntentSource(source ?? 'query_param');
+      setIsIntentChooserOpen(false);
     }
 
     sectionRef.current?.scrollIntoView({
@@ -88,24 +134,35 @@ export function WaitlistForm({
     }, 150);
   };
 
-  useEffect(() => {
-    const intent = getIntentFromSearchParams(searchParams);
-    setFormData((current) => ({ ...current, userType: intent }));
-  }, [searchParams]);
+  const handleIntentSelection = (
+    nextIntent: WaitlistUserType,
+    source = 'form_toggle'
+  ) => {
+    setFormData((current) => ({ ...current, userType: nextIntent }));
+    setIntentSource(source);
+    setIsIntentChooserOpen(false);
+
+    dispatchDriveWaitlistEvent({
+      intent: nextIntent,
+      source,
+    });
+  };
 
   useEffect(() => {
-    const focus = searchParams?.get('focus');
-    if (focus !== 'waitlist') {
+    if (!shouldFocusWaitlist) {
       return;
     }
 
-    openWaitlist(getIntentFromSearchParams(searchParams));
-  }, [searchParams]);
+    openWaitlist(
+      initialIntent,
+      hasPresetIntent ? 'query_param' : 'direct_view'
+    );
+  }, [hasPresetIntent, initialIntent, shouldFocusWaitlist]);
 
   useEffect(() => {
     const handleOpenWaitlist = (event: Event) => {
       const customEvent = event as CustomEvent<DriveWaitlistEventDetail>;
-      openWaitlist(customEvent.detail?.intent);
+      openWaitlist(customEvent.detail?.intent, customEvent.detail?.source);
     };
 
     window.addEventListener(
@@ -139,8 +196,11 @@ export function WaitlistForm({
           siteLocale: locale,
           userType: formData.userType,
           formName: FORM_NAME,
+          pageVariant: resolvedPageVariant,
+          intentSource,
           payload: {
             form_name: FORM_NAME,
+            page_variant: resolvedPageVariant,
             project: 'saheeb_drive',
             page_group: 'saheeb_drive',
             site_locale: locale,
@@ -152,7 +212,7 @@ export function WaitlistForm({
 
     observer.observe(section);
     return () => observer.disconnect();
-  }, [formData.userType, locale]);
+  }, [formData.userType, intentSource, locale, resolvedPageVariant]);
 
   const trackFormStart = () => {
     if (hasTrackedFormStart.current) {
@@ -165,15 +225,19 @@ export function WaitlistForm({
       siteLocale: locale,
       userType: formData.userType,
       formName: FORM_NAME,
+      pageVariant: resolvedPageVariant,
+      intentSource,
       analyticsEventName: 'form_start',
       analyticsParams: {
         form_name: FORM_NAME,
         page_group: 'saheeb_drive',
+        page_variant: resolvedPageVariant,
         project: 'saheeb_drive',
         site_locale: locale,
       },
       payload: {
         form_name: FORM_NAME,
+        page_variant: resolvedPageVariant,
         project: 'saheeb_drive',
         site_locale: locale,
       },
@@ -210,10 +274,13 @@ export function WaitlistForm({
         userType: formData.userType,
         formName: FORM_NAME,
         errorStage: 'client',
+        pageVariant: resolvedPageVariant,
+        intentSource,
         payload: {
           error_count: Object.keys(nextErrors).length,
           error_fields: Object.keys(nextErrors).join(','),
           form_name: FORM_NAME,
+          page_variant: resolvedPageVariant,
         },
       });
     }
@@ -228,6 +295,20 @@ export function WaitlistForm({
 
     try {
       await navigator.clipboard.writeText(window.location.href.split('?')[0]);
+      recordFunnelEvent({
+        eventName: 'share_click',
+        siteLocale: locale,
+        userType: formData.userType,
+        ctaLocation: 'waitlist_success_copy_link',
+        destinationPath: window.location.href.split('?')[0],
+        project: 'saheeb_drive',
+        pageVariant: resolvedPageVariant,
+        intentSource,
+        payload: {
+          page_variant: resolvedPageVariant,
+          share_destination: 'copy_link',
+        },
+      });
       setIsCopied(true);
       window.setTimeout(() => setIsCopied(false), 2500);
     } catch {}
@@ -244,6 +325,24 @@ export function WaitlistForm({
     setSubmitError(null);
 
     const attribution = readAttributionSnapshot();
+    const analyticsIdentity = ensureAnalyticsIdentity();
+    const eventId = createAnalyticsEventId('waitlist');
+
+    recordFunnelEvent({
+      eventName: 'form_submit_attempt',
+      siteLocale: locale,
+      userType: formData.userType,
+      formName: FORM_NAME,
+      pageVariant: resolvedPageVariant,
+      eventId,
+      intentSource,
+      analyticsEventName: 'form_submit_attempt',
+      payload: {
+        form_name: FORM_NAME,
+        page_variant: resolvedPageVariant,
+        project: 'saheeb_drive',
+      },
+    });
 
     try {
       const response = await fetch('/api/waitlist', {
@@ -254,6 +353,11 @@ export function WaitlistForm({
         body: JSON.stringify({
           ...formData,
           locale,
+          anonymousId: analyticsIdentity.anonymousId ?? '',
+          sessionId: analyticsIdentity.sessionId ?? '',
+          pageVariant: resolvedPageVariant,
+          eventId,
+          intentSource,
           utmSource: attribution?.utmSource ?? '',
           utmMedium: attribution?.utmMedium ?? '',
           utmCampaign: attribution?.utmCampaign ?? '',
@@ -265,7 +369,12 @@ export function WaitlistForm({
       });
 
       const payload = (await response.json().catch(() => null)) as
-        | { error?: string; duplicate?: boolean; message?: string }
+        | {
+            error?: string;
+            duplicate?: boolean;
+            eventId?: string;
+            message?: string;
+          }
         | null;
 
       if (!response.ok) {
@@ -278,8 +387,11 @@ export function WaitlistForm({
             response.status === 400 || response.status === 429
               ? 'response'
               : 'network',
+          pageVariant: resolvedPageVariant,
+          intentSource,
           payload: {
             form_name: FORM_NAME,
+            page_variant: resolvedPageVariant,
             response_status: response.status,
           },
         });
@@ -288,13 +400,29 @@ export function WaitlistForm({
         return;
       }
 
-      if (!payload?.duplicate) {
-        trackEvent('waitlist_submit_success', {
+      const resolvedEventId = payload?.eventId ?? eventId;
+
+      if (payload?.duplicate) {
+        trackEvent('waitlist_submit_duplicate', {
+          event_id: resolvedEventId,
           form_name: FORM_NAME,
           page_group: 'saheeb_drive',
+          page_variant: resolvedPageVariant,
           project: 'saheeb_drive',
           site_locale: locale,
           user_type: formData.userType,
+          intent_source: intentSource,
+        });
+      } else {
+        trackEvent('waitlist_submit_success', {
+          event_id: resolvedEventId,
+          form_name: FORM_NAME,
+          page_group: 'saheeb_drive',
+          page_variant: resolvedPageVariant,
+          project: 'saheeb_drive',
+          site_locale: locale,
+          user_type: formData.userType,
+          intent_source: intentSource,
         });
       }
 
@@ -306,8 +434,11 @@ export function WaitlistForm({
         userType: formData.userType,
         formName: FORM_NAME,
         errorStage: 'network',
+        pageVariant: resolvedPageVariant,
+        intentSource,
         payload: {
           form_name: FORM_NAME,
+          page_variant: resolvedPageVariant,
         },
       });
       setSubmitError(t('error.message'));
@@ -316,10 +447,7 @@ export function WaitlistForm({
     }
   };
 
-  const shareUrl =
-    typeof window !== 'undefined'
-      ? window.location.href.split('?')[0]
-      : `https://saheeb.com/${locale}/projects/saheeb-drive`;
+  const shareUrl = `https://saheeb.com/${locale}/projects/saheeb-drive`;
   const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(
     `${t('success.shareText')} ${shareUrl}`
   )}`;
@@ -335,7 +463,7 @@ export function WaitlistForm({
       )}
     >
       {isSuccess ? (
-        <div className="rounded-[2rem] border border-emerald-500/20 bg-[#111113] p-6 sm:p-8 shadow-[0_24px_80px_rgba(0,0,0,0.28)]">
+        <div className="rounded-[2rem] border border-emerald-500/20 bg-[#111113] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8">
           <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-400">
             <svg
               width="28"
@@ -364,6 +492,22 @@ export function WaitlistForm({
               href={whatsappShareUrl}
               target="_blank"
               rel="noreferrer"
+              onClick={() => {
+                recordFunnelEvent({
+                  eventName: 'share_click',
+                  siteLocale: locale,
+                  userType: formData.userType,
+                  ctaLocation: 'waitlist_success_whatsapp',
+                  destinationPath: whatsappShareUrl,
+                  project: 'saheeb_drive',
+                  pageVariant: resolvedPageVariant,
+                  intentSource,
+                  payload: {
+                    page_variant: resolvedPageVariant,
+                    share_destination: 'whatsapp',
+                  },
+                });
+              }}
               className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-[#C9A87C] px-5 py-3 text-sm font-semibold text-[#09090B] transition-colors hover:bg-[#D4B78E]"
             >
               {t('success.shareWhatsapp')}
@@ -391,59 +535,61 @@ export function WaitlistForm({
             </div>
 
             <div className="mb-6 rounded-2xl border border-[#222225] bg-[#09090B] p-2">
-              <p className="px-3 pb-2 text-sm text-[#8F8F96]">
-                {t('buyOrSell')}
-              </p>
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setFormData((current) => ({
-                      ...current,
-                      userType: 'buyer',
-                    }))
-                  }
-                  className={cn(
-                    'rounded-xl px-4 py-3 text-sm font-semibold transition-colors',
-                    formData.userType === 'buyer'
-                      ? 'bg-[#C9A87C] text-[#09090B]'
-                      : 'bg-[#111113] text-[#8F8F96] hover:text-[#EDEDEF]'
-                  )}
-                >
-                  {t('buy')}
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setFormData((current) => ({
-                      ...current,
-                      userType: 'seller',
-                    }))
-                  }
-                  className={cn(
-                    'rounded-xl px-4 py-3 text-sm font-semibold transition-colors',
-                    formData.userType === 'seller'
-                      ? 'bg-[#C9A87C] text-[#09090B]'
-                      : 'bg-[#111113] text-[#8F8F96] hover:text-[#EDEDEF]'
-                  )}
-                >
-                  {t('sell')}
-                </button>
+              <div className="flex items-center justify-between gap-3 px-3 pb-2">
+                <p className="text-sm text-[#8F8F96]">{t('buyOrSell')}</p>
+                {!isIntentChooserOpen ? (
+                  <button
+                    type="button"
+                    onClick={() => setIsIntentChooserOpen(true)}
+                    className="text-sm font-medium text-[#C9A87C] transition-colors hover:text-[#EDEDEF]"
+                  >
+                    {t('changeIntent')}
+                  </button>
+                ) : null}
               </div>
+
+              {isIntentChooserOpen ? (
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleIntentSelection('buyer')}
+                    className={cn(
+                      'rounded-xl px-4 py-3 text-sm font-semibold transition-colors',
+                      formData.userType === 'buyer'
+                        ? 'bg-[#C9A87C] text-[#09090B]'
+                        : 'bg-[#111113] text-[#8F8F96] hover:text-[#EDEDEF]'
+                    )}
+                  >
+                    {t('buy')}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleIntentSelection('seller')}
+                    className={cn(
+                      'rounded-xl px-4 py-3 text-sm font-semibold transition-colors',
+                      formData.userType === 'seller'
+                        ? 'bg-[#C9A87C] text-[#09090B]'
+                        : 'bg-[#111113] text-[#8F8F96] hover:text-[#EDEDEF]'
+                    )}
+                  >
+                    {t('sell')}
+                  </button>
+                </div>
+              ) : (
+                <div className="rounded-xl border border-[#19191B] bg-[#111113] px-4 py-3 text-sm font-semibold text-[#EDEDEF]">
+                  {formData.userType === 'buyer' ? t('buy') : t('sell')}
+                </div>
+              )}
             </div>
 
             <div className="grid gap-4">
               <Input
                 ref={nameInputRef}
                 name="name"
+                label={t('nameLabel')}
                 placeholder={t('namePlaceholder')}
                 value={formData.name}
-                onChange={(event) =>
-                  setFormData((current) => ({
-                    ...current,
-                    name: event.target.value,
-                  }))
-                }
+                onChange={(event) => updateField('name', event.target.value)}
                 error={errors.name}
                 required
                 autoComplete="name"
@@ -452,14 +598,10 @@ export function WaitlistForm({
               <Input
                 name="email"
                 type="email"
+                label={t('emailLabel')}
                 placeholder={t('emailPlaceholder')}
                 value={formData.email}
-                onChange={(event) =>
-                  setFormData((current) => ({
-                    ...current,
-                    email: event.target.value,
-                  }))
-                }
+                onChange={(event) => updateField('email', event.target.value)}
                 error={errors.email}
                 required
                 autoComplete="email"
@@ -469,14 +611,10 @@ export function WaitlistForm({
               <Input
                 name="phone"
                 type="tel"
-                placeholder={`${t('phonePlaceholder')} (${isArabic ? 'اختياري' : 'Optional'})`}
+                label={t('phoneLabel')}
+                placeholder={`${t('phonePlaceholder')} (${t('phoneOptional')})`}
                 value={formData.phone}
-                onChange={(event) =>
-                  setFormData((current) => ({
-                    ...current,
-                    phone: event.target.value,
-                  }))
-                }
+                onChange={(event) => updateField('phone', event.target.value)}
                 error={errors.phone}
                 autoComplete="tel"
                 dir="ltr"
@@ -489,36 +627,29 @@ export function WaitlistForm({
                   type="checkbox"
                   name="consent"
                   checked={formData.consent}
-                  onChange={(event) =>
-                    setFormData((current) => ({
-                      ...current,
-                      consent: event.target.checked,
-                    }))
-                  }
+                  onChange={(event) => updateField('consent', event.target.checked)}
                   className="mt-0.5 h-5 w-5 rounded border-[#222225] bg-[#19191B] text-[#C9A87C] focus:ring-[#C9A87C]/50 focus:ring-offset-0"
                 />
                 <span className="text-sm leading-relaxed text-[#5C5C63]">
-                  {isArabic ? (
-                    <>
-                      {t('consentPrefix')}{' '}
-                      <Link
-                        href="/privacy"
-                        className="text-[#C9A87C] transition-colors hover:text-[#EDEDEF]"
-                      >
-                        {t('privacy')}
-                      </Link>
-                    </>
-                  ) : (
-                    <>
-                      {t('consentPrefix')}{' '}
-                      <Link
-                        href="/privacy"
-                        className="text-[#C9A87C] transition-colors hover:text-[#EDEDEF]"
-                      >
-                        {t('privacy')}
-                      </Link>
-                    </>
-                  )}
+                  {t('consentPrefix')}{' '}
+                  <Link
+                    href="/privacy"
+                    onClick={() => {
+                      recordFunnelEvent({
+                        eventName: 'privacy_click',
+                        siteLocale: locale,
+                        userType: formData.userType,
+                        ctaLocation: 'waitlist_privacy_link',
+                        destinationPath: '/privacy',
+                        project: 'saheeb_drive',
+                        pageVariant: resolvedPageVariant,
+                        intentSource,
+                      });
+                    }}
+                    className="text-[#C9A87C] transition-colors hover:text-[#EDEDEF]"
+                  >
+                    {t('privacy')}
+                  </Link>
                 </span>
               </label>
 
@@ -536,9 +667,14 @@ export function WaitlistForm({
             ) : null}
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-xs leading-relaxed text-[#5C5C63]">
-                {t('privacyNote')}
-              </p>
+              <div className="space-y-2">
+                <p className="text-xs leading-relaxed text-[#5C5C63]">
+                  {t('privacyNote')}
+                </p>
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-[#8F8F96]">
+                  {t('reassurance')}
+                </p>
+              </div>
               <Button
                 type="submit"
                 variant="primary"

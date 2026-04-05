@@ -6,15 +6,26 @@ import {
   trackEvent,
   type AnalyticsEventParams,
 } from '@/lib/analytics';
+import {
+  createAnalyticsEventId,
+  ensureAnalyticsIdentity,
+} from '@/lib/analytics-identity';
 import { readAttributionSnapshot } from '@/lib/attribution';
+import { getPageVariant, type PageVariant } from '@/lib/page-variant';
 
 export type FunnelEventName =
   | 'drive_page_view'
   | 'waitlist_view'
   | 'cta_click'
   | 'form_start'
+  | 'form_submit_attempt'
   | 'validation_error'
-  | 'waitlist_submit_success';
+  | 'waitlist_submit_success'
+  | 'waitlist_submit_duplicate'
+  | 'share_click'
+  | 'privacy_click'
+  | 'language_switch'
+  | 'nav_exit';
 
 type FunnelPayloadValue = string | number | boolean | null;
 type FunnelPayload = Record<string, FunnelPayloadValue>;
@@ -29,6 +40,9 @@ interface RecordFunnelEventInput {
   errorStage?: string;
   pageGroup?: string;
   project?: string;
+  pageVariant?: PageVariant;
+  intentSource?: string;
+  eventId?: string;
   payload?: FunnelPayload;
   analyticsEventName?: string | null;
   analyticsParams?: AnalyticsEventParams;
@@ -112,18 +126,24 @@ export function recordFunnelEvent({
   errorStage,
   pageGroup,
   project,
+  pageVariant,
+  intentSource,
+  eventId,
   payload,
   analyticsEventName,
   analyticsParams,
 }: RecordFunnelEventInput) {
   if (typeof window === 'undefined') {
-    return;
+    return null;
   }
 
   const pathname = normalizeLocalePath(window.location.pathname, siteLocale);
   const attribution = readAttributionSnapshot();
+  const analyticsIdentity = ensureAnalyticsIdentity();
   const sanitizedPayload = sanitizePayload(payload);
   const analyticsPayload = sanitizeAnalyticsPayload(payload);
+  const resolvedEventId = eventId ?? createAnalyticsEventId(eventName);
+  const resolvedPageVariant = pageVariant ?? getPageVariant(pathname);
 
   sendFirstPartyEvent({
     eventName,
@@ -136,6 +156,11 @@ export function recordFunnelEvent({
     destinationPath: trimOptional(destinationPath),
     formName: trimOptional(formName),
     errorStage: trimOptional(errorStage),
+    anonymousId: analyticsIdentity.anonymousId,
+    sessionId: analyticsIdentity.sessionId,
+    pageVariant: resolvedPageVariant,
+    eventId: resolvedEventId,
+    intentSource: trimOptional(intentSource),
     utmSource: attribution?.utmSource ?? null,
     utmMedium: attribution?.utmMedium ?? null,
     utmCampaign: attribution?.utmCampaign ?? null,
@@ -146,11 +171,16 @@ export function recordFunnelEvent({
   });
 
   if (analyticsEventName === null) {
-    return;
+    return resolvedEventId;
   }
 
   trackEvent(analyticsEventName ?? eventName, {
     ...analyticsPayload,
+    event_id: resolvedEventId,
+    page_variant: resolvedPageVariant ?? 'other',
+    intent_source: trimOptional(intentSource) ?? undefined,
     ...(analyticsParams ?? {}),
   });
+
+  return resolvedEventId;
 }

@@ -1,14 +1,20 @@
+'use client';
+
 import { useTranslations, useLocale } from 'next-intl';
 import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton';
 import { Link } from '@/i18n/navigation';
 import { Container } from '@/components/ui';
 import { SITE_CONFIG } from '@/lib/constants';
+import { TrackedLink } from '@/components/analytics/TrackedLink';
+import { usePathname } from '@/i18n/navigation';
 
 export function Footer() {
   const t = useTranslations('footer');
   const tNav = useTranslations('navigation');
   const locale = useLocale();
+  const pathname = usePathname();
   const isArabic = locale === 'ar';
+  const isDrivePage = pathname.startsWith('/projects/saheeb-drive');
 
   const currentYear = new Date().getFullYear();
 
@@ -82,12 +88,25 @@ export function Footer() {
               <ul className="space-y-3">
                 {navLinks.map((link) => (
                   <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-[#5C5C63] hover:text-[#EDEDEF] transition-colors duration-200"
-                    >
-                      {link.label}
-                    </Link>
+                    {isDrivePage ? (
+                      <TrackedLink
+                        href={link.href}
+                        eventName="nav_exit"
+                        ctaLocation={`footer_nav_${link.href.replace('/', '') || 'home'}`}
+                        destinationPath={link.href}
+                        project="saheeb_drive"
+                        className="text-sm text-[#5C5C63] hover:text-[#EDEDEF] transition-colors duration-200"
+                      >
+                        {link.label}
+                      </TrackedLink>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-sm text-[#5C5C63] hover:text-[#EDEDEF] transition-colors duration-200"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -99,12 +118,25 @@ export function Footer() {
               <ul className="space-y-3">
                 {legalLinks.map((link) => (
                   <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-[#5C5C63] hover:text-[#EDEDEF] transition-colors duration-200"
-                    >
-                      {link.label}
-                    </Link>
+                    {isDrivePage && link.href === '/privacy' ? (
+                      <TrackedLink
+                        href={link.href}
+                        eventName="privacy_click"
+                        ctaLocation="footer_privacy"
+                        destinationPath={link.href}
+                        project="saheeb_drive"
+                        className="text-sm text-[#5C5C63] hover:text-[#EDEDEF] transition-colors duration-200"
+                      >
+                        {link.label}
+                      </TrackedLink>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-sm text-[#5C5C63] hover:text-[#EDEDEF] transition-colors duration-200"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
                 <CookieSettingsButton />

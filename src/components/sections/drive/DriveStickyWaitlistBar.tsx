@@ -5,8 +5,15 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useAnalyticsConsent } from '@/components/analytics/AnalyticsProvider';
 import { DriveIntentButton } from '@/components/sections/drive/DriveIntentButton';
 import { recordFunnelEvent } from '@/lib/funnel';
+import type { PageVariant } from '@/lib/page-variant';
 
-export function DriveStickyWaitlistBar() {
+interface DriveStickyWaitlistBarProps {
+  pageVariant: PageVariant;
+}
+
+export function DriveStickyWaitlistBar({
+  pageVariant,
+}: DriveStickyWaitlistBarProps) {
   const t = useTranslations('saheebDrive');
   const locale = useLocale();
   const { isBannerOpen } = useAnalyticsConsent();
@@ -17,13 +24,15 @@ export function DriveStickyWaitlistBar() {
       eventName: 'drive_page_view',
       siteLocale: locale,
       project: 'saheeb_drive',
+      pageVariant,
       payload: {
         page_group: 'saheeb_drive',
+        page_variant: pageVariant,
         project: 'saheeb_drive',
         site_locale: locale,
       },
     });
-  }, [locale]);
+  }, [locale, pageVariant]);
 
   useEffect(() => {
     const hero = document.getElementById('drive-hero');
@@ -78,6 +87,7 @@ export function DriveStickyWaitlistBar() {
         <DriveIntentButton
           intent="buyer"
           ctaLocation="saheeb_drive_sticky_mobile_buy"
+          pageVariant={pageVariant}
           size="md"
           className="w-full"
         >
@@ -86,6 +96,7 @@ export function DriveStickyWaitlistBar() {
         <DriveIntentButton
           intent="seller"
           ctaLocation="saheeb_drive_sticky_mobile_sell"
+          pageVariant={pageVariant}
           variant="secondary"
           size="md"
           className="w-full"

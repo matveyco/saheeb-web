@@ -121,8 +121,8 @@ export function AnalyticsProvider({
       return;
     }
 
-    initializeAnalytics(consent);
-  }, [consent, isAvailable]);
+    initializeAnalytics(consent, pathname);
+  }, [consent, isAvailable, pathname]);
 
   useEffect(() => {
     if (!isAvailable || !shouldTrackPath(pathname)) {

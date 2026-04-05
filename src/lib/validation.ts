@@ -2,13 +2,20 @@ import { z } from 'zod';
 
 const localeSchema = z.enum(['ar', 'en']);
 const waitlistUserTypeSchema = z.enum(['buyer', 'seller']);
+const pageVariantSchema = z.enum(['organic_main', 'paid_lp', 'other']);
 const funnelEventNameSchema = z.enum([
   'drive_page_view',
   'waitlist_view',
   'cta_click',
   'form_start',
+  'form_submit_attempt',
   'validation_error',
   'waitlist_submit_success',
+  'waitlist_submit_duplicate',
+  'share_click',
+  'privacy_click',
+  'language_switch',
+  'nav_exit',
 ]);
 
 const phoneRegex = /^\+?[0-9\s\-()]{8,20}$/;
@@ -101,6 +108,11 @@ export const waitlistSubmissionSchema = z
     utmContent: optionalTrimmedString(255),
     referrer: optionalTrimmedString(2048),
     landingPath: optionalTrimmedString(255),
+    anonymousId: optionalTrimmedString(80),
+    sessionId: optionalTrimmedString(80),
+    pageVariant: pageVariantSchema.optional(),
+    eventId: optionalTrimmedString(80),
+    intentSource: optionalTrimmedString(120),
     consentTimestamp: consentTimestampSchema,
   })
   .transform((value) => ({
@@ -129,6 +141,21 @@ export const waitlistSubmissionSchema = z
       value.landingPath && value.landingPath.length > 0
         ? value.landingPath
         : null,
+    anonymousId:
+      value.anonymousId && value.anonymousId.length > 0
+        ? value.anonymousId
+        : null,
+    sessionId:
+      value.sessionId && value.sessionId.length > 0
+        ? value.sessionId
+        : null,
+    pageVariant: value.pageVariant ?? null,
+    eventId:
+      value.eventId && value.eventId.length > 0 ? value.eventId : null,
+    intentSource:
+      value.intentSource && value.intentSource.length > 0
+        ? value.intentSource
+        : null,
     consentTimestamp: value.consentTimestamp,
   }));
 
@@ -150,6 +177,11 @@ export const funnelEventSchema = z
     utmContent: optionalTrimmedString(255),
     referrer: optionalTrimmedString(2048),
     landingPath: optionalTrimmedString(255),
+    anonymousId: optionalTrimmedString(80),
+    sessionId: optionalTrimmedString(80),
+    pageVariant: pageVariantSchema.optional(),
+    eventId: optionalTrimmedString(80),
+    intentSource: optionalTrimmedString(120),
     payload: funnelPayloadSchema.optional(),
   })
   .transform((value) => ({
@@ -191,6 +223,21 @@ export const funnelEventSchema = z
     landingPath:
       value.landingPath && value.landingPath.length > 0
         ? value.landingPath
+        : null,
+    anonymousId:
+      value.anonymousId && value.anonymousId.length > 0
+        ? value.anonymousId
+        : null,
+    sessionId:
+      value.sessionId && value.sessionId.length > 0
+        ? value.sessionId
+        : null,
+    pageVariant: value.pageVariant ?? null,
+    eventId:
+      value.eventId && value.eventId.length > 0 ? value.eventId : null,
+    intentSource:
+      value.intentSource && value.intentSource.length > 0
+        ? value.intentSource
         : null,
     payload: value.payload ?? {},
   }));

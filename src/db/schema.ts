@@ -25,6 +25,11 @@ export const waitlistEntries = pgTable('waitlist_entries', {
   referrer: text('referrer'),
   landingPath: varchar('landing_path', { length: 255 }),
   countryCode: varchar('country_code', { length: 8 }),
+  anonymousId: varchar('anonymous_id', { length: 80 }),
+  sessionId: varchar('session_id', { length: 80 }),
+  pageVariant: varchar('page_variant', { length: 40 }),
+  eventId: varchar('event_id', { length: 80 }),
+  intentSource: varchar('intent_source', { length: 120 }),
   consentTimestamp: timestamp('consent_timestamp').notNull(),
   createdAt: timestamp('created_at').notNull().defaultNow(),
 });
@@ -48,6 +53,11 @@ export const funnelEvents = pgTable('funnel_events', {
   referrer: text('referrer'),
   landingPath: varchar('landing_path', { length: 255 }),
   countryCode: varchar('country_code', { length: 8 }),
+  anonymousId: varchar('anonymous_id', { length: 80 }),
+  sessionId: varchar('session_id', { length: 80 }),
+  pageVariant: varchar('page_variant', { length: 40 }),
+  eventId: varchar('event_id', { length: 80 }),
+  intentSource: varchar('intent_source', { length: 120 }),
   payload: jsonb('payload')
     .$type<Record<string, string | number | boolean | null>>()
     .notNull()

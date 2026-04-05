@@ -32,7 +32,7 @@
   },
   "analyticsConsent": {
     "title": "Allow optional analytics cookies",
-    "description": "We use limited landing and conversion measurement to understand which campaigns bring people to Saheeb. If you accept, we also use optional analytics cookies to measure on-site behavior like CTA clicks and page journeys. You can change this any time in Cookie Settings.",
+    "description": "We use limited landing and conversion measurement to understand which campaigns bring people to Saheeb. If you accept, we also use optional analytics cookies and privacy-safe session replay on Saheeb Drive to measure page journeys, CTA clicks, and mobile behavior. You can change this any time in Cookie Settings.",
     "accept": "Accept cookies",
     "decline": "Not now"
   },
@@ -208,7 +208,7 @@
     },
     "trust": {
       "title": "Confidence, not guesswork",
-      "subtitle": "The strongest trust questions now sit higher on the page, before the form ask.",
+      "subtitle": "Built to answer the trust questions that usually stop someone from joining a new car marketplace.",
       "cards": [
         {
           "title": "Verified Sellers",
@@ -261,17 +261,23 @@
       ],
       "footnote": "We only ask for what we need to reach you. Phone is optional. Buyer/seller intent helps us tailor launch updates.",
       "eyebrow": "Start in under 30 seconds",
-      "title": "Save your spot",
-      "subtitle": "Name, email, and what side of the market you're on. We'll handle the rest closer to launch.",
+      "title": "Save your spot for launch",
+      "subtitle": "Leave your name and email, pick your side of the market, and we'll keep you posted as Muscat early access opens.",
+      "nameLabel": "Name",
+      "emailLabel": "Email",
+      "phoneLabel": "Phone number",
+      "phoneOptional": "Optional",
       "namePlaceholder": "Your name",
       "emailPlaceholder": "your@email.com",
       "phonePlaceholder": "+968",
       "buyOrSell": "Which side of the market are you on?",
       "buy": "I'm buying",
       "sell": "I'm selling",
+      "changeIntent": "Change",
       "consentPrefix": "I agree to receive Saheeb Drive updates according to the",
       "privacy": "Privacy Policy",
       "privacyNote": "We use this information to contact you about launch access and product updates.",
+      "reassurance": "Launch-only updates. No spam. Phone is optional.",
       "submit": "Join the Waitlist",
       "submitting": "Joining...",
       "success": {
@@ -290,7 +296,7 @@
     },
     "faq": {
       "title": "Questions People Ask",
-      "subtitle": "The questions that usually decide whether someone joins the waitlist or keeps scrolling.",
+      "subtitle": "The questions buyers and sellers usually need answered before they trust a new marketplace.",
       "items": [
         {
           "question": "When and where does it launch?",
@@ -313,6 +319,102 @@
           "answer": "We apply strong data protection controls aligned with Omani regulations. Some processing may involve vetted service providers outside Oman with contractual safeguards."
         }
       ]
+    },
+    "intentContent": {
+      "buyer": {
+        "trustSubtitle": "See the seller, the car, and the likely red flags earlier so you spend less time chasing the wrong listing.",
+        "trustCards": [
+          {
+            "title": "Verified Sellers",
+            "description": "Listings go through identity and fraud checks so you can focus on real cars from real people."
+          },
+          {
+            "title": "Detailed Specs & Insights",
+            "description": "See more than the headline with clearer specs, pricing context, and signals that help you compare faster."
+          },
+          {
+            "title": "Accident History & Red Flags",
+            "description": "Surface the issues buyers worry about before you waste a call, a drive, or a weekend."
+          }
+        ],
+        "waitlistSectionSubtitle": "Get first access to the Muscat launch, buyer-focused updates, and an earlier path to the cars that actually match what you want.",
+        "waitlistBenefits": [
+          "Early access before the public rollout in Muscat.",
+          "Buyer updates tailored to your search intent, not generic product blasts.",
+          "A chance to shape the first buyer experience before the market sees it."
+        ],
+        "waitlistFootnote": "We only ask for what we need to reach you. Phone is optional, and buyer intent helps us send more useful launch updates.",
+        "faqSubtitle": "The answers buyers usually want before they trust a new place to search for their next car.",
+        "faqItems": [
+          {
+            "question": "When and where does it launch?",
+            "answer": "We're starting in Muscat in Q3 2026. Waitlist members get earlier access before the public launch, and we'll expand to other cities based on demand."
+          },
+          {
+            "question": "How do you verify cars and sellers?",
+            "answer": "We combine seller verification, fraud checks, vehicle history signals, and platform-level risk flags so buyers see more of the trust story earlier."
+          },
+          {
+            "question": "What do I get by joining now?",
+            "answer": "You'll get launch updates, early access before the public rollout, and a faster route into the first Muscat buyer wave."
+          },
+          {
+            "question": "What does it cost to use?",
+            "answer": "Browsing and searching will be free. We expect paid services only around successful transactions or optional premium tools, with final pricing shared before launch."
+          },
+          {
+            "question": "Is my data safe?",
+            "answer": "We apply strong data protection controls aligned with Omani regulations, and we limit outreach to launch-related product updates you asked for."
+          }
+        ]
+      },
+      "seller": {
+        "trustSubtitle": "Sell with clearer pricing, stronger trust signals, and better buyer intent from day one instead of guessing how to stand out.",
+        "trustCards": [
+          {
+            "title": "Verified Seller Profile",
+            "description": "Build trust earlier with seller verification that helps serious buyers take your listing more seriously."
+          },
+          {
+            "title": "Smarter Pricing Guidance",
+            "description": "Understand where your car sits in the market with clearer pricing context before you publish."
+          },
+          {
+            "title": "Qualified Buyer Demand",
+            "description": "Reach buyers who are actively looking, not just browsing and sending low-quality messages."
+          }
+        ],
+        "waitlistSectionSubtitle": "Join as a founding seller to get early listing access, onboarding priority, and seller-first updates before the first Muscat supply opens.",
+        "waitlistBenefits": [
+          "Priority onboarding for the first Muscat seller wave.",
+          "Launch updates focused on pricing, listing readiness, and verified demand.",
+          "A chance to influence the seller experience before the marketplace opens publicly."
+        ],
+        "waitlistFootnote": "We only ask for what we need to reach you. Phone is optional, and seller intent helps us prepare the right onboarding and launch messages.",
+        "faqSubtitle": "The questions sellers usually ask before trusting a new marketplace with their next listing.",
+        "faqItems": [
+          {
+            "question": "Can I sell my car through Saheeb Drive?",
+            "answer": "Yes. We're building the first Muscat seller wave now, and waitlist sellers will get earlier access before public listings open."
+          },
+          {
+            "question": "How will pricing guidance work?",
+            "answer": "Sellers will see pricing support built from deeper market context and listing signals so you can price with more confidence before you go live."
+          },
+          {
+            "question": "Why does seller verification matter?",
+            "answer": "Verified seller signals help buyers trust listings faster, which should improve response quality and reduce wasted conversations."
+          },
+          {
+            "question": "What will I need for launch?",
+            "answer": "We'll guide founding sellers through the first onboarding steps, including listing details, verification requirements, and what to prepare before launch."
+          },
+          {
+            "question": "Will there be seller fees?",
+            "answer": "We expect seller pricing to be announced before launch. Joining the waitlist now makes sure you hear those details early."
+          }
+        ]
+      }
     },
     "footer": {
       "launching": "Launching Q3 2026 · Muscat, Oman",
@@ -385,7 +487,7 @@
       },
       "dataCollection": {
         "title": "Information We Collect",
-        "content": "We collect information in the following categories:\n\n• Contact Information: Name, email address, phone number, and any details you provide when contacting us or submitting forms.\n\n• Waitlist Information: Name, email, phone number, and preferences (such as buyer/seller status for Saheeb Drive).\n\n• Device Information: Browser type, operating system, IP address, device identifiers, and general location data derived from IP address.\n\n• Usage Data: Pages visited, time spent on pages, links clicked, and interaction patterns with our website. Limited landing-page and conversion measurement may be processed through Google Analytics and Meta Pixel to understand which campaigns lead to visits, waitlist joins, or contact requests. Richer on-site behavioral analytics only runs if you accept optional measurement cookies.\n\n• Cookies and Similar Technologies: Information collected through cookies, pixels, and similar tracking technologies (see Cookies section below).\n\n• Saheeb Drive Specific Data: If you join the Saheeb Drive waitlist, we collect car preferences, location preferences, and whether you intend to buy or sell vehicles.\n\nWe do not collect sensitive personal data such as health information, religious beliefs, or government-issued identification numbers unless specifically required and with your explicit consent."
+        "content": "We collect information in the following categories:\n\n• Contact Information: Name, email address, phone number, and any details you provide when contacting us or submitting forms.\n\n• Waitlist Information: Name, email, phone number, and preferences (such as buyer/seller status for Saheeb Drive).\n\n• Device Information: Browser type, operating system, IP address, device identifiers, and general location data derived from IP address.\n\n• Usage Data: Pages visited, time spent on pages, links clicked, and interaction patterns with our website. Limited landing-page and conversion measurement may be processed through Google Analytics, Meta Pixel, and server-side conversion tools to understand which campaigns lead to visits, waitlist joins, or contact requests. Richer on-site behavioral analytics, including privacy-safe session replay on Saheeb Drive, only runs if you accept optional measurement cookies.\n\n• Cookies and Similar Technologies: Information collected through cookies, pixels, and similar tracking technologies (see Cookies section below).\n\n• Saheeb Drive Specific Data: If you join the Saheeb Drive waitlist, we collect car preferences, location preferences, and whether you intend to buy or sell vehicles.\n\nWe do not collect sensitive personal data such as health information, religious beliefs, or government-issued identification numbers unless specifically required and with your explicit consent."
       },
       "legalBasis": {
         "title": "Legal Basis for Processing",
@@ -397,7 +499,7 @@
       },
       "dataSharing": {
         "title": "Information Sharing and Disclosure",
-        "content": "We do not sell, rent, or trade your personal information to third parties for their marketing purposes.\n\nWe may share your information in the following circumstances:\n\n• Service Providers: With trusted third-party service providers who assist us in operating our website, conducting our business, or servicing you, provided they agree to keep your information confidential.\n\n• Analytics and Measurement Providers: We use Google Analytics and Meta Pixel for limited landing-page and conversion attribution, and if you accept optional measurement cookies, for richer usage analytics such as page journeys, CTA clicks, and engagement patterns.\n\n• Legal Requirements: When required by law, court order, or governmental authority in the Sultanate of Oman, or when we believe disclosure is necessary to protect our rights, your safety, or the safety of others.\n\n• Business Transfers: In connection with a merger, acquisition, or sale of assets, your information may be transferred to the acquiring entity, subject to this Privacy Policy.\n\n• With Your Consent: In any other circumstances where you have provided explicit consent to share your information.\n\nAll third parties with whom we share data are contractually obligated to protect your information and use it only for the purposes for which it was shared."
+        "content": "We do not sell, rent, or trade your personal information to third parties for their marketing purposes.\n\nWe may share your information in the following circumstances:\n\n• Service Providers: With trusted third-party service providers who assist us in operating our website, conducting our business, or servicing you, provided they agree to keep your information confidential.\n\n• Analytics and Measurement Providers: We use Google Analytics, Meta Pixel, Meta Conversions API, and if you accept optional measurement cookies, Microsoft Clarity for limited landing-page and conversion attribution and for richer usage analytics such as page journeys, CTA clicks, engagement patterns, and privacy-safe replay of Drive journeys.\n\n• Legal Requirements: When required by law, court order, or governmental authority in the Sultanate of Oman, or when we believe disclosure is necessary to protect our rights, your safety, or the safety of others.\n\n• Business Transfers: In connection with a merger, acquisition, or sale of assets, your information may be transferred to the acquiring entity, subject to this Privacy Policy.\n\n• With Your Consent: In any other circumstances where you have provided explicit consent to share your information.\n\nAll third parties with whom we share data are contractually obligated to protect your information and use it only for the purposes for which it was shared."
       },
       "internationalTransfers": {
         "title": "International Data Transfers",
@@ -413,7 +515,7 @@
       },
       "cookies": {
         "title": "Cookies and Tracking Technologies",
-        "content": "We use cookies and similar technologies to operate the website, remember preferences, and understand site usage. These include:\n\n• Essential Cookies: Necessary for the website to function properly. These cannot be disabled.\n\n• Attribution and Conversion Measurement: We use limited Google Analytics and Meta Pixel measurement to understand which campaigns or landing pages lead to visits, waitlist joins, and contact requests. This measurement is configured to avoid sending form-field contents such as your name, email address, phone number, or message.\n\n• Analytics and Measurement Cookies: Optional analytics cookies and pixels that help us understand on-site behavior, such as page journeys, CTA clicks, and engagement patterns. These run only if you accept them.\n\n• Preference Cookies: Remember your settings and preferences (such as language choice).\n\nOptional on-site behavioral analytics stays denied unless you accept it through our consent banner. You can change or withdraw your choice at any time through Cookie Settings in the footer or through your browser controls.\n\nGoogle Analytics and Meta may process limited device, browser, and event information on our behalf and may involve cross-border processing subject to applicable safeguards. We do not intentionally send form fields such as your name, email address, phone number, or message content to these providers.\n\nMost browsers allow you to:\n\n• View cookies stored on your device\n• Accept or reject cookies (either all or certain types)\n• Delete cookies"
+        "content": "We use cookies and similar technologies to operate the website, remember preferences, and understand site usage. These include:\n\n• Essential Cookies: Necessary for the website to function properly. These cannot be disabled.\n\n• Attribution and Conversion Measurement: We use limited Google Analytics, Meta Pixel, and Meta Conversions API measurement to understand which campaigns or landing pages lead to visits, waitlist joins, and contact requests. This measurement is configured to avoid sending form-field contents such as your name, email address, phone number, or message.\n\n• Analytics and Measurement Cookies: Optional analytics cookies and pixels that help us understand on-site behavior, such as page journeys, CTA clicks, engagement patterns, and privacy-safe session replay on Saheeb Drive. These run only if you accept them.\n\n• Preference Cookies: Remember your settings and preferences (such as language choice).\n\nOptional on-site behavioral analytics stays denied unless you accept it through our consent banner. You can change or withdraw your choice at any time through Cookie Settings in the footer or through your browser controls.\n\nGoogle Analytics, Meta, and Microsoft Clarity may process limited device, browser, and event information on our behalf and may involve cross-border processing subject to applicable safeguards. We do not intentionally send form fields such as your name, email address, phone number, or message content to these providers.\n\nMost browsers allow you to:\n\n• View cookies stored on your device\n• Accept or reject cookies (either all or certain types)\n• Delete cookies"
       },
       "childrenPrivacy": {
         "title": "Children's Privacy",

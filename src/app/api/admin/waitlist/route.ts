@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDb, waitlistEntries } from '@/db';
+import { funnelEvents, getDb, waitlistEntries } from '@/db';
 import { desc } from 'drizzle-orm';
 import { createHash, timingSafeEqual } from 'crypto';
 import { checkRateLimit, getClientIP } from '@/lib/rate-limit';
 import { getServerEnv } from '@/lib/env';
+import { buildAdminAnalyticsSummary } from '@/lib/admin-analytics';
 
 const AUTH_RATE_LIMIT = { limit: 10, windowSeconds: 60 };
 
@@ -76,13 +77,14 @@ export async function GET(request: NextRequest) {
 
   try {
     const db = getDb();
-    const entries = await db
-      .select()
-      .from(waitlistEntries)
-      .orderBy(desc(waitlistEntries.createdAt));
+    const [entries, events] = await Promise.all([
+      db.select().from(waitlistEntries).orderBy(desc(waitlistEntries.createdAt)),
+      db.select().from(funnelEvents).orderBy(desc(funnelEvents.createdAt)),
+    ]);
+    const analytics = buildAdminAnalyticsSummary(entries, events);
 
     return NextResponse.json(
-      { entries },
+      { entries, analytics },
       {
         headers: NO_STORE_HEADERS,
       }

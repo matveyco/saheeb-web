@@ -1,70 +1,74 @@
 'use client';
 
-import type { ReactNode } from 'react';
-import { useLocale } from 'next-intl';
+import type { MouseEvent, ReactNode } from 'react';
+import { usePathname } from '@/i18n/navigation';
 import { Button, type ButtonProps } from '@/components/ui';
-import { recordFunnelEvent } from '@/lib/funnel';
-import {
-  DRIVE_WAITLIST_EVENT,
-  type DriveWaitlistEventDetail,
-} from '@/components/sections/drive/events';
+import { TrackedLink } from '@/components/analytics/TrackedLink';
+import { dispatchDriveWaitlistEvent } from '@/components/sections/drive/events';
+import type { PageVariant } from '@/lib/page-variant';
 
 interface DriveIntentButtonProps
-  extends Omit<ButtonProps, 'children' | 'onClick'> {
+  extends Omit<ButtonProps, 'children' | 'asChild' | 'onClick'> {
   intent: 'buyer' | 'seller';
   ctaLocation: string;
   children: ReactNode;
+  pageVariant?: PageVariant;
+}
+
+function getDriveBasePath(pageVariant?: PageVariant) {
+  if (pageVariant === 'paid_lp') {
+    return '/projects/saheeb-drive/lp';
+  }
+
+  return '/projects/saheeb-drive';
 }
 
 export function DriveIntentButton({
   intent,
   ctaLocation,
   children,
+  pageVariant,
   ...buttonProps
 }: DriveIntentButtonProps) {
-  const locale = useLocale();
+  const pathname = usePathname();
+  const basePath = getDriveBasePath(pageVariant);
+  const href = `${basePath}?focus=waitlist&intent=${intent}#drive-waitlist`;
+
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (pathname !== basePath || typeof window === 'undefined') {
+      return;
+    }
+
+    event.preventDefault();
+
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.set('focus', 'waitlist');
+    nextUrl.searchParams.set('intent', intent);
+    window.history.replaceState(
+      {},
+      '',
+      `${nextUrl.pathname}${nextUrl.search}#drive-waitlist`
+    );
+
+    dispatchDriveWaitlistEvent({
+      intent,
+      source: ctaLocation,
+    });
+  };
 
   return (
-    <Button
-      {...buttonProps}
-      type={buttonProps.type ?? 'button'}
-      onClick={() => {
-        recordFunnelEvent({
-          eventName: 'cta_click',
-          siteLocale: locale,
-          userType: intent,
-          ctaLocation,
-          destinationPath: '#drive-waitlist',
-          project: 'saheeb_drive',
-          payload: {
-            cta_location: ctaLocation,
-            destination_path: '#drive-waitlist',
-            project: 'saheeb_drive',
-            site_locale: locale,
-            user_type: intent,
-          },
-        });
-
-        const nextUrl = new URL(window.location.href);
-        nextUrl.searchParams.set('focus', 'waitlist');
-        nextUrl.searchParams.set('intent', intent);
-        window.history.replaceState(
-          {},
-          '',
-          `${nextUrl.pathname}${nextUrl.search}#drive-waitlist`
-        );
-
-        window.dispatchEvent(
-          new CustomEvent<DriveWaitlistEventDetail>(DRIVE_WAITLIST_EVENT, {
-            detail: {
-              intent,
-              source: ctaLocation,
-            },
-          })
-        );
-      }}
-    >
-      {children}
+    <Button {...buttonProps} asChild>
+      <TrackedLink
+        href={href}
+        ctaLocation={ctaLocation}
+        destinationPath={href}
+        project="saheeb_drive"
+        userType={intent}
+        intentSource={ctaLocation}
+        onClick={handleClick}
+      >
+        {children}
+      </TrackedLink>
     </Button>
   );
 }
