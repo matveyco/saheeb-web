@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { eq, sql } from 'drizzle-orm';
+import { sql } from 'drizzle-orm';
 import { checkRateLimit, getClientIP } from '@/lib/rate-limit';
 import { validateOrigin, csrfErrorResponse } from '@/lib/csrf';
 import { getDb, waitlistEntries } from '@/db';
@@ -64,30 +64,6 @@ export async function POST(request: NextRequest) {
       .limit(1);
 
     if (existingEntry) {
-      await db
-        .update(waitlistEntries)
-        .set({
-          phone: waitlistData.phone ?? undefined,
-          userType: waitlistData.userType,
-          locale: waitlistData.locale,
-          consent: waitlistData.consent,
-          city: waitlistData.city,
-          countryCode: countryCode ?? undefined,
-          utmSource: waitlistData.utmSource ?? undefined,
-          utmMedium: waitlistData.utmMedium ?? undefined,
-          utmCampaign: waitlistData.utmCampaign ?? undefined,
-          utmContent: waitlistData.utmContent ?? undefined,
-          referrer: waitlistData.referrer ?? undefined,
-          landingPath: waitlistData.landingPath ?? undefined,
-          anonymousId: waitlistData.anonymousId ?? undefined,
-          sessionId: waitlistData.sessionId ?? undefined,
-          pageVariant: waitlistData.pageVariant ?? undefined,
-          eventId,
-          intentSource: waitlistData.intentSource ?? undefined,
-          consentTimestamp: waitlistData.consentTimestamp,
-        })
-        .where(eq(waitlistEntries.id, existingEntry.id));
-
       void writeFunnelEvent({
         eventName: 'waitlist_submit_duplicate',
         path: '/projects/saheeb-drive',
