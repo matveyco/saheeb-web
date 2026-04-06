@@ -61,7 +61,9 @@ const messageSchema = z
   .max(5000, 'Message must be at most 5000 characters');
 
 const optionalTrimmedString = (max: number) =>
-  z.union([z.string().trim().min(1).max(max), z.literal('')]).optional();
+  z
+    .union([z.string().trim().min(1).max(max), z.literal(''), z.null()])
+    .optional();
 
 const funnelPayloadSchema = z.record(
   z.string(),
@@ -166,7 +168,7 @@ export const funnelEventSchema = z
     pageGroup: optionalTrimmedString(80),
     project: optionalTrimmedString(80),
     siteLocale: localeSchema,
-    userType: waitlistUserTypeSchema.optional(),
+    userType: waitlistUserTypeSchema.nullable().optional(),
     ctaLocation: optionalTrimmedString(120),
     destinationPath: optionalTrimmedString(255),
     formName: optionalTrimmedString(120),
