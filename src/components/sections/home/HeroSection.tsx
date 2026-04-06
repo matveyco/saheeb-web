@@ -59,19 +59,19 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Button asChild size="lg" variant="primary">
-              <Link href="/services">
-                {t('cta')}
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="secondary">
               <TrackedLink
-                href="/projects/saheeb-drive?focus=waitlist"
-                ctaLocation="home_hero_secondary"
-                destinationPath="/projects/saheeb-drive?focus=waitlist"
+                href="/projects/saheeb-drive?focus=waitlist#drive-waitlist"
+                ctaLocation="home_hero_primary_drive"
+                destinationPath="/projects/saheeb-drive?focus=waitlist#drive-waitlist"
                 project="saheeb_drive"
               >
                 {t('ctaSecondary')}
               </TrackedLink>
+            </Button>
+            <Button asChild size="lg" variant="ghost" className="w-full sm:w-auto">
+              <Link href="/services">
+                {t('cta')}
+              </Link>
             </Button>
           </motion.div>
         </div>
