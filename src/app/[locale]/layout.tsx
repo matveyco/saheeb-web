@@ -233,7 +233,7 @@ export default async function LocaleLayout({
                   window.dataLayer = window.dataLayer || [];
                   window.gtag = window.gtag || function(){dataLayer.push(arguments);};
                   if (!window.__saheebAnalyticsInitialized) {
-                    window.gtag('consent', 'default', { analytics_storage: 'denied' });
+                    window.gtag('consent', 'default', { analytics_storage: 'granted' });
                     window.gtag('js', new Date());
                     window.gtag('config', '${gaMeasurementId}', {
                       send_page_view: false,

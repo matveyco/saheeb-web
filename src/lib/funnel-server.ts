@@ -17,16 +17,48 @@ export function getRequestCountryCode(request: Request) {
   );
 }
 
-export async function writeFunnelEvent(event: NewFunnelEvent) {
+export async function writeFunnelEvents(events: NewFunnelEvent[]) {
+  if (events.length === 0) {
+    return {
+      accepted: 0,
+      duplicates: 0,
+      failed: 0,
+    };
+  }
+
   try {
     const db = getDb();
-    await db.insert(funnelEvents).values({
-      ...event,
-      payload: event.payload ?? {},
-    });
-    return true;
+    const inserted = await db
+      .insert(funnelEvents)
+      .values(
+        events.map((event) => ({
+          ...event,
+          payload: event.payload ?? {},
+        }))
+      )
+      .onConflictDoNothing({
+        target: funnelEvents.eventId,
+      })
+      .returning({ id: funnelEvents.id });
+
+    const accepted = inserted.length;
+
+    return {
+      accepted,
+      duplicates: Math.max(0, events.length - accepted),
+      failed: 0,
+    };
   } catch (error) {
     console.error('Funnel event logging error:', error);
-    return false;
+    return {
+      accepted: 0,
+      duplicates: 0,
+      failed: events.length,
+    };
   }
+}
+
+export async function writeFunnelEvent(event: NewFunnelEvent) {
+  const result = await writeFunnelEvents([event]);
+  return result.accepted > 0;
 }

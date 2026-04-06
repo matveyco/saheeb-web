@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import {
+  DRIVE_INTENT_EVENT,
   DRIVE_WAITLIST_EVENT,
   type DriveWaitlistEventDetail,
 } from '@/components/sections/drive/events';
@@ -24,10 +25,18 @@ export function useDriveIntent(defaultIntent: DriveIntent = 'buyer') {
       DRIVE_WAITLIST_EVENT,
       handleIntentChange as EventListener
     );
+    window.addEventListener(
+      DRIVE_INTENT_EVENT,
+      handleIntentChange as EventListener
+    );
 
     return () => {
       window.removeEventListener(
         DRIVE_WAITLIST_EVENT,
+        handleIntentChange as EventListener
+      );
+      window.removeEventListener(
+        DRIVE_INTENT_EVENT,
         handleIntentChange as EventListener
       );
     };

@@ -61,6 +61,12 @@ interface AnalyticsWindow {
     intents: BreakdownItem[];
     pageVariants: BreakdownItem[];
   };
+  reconciliation: {
+    date: string;
+    leads: number;
+    submitSuccesses: number;
+    delta: number;
+  }[];
 }
 
 interface AnalyticsSummary {
@@ -138,6 +144,68 @@ function BreakdownTable({
           </table>
         </div>
       )}
+    </div>
+  );
+}
+
+function ReconciliationTable({
+  rows,
+}: {
+  rows: AnalyticsWindow['reconciliation'];
+}) {
+  return (
+    <div className="rounded-2xl border border-[#222225] bg-[#111113] p-5">
+      <div className="mb-4">
+        <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-[#EDEDEF]">
+          Submit vs Lead Reconciliation
+        </h3>
+        <p className="mt-1 text-sm text-[#5C5C63]">
+          Positive delta means leads exceeded first-party submit-success events that day.
+        </p>
+      </div>
+
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[420px]">
+          <thead>
+            <tr className="border-b border-[#1A1A1D]">
+              <th className="py-2 pe-4 text-left text-xs font-medium uppercase tracking-[0.12em] text-[#5C5C63]">
+                Date
+              </th>
+              <th className="py-2 pe-4 text-left text-xs font-medium uppercase tracking-[0.12em] text-[#5C5C63]">
+                Leads
+              </th>
+              <th className="py-2 pe-4 text-left text-xs font-medium uppercase tracking-[0.12em] text-[#5C5C63]">
+                Submit events
+              </th>
+              <th className="py-2 text-left text-xs font-medium uppercase tracking-[0.12em] text-[#5C5C63]">
+                Delta
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.date} className="border-b border-[#1A1A1D]/60">
+                <td className="py-3 pe-4 text-sm text-white">{row.date}</td>
+                <td className="py-3 pe-4 text-sm text-[#D0D0D5]">{row.leads}</td>
+                <td className="py-3 pe-4 text-sm text-[#D0D0D5]">
+                  {row.submitSuccesses}
+                </td>
+                <td
+                  className={`py-3 text-sm ${
+                    row.delta === 0
+                      ? 'text-[#D0D0D5]'
+                      : row.delta > 0
+                        ? 'text-amber-300'
+                        : 'text-emerald-400'
+                  }`}
+                >
+                  {row.delta}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -289,6 +357,7 @@ export default function AdminWaitlistPage() {
                 </div>
 
                 <div className="mt-6 grid gap-4 xl:grid-cols-2">
+                  <ReconciliationTable rows={window.reconciliation} />
                   <BreakdownTable
                     title="Normalized Sources"
                     items={window.breakdowns.normalizedSources}

@@ -29,6 +29,7 @@ export type FunnelEventName =
 
 type FunnelPayloadValue = string | number | boolean | null;
 type FunnelPayload = Record<string, FunnelPayloadValue>;
+type FirstPartyBody = Record<string, unknown>;
 
 interface RecordFunnelEventInput {
   eventName: FunnelEventName;
@@ -47,6 +48,14 @@ interface RecordFunnelEventInput {
   analyticsEventName?: string | null;
   analyticsParams?: AnalyticsEventParams;
 }
+
+const MAX_BATCH_SIZE = 10;
+const FLUSH_DELAY_MS = 350;
+
+let firstPartyQueue: FirstPartyBody[] = [];
+let flushTimer: number | null = null;
+let isFlushing = false;
+let hasLifecycleHooks = false;
 
 function trimOptional(value: string | null | undefined) {
   if (!value) {
@@ -83,37 +92,110 @@ function normalizeLocalePath(pathname: string, siteLocale: string) {
   return pathname;
 }
 
-function sendFirstPartyEvent(body: Record<string, unknown>) {
-  const serialized = JSON.stringify(body);
+function sendBeaconBatch(events: FirstPartyBody[]) {
+  if (
+    typeof navigator === 'undefined' ||
+    typeof navigator.sendBeacon !== 'function' ||
+    events.length === 0
+  ) {
+    return false;
+  }
 
-  const sendBeaconFallback = () => {
-    if (typeof navigator === 'undefined' || !navigator.sendBeacon) {
-      return;
+  const blob = new Blob([JSON.stringify(events)], {
+    type: 'application/json',
+  });
+
+  return navigator.sendBeacon('/api/funnel', blob);
+}
+
+async function flushFirstPartyQueue(options?: { preferBeacon?: boolean }) {
+  if (typeof window === 'undefined' || isFlushing || firstPartyQueue.length === 0) {
+    return;
+  }
+
+  isFlushing = true;
+
+  try {
+    while (firstPartyQueue.length > 0) {
+      const batch = firstPartyQueue.splice(0, MAX_BATCH_SIZE);
+
+      if (options?.preferBeacon && sendBeaconBatch(batch)) {
+        continue;
+      }
+
+      try {
+        const response = await fetch('/api/funnel', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(batch),
+          keepalive: true,
+          credentials: 'same-origin',
+        });
+
+        if (!response.ok && !sendBeaconBatch(batch)) {
+          firstPartyQueue = [...batch, ...firstPartyQueue];
+          break;
+        }
+      } catch {
+        if (!sendBeaconBatch(batch)) {
+          firstPartyQueue = [...batch, ...firstPartyQueue];
+          break;
+        }
+      }
     }
+  } finally {
+    isFlushing = false;
 
-    const blob = new Blob([serialized], {
-      type: 'application/json',
-    });
-    navigator.sendBeacon('/api/funnel', blob);
+    if (firstPartyQueue.length > 0 && !options?.preferBeacon) {
+      scheduleQueueFlush(true);
+    }
+  }
+}
+
+function scheduleQueueFlush(immediate = false) {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  if (flushTimer !== null) {
+    window.clearTimeout(flushTimer);
+  }
+
+  flushTimer = window.setTimeout(() => {
+    flushTimer = null;
+    void flushFirstPartyQueue();
+  }, immediate ? 0 : FLUSH_DELAY_MS);
+}
+
+function ensureLifecycleHooks() {
+  if (typeof window === 'undefined' || hasLifecycleHooks) {
+    return;
+  }
+
+  hasLifecycleHooks = true;
+
+  const flushForLifecycle = () => {
+    void flushFirstPartyQueue({ preferBeacon: true });
   };
 
-  void fetch('/api/funnel', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: serialized,
-    keepalive: true,
-    credentials: 'same-origin',
-  })
-    .then((response) => {
-      if (!response.ok) {
-        sendBeaconFallback();
-      }
-    })
-    .catch(() => {
-      sendBeaconFallback();
-    });
+  window.addEventListener('pagehide', flushForLifecycle);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      flushForLifecycle();
+    }
+  });
+}
+
+function enqueueFirstPartyEvent(body: FirstPartyBody) {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  ensureLifecycleHooks();
+  firstPartyQueue.push(body);
+  scheduleQueueFlush(firstPartyQueue.length >= MAX_BATCH_SIZE);
 }
 
 export function recordFunnelEvent({
@@ -145,7 +227,7 @@ export function recordFunnelEvent({
   const resolvedEventId = eventId ?? createAnalyticsEventId(eventName);
   const resolvedPageVariant = pageVariant ?? getPageVariant(pathname);
 
-  sendFirstPartyEvent({
+  enqueueFirstPartyEvent({
     eventName,
     path: pathname,
     pageGroup: pageGroup ?? getPageGroup(pathname),

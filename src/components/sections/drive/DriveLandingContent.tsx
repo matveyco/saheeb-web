@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { WaitlistForm } from '@/components/forms';
 import { Container, Badge } from '@/components/ui';
-import { DriveIntentButton } from '@/components/sections/drive/DriveIntentButton';
+import { DriveHeroPrimaryCta } from '@/components/sections/drive/DriveHeroPrimaryCta';
 import { DriveStickyWaitlistBar } from '@/components/sections/drive/DriveStickyWaitlistBar';
 import { DriveTrustSection } from '@/components/sections/drive/DriveTrustSection';
 import { DriveWaitlistPitch } from '@/components/sections/drive/DriveWaitlistPitch';
@@ -27,6 +27,8 @@ interface DriveLandingContentProps {
     titleHighlight: string;
     subtitle: string;
     supportLine: string;
+    primaryCta: string;
+    intentLabel: string;
     buyCta: string;
     sellCta: string;
     proofItems: string[];
@@ -66,7 +68,7 @@ export function DriveLandingContent({
       <main className="bg-[#09090B] pt-20 lg:pt-24">
         <section
           id="drive-hero"
-          className="relative overflow-hidden border-b border-[#1A1A1D] bg-[#09090B] py-12 lg:py-24"
+          className="relative overflow-hidden border-b border-[#1A1A1D] bg-[#09090B] py-6 lg:py-24"
         >
           <div className="absolute inset-0" aria-hidden="true">
             <Image
@@ -81,61 +83,51 @@ export function DriveLandingContent({
           </div>
 
           <Container className="relative z-10">
-            <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14">
-              <div className="max-w-3xl">
-                <Badge variant="accent" className="mb-5">
+            <div className="grid items-start gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-14">
+              <div className="relative z-20 max-w-3xl">
+                <Badge variant="accent" className="mb-4">
                   {hero.badge}
                 </Badge>
-                <h1 className="text-5xl font-bold leading-[0.95] tracking-tight text-[#EDEDEF] sm:text-6xl lg:text-7xl">
+                <h1 className="text-4xl font-bold leading-[0.95] tracking-tight text-[#EDEDEF] sm:text-6xl lg:text-7xl">
                   {hero.title}
                 </h1>
-                <p className="mt-2 text-5xl font-bold leading-[0.95] tracking-tight text-[#C9A87C] sm:text-6xl lg:text-7xl">
+                <p className="mt-1 text-4xl font-bold leading-[0.95] tracking-tight text-[#C9A87C] sm:mt-2 sm:text-6xl lg:text-7xl">
                   {hero.titleHighlight}
                 </p>
-                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#D0D0D5] lg:text-xl">
+                <DriveHeroPrimaryCta
+                  initialIntent={initialIntent}
+                  pageVariant={pageVariant}
+                  primaryCta={hero.primaryCta}
+                  intentLabel={hero.intentLabel}
+                  buyLabel={hero.buyCta}
+                  sellLabel={hero.sellCta}
+                />
+
+                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#D0D0D5] sm:text-lg lg:mt-6 lg:text-xl">
                   {hero.subtitle}
                 </p>
-                <p className="mt-4 text-sm font-medium uppercase tracking-[0.18em] text-[#8F8F96]">
+
+                <p className="mt-3 text-xs font-medium uppercase tracking-[0.18em] text-[#8F8F96] sm:mt-5 sm:text-sm">
                   {hero.supportLine}
                 </p>
 
-                <div className="mt-6 flex flex-wrap gap-3">
-                  {hero.proofItems.map((item) => (
+                <div className="mt-4 flex flex-wrap gap-2.5 sm:mt-6 sm:gap-3">
+                  {hero.proofItems.map((item, index) => (
                     <div
                       key={item}
-                      className="inline-flex items-center gap-2 rounded-full border border-[#2A2A2E] bg-[#111113]/80 px-4 py-2 text-sm text-[#EDEDEF]"
+                      className={`items-center gap-2 rounded-full border border-[#2A2A2E] bg-[#111113]/80 px-3 py-2 text-sm text-[#EDEDEF] sm:px-4 ${
+                        index > 1 ? 'hidden sm:inline-flex' : 'inline-flex'
+                      }`}
                     >
                       <span className="h-2 w-2 rounded-full bg-[#C9A87C]" />
                       {item}
                     </div>
                   ))}
                 </div>
-
-                <div className="mt-8 grid gap-3 sm:grid-cols-2 sm:max-w-xl">
-                  <DriveIntentButton
-                    intent="buyer"
-                    ctaLocation={`saheeb_drive_${pageVariant}_hero_buy`}
-                    pageVariant={pageVariant}
-                    size="lg"
-                    className="w-full"
-                  >
-                    {hero.buyCta}
-                  </DriveIntentButton>
-                  <DriveIntentButton
-                    intent="seller"
-                    ctaLocation={`saheeb_drive_${pageVariant}_hero_sell`}
-                    pageVariant={pageVariant}
-                    variant="secondary"
-                    size="lg"
-                    className="w-full"
-                  >
-                    {hero.sellCta}
-                  </DriveIntentButton>
-                </div>
               </div>
 
-              <div className="mx-auto w-full max-w-[340px]">
-                <div className="rounded-[2rem] border border-[#2A2A2E] bg-[#111113]/85 p-4 shadow-[0_30px_100px_rgba(0,0,0,0.35)] backdrop-blur">
+              <div className="relative z-0 hidden w-full max-w-[300px] self-end sm:max-w-[340px] lg:mx-auto lg:mt-0 lg:block lg:pt-4">
+                <div className="pointer-events-none rounded-[2rem] border border-[#2A2A2E] bg-[#111113]/85 p-4 shadow-[0_30px_100px_rgba(0,0,0,0.35)] backdrop-blur">
                   <div className="mb-4 rounded-2xl border border-[#222225] bg-[#09090B] px-4 py-3">
                     <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#8F8F96]">
                       {hero.visualEyebrow}
@@ -149,7 +141,7 @@ export function DriveLandingContent({
                       src="/images/saheeb-drive-app-chat.jpg"
                       alt="Saheeb Drive app preview"
                       fill
-                      className="object-contain"
+                      className="pointer-events-none object-contain"
                       sizes="(max-width: 1024px) 70vw, 340px"
                     />
                   </div>
@@ -169,20 +161,24 @@ export function DriveLandingContent({
         <section className="border-b border-[#1A1A1D] bg-[#09090B] py-12 lg:py-18">
           <Container>
             <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
-              <DriveWaitlistPitch
-                eyebrow={waitlist.sectionEyebrow}
-                title={waitlist.sectionTitle}
-                buyerContent={buyerContent}
-                sellerContent={sellerContent}
-                initialIntent={initialIntent}
-              />
+              <div className="order-2 lg:order-1">
+                <DriveWaitlistPitch
+                  eyebrow={waitlist.sectionEyebrow}
+                  title={waitlist.sectionTitle}
+                  buyerContent={buyerContent}
+                  sellerContent={sellerContent}
+                  initialIntent={initialIntent}
+                />
+              </div>
 
-              <WaitlistForm
-                pageVariant={pageVariant}
-                initialIntent={initialIntent}
-                hasPresetIntent={hasPresetIntent}
-                shouldFocusWaitlist={shouldFocusWaitlist}
-              />
+              <div className="order-1 lg:order-2">
+                <WaitlistForm
+                  pageVariant={pageVariant}
+                  initialIntent={initialIntent}
+                  hasPresetIntent={hasPresetIntent}
+                  shouldFocusWaitlist={shouldFocusWaitlist}
+                />
+              </div>
             </div>
           </Container>
         </section>

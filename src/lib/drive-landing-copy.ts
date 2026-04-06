@@ -17,6 +17,8 @@ export async function getDriveLandingCopy(locale: string) {
       titleHighlight: t('hero.titleHighlight'),
       subtitle: t('hero.subtitle'),
       supportLine: t('hero.supportLine'),
+      primaryCta: t('hero.primaryCta'),
+      intentLabel: t('hero.intentLabel'),
       buyCta: t('hero.buyCta'),
       sellCta: t('hero.sellCta'),
       proofItems: t.raw('hero.proofItems') as string[],

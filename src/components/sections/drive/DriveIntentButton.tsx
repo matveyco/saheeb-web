@@ -35,7 +35,15 @@ export function DriveIntentButton({
   const href = `${basePath}?focus=waitlist&intent=${intent}#drive-waitlist`;
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    if (pathname !== basePath || typeof window === 'undefined') {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const currentPathname = pathname || window.location.pathname;
+    const isSameDrivePage =
+      currentPathname === basePath || currentPathname.endsWith(basePath);
+
+    if (!isSameDrivePage) {
       return;
     }
 

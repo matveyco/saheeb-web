@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start -p 3333",
     "lint": "eslint",
-    "check:assets": "node scripts/check-asset-sizes.mjs"
+    "check:assets": "node scripts/check-asset-sizes.mjs",
+    "smoke:drive": "node scripts/drive-funnel-smoke.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -31,6 +32,7 @@
     "drizzle-kit": "^0.31.9",
     "eslint": "^9",
     "eslint-config-next": "^16.1.7",
+    "playwright": "^1.59.1",
     "prettier": "^3.8.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "sharp": "^0.34.4",

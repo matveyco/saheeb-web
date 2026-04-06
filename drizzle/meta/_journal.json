@@ -15,6 +15,13 @@
       "when": 1775361000000,
       "tag": "0001_conversion_analytics_hardening",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1775421600000,
+      "tag": "0002_funnel_event_dedupe",
+      "breakpoints": true
     }
   ]
 }

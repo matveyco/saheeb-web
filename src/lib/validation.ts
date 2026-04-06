@@ -242,6 +242,8 @@ export const funnelEventSchema = z
     payload: value.payload ?? {},
   }));
 
+export const funnelEventBatchSchema = z.array(funnelEventSchema).min(1).max(20);
+
 export type ContactSubmissionInput = z.infer<typeof contactSubmissionSchema>;
 export type WaitlistSubmissionInput = z.infer<typeof waitlistSubmissionSchema>;
 export type FunnelEventInput = z.infer<typeof funnelEventSchema>;

@@ -6,6 +6,7 @@ import {
   boolean,
   timestamp,
   jsonb,
+  uniqueIndex,
 } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 
@@ -34,36 +35,44 @@ export const waitlistEntries = pgTable('waitlist_entries', {
   createdAt: timestamp('created_at').notNull().defaultNow(),
 });
 
-export const funnelEvents = pgTable('funnel_events', {
-  id: serial('id').primaryKey(),
-  eventName: varchar('event_name', { length: 80 }).notNull(),
-  path: varchar('path', { length: 255 }).notNull(),
-  pageGroup: varchar('page_group', { length: 80 }),
-  project: varchar('project', { length: 80 }),
-  siteLocale: varchar('site_locale', { length: 10 }).notNull(),
-  userType: varchar('user_type', { length: 20 }),
-  ctaLocation: varchar('cta_location', { length: 120 }),
-  destinationPath: varchar('destination_path', { length: 255 }),
-  formName: varchar('form_name', { length: 120 }),
-  errorStage: varchar('error_stage', { length: 80 }),
-  utmSource: varchar('utm_source', { length: 255 }),
-  utmMedium: varchar('utm_medium', { length: 255 }),
-  utmCampaign: varchar('utm_campaign', { length: 255 }),
-  utmContent: varchar('utm_content', { length: 255 }),
-  referrer: text('referrer'),
-  landingPath: varchar('landing_path', { length: 255 }),
-  countryCode: varchar('country_code', { length: 8 }),
-  anonymousId: varchar('anonymous_id', { length: 80 }),
-  sessionId: varchar('session_id', { length: 80 }),
-  pageVariant: varchar('page_variant', { length: 40 }),
-  eventId: varchar('event_id', { length: 80 }),
-  intentSource: varchar('intent_source', { length: 120 }),
-  payload: jsonb('payload')
-    .$type<Record<string, string | number | boolean | null>>()
-    .notNull()
-    .default(sql`'{}'::jsonb`),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-});
+export const funnelEvents = pgTable(
+  'funnel_events',
+  {
+    id: serial('id').primaryKey(),
+    eventName: varchar('event_name', { length: 80 }).notNull(),
+    path: varchar('path', { length: 255 }).notNull(),
+    pageGroup: varchar('page_group', { length: 80 }),
+    project: varchar('project', { length: 80 }),
+    siteLocale: varchar('site_locale', { length: 10 }).notNull(),
+    userType: varchar('user_type', { length: 20 }),
+    ctaLocation: varchar('cta_location', { length: 120 }),
+    destinationPath: varchar('destination_path', { length: 255 }),
+    formName: varchar('form_name', { length: 120 }),
+    errorStage: varchar('error_stage', { length: 80 }),
+    utmSource: varchar('utm_source', { length: 255 }),
+    utmMedium: varchar('utm_medium', { length: 255 }),
+    utmCampaign: varchar('utm_campaign', { length: 255 }),
+    utmContent: varchar('utm_content', { length: 255 }),
+    referrer: text('referrer'),
+    landingPath: varchar('landing_path', { length: 255 }),
+    countryCode: varchar('country_code', { length: 8 }),
+    anonymousId: varchar('anonymous_id', { length: 80 }),
+    sessionId: varchar('session_id', { length: 80 }),
+    pageVariant: varchar('page_variant', { length: 40 }),
+    eventId: varchar('event_id', { length: 80 }),
+    intentSource: varchar('intent_source', { length: 120 }),
+    payload: jsonb('payload')
+      .$type<Record<string, string | number | boolean | null>>()
+      .notNull()
+      .default(sql`'{}'::jsonb`),
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+  },
+  (table) => ({
+    funnelEventsEventIdUnique: uniqueIndex('funnel_events_event_id_unique').on(
+      table.eventId
+    ),
+  })
+);
 
 export const contactSubmissions = pgTable('contact_submissions', {
   id: serial('id').primaryKey(),

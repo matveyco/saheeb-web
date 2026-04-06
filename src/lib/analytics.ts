@@ -15,12 +15,12 @@ const ALWAYS_ON_CONVERSION_EVENTS = new Set([
   'contact_submit_success',
 ]);
 
-export type AnalyticsConsent = 'accepted' | 'declined';
+export type AnalyticsConsent = 'accepted';
 export type AnalyticsEventParams = Record<
   string,
   string | number | boolean | undefined
 >;
-export type PageViewTrackingMode = 'landing' | 'full';
+type ClarityTagValue = string | number | boolean;
 
 declare global {
   interface MetaPixelFunction {
@@ -135,44 +135,23 @@ export function getProjectName(pathname: string) {
   return undefined;
 }
 
-export function readAnalyticsConsent(): AnalyticsConsent | null {
-  if (typeof window === 'undefined') {
-    return null;
-  }
-
-  const stored = window.localStorage.getItem(ANALYTICS_CONSENT_STORAGE_KEY);
-  return stored === 'accepted' || stored === 'declined' ? stored : null;
+export function readAnalyticsConsent(): AnalyticsConsent {
+  return 'accepted';
 }
 
-export function persistAnalyticsConsent(consent: AnalyticsConsent) {
-  if (typeof window === 'undefined') {
-    return;
-  }
+export function persistAnalyticsConsent() {}
 
-  window.localStorage.setItem(ANALYTICS_CONSENT_STORAGE_KEY, consent);
+export function shouldAutoShowAnalyticsBanner() {
+  return false;
 }
 
-export function shouldAutoShowAnalyticsBanner(
-  consent: AnalyticsConsent | null
-) {
-  if (typeof window === 'undefined') {
-    return false;
-  }
-
-  return consent === null;
-}
-
-function hasBehavioralAnalyticsConsent() {
-  return readAnalyticsConsent() === 'accepted';
-}
-
-function updateGoogleAnalyticsConsent(consent: AnalyticsConsent | null) {
+function updateGoogleAnalyticsConsent() {
   if (typeof window === 'undefined' || !GA_MEASUREMENT_ID) {
     return;
   }
 
   window.gtag?.('consent', 'update', {
-    analytics_storage: consent === 'accepted' ? 'granted' : 'denied',
+    analytics_storage: 'granted',
   });
 }
 
@@ -250,10 +229,7 @@ function shouldEnableClarity(pathname?: string) {
   return Boolean(pathname?.startsWith('/projects/saheeb-drive'));
 }
 
-export function initializeAnalytics(
-  consent: AnalyticsConsent | null,
-  pathname?: string
-) {
+export function initializeAnalytics(pathname?: string) {
   if (!canUseAnalyticsRuntime()) {
     return;
   }
@@ -262,7 +238,7 @@ export function initializeAnalytics(
     ensureGtagBootstrap();
 
     if (!window.__saheebAnalyticsInitialized) {
-      window.gtag?.('consent', 'default', { analytics_storage: 'denied' });
+      window.gtag?.('consent', 'default', { analytics_storage: 'granted' });
       window.gtag?.('js', new Date());
       window.gtag?.('config', GA_MEASUREMENT_ID, {
         send_page_view: false,
@@ -273,7 +249,7 @@ export function initializeAnalytics(
       window.__saheebAnalyticsInitialized = true;
     }
 
-    updateGoogleAnalyticsConsent(consent);
+    updateGoogleAnalyticsConsent();
   }
 
   if (META_PIXEL_ID) {
@@ -285,22 +261,12 @@ export function initializeAnalytics(
     }
   }
 
-  if (
-    consent === 'accepted' &&
-    CLARITY_PROJECT_ID &&
-    shouldEnableClarity(pathname)
-  ) {
+  if (CLARITY_PROJECT_ID && shouldEnableClarity(pathname)) {
     ensureClarityBootstrap();
   }
 }
 
-export function disableAnalytics() {
-  if (typeof window === 'undefined') {
-    return;
-  }
-
-  updateGoogleAnalyticsConsent('declined');
-}
+export function disableAnalytics() {}
 
 function trackGoogleEvent(
   eventName: string,
@@ -371,9 +337,7 @@ function trackMetaConversionEvent(
       break;
   }
 
-  if (hasBehavioralAnalyticsConsent()) {
-    trackMetaCustomEvent(eventName, params);
-  }
+  trackMetaCustomEvent(eventName, params);
 }
 
 function trackConversionEvent(
@@ -397,10 +361,6 @@ export function trackEvent(
     return;
   }
 
-  if (!hasBehavioralAnalyticsConsent()) {
-    return;
-  }
-
   trackGoogleEvent(eventName, params);
   trackMetaCustomEvent(eventName, params);
 }
@@ -408,21 +368,15 @@ export function trackEvent(
 export function trackPageView({
   locale,
   pathname,
-  mode = 'full',
 }: {
   locale: string;
   pathname: string;
-  mode?: PageViewTrackingMode;
 }) {
   if (!canUseAnalyticsRuntime()) {
     return;
   }
 
   if (!shouldTrackPath(pathname)) {
-    return;
-  }
-
-  if (mode === 'full' && !hasBehavioralAnalyticsConsent()) {
     return;
   }
 
@@ -438,4 +392,45 @@ export function trackPageView({
 
   trackGoogleEvent('page_view', pageViewParams);
   trackMetaStandardEvent('PageView');
+}
+
+export function setClarityTag(
+  key: string,
+  value: ClarityTagValue | null | undefined
+) {
+  if (
+    typeof window === 'undefined' ||
+    !CLARITY_PROJECT_ID ||
+    value === null ||
+    value === undefined ||
+    value === ''
+  ) {
+    return;
+  }
+
+  window.clarity?.('set', key, value);
+}
+
+export function setAnalyticsContext({
+  locale,
+  pathname,
+  intent,
+  utmSource,
+  utmCampaign,
+}: {
+  locale: string;
+  pathname: string;
+  intent?: string | null;
+  utmSource?: string | null;
+  utmCampaign?: string | null;
+}) {
+  if (!canUseAnalyticsRuntime() || !shouldEnableClarity(pathname)) {
+    return;
+  }
+
+  setClarityTag('page_variant', getPageVariant(pathname) ?? 'other');
+  setClarityTag('site_locale', locale);
+  setClarityTag('intent', intent ?? 'buyer');
+  setClarityTag('utm_source', utmSource ?? 'direct');
+  setClarityTag('utm_campaign', utmCampaign ?? 'unattributed');
 }

@@ -43,6 +43,13 @@ export interface AdminAnalyticsBreakdownItem extends SummaryCounts {
   label: string;
 }
 
+export interface AdminAnalyticsReconciliationRow {
+  date: string;
+  leads: number;
+  submitSuccesses: number;
+  delta: number;
+}
+
 export interface AdminAnalyticsSummaryWindow {
   days: SummaryWindowDays;
   totals: SummaryCounts;
@@ -55,6 +62,7 @@ export interface AdminAnalyticsSummaryWindow {
     duplicateFromSubmit: number | null;
   };
   breakdowns: Record<BreakdownKind, AdminAnalyticsBreakdownItem[]>;
+  reconciliation: AdminAnalyticsReconciliationRow[];
 }
 
 export interface AdminAnalyticsSummary {
@@ -367,6 +375,54 @@ function ratio(numerator: number, denominator: number) {
   return numerator / denominator;
 }
 
+function getDayKey(value: Date | string) {
+  return toDate(value).toISOString().slice(0, 10);
+}
+
+function buildDailyReconciliation(
+  days: SummaryWindowDays,
+  entries: WaitlistEntry[],
+  events: FunnelEvent[],
+  now: Date
+) {
+  const leadCounts = new Map<string, number>();
+  const submitCounts = new Map<string, number>();
+
+  for (const entry of entries) {
+    const dayKey = getDayKey(entry.createdAt);
+    leadCounts.set(dayKey, (leadCounts.get(dayKey) ?? 0) + 1);
+  }
+
+  for (const event of events) {
+    if (event.eventName !== 'waitlist_submit_success') {
+      continue;
+    }
+
+    const dayKey = getDayKey(event.createdAt);
+    submitCounts.set(dayKey, (submitCounts.get(dayKey) ?? 0) + 1);
+  }
+
+  const rows: AdminAnalyticsReconciliationRow[] = [];
+
+  for (let index = 0; index < days; index += 1) {
+    const day = new Date(now);
+    day.setUTCHours(0, 0, 0, 0);
+    day.setUTCDate(day.getUTCDate() - index);
+    const dayKey = day.toISOString().slice(0, 10);
+    const leads = leadCounts.get(dayKey) ?? 0;
+    const submitSuccesses = submitCounts.get(dayKey) ?? 0;
+
+    rows.push({
+      date: dayKey,
+      leads,
+      submitSuccesses,
+      delta: leads - submitSuccesses,
+    });
+  }
+
+  return rows;
+}
+
 function buildSummaryWindow(
   days: SummaryWindowDays,
   entries: WaitlistEntry[],
@@ -420,6 +476,12 @@ function buildSummaryWindow(
         eventsInWindow
       ),
     },
+    reconciliation: buildDailyReconciliation(
+      days,
+      entriesInWindow,
+      eventsInWindow,
+      now
+    ),
   };
 }
 

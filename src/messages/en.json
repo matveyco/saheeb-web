@@ -196,6 +196,8 @@
       "titleHighlight": "Sell with Confidence.",
       "subtitle": "Saheeb Drive is a smart car marketplace that helps buyers and sellers make more confident decisions through verification, deeper car insights, and a personal AI assistant.",
       "supportLine": "Founding waitlist now open for Muscat · Launching Q3 2026",
+      "primaryCta": "Join the Muscat waitlist",
+      "intentLabel": "I'm here as",
       "buyCta": "I'm Buying",
       "sellCta": "I'm Selling",
       "proofItems": [
@@ -262,11 +264,12 @@
       "footnote": "We only ask for what we need to reach you. Phone is optional. Buyer/seller intent helps us tailor launch updates.",
       "eyebrow": "Start in under 30 seconds",
       "title": "Save your spot for launch",
-      "subtitle": "Leave your name and email, pick your side of the market, and we'll keep you posted as Muscat early access opens.",
+      "subtitle": "Leave your details below and we’ll reach out as soon as the first Muscat access wave opens.",
       "nameLabel": "Name",
       "emailLabel": "Email",
       "phoneLabel": "Phone number",
       "phoneOptional": "Optional",
+      "phoneHint": "Optional. Helpful if you prefer WhatsApp or calls.",
       "namePlaceholder": "Your name",
       "emailPlaceholder": "your@email.com",
       "phonePlaceholder": "+968",
@@ -276,8 +279,8 @@
       "changeIntent": "Change",
       "consentPrefix": "I agree to receive Saheeb Drive updates according to the",
       "privacy": "Privacy Policy",
-      "privacyNote": "We use this information to contact you about launch access and product updates.",
-      "reassurance": "Launch-only updates. No spam. Phone is optional.",
+      "privacyNote": "We only use this information for launch access and product updates.",
+      "reassurance": "Launch updates only. No spam.",
       "submit": "Join the Waitlist",
       "submitting": "Joining...",
       "success": {
@@ -487,7 +490,7 @@
       },
       "dataCollection": {
         "title": "Information We Collect",
-        "content": "We collect information in the following categories:\n\n• Contact Information: Name, email address, phone number, and any details you provide when contacting us or submitting forms.\n\n• Waitlist Information: Name, email, phone number, and preferences (such as buyer/seller status for Saheeb Drive).\n\n• Device Information: Browser type, operating system, IP address, device identifiers, and general location data derived from IP address.\n\n• Usage Data: Pages visited, time spent on pages, links clicked, and interaction patterns with our website. Limited landing-page and conversion measurement may be processed through Google Analytics, Meta Pixel, and server-side conversion tools to understand which campaigns lead to visits, waitlist joins, or contact requests. Richer on-site behavioral analytics, including privacy-safe session replay on Saheeb Drive, only runs if you accept optional measurement cookies.\n\n• Cookies and Similar Technologies: Information collected through cookies, pixels, and similar tracking technologies (see Cookies section below).\n\n• Saheeb Drive Specific Data: If you join the Saheeb Drive waitlist, we collect car preferences, location preferences, and whether you intend to buy or sell vehicles.\n\nWe do not collect sensitive personal data such as health information, religious beliefs, or government-issued identification numbers unless specifically required and with your explicit consent."
+        "content": "We collect information in the following categories:\n\n• Contact Information: Name, email address, phone number, and any details you provide when contacting us or submitting forms.\n\n• Waitlist Information: Name, email, phone number, and preferences (such as buyer/seller status for Saheeb Drive).\n\n• Device Information: Browser type, operating system, IP address, device identifiers, and general location data derived from IP address.\n\n• Usage Data: Pages visited, time spent on pages, links clicked, and interaction patterns with our website. We use Google Analytics, Meta Pixel, server-side conversion measurement, and privacy-safe session replay on Saheeb Drive to understand which campaigns, landing pages, and CTA paths lead to visits, waitlist joins, or contact requests. This measurement is configured not to intentionally capture form-field contents such as names, email addresses, phone numbers, or message text.\n\n• Cookies and Similar Technologies: Information collected through cookies, pixels, and similar tracking technologies (see Cookies section below).\n\n• Saheeb Drive Specific Data: If you join the Saheeb Drive waitlist, we collect car preferences, location preferences, and whether you intend to buy or sell vehicles.\n\nWe do not collect sensitive personal data such as health information, religious beliefs, or government-issued identification numbers unless specifically required and with your explicit consent."
       },
       "legalBasis": {
         "title": "Legal Basis for Processing",
@@ -499,7 +502,7 @@
       },
       "dataSharing": {
         "title": "Information Sharing and Disclosure",
-        "content": "We do not sell, rent, or trade your personal information to third parties for their marketing purposes.\n\nWe may share your information in the following circumstances:\n\n• Service Providers: With trusted third-party service providers who assist us in operating our website, conducting our business, or servicing you, provided they agree to keep your information confidential.\n\n• Analytics and Measurement Providers: We use Google Analytics, Meta Pixel, Meta Conversions API, and if you accept optional measurement cookies, Microsoft Clarity for limited landing-page and conversion attribution and for richer usage analytics such as page journeys, CTA clicks, engagement patterns, and privacy-safe replay of Drive journeys.\n\n• Legal Requirements: When required by law, court order, or governmental authority in the Sultanate of Oman, or when we believe disclosure is necessary to protect our rights, your safety, or the safety of others.\n\n• Business Transfers: In connection with a merger, acquisition, or sale of assets, your information may be transferred to the acquiring entity, subject to this Privacy Policy.\n\n• With Your Consent: In any other circumstances where you have provided explicit consent to share your information.\n\nAll third parties with whom we share data are contractually obligated to protect your information and use it only for the purposes for which it was shared."
+        "content": "We do not sell, rent, or trade your personal information to third parties for their marketing purposes.\n\nWe may share your information in the following circumstances:\n\n• Service Providers: With trusted third-party service providers who assist us in operating our website, conducting our business, or servicing you, provided they agree to keep your information confidential.\n\n• Analytics and Measurement Providers: We use Google Analytics, Meta Pixel, Meta Conversions API when configured, and Microsoft Clarity for landing-page attribution, conversion measurement, CTA analysis, mobile behavior analysis, and privacy-safe replay of Saheeb Drive journeys.\n\n• Legal Requirements: When required by law, court order, or governmental authority in the Sultanate of Oman, or when we believe disclosure is necessary to protect our rights, your safety, or the safety of others.\n\n• Business Transfers: In connection with a merger, acquisition, or sale of assets, your information may be transferred to the acquiring entity, subject to this Privacy Policy.\n\n• With Your Consent: In any other circumstances where you have provided explicit consent to share your information.\n\nAll third parties with whom we share data are contractually obligated to protect your information and use it only for the purposes for which it was shared."
       },
       "internationalTransfers": {
         "title": "International Data Transfers",
@@ -515,7 +518,7 @@
       },
       "cookies": {
         "title": "Cookies and Tracking Technologies",
-        "content": "We use cookies and similar technologies to operate the website, remember preferences, and understand site usage. These include:\n\n• Essential Cookies: Necessary for the website to function properly. These cannot be disabled.\n\n• Attribution and Conversion Measurement: We use limited Google Analytics, Meta Pixel, and Meta Conversions API measurement to understand which campaigns or landing pages lead to visits, waitlist joins, and contact requests. This measurement is configured to avoid sending form-field contents such as your name, email address, phone number, or message.\n\n• Analytics and Measurement Cookies: Optional analytics cookies and pixels that help us understand on-site behavior, such as page journeys, CTA clicks, engagement patterns, and privacy-safe session replay on Saheeb Drive. These run only if you accept them.\n\n• Preference Cookies: Remember your settings and preferences (such as language choice).\n\nOptional on-site behavioral analytics stays denied unless you accept it through our consent banner. You can change or withdraw your choice at any time through Cookie Settings in the footer or through your browser controls.\n\nGoogle Analytics, Meta, and Microsoft Clarity may process limited device, browser, and event information on our behalf and may involve cross-border processing subject to applicable safeguards. We do not intentionally send form fields such as your name, email address, phone number, or message content to these providers.\n\nMost browsers allow you to:\n\n• View cookies stored on your device\n• Accept or reject cookies (either all or certain types)\n• Delete cookies"
+        "content": "We use cookies and similar technologies to operate the website, remember preferences, and understand site usage. These include:\n\n• Essential Cookies: Necessary for the website to function properly. These cannot be disabled.\n\n• Attribution and Conversion Measurement: We use Google Analytics, Meta Pixel, Meta Conversions API when configured, and server-side measurement to understand which campaigns or landing pages lead to visits, waitlist joins, and contact requests. This measurement is configured to avoid intentionally sending form-field contents such as your name, email address, phone number, or message.\n\n• Analytics and Measurement Cookies: We use analytics cookies and privacy-safe session replay on public Saheeb pages, including Saheeb Drive, to understand page journeys, CTA clicks, mobile behavior, and conversion friction.\n\n• Preference Cookies: Remember your settings and preferences (such as language choice).\n\nGoogle Analytics, Meta, and Microsoft Clarity may process limited device, browser, and event information on our behalf and may involve cross-border processing subject to applicable safeguards. We do not intentionally send form fields such as your name, email address, phone number, or message content to these providers.\n\nMost browsers allow you to:\n\n• View cookies stored on your device\n• Accept or reject cookies (either all or certain types)\n• Delete cookies"
       },
       "childrenPrivacy": {
         "title": "Children's Privacy",

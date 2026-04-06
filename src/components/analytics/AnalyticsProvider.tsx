@@ -2,88 +2,36 @@
 
 import {
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useMemo,
-  useRef,
-  useState,
   useSyncExternalStore,
 } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 import { usePathname } from '@/i18n/navigation';
 import {
   canUseAnalyticsRuntime,
   initializeAnalytics,
-  persistAnalyticsConsent,
-  readAnalyticsConsent,
-  shouldAutoShowAnalyticsBanner,
+  setAnalyticsContext,
   shouldTrackPath,
   trackPageView,
-  type AnalyticsConsent,
 } from '@/lib/analytics';
-import { captureAttribution } from '@/lib/attribution';
+import { captureAttribution, readAttributionSnapshot } from '@/lib/attribution';
+import { ensureAnalyticsIdentity } from '@/lib/analytics-identity';
 
 interface AnalyticsConsentContextValue {
-  consent: AnalyticsConsent | null;
+  consent: 'accepted';
   isAvailable: boolean;
-  isBannerOpen: boolean;
+  isBannerOpen: false;
   openSettings: () => void;
   acceptAnalytics: () => void;
   declineAnalytics: () => void;
 }
 
+const noop = () => {};
+
 const AnalyticsConsentContext =
   createContext<AnalyticsConsentContextValue | null>(null);
-
-function AnalyticsConsentBanner({
-  isOpen,
-  onAccept,
-  onDecline,
-}: {
-  isOpen: boolean;
-  onAccept: () => void;
-  onDecline: () => void;
-}) {
-  const t = useTranslations('analyticsConsent');
-
-  if (!isOpen) {
-    return null;
-  }
-
-  return (
-    <div className="fixed inset-x-0 bottom-0 z-50 p-4 sm:p-6">
-      <div className="mx-auto max-w-3xl rounded-3xl border border-[#2A2A2E] bg-[#111113]/95 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-2xl">
-            <h2 className="text-lg font-semibold text-[#EDEDEF]">
-              {t('title')}
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-[#8F8F96]">
-              {t('description')}
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 sm:min-w-[220px]">
-            <button
-              type="button"
-              onClick={onAccept}
-              className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-[#C9A87C] px-5 py-3 text-sm font-semibold text-[#09090B] transition-colors hover:bg-[#D4B78E]"
-            >
-              {t('accept')}
-            </button>
-            <button
-              type="button"
-              onClick={onDecline}
-              className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-[#333338] px-5 py-3 text-sm font-semibold text-[#EDEDEF] transition-colors hover:bg-[#19191B]"
-            >
-              {t('decline')}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export function AnalyticsProvider({
   children,
@@ -97,16 +45,7 @@ export function AnalyticsProvider({
     () => true,
     () => false
   );
-  const [consent, setConsent] = useState<AnalyticsConsent | null>(() =>
-    typeof window === 'undefined' ? null : readAnalyticsConsent()
-  );
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const lastTrackedLandingPath = useRef<string | null>(null);
   const isAvailable = isHydrated && canUseAnalyticsRuntime();
-  const isBannerOpen =
-    isAvailable &&
-    shouldTrackPath(pathname) &&
-    (isSettingsOpen || shouldAutoShowAnalyticsBanner(consent));
 
   useEffect(() => {
     if (!isHydrated) {
@@ -114,6 +53,7 @@ export function AnalyticsProvider({
     }
 
     captureAttribution(pathname);
+    ensureAnalyticsIdentity();
   }, [isHydrated, pathname]);
 
   useEffect(() => {
@@ -121,74 +61,45 @@ export function AnalyticsProvider({
       return;
     }
 
-    initializeAnalytics(consent, pathname);
-  }, [consent, isAvailable, pathname]);
+    initializeAnalytics(pathname);
+  }, [isAvailable, pathname]);
 
   useEffect(() => {
     if (!isAvailable || !shouldTrackPath(pathname)) {
       return;
     }
 
-    if (consent === 'accepted') {
-      trackPageView({ locale, pathname, mode: 'full' });
-      return;
-    }
+    trackPageView({ locale, pathname });
 
-    if (lastTrackedLandingPath.current === pathname) {
-      return;
-    }
-
-    trackPageView({ locale, pathname, mode: 'landing' });
-    lastTrackedLandingPath.current = pathname;
-  }, [consent, isAvailable, locale, pathname]);
-
-  const acceptAnalytics = useCallback(() => {
-    persistAnalyticsConsent('accepted');
-    setConsent('accepted');
-    setIsSettingsOpen(false);
-  }, []);
-
-  const declineAnalytics = useCallback(() => {
-    persistAnalyticsConsent('declined');
-    setConsent('declined');
-    setIsSettingsOpen(false);
-  }, []);
-
-  const openSettings = useCallback(() => {
-    if (!isAvailable || !shouldTrackPath(pathname)) {
-      return;
-    }
-
-    setIsSettingsOpen(true);
-  }, [isAvailable, pathname]);
+    const attribution = readAttributionSnapshot();
+    const searchParams =
+      typeof window === 'undefined'
+        ? null
+        : new URLSearchParams(window.location.search);
+    setAnalyticsContext({
+      locale,
+      pathname,
+      intent: searchParams?.get('intent'),
+      utmSource: attribution?.utmSource,
+      utmCampaign: attribution?.utmCampaign,
+    });
+  }, [isAvailable, locale, pathname]);
 
   const contextValue = useMemo(
     () => ({
-      consent,
+      consent: 'accepted' as const,
       isAvailable,
-      isBannerOpen,
-      openSettings,
-      acceptAnalytics,
-      declineAnalytics,
+      isBannerOpen: false as const,
+      openSettings: noop,
+      acceptAnalytics: noop,
+      declineAnalytics: noop,
     }),
-    [
-      acceptAnalytics,
-      consent,
-      declineAnalytics,
-      isAvailable,
-      isBannerOpen,
-      openSettings,
-    ]
+    [isAvailable]
   );
 
   return (
     <AnalyticsConsentContext.Provider value={contextValue}>
       {children}
-      <AnalyticsConsentBanner
-        isOpen={isBannerOpen}
-        onAccept={acceptAnalytics}
-        onDecline={declineAnalytics}
-      />
     </AnalyticsConsentContext.Provider>
   );
 }

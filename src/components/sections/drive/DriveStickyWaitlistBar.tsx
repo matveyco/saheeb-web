@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useAnalyticsConsent } from '@/components/analytics/AnalyticsProvider';
 import { DriveIntentButton } from '@/components/sections/drive/DriveIntentButton';
 import { recordFunnelEvent } from '@/lib/funnel';
 import type { PageVariant } from '@/lib/page-variant';
@@ -16,7 +15,6 @@ export function DriveStickyWaitlistBar({
 }: DriveStickyWaitlistBarProps) {
   const t = useTranslations('saheebDrive');
   const locale = useLocale();
-  const { isBannerOpen } = useAnalyticsConsent();
   const [showStickyBar, setShowStickyBar] = useState(false);
 
   useEffect(() => {
@@ -62,7 +60,10 @@ export function DriveStickyWaitlistBar({
         waitlistVisible = entry.isIntersecting;
         updateStickyBar();
       },
-      { threshold: 0.2 }
+      {
+        threshold: 0,
+        rootMargin: '0px 0px -45% 0px',
+      }
     );
 
     heroObserver.observe(hero);
@@ -74,12 +75,15 @@ export function DriveStickyWaitlistBar({
     };
   }, []);
 
-  if (isBannerOpen || !showStickyBar) {
+  if (!showStickyBar) {
     return null;
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#222225] bg-[#09090B]/96 px-4 py-3 shadow-[0_-10px_30px_rgba(0,0,0,0.35)] backdrop-blur lg:hidden">
+    <div
+      data-testid="drive-sticky-bar"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-[#222225] bg-[#09090B]/96 px-4 py-3 shadow-[0_-10px_30px_rgba(0,0,0,0.35)] backdrop-blur lg:hidden"
+    >
       <p className="mb-2 text-center text-xs font-medium uppercase tracking-[0.18em] text-[#8F8F96]">
         {t('stickyCta.title')}
       </p>
