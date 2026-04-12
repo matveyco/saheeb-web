@@ -638,7 +638,7 @@ export function WaitlistForm({
             <div className="mb-5">
               <div
                 data-testid="drive-waitlist-social-proof"
-                className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-300"
+                className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-300 sm:px-4 sm:py-2 sm:text-sm"
               >
                 <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.7)]" />
                 {waitlistCount !== null
@@ -648,30 +648,35 @@ export function WaitlistForm({
                   : t('socialProofFallback')}
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
-                {trustPills.map((pill) => (
+                {trustPills.map((pill, index) => (
                   <span
                     key={pill}
-                    className="inline-flex items-center rounded-full border border-[#2B2B31] bg-[#17171A] px-3 py-1.5 text-sm text-[#CFCFD4]"
+                    className={cn(
+                      'items-center rounded-full border border-[#2B2B31] bg-[#17171A] px-2.5 py-1 text-xs text-[#CFCFD4] sm:px-3 sm:py-1.5 sm:text-sm',
+                      index > 1 ? 'hidden sm:inline-flex' : 'inline-flex'
+                    )}
                   >
                     {pill}
                   </span>
                 ))}
               </div>
-              <p className="text-sm font-medium uppercase tracking-[0.18em] text-[#C9A87C]">
+              <p className="mt-4 text-xs font-medium uppercase tracking-[0.18em] text-[#C9A87C] sm:text-sm">
                 {t('eyebrow')}
               </p>
               <h3
                 ref={sectionTitleRef}
                 data-testid="drive-waitlist-title"
-                className="mt-3 text-2xl font-bold text-[#EDEDEF]"
+                className="mt-2 text-xl font-bold text-[#EDEDEF] sm:mt-3 sm:text-2xl"
               >
                 {t('title')}
               </h3>
-              <p className="mt-3 text-[#8F8F96]">{t('subtitle')}</p>
+              <p className="mt-2 text-sm text-[#8F8F96] sm:mt-3 sm:text-base">
+                {t('subtitle')}
+              </p>
             </div>
 
-            <div className="mb-5 rounded-2xl border border-[#1E3A2F] bg-[#0E1512] p-4">
-              <p className="text-base font-semibold text-emerald-300">
+            <div className="mb-5 rounded-2xl border border-[#1E3A2F] bg-[#0E1512] p-3 sm:p-4">
+              <p className="text-sm font-semibold text-emerald-300 sm:text-base">
                 {isBuyerIntent ? t('selectedBuyer') : t('selectedSeller')}
               </p>
               <button
@@ -687,7 +692,7 @@ export function WaitlistForm({
                     'form_switch_link'
                   )
                 }
-                className="mt-3 text-sm font-medium text-[#B7B7BE] underline decoration-[#5C5C63] underline-offset-4 transition-colors hover:text-[#EDEDEF]"
+                className="mt-2 text-sm font-medium text-[#B7B7BE] underline decoration-[#5C5C63] underline-offset-4 transition-colors hover:text-[#EDEDEF]"
               >
                 {isBuyerIntent ? t('switchToSeller') : t('switchToBuyer')}
               </button>
