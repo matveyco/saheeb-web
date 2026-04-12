@@ -1,4 +1,9 @@
 import type { FunnelEvent, WaitlistEntry } from '@/db';
+import type { Ga4SubmitReport } from '@/lib/ga4-admin';
+import {
+  isLikelyInternalFunnelEvent,
+  isLikelyInternalWaitlistEntry,
+} from '@/lib/internal-traffic';
 
 const SUMMARY_WINDOWS = [7, 30] as const;
 
@@ -7,6 +12,7 @@ type BreakdownKind =
   | 'normalizedSources'
   | 'sources'
   | 'campaigns'
+  | 'landingPaths'
   | 'locales'
   | 'countries'
   | 'intents'
@@ -47,7 +53,9 @@ export interface AdminAnalyticsReconciliationRow {
   date: string;
   leads: number;
   submitSuccesses: number;
+  gaSubmitSuccesses: number | null;
   delta: number;
+  gaDelta: number | null;
 }
 
 export interface AdminAnalyticsSummaryWindow {
@@ -67,6 +75,11 @@ export interface AdminAnalyticsSummaryWindow {
 
 export interface AdminAnalyticsSummary {
   generatedAt: string;
+  ga4: {
+    configured: boolean;
+    propertyId: string | null;
+    error: string | null;
+  };
   windows: AdminAnalyticsSummaryWindow[];
 }
 
@@ -216,6 +229,10 @@ function getCampaignLabel(input: {
   return normalizeText(input.utmCampaign) ?? normalizeText(input.landingPath) ?? 'unattributed';
 }
 
+function getLandingPathLabel(value: string | null | undefined) {
+  return normalizeText(value) ?? 'unknown';
+}
+
 function getLocaleLabel(value: string | null | undefined) {
   return normalizeText(value) ?? 'unknown';
 }
@@ -249,6 +266,8 @@ function getBreakdownLabelFromEntry(kind: BreakdownKind, entry: WaitlistEntry) {
       return getRawSourceLabel(entry);
     case 'campaigns':
       return getCampaignLabel(entry);
+    case 'landingPaths':
+      return getLandingPathLabel(entry.landingPath);
     case 'locales':
       return getLocaleLabel(entry.locale);
     case 'countries':
@@ -268,6 +287,8 @@ function getBreakdownLabelFromEvent(kind: BreakdownKind, event: FunnelEvent) {
       return getRawSourceLabel(event);
     case 'campaigns':
       return getCampaignLabel(event);
+    case 'landingPaths':
+      return getLandingPathLabel(event.landingPath);
     case 'locales':
       return getLocaleLabel(event.siteLocale);
     case 'countries':
@@ -383,6 +404,7 @@ function buildDailyReconciliation(
   days: SummaryWindowDays,
   entries: WaitlistEntry[],
   events: FunnelEvent[],
+  gaSubmitCounts: Map<string, number> | null,
   now: Date
 ) {
   const leadCounts = new Map<string, number>();
@@ -411,12 +433,16 @@ function buildDailyReconciliation(
     const dayKey = day.toISOString().slice(0, 10);
     const leads = leadCounts.get(dayKey) ?? 0;
     const submitSuccesses = submitCounts.get(dayKey) ?? 0;
+    const gaSubmitSuccesses = gaSubmitCounts?.get(dayKey) ?? null;
 
     rows.push({
       date: dayKey,
       leads,
       submitSuccesses,
       delta: leads - submitSuccesses,
+      gaSubmitSuccesses,
+      gaDelta:
+        gaSubmitSuccesses === null ? null : leads - gaSubmitSuccesses,
     });
   }
 
@@ -427,6 +453,7 @@ function buildSummaryWindow(
   days: SummaryWindowDays,
   entries: WaitlistEntry[],
   events: FunnelEvent[],
+  gaSubmitCounts: Map<string, number> | null,
   now: Date
 ): AdminAnalyticsSummaryWindow {
   const entriesInWindow = entries.filter((entry) =>
@@ -463,6 +490,11 @@ function buildSummaryWindow(
         entriesInWindow,
         eventsInWindow
       ),
+      landingPaths: buildBreakdownItems(
+        'landingPaths',
+        entriesInWindow,
+        eventsInWindow
+      ),
       locales: buildBreakdownItems('locales', entriesInWindow, eventsInWindow),
       countries: buildBreakdownItems(
         'countries',
@@ -480,6 +512,7 @@ function buildSummaryWindow(
       days,
       entriesInWindow,
       eventsInWindow,
+      gaSubmitCounts,
       now
     ),
   };
@@ -488,12 +521,28 @@ function buildSummaryWindow(
 export function buildAdminAnalyticsSummary(
   entries: WaitlistEntry[],
   events: FunnelEvent[],
+  ga4Report?: Ga4SubmitReport | null,
   now = new Date()
 ): AdminAnalyticsSummary {
+  const filteredEntries = entries.filter(
+    (entry) => !isLikelyInternalWaitlistEntry(entry)
+  );
+  const filteredEvents = events.filter(
+    (event) => !isLikelyInternalFunnelEvent(event)
+  );
+  const gaSubmitCounts = ga4Report
+    ? new Map(ga4Report.rows.map((row) => [row.date, row.submitSuccesses]))
+    : null;
+
   return {
     generatedAt: now.toISOString(),
+    ga4: {
+      configured: ga4Report?.configured ?? false,
+      propertyId: ga4Report?.propertyId ?? null,
+      error: ga4Report?.error ?? null,
+    },
     windows: SUMMARY_WINDOWS.map((days) =>
-      buildSummaryWindow(days, entries, events, now)
+      buildSummaryWindow(days, filteredEntries, filteredEvents, gaSubmitCounts, now)
     ),
   };
 }

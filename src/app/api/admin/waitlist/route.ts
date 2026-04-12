@@ -5,6 +5,11 @@ import { createHash, timingSafeEqual } from 'crypto';
 import { checkRateLimit, getClientIP } from '@/lib/rate-limit';
 import { getServerEnv } from '@/lib/env';
 import { buildAdminAnalyticsSummary } from '@/lib/admin-analytics';
+import { getGa4WaitlistSubmitReport } from '@/lib/ga4-admin';
+import {
+  isLikelyInternalFunnelEvent,
+  isLikelyInternalWaitlistEntry,
+} from '@/lib/internal-traffic';
 
 const AUTH_RATE_LIMIT = { limit: 10, windowSeconds: 60 };
 
@@ -77,14 +82,25 @@ export async function GET(request: NextRequest) {
 
   try {
     const db = getDb();
-    const [entries, events] = await Promise.all([
+    const [entries, events, ga4Report] = await Promise.all([
       db.select().from(waitlistEntries).orderBy(desc(waitlistEntries.createdAt)),
       db.select().from(funnelEvents).orderBy(desc(funnelEvents.createdAt)),
+      getGa4WaitlistSubmitReport(30),
     ]);
-    const analytics = buildAdminAnalyticsSummary(entries, events);
+    const filteredEntries = entries.filter(
+      (entry) => !isLikelyInternalWaitlistEntry(entry)
+    );
+    const filteredEvents = events.filter(
+      (event) => !isLikelyInternalFunnelEvent(event)
+    );
+    const analytics = buildAdminAnalyticsSummary(
+      filteredEntries,
+      filteredEvents,
+      ga4Report
+    );
 
     return NextResponse.json(
-      { entries, analytics },
+      { entries: filteredEntries, analytics },
       {
         headers: NO_STORE_HEADERS,
       }

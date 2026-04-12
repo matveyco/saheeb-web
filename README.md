@@ -23,6 +23,12 @@ Copy `.env.example` to `.env.local` and configure:
 - `RESEND_API_KEY` (optional; if omitted, email notifications are skipped)
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID` (optional; public GA4 measurement ID for limited landing/conversion attribution plus consented behavioral analytics)
 - `NEXT_PUBLIC_META_PIXEL_ID` (optional; public Meta Pixel ID for landing/conversion attribution plus consented behavioral analytics)
+- `NEXT_PUBLIC_CLARITY_PROJECT_ID` (optional; Clarity project ID for public Saheeb Drive pages)
+- `CLARITY_DATA_EXPORT_API_TOKEN` (optional; Clarity export token for diagnostics)
+- `GA4_PROPERTY_ID` (optional; enables server-side GA4 reconciliation in admin)
+- `GA4_SERVICE_ACCOUNT_CLIENT_EMAIL` (optional; GA4 reporting service account email)
+- `GA4_SERVICE_ACCOUNT_PRIVATE_KEY` (optional; GA4 reporting service account private key with `\n` escapes)
+- `META_CAPI_ACCESS_TOKEN` (optional; enables server-side Meta lead delivery)
 - `GOOGLE_SITE_VERIFICATION` (optional; Google Search Console verification token)
 - `META_DOMAIN_VERIFICATION` (optional; Meta domain verification token)
 - `ALLOWED_ORIGINS` (optional, comma-separated CSRF allowlist override)
@@ -45,7 +51,7 @@ Copy `.env.example` to `.env.local` and configure:
 - HTML escaping for outbound contact email templates
 - Shared Zod request schemas for contact/waitlist APIs
 - Server-side locale redirects for the root URL plus canonical host/protocol middleware
-- Limited pre-consent attribution measurement with consent-gated behavioral analytics
+- Always-on public attribution and behavioral analytics for Saheeb Drive
 
 ## API Contracts
 
@@ -63,10 +69,11 @@ Optional:
 
 Required:
 
-- `name`, `email`, `userType`, `consent=true`, `locale`, `consentTimestamp`
+- `name`, `email`, `userType`, `locale`, `consentTimestamp`
 
 Optional:
 
+- `consent=true` (the public waitlist now treats submit as passive consent if omitted)
 - `phone`
 - `utmSource`, `utmMedium`, `utmCampaign`, `utmContent`
 - `referrer`, `landingPath`
@@ -86,8 +93,14 @@ Accepted `eventName` values:
 - `waitlist_view`
 - `cta_click`
 - `form_start`
+- `form_submit_attempt`
 - `validation_error`
 - `waitlist_submit_success`
+- `waitlist_submit_duplicate`
+- `share_click`
+- `privacy_click`
+- `language_switch`
+- `nav_exit`
 
 ## Pre-Deploy Checks
 

@@ -19,6 +19,9 @@ const envSchema = z.object({
   CLARITY_DATA_EXPORT_API_TOKEN: z.string().trim().optional(),
   META_CAPI_ACCESS_TOKEN: z.string().trim().optional(),
   META_CAPI_TEST_EVENT_CODE: z.string().trim().optional(),
+  GA4_PROPERTY_ID: z.string().trim().optional(),
+  GA4_SERVICE_ACCOUNT_CLIENT_EMAIL: z.string().trim().optional(),
+  GA4_SERVICE_ACCOUNT_PRIVATE_KEY: z.string().trim().optional(),
 });
 
 export type ServerEnv = z.infer<typeof envSchema>;

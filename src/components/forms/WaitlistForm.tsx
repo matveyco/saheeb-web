@@ -28,14 +28,12 @@ interface WaitlistFormData {
   email: string;
   phone: string;
   userType: WaitlistUserType;
-  consent: boolean;
 }
 
 interface WaitlistFormErrors {
   name?: string;
   email?: string;
   phone?: string;
-  consent?: string;
 }
 
 interface WaitlistFormProps {
@@ -79,7 +77,6 @@ export function WaitlistForm({
     email: '',
     phone: '',
     userType: initialIntent,
-    consent: false,
   });
   const [intentSource, setIntentSource] = useState<string>(
     hasPresetIntent ? 'query_param' : 'direct_view'
@@ -89,6 +86,7 @@ export function WaitlistForm({
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isCopied, setIsCopied] = useState(false);
+  const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const sectionTitleRef = useRef<HTMLHeadingElement>(null);
@@ -97,6 +95,49 @@ export function WaitlistForm({
   const hasTrackedWaitlistView = useRef(false);
 
   const resolvedPageVariant = getResolvedPageVariant(pageVariant);
+  const trustPills = (t.raw('trustPills') as string[]) ?? [];
+
+  const formatFoundingMembersCount = useCallback(
+    (count: number) => {
+      const roundedCount = count >= 10 ? Math.floor(count / 10) * 10 : count;
+      const displayCount = roundedCount > 0 ? roundedCount : count;
+      return `${new Intl.NumberFormat(locale).format(displayCount)}+`;
+    },
+    [locale]
+  );
+
+  const resolveFieldError = useCallback(
+    (
+      field: keyof Pick<WaitlistFormData, 'name' | 'email' | 'phone'>,
+      value: string
+    ) => {
+      const trimmedValue = value.trim();
+
+      switch (field) {
+        case 'name':
+          return trimmedValue ? undefined : tValidation('required');
+        case 'email':
+          if (!trimmedValue) {
+            return tValidation('required');
+          }
+
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedValue)
+            ? undefined
+            : tValidation('email');
+        case 'phone':
+          if (!trimmedValue) {
+            return undefined;
+          }
+
+          return PHONE_REGEX.test(trimmedValue)
+            ? undefined
+            : tValidation('phone');
+        default:
+          return undefined;
+      }
+    },
+    [tValidation]
+  );
 
   const updateField = (field: keyof WaitlistFormData, value: string | boolean) => {
     setFormData((current) => ({
@@ -105,13 +146,18 @@ export function WaitlistForm({
     }));
 
     setErrors((current) => {
-      if (!current[field as keyof WaitlistFormErrors]) {
+      const errorField = field as keyof WaitlistFormErrors;
+      if (!current[errorField]) {
         return current;
       }
 
       return {
         ...current,
-        [field]: undefined,
+        [errorField]:
+          typeof value === 'string' &&
+          (errorField === 'name' || errorField === 'email' || errorField === 'phone')
+            ? resolveFieldError(errorField, value)
+            : undefined,
       };
     });
   };
@@ -122,7 +168,7 @@ export function WaitlistForm({
       return;
     }
 
-    const offset = window.innerWidth < 640 ? 92 : 116;
+    const offset = window.innerWidth < 640 ? 56 : 116;
     const top =
       target.getBoundingClientRect().top + window.scrollY - offset;
 
@@ -130,6 +176,39 @@ export function WaitlistForm({
       top: Math.max(0, top),
       behavior: 'auto',
     });
+  }, []);
+
+  const ensureVisibleFormViewport = useCallback(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const title = sectionTitleRef.current;
+    const nameInput = nameInputRef.current;
+    const topSafeArea = window.innerWidth < 640 ? 36 : 96;
+    const bottomSafeArea = window.innerWidth < 640 ? 20 : 28;
+
+    if (title) {
+      const titleRect = title.getBoundingClientRect();
+      if (titleRect.top < topSafeArea) {
+        window.scrollBy({
+          top: titleRect.top - topSafeArea,
+          behavior: 'auto',
+        });
+      }
+    }
+
+    if (nameInput) {
+      const inputRect = nameInput.getBoundingClientRect();
+      const maxBottom = window.innerHeight - bottomSafeArea;
+
+      if (inputRect.bottom > maxBottom) {
+        window.scrollBy({
+          top: inputRect.bottom - maxBottom,
+          behavior: 'auto',
+        });
+      }
+    }
   }, []);
 
   const openWaitlist = useCallback((intent?: WaitlistUserType, source?: string) => {
@@ -141,9 +220,10 @@ export function WaitlistForm({
     scrollWaitlistIntoView();
 
     window.setTimeout(() => {
+      ensureVisibleFormViewport();
       nameInputRef.current?.focus({ preventScroll: true });
     }, 220);
-  }, [scrollWaitlistIntoView]);
+  }, [ensureVisibleFormViewport, scrollWaitlistIntoView]);
 
   const handleIntentSelection = (
     nextIntent: WaitlistUserType,
@@ -168,6 +248,35 @@ export function WaitlistForm({
       hasPresetIntent ? 'query_param' : 'direct_view'
     );
   }, [hasPresetIntent, initialIntent, openWaitlist, shouldFocusWaitlist]);
+
+  useEffect(() => {
+    let isActive = true;
+
+    async function loadWaitlistCount() {
+      try {
+        const response = await fetch('/api/waitlist/count', {
+          cache: 'no-store',
+        });
+
+        if (!response.ok) {
+          return;
+        }
+
+        const payload = (await response.json()) as { count?: number };
+        if (!isActive || typeof payload.count !== 'number') {
+          return;
+        }
+
+        setWaitlistCount(payload.count);
+      } catch {}
+    }
+
+    void loadWaitlistCount();
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
 
   useEffect(() => {
     const handleOpenWaitlist = (event: Event) => {
@@ -284,28 +393,17 @@ export function WaitlistForm({
 
   const validateForm = () => {
     const nextErrors: WaitlistFormErrors = {};
-
-    if (!formData.name.trim()) {
-      nextErrors.name = tValidation('required');
-    }
-
-    if (!formData.email.trim()) {
-      nextErrors.email = tValidation('required');
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      nextErrors.email = tValidation('email');
-    }
-
-    if (formData.phone.trim() && !PHONE_REGEX.test(formData.phone)) {
-      nextErrors.phone = tValidation('phone');
-    }
-
-    if (!formData.consent) {
-      nextErrors.consent = tValidation('consent');
-    }
+    nextErrors.name = resolveFieldError('name', formData.name);
+    nextErrors.email = resolveFieldError('email', formData.email);
+    nextErrors.phone = resolveFieldError('phone', formData.phone);
 
     setErrors(nextErrors);
 
-    if (Object.keys(nextErrors).length > 0) {
+    const errorFields = Object.entries(nextErrors)
+      .filter(([, value]) => Boolean(value))
+      .map(([field]) => field);
+
+    if (errorFields.length > 0) {
       recordFunnelEvent({
         eventName: 'validation_error',
         siteLocale: locale,
@@ -315,15 +413,15 @@ export function WaitlistForm({
         pageVariant: resolvedPageVariant,
         intentSource,
         payload: {
-          error_count: Object.keys(nextErrors).length,
-          error_fields: Object.keys(nextErrors).join(','),
+          error_count: errorFields.length,
+          error_fields: errorFields.join(','),
           form_name: FORM_NAME,
           page_variant: resolvedPageVariant,
         },
       });
     }
 
-    return Object.keys(nextErrors).length === 0;
+    return errorFields.length === 0;
   };
 
   const handleCopyLink = async () => {
@@ -390,6 +488,7 @@ export function WaitlistForm({
         },
         body: JSON.stringify({
           ...formData,
+          consent: true,
           locale,
           anonymousId: analyticsIdentity.anonymousId ?? '',
           sessionId: analyticsIdentity.sessionId ?? '',
@@ -485,10 +584,7 @@ export function WaitlistForm({
     }
   };
 
-  const shareUrl = `https://saheeb.com/${locale}/projects/saheeb-drive`;
-  const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(
-    `${t('success.shareText')} ${shareUrl}`
-  )}`;
+  const isBuyerIntent = formData.userType === 'buyer';
 
   return (
     <div
@@ -521,31 +617,7 @@ export function WaitlistForm({
             {t('success.launchNote')}
           </p>
 
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={whatsappShareUrl}
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => {
-                recordFunnelEvent({
-                  eventName: 'share_click',
-                  siteLocale: locale,
-                  userType: formData.userType,
-                  ctaLocation: 'waitlist_success_whatsapp',
-                  destinationPath: whatsappShareUrl,
-                  project: 'saheeb_drive',
-                  pageVariant: resolvedPageVariant,
-                  intentSource,
-                  payload: {
-                    page_variant: resolvedPageVariant,
-                    share_destination: 'whatsapp',
-                  },
-                });
-              }}
-              className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-[#C9A87C] px-5 py-3 text-sm font-semibold text-[#09090B] transition-colors hover:bg-[#D4B78E]"
-            >
-              {t('success.shareWhatsapp')}
-            </a>
+          <div className="mt-6">
             <Button type="button" variant="secondary" onClick={handleCopyLink}>
               {isCopied ? t('success.copied') : t('success.copyLink')}
             </Button>
@@ -555,14 +627,36 @@ export function WaitlistForm({
         <form
           onSubmit={handleSubmit}
           onFocusCapture={trackFormStart}
+          noValidate
           className="space-y-4"
         >
           <div
             id={sectionId}
-            className="scroll-mt-24 rounded-[2rem] border border-[#222225] bg-[#111113] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8 lg:scroll-mt-32"
+            className="scroll-mt-24 rounded-[2rem] border border-[#2B2B31] bg-[#111113] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8 lg:scroll-mt-32"
             data-testid="drive-waitlist-card"
           >
             <div className="mb-5">
+              <div
+                data-testid="drive-waitlist-social-proof"
+                className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-300"
+              >
+                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.7)]" />
+                {waitlistCount !== null
+                  ? t('socialProofBadge', {
+                      count: formatFoundingMembersCount(waitlistCount),
+                    })
+                  : t('socialProofFallback')}
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {trustPills.map((pill) => (
+                  <span
+                    key={pill}
+                    className="inline-flex items-center rounded-full border border-[#2B2B31] bg-[#17171A] px-3 py-1.5 text-sm text-[#CFCFD4]"
+                  >
+                    {pill}
+                  </span>
+                ))}
+              </div>
               <p className="text-sm font-medium uppercase tracking-[0.18em] text-[#C9A87C]">
                 {t('eyebrow')}
               </p>
@@ -576,39 +670,27 @@ export function WaitlistForm({
               <p className="mt-3 text-[#8F8F96]">{t('subtitle')}</p>
             </div>
 
-            <div className="mb-5 rounded-2xl border border-[#222225] bg-[#09090B] p-2">
-              <p className="px-3 pb-2 text-sm text-[#8F8F96]">{t('buyOrSell')}</p>
-
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  data-testid="drive-form-intent-buyer"
-                  onClick={() => handleIntentSelection('buyer')}
-                  aria-pressed={formData.userType === 'buyer'}
-                  className={cn(
-                    'rounded-xl px-4 py-3 text-sm font-semibold transition-colors',
-                    formData.userType === 'buyer'
-                      ? 'bg-[#C9A87C] text-[#09090B]'
-                      : 'bg-[#111113] text-[#8F8F96] hover:text-[#EDEDEF]'
-                  )}
-                >
-                  {t('buy')}
-                </button>
-                <button
-                  type="button"
-                  data-testid="drive-form-intent-seller"
-                  onClick={() => handleIntentSelection('seller')}
-                  aria-pressed={formData.userType === 'seller'}
-                  className={cn(
-                    'rounded-xl px-4 py-3 text-sm font-semibold transition-colors',
-                    formData.userType === 'seller'
-                      ? 'bg-[#C9A87C] text-[#09090B]'
-                      : 'bg-[#111113] text-[#8F8F96] hover:text-[#EDEDEF]'
-                  )}
-                >
-                  {t('sell')}
-                </button>
-              </div>
+            <div className="mb-5 rounded-2xl border border-[#1E3A2F] bg-[#0E1512] p-4">
+              <p className="text-base font-semibold text-emerald-300">
+                {isBuyerIntent ? t('selectedBuyer') : t('selectedSeller')}
+              </p>
+              <button
+                type="button"
+                data-testid={
+                  isBuyerIntent
+                    ? 'drive-form-intent-seller'
+                    : 'drive-form-intent-buyer'
+                }
+                onClick={() =>
+                  handleIntentSelection(
+                    isBuyerIntent ? 'seller' : 'buyer',
+                    'form_switch_link'
+                  )
+                }
+                className="mt-3 text-sm font-medium text-[#B7B7BE] underline decoration-[#5C5C63] underline-offset-4 transition-colors hover:text-[#EDEDEF]"
+              >
+                {isBuyerIntent ? t('switchToSeller') : t('switchToBuyer')}
+              </button>
             </div>
 
             <div className="grid gap-4">
@@ -620,9 +702,16 @@ export function WaitlistForm({
                 placeholder={t('namePlaceholder')}
                 value={formData.name}
                 onChange={(event) => updateField('name', event.target.value)}
+                onBlur={(event) =>
+                  setErrors((current) => ({
+                    ...current,
+                    name: resolveFieldError('name', event.target.value),
+                  }))
+                }
                 error={errors.name}
                 required
                 autoComplete="name"
+                className="border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
               />
 
               <Input
@@ -633,10 +722,17 @@ export function WaitlistForm({
                 placeholder={t('emailPlaceholder')}
                 value={formData.email}
                 onChange={(event) => updateField('email', event.target.value)}
+                onBlur={(event) =>
+                  setErrors((current) => ({
+                    ...current,
+                    email: resolveFieldError('email', event.target.value),
+                  }))
+                }
                 error={errors.email}
                 required
                 autoComplete="email"
                 dir="ltr"
+                className="border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
               />
 
               <Input
@@ -647,50 +743,18 @@ export function WaitlistForm({
                 placeholder={t('phonePlaceholder')}
                 value={formData.phone}
                 onChange={(event) => updateField('phone', event.target.value)}
+                onBlur={(event) =>
+                  setErrors((current) => ({
+                    ...current,
+                    phone: resolveFieldError('phone', event.target.value),
+                  }))
+                }
                 error={errors.phone}
                 hint={t('phoneHint')}
                 autoComplete="tel"
                 dir="ltr"
+                className="border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
               />
-            </div>
-
-            <div className="mt-5">
-              <label className="flex cursor-pointer items-start gap-3 text-start">
-                <input
-                  type="checkbox"
-                  name="consent"
-                  checked={formData.consent}
-                  onChange={(event) => updateField('consent', event.target.checked)}
-                  className="mt-0.5 h-5 w-5 rounded border-[#222225] bg-[#19191B] text-[#C9A87C] focus:ring-[#C9A87C]/50 focus:ring-offset-0"
-                />
-                <span className="text-sm leading-relaxed text-[#5C5C63]">
-                  {t('consentPrefix')}{' '}
-                  <Link
-                    href="/privacy"
-                    onClick={() => {
-                      recordFunnelEvent({
-                        eventName: 'privacy_click',
-                        siteLocale: locale,
-                        userType: formData.userType,
-                        ctaLocation: 'waitlist_privacy_link',
-                        destinationPath: '/privacy',
-                        project: 'saheeb_drive',
-                        pageVariant: resolvedPageVariant,
-                        intentSource,
-                      });
-                    }}
-                    className="text-[#C9A87C] transition-colors hover:text-[#EDEDEF]"
-                  >
-                    {t('privacy')}
-                  </Link>
-                </span>
-              </label>
-
-              {errors.consent ? (
-                <p className="mt-2 ps-7 text-sm text-red-400">
-                  {errors.consent}
-                </p>
-              ) : null}
             </div>
 
             {submitError ? (
@@ -699,25 +763,45 @@ export function WaitlistForm({
               </div>
             ) : null}
 
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-              <div className="space-y-2">
-                <p className="text-sm font-medium text-[#D0D0D5]">
-                  {t('reassurance')}
-                </p>
-                <p className="text-xs leading-relaxed text-[#5C5C63]">
-                  {t('privacyNote')}
-                </p>
-              </div>
+            <div className="mt-6">
+              <p className="text-sm font-medium text-[#D0D0D5]">
+                {t('reassurance')}
+              </p>
               <Button
                 type="submit"
                 variant="primary"
                 size="lg"
                 disabled={isSubmitting}
                 data-testid="drive-waitlist-submit"
-                className="w-full sm:w-auto"
+                className="mt-4 w-full"
               >
                 {isSubmitting ? t('submitting') : t('submit')}
               </Button>
+              <p
+                data-testid="drive-waitlist-passive-privacy"
+                className="mt-4 text-center text-sm leading-relaxed text-[#7E7E85]"
+              >
+                {t('privacyLinePrefix')}{' '}
+                <Link
+                  href="/privacy"
+                  onClick={() => {
+                    recordFunnelEvent({
+                      eventName: 'privacy_click',
+                      siteLocale: locale,
+                      userType: formData.userType,
+                      ctaLocation: 'waitlist_privacy_link',
+                      destinationPath: '/privacy',
+                      project: 'saheeb_drive',
+                      pageVariant: resolvedPageVariant,
+                      intentSource,
+                    });
+                  }}
+                  className="text-[#C9A87C] transition-colors hover:text-[#EDEDEF]"
+                >
+                  {t('privacy')}
+                </Link>
+                {t('privacyLineSuffix')}
+              </p>
             </div>
           </div>
         </form>

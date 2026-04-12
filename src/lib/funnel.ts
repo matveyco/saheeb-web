@@ -10,7 +10,7 @@ import {
   createAnalyticsEventId,
   ensureAnalyticsIdentity,
 } from '@/lib/analytics-identity';
-import { readAttributionSnapshot } from '@/lib/attribution';
+import { captureAttribution, readAttributionSnapshot } from '@/lib/attribution';
 import { getPageVariant, type PageVariant } from '@/lib/page-variant';
 
 export type FunnelEventName =
@@ -220,7 +220,7 @@ export function recordFunnelEvent({
   }
 
   const pathname = normalizeLocalePath(window.location.pathname, siteLocale);
-  const attribution = readAttributionSnapshot();
+  const attribution = readAttributionSnapshot() ?? captureAttribution(pathname);
   const analyticsIdentity = ensureAnalyticsIdentity();
   const sanitizedPayload = sanitizePayload(payload);
   const analyticsPayload = sanitizeAnalyticsPayload(payload);

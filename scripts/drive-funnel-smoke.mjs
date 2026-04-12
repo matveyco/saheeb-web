@@ -52,6 +52,7 @@ async function assertVisibleAboveFold(page, testId, label) {
 async function assertWaitlistFlow(page, path, intent) {
   await gotoPath(page, path);
   await assertVisibleAboveFold(page, 'drive-hero-primary-cta', `${path} hero CTA`);
+  await page.waitForTimeout(600);
 
   await page.getByTestId('drive-hero-primary-cta').click();
   await page.getByTestId('drive-waitlist-title').waitFor({
@@ -67,6 +68,8 @@ async function assertWaitlistFlow(page, path, intent) {
   const intentToggle = page.getByTestId(
     intent === 'seller' ? 'drive-form-intent-seller' : 'drive-form-intent-buyer'
   );
+  const passivePrivacy = page.getByTestId('drive-waitlist-passive-privacy');
+  const socialProof = page.getByTestId('drive-waitlist-social-proof');
 
   assert(viewport, 'Viewport should be available');
   assert(titleBox, 'Waitlist title should be visible');
@@ -88,6 +91,21 @@ async function assertWaitlistFlow(page, path, intent) {
     await sticky.isVisible().catch(() => false),
     false,
     `${path} sticky bar should hide while the waitlist is in view`
+  );
+  assert.equal(
+    await page.locator('input[name="consent"]').count(),
+    0,
+    `${path} should not render a blocking consent checkbox`
+  );
+  assert.equal(
+    await passivePrivacy.isVisible().catch(() => false),
+    true,
+    `${path} should show the passive privacy line`
+  );
+  assert.equal(
+    await socialProof.isVisible().catch(() => false),
+    true,
+    `${path} should show the social proof badge`
   );
 
   const bannerText = page.getByText(/Allow optional analytics cookies|Accept cookies/);

@@ -14,6 +14,12 @@ export async function GET() {
           )
         )::int as count
       from waitlist_entries
+      where not (
+        lower(coalesce(email, '')) like '%@example.com'
+        or lower(coalesce(email, '')) like '%prod-smoke%'
+        or lower(coalesce(name, '')) like '%prod-smoke%'
+        or lower(coalesce(name, '')) like '%codex-smoke%'
+      )
     `);
     const count = result.rows[0]?.count ?? 0;
 

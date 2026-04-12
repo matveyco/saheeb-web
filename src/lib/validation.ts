@@ -100,9 +100,7 @@ export const waitlistSubmissionSchema = z
     email: emailSchema,
     phone: z.union([phoneSchema, z.literal('')]).optional(),
     userType: waitlistUserTypeSchema,
-    consent: z.literal(true, {
-      error: 'Consent is required',
-    }),
+    consent: z.union([z.literal(true), z.undefined()]).optional(),
     locale: localeSchema,
     utmSource: optionalTrimmedString(255),
     utmMedium: optionalTrimmedString(255),
@@ -123,7 +121,7 @@ export const waitlistSubmissionSchema = z
     phone: value.phone && value.phone.length > 0 ? value.phone : null,
     userType: value.userType,
     city: 'muscat',
-    consent: value.consent,
+    consent: true,
     locale: value.locale,
     utmSource:
       value.utmSource && value.utmSource.length > 0 ? value.utmSource : null,

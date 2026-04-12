@@ -9,6 +9,19 @@ export interface AttributionSnapshot {
   landingPath: string | null;
 }
 
+const LANDING_PATH_ALLOWED_PARAMS = new Set(['intent', 'focus']);
+const URL_NOISE_PARAMS = new Set([
+  'fbclid',
+  'gclid',
+  'gbraid',
+  'wbraid',
+  'msclkid',
+  'ttclid',
+  'twclid',
+  'mc_cid',
+  'mc_eid',
+]);
+
 function trimValue(value: string | null | undefined) {
   if (!value) {
     return null;
@@ -93,6 +106,56 @@ function getExternalReferrer() {
   return referrer;
 }
 
+function buildNormalizedLandingPath(
+  pathname: string,
+  searchParams: URLSearchParams
+) {
+  const normalizedParams = new URLSearchParams();
+
+  for (const [key, value] of searchParams.entries()) {
+    if (!LANDING_PATH_ALLOWED_PARAMS.has(key)) {
+      continue;
+    }
+
+    const trimmedValue = trimValue(value);
+    if (trimmedValue) {
+      normalizedParams.set(key, trimmedValue);
+    }
+  }
+
+  const query = normalizedParams.toString();
+  return query ? `${pathname}?${query}` : pathname;
+}
+
+function stripNoiseParamsFromCurrentUrl(searchParams: URLSearchParams) {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  let hasNoiseParams = false;
+  const nextParams = new URLSearchParams(searchParams);
+
+  for (const param of URL_NOISE_PARAMS) {
+    if (!nextParams.has(param)) {
+      continue;
+    }
+
+    hasNoiseParams = true;
+    nextParams.delete(param);
+  }
+
+  if (!hasNoiseParams) {
+    return;
+  }
+
+  const nextSearch = nextParams.toString();
+  const nextUrl = `${window.location.pathname}${
+    nextSearch ? `?${nextSearch}` : ''
+  }${window.location.hash}`;
+
+  window.history.replaceState({}, '', nextUrl);
+}
+
 export function captureAttribution(pathname: string) {
   if (typeof window === 'undefined') {
     return null;
@@ -100,6 +163,7 @@ export function captureAttribution(pathname: string) {
 
   const existing = readStoredSnapshot();
   const searchParams = new URLSearchParams(window.location.search);
+  const normalizedLandingPath = buildNormalizedLandingPath(pathname, searchParams);
 
   const nextSnapshot: AttributionSnapshot = {
     utmSource: existing?.utmSource ?? trimValue(searchParams.get('utm_source')),
@@ -109,10 +173,11 @@ export function captureAttribution(pathname: string) {
     utmContent:
       existing?.utmContent ?? trimValue(searchParams.get('utm_content')),
     referrer: existing?.referrer ?? getExternalReferrer(),
-    landingPath: existing?.landingPath ?? trimValue(pathname),
+    landingPath: existing?.landingPath ?? normalizedLandingPath,
   };
 
   writeStoredSnapshot(nextSnapshot);
+  stripNoiseParamsFromCurrentUrl(searchParams);
   return nextSnapshot;
 }
 

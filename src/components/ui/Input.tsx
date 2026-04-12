@@ -32,10 +32,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           type={type}
           className={cn(
             'w-full px-4 py-3.5 rounded-xl transition-colors duration-200 min-h-[44px]',
-            'bg-[#111113] border border-[#222225]',
+            'bg-[#111113] border border-[#3A3A3F]',
             'text-[#EDEDEF] placeholder:text-[#5C5C63]',
-            'focus:outline-none focus:border-[#C9A87C]/50 focus:ring-1 focus:ring-[#C9A87C]/20',
-            error ? 'border-red-400' : 'hover:border-[#333338]',
+            'focus:outline-none focus:border-[#C9A87C] focus:ring-1 focus:ring-[#C9A87C]/25',
+            error ? 'border-red-400' : 'hover:border-[#4A4A50]',
             className
           )}
           aria-invalid={error ? 'true' : 'false'}

@@ -56,6 +56,7 @@ interface AnalyticsWindow {
     normalizedSources: BreakdownItem[];
     sources: BreakdownItem[];
     campaigns: BreakdownItem[];
+    landingPaths: BreakdownItem[];
     locales: BreakdownItem[];
     countries: BreakdownItem[];
     intents: BreakdownItem[];
@@ -65,12 +66,19 @@ interface AnalyticsWindow {
     date: string;
     leads: number;
     submitSuccesses: number;
+    gaSubmitSuccesses: number | null;
     delta: number;
+    gaDelta: number | null;
   }[];
 }
 
 interface AnalyticsSummary {
   generatedAt: string;
+  ga4: {
+    configured: boolean;
+    propertyId: string | null;
+    error: string | null;
+  };
   windows: AnalyticsWindow[];
 }
 
@@ -160,7 +168,7 @@ function ReconciliationTable({
           Submit vs Lead Reconciliation
         </h3>
         <p className="mt-1 text-sm text-[#5C5C63]">
-          Positive delta means leads exceeded first-party submit-success events that day.
+          Positive delta means leads exceeded submit-success events that day.
         </p>
       </div>
 
@@ -175,7 +183,10 @@ function ReconciliationTable({
                 Leads
               </th>
               <th className="py-2 pe-4 text-left text-xs font-medium uppercase tracking-[0.12em] text-[#5C5C63]">
-                Submit events
+                First-party submits
+              </th>
+              <th className="py-2 pe-4 text-left text-xs font-medium uppercase tracking-[0.12em] text-[#5C5C63]">
+                GA4 submits
               </th>
               <th className="py-2 text-left text-xs font-medium uppercase tracking-[0.12em] text-[#5C5C63]">
                 Delta
@@ -190,16 +201,19 @@ function ReconciliationTable({
                 <td className="py-3 pe-4 text-sm text-[#D0D0D5]">
                   {row.submitSuccesses}
                 </td>
+                <td className="py-3 pe-4 text-sm text-[#D0D0D5]">
+                  {row.gaSubmitSuccesses ?? '—'}
+                </td>
                 <td
                   className={`py-3 text-sm ${
-                    row.delta === 0
+                    (row.gaDelta ?? row.delta) === 0
                       ? 'text-[#D0D0D5]'
-                      : row.delta > 0
+                      : (row.gaDelta ?? row.delta) > 0
                         ? 'text-amber-300'
                         : 'text-emerald-400'
                   }`}
                 >
-                  {row.delta}
+                  {row.gaDelta ?? row.delta}
                 </td>
               </tr>
             ))}
@@ -268,6 +282,17 @@ export default function AdminWaitlistPage() {
         <p className="mb-2 text-[#8F8F96]">
           Total entries: {entries.length}
         </p>
+        {analytics?.ga4.configured ? (
+          <p className="mb-2 text-sm text-[#5C5C63]">
+            GA4 reconciliation enabled
+            {analytics.ga4.propertyId ? ` · property ${analytics.ga4.propertyId}` : ''}
+            {analytics.ga4.error ? ` · ${analytics.ga4.error}` : ''}
+          </p>
+        ) : (
+          <p className="mb-2 text-sm text-[#5C5C63]">
+            GA4 reconciliation not configured on the server
+          </p>
+        )}
         <p className="mb-8 text-sm text-[#5C5C63]">
           Analytics snapshot:{' '}
           {analytics
@@ -365,6 +390,10 @@ export default function AdminWaitlistPage() {
                   <BreakdownTable
                     title="Campaigns"
                     items={window.breakdowns.campaigns}
+                  />
+                  <BreakdownTable
+                    title="Landing Paths"
+                    items={window.breakdowns.landingPaths}
                   />
                   <BreakdownTable
                     title="Page Variants"
