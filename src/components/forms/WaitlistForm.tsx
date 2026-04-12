@@ -217,12 +217,17 @@ export function WaitlistForm({
       setIntentSource(source ?? 'query_param');
     }
 
-    scrollWaitlistIntoView();
-
-    window.setTimeout(() => {
+    const alignWaitlistViewport = () => {
       ensureVisibleFormViewport();
       nameInputRef.current?.focus({ preventScroll: true });
-    }, 220);
+    };
+
+    scrollWaitlistIntoView();
+    alignWaitlistViewport();
+
+    [180, 360, 560].forEach((delay) => {
+      window.setTimeout(alignWaitlistViewport, delay);
+    });
   }, [ensureVisibleFormViewport, scrollWaitlistIntoView]);
 
   const handleIntentSelection = (
