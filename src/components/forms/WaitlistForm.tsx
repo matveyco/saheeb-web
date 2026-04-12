@@ -185,6 +185,29 @@ export function WaitlistForm({
 
     const title = sectionTitleRef.current;
     const nameInput = nameInputRef.current;
+    const isMobileViewport = window.innerWidth < 640;
+
+    if (isMobileViewport && nameInput) {
+      nameInput.scrollIntoView({
+        block: 'center',
+        inline: 'nearest',
+        behavior: 'auto',
+      });
+
+      if (title) {
+        const titleRect = title.getBoundingClientRect();
+
+        if (titleRect.top < 18) {
+          window.scrollBy({
+            top: titleRect.top - 18,
+            behavior: 'auto',
+          });
+        }
+      }
+
+      return;
+    }
+
     const topSafeArea = window.innerWidth < 640 ? 28 : 96;
     const bottomSafeArea = window.innerWidth < 640 ? 20 : 28;
 
