@@ -32,7 +32,7 @@ export function DriveIntentButton({
 }: DriveIntentButtonProps) {
   const pathname = usePathname();
   const basePath = getDriveBasePath(pageVariant);
-  const href = `${basePath}?focus=waitlist&intent=${intent}#drive-waitlist`;
+  const href = `${basePath}?focus=waitlist&intent=${intent}#drive-waitlist-form`;
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     if (typeof window === 'undefined') {
@@ -55,7 +55,7 @@ export function DriveIntentButton({
     window.history.replaceState(
       {},
       '',
-      `${nextUrl.pathname}${nextUrl.search}#drive-waitlist`
+      `${nextUrl.pathname}${nextUrl.search}#drive-waitlist-form`
     );
 
     dispatchDriveWaitlistEvent({

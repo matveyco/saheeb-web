@@ -191,12 +191,12 @@
   },
   "saheebDrive": {
     "hero": {
-      "badge": "Oman Early Access · Q3 2026",
+      "badge": "Founder Perks · Oman Launch Q3 2026",
       "title": "Buy with Clarity.",
       "titleHighlight": "Sell with Confidence.",
       "subtitle": "Saheeb Drive is a smart car marketplace that helps buyers and sellers make more confident decisions through verification, deeper car insights, and a personal AI assistant.",
-      "supportLine": "Register now before the public Q3 2026 Oman launch",
-      "primaryCta": "Get Q3 early access",
+      "supportLine": "Subscribe now before the public Oman launch planned for Q3 2026",
+      "primaryCta": "Subscribe and get Premium free",
       "intentLabel": "I'm here as",
       "buyCta": "I'm Buying",
       "sellCta": "I'm Selling",
@@ -227,7 +227,7 @@
       ]
     },
     "stickyCta": {
-      "title": "Q3 launch perks",
+      "title": "Founder perks",
       "buy": "Buying",
       "sell": "Selling"
     },
@@ -253,24 +253,24 @@
       ]
     },
     "waitlist": {
-      "sectionEyebrow": "Q3 launch perks",
-      "sectionTitle": "What early members lock in now",
-      "sectionSubtitle": "Register now to lock in Q3 launch perks, a free Premium month, and first invites to private Saheeb events and giveaways as Oman rollout begins.",
+      "sectionEyebrow": "Founder perks",
+      "sectionTitle": "What you lock in by subscribing now",
+      "sectionSubtitle": "Subscribe now to lock in a free Premium month, private Saheeb event invites, giveaway access, and early priority as Oman rollout begins.",
       "benefits": [
         "1 month of Saheeb Drive Premium free at launch.",
         "First invites to private Saheeb events and giveaways.",
-        "Priority access as the Oman rollout begins, starting with Muscat."
+        "Priority access as Oman rollout begins, with first waves starting in Muscat."
       ],
-      "footnote": "We keep the form short. Phone is optional, and buyer/seller helps us send the right launch updates.",
+      "footnote": "We only ask for what we need to reach you fast. Phone is optional, and your buyer or seller choice helps us send the right launch updates.",
       "eyebrow": "Register now in under 30 seconds",
-      "title": "Join the Oman launch waitlist",
-      "subtitle": "Register now for Q3 early access, a free Premium month at launch, and first invites to private Saheeb events and giveaways.",
-      "socialProofBadge": "Q3 early-member perks",
+      "title": "Subscribe before the public Oman launch",
+      "subtitle": "Founder perks include 1 month of Saheeb Drive Premium free at launch, private Saheeb event invites, giveaway access, and early priority before public rollout.",
+      "socialProofBadge": "Founder perks included",
       "socialProofFallback": "Founder perks included",
       "trustPills": [
-        "Premium free",
+        "Free Premium",
         "Private invites",
-        "Q3 priority access"
+        "Giveaway access"
       ],
       "nameLabel": "Name",
       "emailLabel": "Email",
@@ -295,13 +295,13 @@
       "privacyNote": "We only use this information for launch access and product updates.",
       "privacyLinePrefix": "By joining, you agree to launch updates under our",
       "privacyLineSuffix": ". No spam, ever.",
-      "reassurance": "Guaranteed 1 month of Premium free at launch. No spam.",
-      "submit": "Get Q3 early access",
+      "reassurance": "Founder perks stay reserved when you subscribe now. No spam.",
+      "submit": "Subscribe and get Premium free",
       "submitting": "Joining...",
       "success": {
         "title": "You're on the list.",
-        "message": "We've saved your early-access request for the Q3 Oman launch wave.",
-        "launchNote": "Your early-bird perks include 1 month of Saheeb Drive Premium free at launch and first invites to private Saheeb events and giveaways.",
+        "message": "We've saved your request for founder access before the public Oman launch.",
+        "launchNote": "Your founder perks include 1 month of Saheeb Drive Premium free at launch plus first invites to private Saheeb events and giveaways.",
         "shareText": "Saheeb Drive is launching in Oman. Join the waitlist:",
         "copyLink": "Copy link",
         "copied": "Copied"

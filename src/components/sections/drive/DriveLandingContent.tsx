@@ -151,17 +151,10 @@ export function DriveLandingContent({
           </Container>
         </section>
 
-        <DriveTrustSection
-          title={trustTitle}
-          buyerContent={buyerContent}
-          sellerContent={sellerContent}
-          initialIntent={initialIntent}
-        />
-
         <section className="border-b border-[#1A1A1D] bg-[#09090B] py-12 lg:py-18">
           <Container>
-            <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
-              <div className="order-2 lg:order-1">
+            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+              <div className="order-2 lg:order-2">
                 <DriveWaitlistPitch
                   eyebrow={waitlist.sectionEyebrow}
                   title={waitlist.sectionTitle}
@@ -171,7 +164,7 @@ export function DriveLandingContent({
                 />
               </div>
 
-              <div className="order-1 lg:order-2">
+              <div className="order-1 lg:order-1">
                 <WaitlistForm
                   pageVariant={pageVariant}
                   initialIntent={initialIntent}
@@ -182,6 +175,13 @@ export function DriveLandingContent({
             </div>
           </Container>
         </section>
+
+        <DriveTrustSection
+          title={trustTitle}
+          buyerContent={buyerContent}
+          sellerContent={sellerContent}
+          initialIntent={initialIntent}
+        />
 
         <section className="border-b border-[#1A1A1D] bg-[#09090B] py-12 lg:py-20">
           <Container>

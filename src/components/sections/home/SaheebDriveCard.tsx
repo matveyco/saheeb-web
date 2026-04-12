@@ -56,9 +56,9 @@ export function SaheebDriveCard() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button asChild variant="primary" size="lg">
                     <TrackedLink
-                      href="/projects/saheeb-drive?focus=waitlist"
+                      href="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
                       ctaLocation="home_featured_saheeb_drive"
-                      destinationPath="/projects/saheeb-drive?focus=waitlist"
+                      destinationPath="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
                       project="saheeb_drive"
                     >
                       {t('saheebDrive.cta')}

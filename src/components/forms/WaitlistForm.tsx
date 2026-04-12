@@ -158,7 +158,7 @@ export function WaitlistForm({
       return;
     }
 
-    const offset = window.innerWidth < 640 ? 48 : 116;
+    const offset = window.innerWidth < 640 ? 92 : 132;
     const top =
       target.getBoundingClientRect().top + window.scrollY - offset;
 
@@ -177,19 +177,20 @@ export function WaitlistForm({
     const nameInput = nameInputRef.current;
     const isMobileViewport = window.innerWidth < 640;
 
-    if (isMobileViewport && nameInput) {
-      nameInput.scrollIntoView({
-        block: 'center',
-        inline: 'nearest',
+    if (isMobileViewport && title) {
+      const targetTop = title.getBoundingClientRect().top + window.scrollY - 92;
+      window.scrollTo({
+        top: Math.max(0, targetTop),
         behavior: 'auto',
       });
 
-      if (title) {
-        const titleRect = title.getBoundingClientRect();
+      if (nameInput) {
+        const inputRect = nameInput.getBoundingClientRect();
+        const viewportLimit = window.innerHeight - 28;
 
-        if (titleRect.top < 24) {
+        if (inputRect.bottom > viewportLimit) {
           window.scrollBy({
-            top: titleRect.top - 24,
+            top: inputRect.bottom - viewportLimit,
             behavior: 'auto',
           });
         }
@@ -630,29 +631,28 @@ export function WaitlistForm({
                 <span className="h-2 w-2 rounded-full bg-[#C9A87C]" />
                 {t('socialProofBadge')}
               </div>
-              <div className="grid gap-2 sm:grid-cols-3">
-                {trustPills.map((pill) => (
-                  <div
-                    key={pill}
-                    className="rounded-2xl border border-[#3A3226] bg-[#17120C] px-3 py-3 text-sm font-semibold text-[#F1DFC2] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
-                  >
-                    <span className="flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full bg-[#C9A87C]" />
-                      {pill}
-                    </span>
-                  </div>
-                ))}
-              </div>
               <h3
                 ref={sectionTitleRef}
+                id={`${sectionId}-form`}
                 data-testid="drive-waitlist-title"
-                className="text-2xl font-bold tracking-tight text-[#EDEDEF] sm:text-[2rem]"
+                className="scroll-mt-24 text-2xl font-bold tracking-tight text-[#EDEDEF] sm:text-[2rem] lg:scroll-mt-32"
               >
                 {t('title')}
               </h3>
               <p className="max-w-xl text-sm leading-relaxed text-[#9B9BA3] sm:text-base">
                 {t('subtitle')}
               </p>
+              <div className="grid grid-cols-3 gap-2">
+                {trustPills.map((pill) => (
+                  <div
+                    key={pill}
+                    className="rounded-2xl border border-[#3A3226] bg-[#17120C] px-2.5 py-3 text-center text-[11px] font-semibold leading-tight text-[#F1DFC2] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] sm:px-3 sm:text-sm"
+                  >
+                    <span className="mx-auto mb-2 block h-2 w-2 rounded-full bg-[#C9A87C]" />
+                    {pill}
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="mt-5">
@@ -759,13 +759,16 @@ export function WaitlistForm({
             ) : null}
 
             <div className="mt-6">
+              <p className="mb-3 text-sm font-medium leading-relaxed text-[#E3C08B]">
+                {t('reassurance')}
+              </p>
               <Button
                 type="submit"
                 variant="primary"
                 size="lg"
                 disabled={isSubmitting}
                 data-testid="drive-waitlist-submit"
-                className="w-full"
+                className="w-full text-base sm:text-lg"
               >
                 {isSubmitting ? t('submitting') : t('submit')}
               </Button>

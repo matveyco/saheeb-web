@@ -172,7 +172,7 @@ async function assertLegacyRedirect(page) {
   );
   assert.equal(
     redirectedUrl.hash,
-    '#drive-waitlist',
+    '#drive-waitlist-form',
     'Legacy waitlist redirect should preserve the waitlist anchor'
   );
 }

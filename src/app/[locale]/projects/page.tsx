@@ -50,9 +50,9 @@ export default function ProjectsPage() {
               </p>
               <Button asChild variant="primary" size="lg">
                 <TrackedLink
-                  href="/projects/saheeb-drive?focus=waitlist"
+                  href="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
                   ctaLocation="projects_hero_join_waitlist"
-                  destinationPath="/projects/saheeb-drive?focus=waitlist"
+                  destinationPath="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
                   project="saheeb_drive"
                 >
                   {tNavigation('joinWaitlist')}
@@ -107,9 +107,9 @@ export default function ProjectsPage() {
                 <div className="flex flex-col gap-4 sm:flex-row">
                   <Button asChild variant="primary" size="lg">
                     <TrackedLink
-                      href="/projects/saheeb-drive?focus=waitlist"
+                      href="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
                       ctaLocation="projects_showcase_join_waitlist"
-                      destinationPath="/projects/saheeb-drive?focus=waitlist"
+                      destinationPath="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
                       project="saheeb_drive"
                     >
                       {tNavigation('joinWaitlist')}
@@ -196,14 +196,14 @@ export default function ProjectsPage() {
               </h2>
               <p className="text-xl text-[#8F8F96] max-w-xl mx-auto mb-10">
                 {isArabic
-                  ? 'منتجنا الأولوي الآن. سجّل مبكراً إذا كنت تنوي الشراء أو البيع في مسقط.'
-                  : 'Saheeb Drive is our priority launch right now. Join early if you plan to buy or sell in Muscat.'}
+                  ? 'منتجنا الأولوي الآن. سجّل مبكراً إذا كنت تنوي الشراء أو البيع في عُمان.'
+                  : 'Saheeb Drive is our priority launch right now. Join early if you plan to buy or sell anywhere in Oman.'}
               </p>
               <Button asChild size="lg" variant="primary">
                 <TrackedLink
-                  href="/projects/saheeb-drive?focus=waitlist"
+                  href="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
                   ctaLocation="projects_footer_join_waitlist"
-                  destinationPath="/projects/saheeb-drive?focus=waitlist"
+                  destinationPath="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
                   project="saheeb_drive"
                 >
                   {tNavigation('joinWaitlist')}
