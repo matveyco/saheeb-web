@@ -704,7 +704,11 @@ export function WaitlistForm({
             </div>
 
             <div className="mb-4 rounded-2xl border border-[#1E3A2F] bg-[#0E1512] p-3 sm:mb-5 sm:p-4">
-              <p className="text-sm font-semibold text-emerald-300 sm:text-base">
+              <p
+                data-testid="drive-form-selected-intent"
+                data-intent={formData.userType}
+                className="text-sm font-semibold text-emerald-300 sm:text-base"
+              >
                 {isBuyerIntent ? t('selectedBuyer') : t('selectedSeller')}
               </p>
               <button
