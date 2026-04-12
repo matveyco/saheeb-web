@@ -168,7 +168,7 @@ export function WaitlistForm({
       return;
     }
 
-    const offset = window.innerWidth < 640 ? 56 : 116;
+    const offset = window.innerWidth < 640 ? 48 : 116;
     const top =
       target.getBoundingClientRect().top + window.scrollY - offset;
 
@@ -185,7 +185,7 @@ export function WaitlistForm({
 
     const title = sectionTitleRef.current;
     const nameInput = nameInputRef.current;
-    const topSafeArea = window.innerWidth < 640 ? 36 : 96;
+    const topSafeArea = window.innerWidth < 640 ? 28 : 96;
     const bottomSafeArea = window.innerWidth < 640 ? 20 : 28;
 
     if (title) {
