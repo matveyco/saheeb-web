@@ -632,10 +632,10 @@ export function WaitlistForm({
         >
           <div
             id={sectionId}
-            className="scroll-mt-24 rounded-[2rem] border border-[#2B2B31] bg-[#111113] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8 lg:scroll-mt-32"
+            className="scroll-mt-24 rounded-[2rem] border border-[#2B2B31] bg-[#111113] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8 lg:scroll-mt-32"
             data-testid="drive-waitlist-card"
           >
-            <div className="mb-5">
+            <div className="mb-4 sm:mb-5">
               <div
                 data-testid="drive-waitlist-social-proof"
                 className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-300 sm:px-4 sm:py-2 sm:text-sm"
@@ -675,7 +675,7 @@ export function WaitlistForm({
               </p>
             </div>
 
-            <div className="mb-5 rounded-2xl border border-[#1E3A2F] bg-[#0E1512] p-3 sm:p-4">
+            <div className="mb-4 rounded-2xl border border-[#1E3A2F] bg-[#0E1512] p-3 sm:mb-5 sm:p-4">
               <p className="text-sm font-semibold text-emerald-300 sm:text-base">
                 {isBuyerIntent ? t('selectedBuyer') : t('selectedSeller')}
               </p>
