@@ -203,6 +203,14 @@ export function ensureClarityBootstrap() {
     return;
   }
 
+  const existingScript = document.querySelector(
+    `script[data-saheeb-clarity="true"], script[src="https://www.clarity.ms/tag/${CLARITY_PROJECT_ID}"]`
+  );
+
+  if (existingScript) {
+    window.__saheebClarityInitialized = true;
+  }
+
   if (window.__saheebClarityInitialized) {
     return;
   }
@@ -222,11 +230,12 @@ export function ensureClarityBootstrap() {
   const script = document.createElement('script');
   script.async = true;
   script.src = `https://www.clarity.ms/tag/${CLARITY_PROJECT_ID}`;
+  script.setAttribute('data-saheeb-clarity', 'true');
   document.head.appendChild(script);
 }
 
 function shouldEnableClarity(pathname?: string) {
-  return Boolean(pathname?.startsWith('/projects/saheeb-drive'));
+  return Boolean(pathname && shouldTrackPath(pathname));
 }
 
 export function initializeAnalytics(pathname?: string) {

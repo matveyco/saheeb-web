@@ -162,10 +162,14 @@ export default async function LocaleLayout({
   const direction = isArabic ? 'rtl' : 'ltr';
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
   const metaPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim();
+  const clarityProjectId =
+    process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID?.trim();
   const shouldRenderGa =
     process.env.NODE_ENV === 'production' && Boolean(gaMeasurementId);
   const shouldRenderMeta =
     process.env.NODE_ENV === 'production' && Boolean(metaPixelId);
+  const shouldRenderClarity =
+    process.env.NODE_ENV === 'production' && Boolean(clarityProjectId);
 
   // JSON-LD Structured Data
   const organizationSchema = {
@@ -277,6 +281,23 @@ export default async function LocaleLayout({
               }}
             />
           </>
+        ) : null}
+        {shouldRenderClarity && clarityProjectId ? (
+          <Script
+            id="clarity-init"
+            strategy="beforeInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.__saheebClarityInitialized = true;
+                (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  t.setAttribute('data-saheeb-clarity','true');
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                })(window, document, "clarity", "script", "${clarityProjectId}");
+              `,
+            }}
+          />
         ) : null}
       </head>
       <body

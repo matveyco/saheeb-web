@@ -227,7 +227,7 @@
       ]
     },
     "stickyCta": {
-      "title": "Join the founding waitlist",
+      "title": "Unlock founding perks",
       "buy": "Buying",
       "sell": "Selling"
     },
@@ -253,24 +253,24 @@
       ]
     },
     "waitlist": {
-      "sectionEyebrow": "Founding Waitlist",
+      "sectionEyebrow": "Founding Perks",
       "sectionTitle": "Join before the public launch",
-      "sectionSubtitle": "Get early access, priority updates, and a direct line into the first Muscat launch wave.",
+      "sectionSubtitle": "Founding members get Muscat-first access, priority launch updates, and 1 month of Saheeb Drive Premium free at launch.",
       "benefits": [
-        "Early access before the public rollout in Muscat.",
-        "Launch updates matched to whether you're buying or selling.",
-        "A chance to shape the product before the market sees it."
+        "Guaranteed 1 month of Saheeb Drive Premium free at launch.",
+        "Priority access before the public Muscat rollout.",
+        "Launch updates matched to whether you're buying or selling."
       ],
       "footnote": "We only ask for what we need to reach you. Phone is optional. Buyer/seller intent helps us tailor launch updates.",
-      "eyebrow": "Start in under 30 seconds",
-      "title": "Claim your early access spot",
-      "subtitle": "We’ll reach out as soon as the first Muscat wave opens. No spam, just launch updates.",
-      "socialProofBadge": "{count} founding members already",
-      "socialProofFallback": "Founding waitlist now open",
+      "eyebrow": "Secure your perks in under 30 seconds",
+      "title": "Reserve your founding perks",
+      "subtitle": "Founding members get 1 month of Saheeb Drive Premium free, Muscat-first access, and priority launch updates.",
+      "socialProofBadge": "Founding members get Premium free at launch",
+      "socialProofFallback": "Founding perks now open",
       "trustPills": [
         "ROP verified",
-        "No spam",
-        "Muscat-first"
+        "1 month Premium free",
+        "Muscat-first access"
       ],
       "nameLabel": "Name",
       "emailLabel": "Email",
@@ -284,8 +284,10 @@
       "buy": "I'm buying",
       "sell": "I'm selling",
       "changeIntent": "Change",
-      "selectedBuyer": "Buyer updates selected",
-      "selectedSeller": "Seller updates selected",
+      "selectedBuyer": "Buyer perks selected",
+      "selectedSeller": "Seller perks selected",
+      "selectedBuyerPerk": "Guaranteed 1 month of Saheeb Drive Premium free at launch.",
+      "selectedSellerPerk": "Guaranteed 1 month of Saheeb Drive Premium free at launch.",
       "switchToBuyer": "Switch to buyer instead",
       "switchToSeller": "Switch to seller instead",
       "consentPrefix": "I agree to receive Saheeb Drive updates according to the",
@@ -293,13 +295,13 @@
       "privacyNote": "We only use this information for launch access and product updates.",
       "privacyLinePrefix": "By joining, you agree to launch updates under our",
       "privacyLineSuffix": ". No spam, ever.",
-      "reassurance": "Muscat launch updates only. No spam.",
-      "submit": "Claim my early access spot",
+      "reassurance": "Guaranteed 1 month of Premium free at launch. No spam.",
+      "submit": "Reserve my founding perks",
       "submitting": "Joining...",
       "success": {
         "title": "You're on the list.",
-        "message": "We've saved your early-access request for the Muscat launch wave.",
-        "launchNote": "Want to help us build momentum? Copy the waitlist link and share it with one buyer or seller.",
+        "message": "We've saved your founding request for the Muscat launch wave.",
+        "launchNote": "Your early-bird perks include 1 month of Saheeb Drive Premium free at launch.",
         "shareText": "Saheeb Drive is launching in Muscat. Join the waitlist:",
         "copyLink": "Copy link",
         "copied": "Copied"
@@ -352,11 +354,11 @@
             "description": "Surface the issues buyers worry about before you waste a call, a drive, or a weekend."
           }
         ],
-        "waitlistSectionSubtitle": "Get first access to the Muscat launch, buyer-focused updates, and an earlier path to the cars that actually match what you want.",
+        "waitlistSectionSubtitle": "Join now for first access to Muscat listings, buyer-focused updates, and 1 month of Saheeb Drive Premium free at launch.",
         "waitlistBenefits": [
-          "Early access before the public rollout in Muscat.",
-          "Buyer updates tailored to your search intent, not generic product blasts.",
-          "A chance to shape the first buyer experience before the market sees it."
+          "Guaranteed 1 month of Saheeb Drive Premium free when Muscat launches.",
+          "Priority access before the public buyer rollout in Muscat.",
+          "Buyer updates matched to the cars and signals you actually care about."
         ],
         "waitlistFootnote": "We only ask for what we need to reach you. Phone is optional, and buyer intent helps us send more useful launch updates.",
         "faqSubtitle": "The answers buyers usually want before they trust a new place to search for their next car.",
@@ -371,7 +373,7 @@
           },
           {
             "question": "What do I get by joining now?",
-            "answer": "You'll get launch updates, early access before the public rollout, and a faster route into the first Muscat buyer wave."
+            "answer": "You'll get launch updates, early access before the public rollout, and a guaranteed 1 month of Saheeb Drive Premium free at launch."
           },
           {
             "question": "What does it cost to use?",
@@ -399,11 +401,11 @@
             "description": "Reach buyers who are actively looking, not just browsing and sending low-quality messages."
           }
         ],
-        "waitlistSectionSubtitle": "Join as a founding seller to get early listing access, onboarding priority, and seller-first updates before the first Muscat supply opens.",
+        "waitlistSectionSubtitle": "Join as a founding seller to get priority onboarding, early listing access, and 1 month of Saheeb Drive Premium free at launch.",
         "waitlistBenefits": [
+          "Guaranteed 1 month of Saheeb Drive Premium free when Muscat launches.",
           "Priority onboarding for the first Muscat seller wave.",
-          "Launch updates focused on pricing, listing readiness, and verified demand.",
-          "A chance to influence the seller experience before the marketplace opens publicly."
+          "Seller-first updates on pricing, listing readiness, and verified demand."
         ],
         "waitlistFootnote": "We only ask for what we need to reach you. Phone is optional, and seller intent helps us prepare the right onboarding and launch messages.",
         "faqSubtitle": "The questions sellers usually ask before trusting a new marketplace with their next listing.",
@@ -426,7 +428,7 @@
           },
           {
             "question": "Will there be seller fees?",
-            "answer": "We expect seller pricing to be announced before launch. Joining the waitlist now makes sure you hear those details early."
+            "answer": "We expect seller pricing to be announced before launch. Founding sellers will also get 1 month of Saheeb Drive Premium free when we go live."
           }
         ]
       }

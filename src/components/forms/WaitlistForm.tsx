@@ -711,6 +711,11 @@ export function WaitlistForm({
               >
                 {isBuyerIntent ? t('selectedBuyer') : t('selectedSeller')}
               </p>
+              <p className="mt-1 text-xs font-medium text-[#D7C09A] sm:text-sm">
+                {isBuyerIntent
+                  ? t('selectedBuyerPerk')
+                  : t('selectedSellerPerk')}
+              </p>
               <button
                 type="button"
                 data-testid={
