@@ -60,9 +60,9 @@ export function HeroSection() {
           >
             <Button asChild size="lg" variant="primary">
               <TrackedLink
-                href="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
+                href="/projects/saheeb-drive?focus=waitlist#join-now"
                 ctaLocation="home_hero_primary_drive"
-                destinationPath="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
+                destinationPath="/projects/saheeb-drive?focus=waitlist#join-now"
                 project="saheeb_drive"
               >
                 {t('ctaSecondary')}

@@ -41,9 +41,9 @@ export function Header() {
             <Navigation />
             <Button asChild size="sm">
               <TrackedLink
-                href="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
+                href="/projects/saheeb-drive?focus=waitlist#join-now"
                 ctaLocation="header_join_waitlist"
-                destinationPath="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
+                destinationPath="/projects/saheeb-drive?focus=waitlist#join-now"
                 project="saheeb_drive"
               >
                 {tNavigation('joinWaitlist')}

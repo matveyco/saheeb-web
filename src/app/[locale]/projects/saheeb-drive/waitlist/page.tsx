@@ -37,6 +37,6 @@ export default async function WaitlistAliasPage({
   query.set('focus', 'waitlist');
 
   permanentRedirect(
-    `/${locale}/projects/saheeb-drive?${query.toString()}#drive-waitlist-form`
+    `/${locale}/projects/saheeb-drive?${query.toString()}#join-now`
   );
 }

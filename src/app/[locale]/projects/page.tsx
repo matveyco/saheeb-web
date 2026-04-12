@@ -50,9 +50,9 @@ export default function ProjectsPage() {
               </p>
               <Button asChild variant="primary" size="lg">
                 <TrackedLink
-                  href="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
+                  href="/projects/saheeb-drive?focus=waitlist#join-now"
                   ctaLocation="projects_hero_join_waitlist"
-                  destinationPath="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
+                  destinationPath="/projects/saheeb-drive?focus=waitlist#join-now"
                   project="saheeb_drive"
                 >
                   {tNavigation('joinWaitlist')}
@@ -107,9 +107,9 @@ export default function ProjectsPage() {
                 <div className="flex flex-col gap-4 sm:flex-row">
                   <Button asChild variant="primary" size="lg">
                     <TrackedLink
-                      href="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
+                      href="/projects/saheeb-drive?focus=waitlist#join-now"
                       ctaLocation="projects_showcase_join_waitlist"
-                      destinationPath="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
+                      destinationPath="/projects/saheeb-drive?focus=waitlist#join-now"
                       project="saheeb_drive"
                     >
                       {tNavigation('joinWaitlist')}
@@ -201,9 +201,9 @@ export default function ProjectsPage() {
               </p>
               <Button asChild size="lg" variant="primary">
                 <TrackedLink
-                  href="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
+                  href="/projects/saheeb-drive?focus=waitlist#join-now"
                   ctaLocation="projects_footer_join_waitlist"
-                  destinationPath="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
+                  destinationPath="/projects/saheeb-drive?focus=waitlist#join-now"
                   project="saheeb_drive"
                 >
                   {tNavigation('joinWaitlist')}

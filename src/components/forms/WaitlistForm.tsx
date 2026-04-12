@@ -88,8 +88,7 @@ export function WaitlistForm({
   const [isCopied, setIsCopied] = useState(false);
 
   const sectionRef = useRef<HTMLDivElement>(null);
-  const sectionTitleRef = useRef<HTMLHeadingElement>(null);
-  const nameInputRef = useRef<HTMLInputElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const hasTrackedFormStart = useRef(false);
   const hasTrackedWaitlistView = useRef(false);
 
@@ -153,76 +152,18 @@ export function WaitlistForm({
   };
 
   const scrollWaitlistIntoView = useCallback(() => {
-    const target = sectionTitleRef.current ?? sectionRef.current;
+    const target = cardRef.current ?? sectionRef.current;
     if (!target || typeof window === 'undefined') {
       return;
     }
 
-    const offset = window.innerWidth < 640 ? 92 : 132;
-    const top =
-      target.getBoundingClientRect().top + window.scrollY - offset;
+    const offset = window.innerWidth < 640 ? 64 : 120;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
 
     window.scrollTo({
       top: Math.max(0, top),
       behavior: 'auto',
     });
-  }, []);
-
-  const ensureVisibleFormViewport = useCallback(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    const title = sectionTitleRef.current;
-    const nameInput = nameInputRef.current;
-    const isMobileViewport = window.innerWidth < 640;
-
-    if (isMobileViewport && title) {
-      const targetTop = title.getBoundingClientRect().top + window.scrollY - 92;
-      window.scrollTo({
-        top: Math.max(0, targetTop),
-        behavior: 'auto',
-      });
-
-      if (nameInput) {
-        const inputRect = nameInput.getBoundingClientRect();
-        const viewportLimit = window.innerHeight - 28;
-
-        if (inputRect.bottom > viewportLimit) {
-          window.scrollBy({
-            top: inputRect.bottom - viewportLimit,
-            behavior: 'auto',
-          });
-        }
-      }
-
-      return;
-    }
-
-    const topSafeArea = window.innerWidth < 640 ? 28 : 96;
-    const bottomSafeArea = window.innerWidth < 640 ? 20 : 28;
-
-    if (title) {
-      const titleRect = title.getBoundingClientRect();
-      if (titleRect.top < topSafeArea) {
-        window.scrollBy({
-          top: titleRect.top - topSafeArea,
-          behavior: 'auto',
-        });
-      }
-    }
-
-    if (nameInput) {
-      const inputRect = nameInput.getBoundingClientRect();
-      const maxBottom = window.innerHeight - bottomSafeArea;
-
-      if (inputRect.bottom > maxBottom) {
-        window.scrollBy({
-          top: inputRect.bottom - maxBottom,
-          behavior: 'auto',
-        });
-      }
-    }
   }, []);
 
   const openWaitlist = useCallback((intent?: WaitlistUserType, source?: string) => {
@@ -232,8 +173,7 @@ export function WaitlistForm({
     }
 
     const alignWaitlistViewport = () => {
-      ensureVisibleFormViewport();
-      nameInputRef.current?.focus({ preventScroll: true });
+      scrollWaitlistIntoView();
     };
 
     scrollWaitlistIntoView();
@@ -242,7 +182,7 @@ export function WaitlistForm({
     [120, 240, 360, 480, 640].forEach((delay) => {
       window.setTimeout(alignWaitlistViewport, delay);
     });
-  }, [ensureVisibleFormViewport, scrollWaitlistIntoView]);
+  }, [scrollWaitlistIntoView]);
 
   const handleIntentSelection = (
     nextIntent: WaitlistUserType,
@@ -577,6 +517,7 @@ export function WaitlistForm({
   return (
     <div
       ref={sectionRef}
+      id={sectionId}
       data-testid="drive-waitlist-section"
       className={cn('scroll-mt-24 lg:scroll-mt-32', className)}
     >
@@ -619,43 +560,35 @@ export function WaitlistForm({
           className="space-y-4"
         >
           <div
-            id={sectionId}
+            ref={cardRef}
+            id="join-now"
             className="scroll-mt-24 rounded-[2rem] border border-[#2B2B31] bg-[#111113] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8 lg:scroll-mt-32"
             data-testid="drive-waitlist-card"
           >
-            <div className="space-y-4">
-              <div
-                data-testid="drive-waitlist-social-proof"
-                className="inline-flex items-center gap-2 rounded-full border border-[#3A3226] bg-[#17120C] px-3 py-1.5 text-xs font-semibold text-[#E3C08B] sm:px-4 sm:py-2 sm:text-sm"
-              >
-                <span className="h-2 w-2 rounded-full bg-[#C9A87C]" />
-                {t('socialProofBadge')}
-              </div>
+            <div className="space-y-2">
               <h3
-                ref={sectionTitleRef}
-                id={`${sectionId}-form`}
                 data-testid="drive-waitlist-title"
-                className="scroll-mt-24 text-2xl font-bold tracking-tight text-[#EDEDEF] sm:text-[2rem] lg:scroll-mt-32"
+                className="text-[1.85rem] font-bold tracking-tight text-[#EDEDEF] sm:text-[2.15rem]"
               >
                 {t('title')}
               </h3>
               <p className="max-w-xl text-sm leading-relaxed text-[#9B9BA3] sm:text-base">
                 {t('subtitle')}
               </p>
-              <div className="grid grid-cols-3 gap-2">
+              <div data-testid="drive-waitlist-social-proof" className="flex flex-wrap gap-1.5">
                 {trustPills.map((pill) => (
                   <div
                     key={pill}
-                    className="rounded-2xl border border-[#3A3226] bg-[#17120C] px-2.5 py-3 text-center text-[11px] font-semibold leading-tight text-[#F1DFC2] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] sm:px-3 sm:text-sm"
+                    className="inline-flex items-center gap-2 rounded-full border border-[#3A3226] bg-[#17120C] px-3.5 py-2 text-xs font-semibold text-[#F1DFC2] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] sm:text-sm"
                   >
-                    <span className="mx-auto mb-2 block h-2 w-2 rounded-full bg-[#C9A87C]" />
+                    <span className="h-2 w-2 rounded-full bg-[#C9A87C]" />
                     {pill}
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="mt-5">
+            <div className="mt-4">
               <div className="inline-grid w-full grid-cols-2 rounded-2xl border border-[#222225] bg-[#0D0D10] p-1 sm:w-auto">
                 <button
                   type="button"
@@ -688,9 +621,8 @@ export function WaitlistForm({
               </div>
             </div>
 
-            <div className="mt-6 grid gap-4">
+            <div className="mt-5 grid gap-4">
               <Input
-                ref={nameInputRef}
                 data-testid="drive-waitlist-name"
                 name="name"
                 label={t('nameLabel')}

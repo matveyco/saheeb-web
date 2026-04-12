@@ -116,9 +116,9 @@ export function MobileMenu() {
             <div className="mt-5 border-t border-[#1A1A1D] pt-5">
               <Button asChild className="w-full">
                 <TrackedLink
-                  href="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
+                  href="/projects/saheeb-drive?focus=waitlist#join-now"
                   ctaLocation="mobile_menu_join_waitlist"
-                  destinationPath="/projects/saheeb-drive?focus=waitlist#drive-waitlist-form"
+                  destinationPath="/projects/saheeb-drive?focus=waitlist#join-now"
                   project="saheeb_drive"
                   onClick={() => setIsOpen(false)}
                 >
