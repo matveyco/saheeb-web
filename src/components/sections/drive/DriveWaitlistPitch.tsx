@@ -24,19 +24,23 @@ export function DriveWaitlistPitch({
 
   return (
     <div className="rounded-[2rem] border border-[#1F1F23] bg-[#0D0D10] p-6 sm:p-8">
-      <p className="text-sm font-medium uppercase tracking-[0.18em] text-[#C9A87C]">
+      <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#C9A87C] sm:text-sm">
         {eyebrow}
       </p>
-      <h2 className="mt-3 text-3xl font-bold text-[#EDEDEF] lg:text-4xl">
+      <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#EDEDEF] lg:text-4xl">
         {title}
       </h2>
-      <p className="mt-4 text-[#8F8F96]">{content.waitlistSectionSubtitle}</p>
+      <p className="mt-4 text-sm leading-relaxed text-[#9B9BA3] sm:text-base">
+        {content.waitlistSectionSubtitle}
+      </p>
 
-      <div className="mt-6 space-y-3">
-        {content.waitlistBenefits.map((benefit) => (
+      <div className="mt-6 rounded-[1.5rem] border border-[#19191B] bg-[#111113] px-4 sm:px-5">
+        {content.waitlistBenefits.map((benefit, index) => (
           <div
             key={benefit}
-            className="flex items-start gap-3 rounded-2xl border border-[#19191B] bg-[#111113] px-4 py-3"
+            className={`flex items-start gap-3 py-4 ${
+              index > 0 ? 'border-t border-[#1B1B20]' : ''
+            }`}
           >
             <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C9A87C]/15 text-[#C9A87C]">
               <svg
@@ -51,14 +55,16 @@ export function DriveWaitlistPitch({
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             </span>
-            <span className="text-sm leading-relaxed text-[#D0D0D5]">
+            <span className="text-sm leading-relaxed text-[#D0D0D5] sm:text-[15px]">
               {benefit}
             </span>
           </div>
         ))}
       </div>
 
-      <p className="mt-5 text-sm text-[#5C5C63]">{content.waitlistFootnote}</p>
+      <p className="mt-5 text-sm leading-relaxed text-[#6F6F77]">
+        {content.waitlistFootnote}
+      </p>
     </div>
   );
 }

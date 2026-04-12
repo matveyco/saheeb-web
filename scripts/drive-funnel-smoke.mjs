@@ -65,7 +65,9 @@ async function assertWaitlistFlow(page, path, intent) {
   const titleBox = await page.getByTestId('drive-waitlist-title').boundingBox();
   const inputBox = await page.getByTestId('drive-waitlist-name').boundingBox();
   const sticky = page.getByTestId('drive-sticky-bar');
-  const selectedIntent = page.getByTestId('drive-form-selected-intent');
+  const selectedIntent = page.getByTestId(
+    intent === 'seller' ? 'drive-form-intent-seller' : 'drive-form-intent-buyer'
+  );
   const passivePrivacy = page.getByTestId('drive-waitlist-passive-privacy');
   const socialProof = page.getByTestId('drive-waitlist-social-proof');
 
@@ -81,8 +83,8 @@ async function assertWaitlistFlow(page, path, intent) {
     `${path} first input should be fully visible after CTA click (inputY=${inputBox.y}, inputBottom=${inputBox.y + inputBox.height}, viewport=${viewport.height})`
   );
   assert.equal(
-    await selectedIntent.getAttribute('data-intent'),
-    intent,
+    await selectedIntent.getAttribute('aria-pressed'),
+    'true',
     `${path} should preserve ${intent} intent into the form`
   );
   assert.equal(

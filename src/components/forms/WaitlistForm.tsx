@@ -86,7 +86,6 @@ export function WaitlistForm({
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isCopied, setIsCopied] = useState(false);
-  const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const sectionTitleRef = useRef<HTMLHeadingElement>(null);
@@ -96,15 +95,6 @@ export function WaitlistForm({
 
   const resolvedPageVariant = getResolvedPageVariant(pageVariant);
   const trustPills = (t.raw('trustPills') as string[]) ?? [];
-
-  const formatFoundingMembersCount = useCallback(
-    (count: number) => {
-      const roundedCount = count >= 10 ? Math.floor(count / 10) * 10 : count;
-      const displayCount = roundedCount > 0 ? roundedCount : count;
-      return `${new Intl.NumberFormat(locale).format(displayCount)}+`;
-    },
-    [locale]
-  );
 
   const resolveFieldError = useCallback(
     (
@@ -197,9 +187,9 @@ export function WaitlistForm({
       if (title) {
         const titleRect = title.getBoundingClientRect();
 
-        if (titleRect.top < 18) {
+        if (titleRect.top < 24) {
           window.scrollBy({
-            top: titleRect.top - 18,
+            top: titleRect.top - 24,
             behavior: 'auto',
           });
         }
@@ -248,7 +238,7 @@ export function WaitlistForm({
     scrollWaitlistIntoView();
     alignWaitlistViewport();
 
-    [180, 360, 560].forEach((delay) => {
+    [120, 240, 360, 480, 640].forEach((delay) => {
       window.setTimeout(alignWaitlistViewport, delay);
     });
   }, [ensureVisibleFormViewport, scrollWaitlistIntoView]);
@@ -276,35 +266,6 @@ export function WaitlistForm({
       hasPresetIntent ? 'query_param' : 'direct_view'
     );
   }, [hasPresetIntent, initialIntent, openWaitlist, shouldFocusWaitlist]);
-
-  useEffect(() => {
-    let isActive = true;
-
-    async function loadWaitlistCount() {
-      try {
-        const response = await fetch('/api/waitlist/count', {
-          cache: 'no-store',
-        });
-
-        if (!response.ok) {
-          return;
-        }
-
-        const payload = (await response.json()) as { count?: number };
-        if (!isActive || typeof payload.count !== 'number') {
-          return;
-        }
-
-        setWaitlistCount(payload.count);
-      } catch {}
-    }
-
-    void loadWaitlistCount();
-
-    return () => {
-      isActive = false;
-    };
-  }, []);
 
   useEffect(() => {
     const handleOpenWaitlist = (event: Event) => {
@@ -612,8 +573,6 @@ export function WaitlistForm({
     }
   };
 
-  const isBuyerIntent = formData.userType === 'buyer';
-
   return (
     <div
       ref={sectionRef}
@@ -663,79 +622,72 @@ export function WaitlistForm({
             className="scroll-mt-24 rounded-[2rem] border border-[#2B2B31] bg-[#111113] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8 lg:scroll-mt-32"
             data-testid="drive-waitlist-card"
           >
-            <div className="mb-4 sm:mb-5">
+            <div className="space-y-4">
               <div
                 data-testid="drive-waitlist-social-proof"
-                className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-300 sm:px-4 sm:py-2 sm:text-sm"
+                className="inline-flex items-center gap-2 rounded-full border border-[#3A3226] bg-[#17120C] px-3 py-1.5 text-xs font-semibold text-[#E3C08B] sm:px-4 sm:py-2 sm:text-sm"
               >
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.7)]" />
-                {waitlistCount !== null
-                  ? t('socialProofBadge', {
-                      count: formatFoundingMembersCount(waitlistCount),
-                    })
-                  : t('socialProofFallback')}
+                <span className="h-2 w-2 rounded-full bg-[#C9A87C]" />
+                {t('socialProofBadge')}
               </div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {trustPills.map((pill, index) => (
+              <div className="flex flex-wrap gap-2">
+                {trustPills.map((pill) => (
                   <span
                     key={pill}
                     className={cn(
-                      'items-center rounded-full border border-[#2B2B31] bg-[#17171A] px-2.5 py-1 text-xs text-[#CFCFD4] sm:px-3 sm:py-1.5 sm:text-sm',
-                      index > 1 ? 'hidden sm:inline-flex' : 'inline-flex'
+                      'inline-flex items-center rounded-full border border-[#2B2B31] bg-[#17171A] px-2.5 py-1 text-xs text-[#CFCFD4] sm:px-3 sm:py-1.5 sm:text-sm'
                     )}
                   >
                     {pill}
                   </span>
                 ))}
               </div>
-              <p className="mt-4 text-xs font-medium uppercase tracking-[0.18em] text-[#C9A87C] sm:text-sm">
-                {t('eyebrow')}
-              </p>
               <h3
                 ref={sectionTitleRef}
                 data-testid="drive-waitlist-title"
-                className="mt-2 text-xl font-bold text-[#EDEDEF] sm:mt-3 sm:text-2xl"
+                className="text-2xl font-bold tracking-tight text-[#EDEDEF] sm:text-[2rem]"
               >
                 {t('title')}
               </h3>
-              <p className="mt-2 text-sm text-[#8F8F96] sm:mt-3 sm:text-base">
+              <p className="max-w-xl text-sm leading-relaxed text-[#9B9BA3] sm:text-base">
                 {t('subtitle')}
               </p>
             </div>
 
-            <div className="mb-4 rounded-2xl border border-[#1E3A2F] bg-[#0E1512] p-3 sm:mb-5 sm:p-4">
-              <p
-                data-testid="drive-form-selected-intent"
-                data-intent={formData.userType}
-                className="text-sm font-semibold text-emerald-300 sm:text-base"
-              >
-                {isBuyerIntent ? t('selectedBuyer') : t('selectedSeller')}
-              </p>
-              <p className="mt-1 text-xs font-medium text-[#D7C09A] sm:text-sm">
-                {isBuyerIntent
-                  ? t('selectedBuyerPerk')
-                  : t('selectedSellerPerk')}
-              </p>
-              <button
-                type="button"
-                data-testid={
-                  isBuyerIntent
-                    ? 'drive-form-intent-seller'
-                    : 'drive-form-intent-buyer'
-                }
-                onClick={() =>
-                  handleIntentSelection(
-                    isBuyerIntent ? 'seller' : 'buyer',
-                    'form_switch_link'
-                  )
-                }
-                className="mt-2 text-sm font-medium text-[#B7B7BE] underline decoration-[#5C5C63] underline-offset-4 transition-colors hover:text-[#EDEDEF]"
-              >
-                {isBuyerIntent ? t('switchToSeller') : t('switchToBuyer')}
-              </button>
+            <div className="mt-5">
+              <div className="inline-grid w-full grid-cols-2 rounded-2xl border border-[#222225] bg-[#0D0D10] p-1 sm:w-auto">
+                <button
+                  type="button"
+                  data-testid="drive-form-intent-buyer"
+                  aria-pressed={formData.userType === 'buyer'}
+                  onClick={() => handleIntentSelection('buyer', 'form_toggle')}
+                  className={cn(
+                    'rounded-[0.9rem] px-4 py-3 text-sm font-semibold transition-colors',
+                    formData.userType === 'buyer'
+                      ? 'bg-[#C9A87C] text-[#09090B]'
+                      : 'text-[#8F8F96] hover:text-[#EDEDEF]'
+                  )}
+                >
+                  {t('buy')}
+                </button>
+                <button
+                  type="button"
+                  data-testid="drive-form-intent-seller"
+                  aria-pressed={formData.userType === 'seller'}
+                  onClick={() => handleIntentSelection('seller', 'form_toggle')}
+                  className={cn(
+                    'rounded-[0.9rem] px-4 py-3 text-sm font-semibold transition-colors',
+                    formData.userType === 'seller'
+                      ? 'bg-[#C9A87C] text-[#09090B]'
+                      : 'text-[#8F8F96] hover:text-[#EDEDEF]'
+                  )}
+                >
+                  {t('sell')}
+                </button>
+              </div>
             </div>
 
-            <div className="grid gap-4">
+            <div className="mt-6 grid gap-4">
               <Input
                 ref={nameInputRef}
                 data-testid="drive-waitlist-name"
@@ -806,16 +758,13 @@ export function WaitlistForm({
             ) : null}
 
             <div className="mt-6">
-              <p className="text-sm font-medium text-[#D0D0D5]">
-                {t('reassurance')}
-              </p>
               <Button
                 type="submit"
                 variant="primary"
                 size="lg"
                 disabled={isSubmitting}
                 data-testid="drive-waitlist-submit"
-                className="mt-4 w-full"
+                className="w-full"
               >
                 {isSubmitting ? t('submitting') : t('submit')}
               </Button>

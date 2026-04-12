@@ -9,11 +9,11 @@ const contentSecurityPolicy = [
   "frame-ancestors 'self'",
   "object-src 'none'",
   "form-action 'self'",
-  "img-src 'self' data: blob: https://www.google-analytics.com https://region1.google-analytics.com https://www.facebook.com https://www.clarity.ms https://c.clarity.ms",
+  "img-src 'self' data: blob: https://www.google-analytics.com https://region1.google-analytics.com https://www.facebook.com https://www.clarity.ms https://scripts.clarity.ms https://c.clarity.ms https://*.clarity.ms",
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://www.clarity.ms",
-  "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.facebook.com https://connect.facebook.net https://www.clarity.ms https://c.clarity.ms",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://www.clarity.ms https://scripts.clarity.ms",
+  "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.facebook.com https://connect.facebook.net https://www.clarity.ms https://scripts.clarity.ms https://c.clarity.ms https://*.clarity.ms",
   'upgrade-insecure-requests',
 ].join('; ');
 
