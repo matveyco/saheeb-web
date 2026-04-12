@@ -1,9 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { DriveIntentButton } from '@/components/sections/drive/DriveIntentButton';
-import { recordFunnelEvent } from '@/lib/funnel';
 import type { PageVariant } from '@/lib/page-variant';
 
 interface DriveStickyWaitlistBarProps {
@@ -14,23 +13,7 @@ export function DriveStickyWaitlistBar({
   pageVariant,
 }: DriveStickyWaitlistBarProps) {
   const t = useTranslations('saheebDrive');
-  const locale = useLocale();
   const [showStickyBar, setShowStickyBar] = useState(false);
-
-  useEffect(() => {
-    recordFunnelEvent({
-      eventName: 'drive_page_view',
-      siteLocale: locale,
-      project: 'saheeb_drive',
-      pageVariant,
-      payload: {
-        page_group: 'saheeb_drive',
-        page_variant: pageVariant,
-        project: 'saheeb_drive',
-        site_locale: locale,
-      },
-    });
-  }, [locale, pageVariant]);
 
   useEffect(() => {
     const hero = document.getElementById('drive-hero');

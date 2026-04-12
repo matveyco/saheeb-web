@@ -18,6 +18,8 @@ import {
 } from '@/lib/analytics';
 import { captureAttribution, readAttributionSnapshot } from '@/lib/attribution';
 import { ensureAnalyticsIdentity } from '@/lib/analytics-identity';
+import { recordFunnelEvent } from '@/lib/funnel';
+import { getPageVariant } from '@/lib/page-variant';
 
 interface AnalyticsConsentContextValue {
   consent: 'accepted';
@@ -70,6 +72,21 @@ export function AnalyticsProvider({
     }
 
     trackPageView({ locale, pathname });
+
+    if (pathname.startsWith('/projects/saheeb-drive')) {
+      recordFunnelEvent({
+        eventName: 'drive_page_view',
+        siteLocale: locale,
+        project: 'saheeb_drive',
+        pageVariant: getPageVariant(pathname) ?? 'organic_main',
+        payload: {
+          page_group: 'saheeb_drive',
+          page_variant: getPageVariant(pathname) ?? 'organic_main',
+          project: 'saheeb_drive',
+          site_locale: locale,
+        },
+      });
+    }
 
     const attribution = readAttributionSnapshot();
     const searchParams =

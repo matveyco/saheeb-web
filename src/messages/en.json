@@ -191,12 +191,12 @@
   },
   "saheebDrive": {
     "hero": {
-      "badge": "Priority Early Access · Muscat",
+      "badge": "Oman Early Access · Q3 2026",
       "title": "Buy with Clarity.",
       "titleHighlight": "Sell with Confidence.",
       "subtitle": "Saheeb Drive is a smart car marketplace that helps buyers and sellers make more confident decisions through verification, deeper car insights, and a personal AI assistant.",
-      "supportLine": "Founding waitlist now open for Muscat · Launching Q3 2026",
-      "primaryCta": "Join the Muscat waitlist",
+      "supportLine": "Register now before the public Q3 2026 Oman launch",
+      "primaryCta": "Get Q3 early access",
       "intentLabel": "I'm here as",
       "buyCta": "I'm Buying",
       "sellCta": "I'm Selling",
@@ -227,7 +227,7 @@
       ]
     },
     "stickyCta": {
-      "title": "Founder perks",
+      "title": "Q3 launch perks",
       "buy": "Buying",
       "sell": "Selling"
     },
@@ -253,24 +253,24 @@
       ]
     },
     "waitlist": {
-      "sectionEyebrow": "Early access perks",
-      "sectionTitle": "What you unlock by joining early",
-      "sectionSubtitle": "Early members get a free Premium month at launch, Muscat-first access, and first invites to private Saheeb events and giveaways.",
+      "sectionEyebrow": "Q3 launch perks",
+      "sectionTitle": "What early members lock in now",
+      "sectionSubtitle": "Register now to lock in Q3 launch perks, a free Premium month, and first invites to private Saheeb events and giveaways as Oman rollout begins.",
       "benefits": [
         "1 month of Saheeb Drive Premium free at launch.",
         "First invites to private Saheeb events and giveaways.",
-        "Muscat-first access before the public rollout."
+        "Priority access as the Oman rollout begins, starting with Muscat."
       ],
       "footnote": "We keep the form short. Phone is optional, and buyer/seller helps us send the right launch updates.",
-      "eyebrow": "Secure your perks in under 30 seconds",
-      "title": "Join the Muscat waitlist",
-      "subtitle": "Get a free Premium month at launch, Muscat-first access, and first invites to private Saheeb events and giveaways.",
-      "socialProofBadge": "Early-member launch perks",
+      "eyebrow": "Register now in under 30 seconds",
+      "title": "Join the Oman launch waitlist",
+      "subtitle": "Register now for Q3 early access, a free Premium month at launch, and first invites to private Saheeb events and giveaways.",
+      "socialProofBadge": "Q3 early-member perks",
       "socialProofFallback": "Founder perks included",
       "trustPills": [
         "Premium free",
         "Private invites",
-        "Giveaway access"
+        "Q3 priority access"
       ],
       "nameLabel": "Name",
       "emailLabel": "Email",
@@ -296,13 +296,13 @@
       "privacyLinePrefix": "By joining, you agree to launch updates under our",
       "privacyLineSuffix": ". No spam, ever.",
       "reassurance": "Guaranteed 1 month of Premium free at launch. No spam.",
-      "submit": "Join the waitlist",
+      "submit": "Get Q3 early access",
       "submitting": "Joining...",
       "success": {
         "title": "You're on the list.",
-        "message": "We've saved your founding request for the Muscat launch wave.",
-        "launchNote": "Your early-bird perks include 1 month of Saheeb Drive Premium free at launch.",
-        "shareText": "Saheeb Drive is launching in Muscat. Join the waitlist:",
+        "message": "We've saved your early-access request for the Q3 Oman launch wave.",
+        "launchNote": "Your early-bird perks include 1 month of Saheeb Drive Premium free at launch and first invites to private Saheeb events and giveaways.",
+        "shareText": "Saheeb Drive is launching in Oman. Join the waitlist:",
         "copyLink": "Copy link",
         "copied": "Copied"
       },
@@ -354,10 +354,10 @@
             "description": "Surface the issues buyers worry about before you waste a call, a drive, or a weekend."
           }
         ],
-        "waitlistSectionSubtitle": "Join early for Muscat-first buyer access, a free month of Premium, and first invites to private Saheeb events and giveaways.",
+        "waitlistSectionSubtitle": "Join early for Q3 buyer access, a free month of Premium, and first invites to private Saheeb events and giveaways as Oman rollout begins.",
         "waitlistBenefits": [
           "1 month of Saheeb Drive Premium free at launch.",
-          "Priority access before the public buyer rollout in Muscat.",
+          "Priority access before the public Oman rollout, starting with Muscat.",
           "First invites to private Saheeb events and giveaways."
         ],
         "waitlistFootnote": "We only ask for what we need to reach you. Phone is optional, and buyer intent helps us send more useful launch updates.",
@@ -401,10 +401,10 @@
             "description": "Reach buyers who are actively looking, not just browsing and sending low-quality messages."
           }
         ],
-        "waitlistSectionSubtitle": "Join early as a seller for priority onboarding, a free month of Premium, and first invites to private Saheeb events and giveaways.",
+        "waitlistSectionSubtitle": "Join early as a seller for Q3 onboarding priority, a free month of Premium, and first invites to private Saheeb events and giveaways.",
         "waitlistBenefits": [
           "1 month of Saheeb Drive Premium free at launch.",
-          "Priority seller onboarding before the public rollout.",
+          "Priority seller onboarding before the public Oman rollout, starting with Muscat.",
           "First invites to private Saheeb events and giveaways."
         ],
         "waitlistFootnote": "We only ask for what we need to reach you. Phone is optional, and seller intent helps us prepare the right onboarding and launch messages.",

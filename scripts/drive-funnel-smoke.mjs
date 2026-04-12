@@ -177,6 +177,36 @@ async function assertLegacyRedirect(page) {
   );
 }
 
+async function assertPaidTrafficRedirect(page) {
+  await page.goto(
+    `${BASE_URL}/en/projects/saheeb-drive?utm_source=MetaADS&utm_medium=banner&utm_campaign=smoke_paid`,
+    { waitUntil: 'domcontentloaded' }
+  );
+  await page.waitForLoadState('networkidle').catch(() => {});
+
+  const redirectedUrl = new URL(page.url());
+  assert.equal(
+    redirectedUrl.pathname,
+    '/en/projects/saheeb-drive/lp',
+    'Paid campaign traffic should redirect from the main Drive page to the paid LP'
+  );
+  assert.equal(
+    redirectedUrl.searchParams.get('utm_source'),
+    'MetaADS',
+    'Paid traffic redirect should preserve utm_source'
+  );
+  assert.equal(
+    redirectedUrl.searchParams.get('utm_medium'),
+    'banner',
+    'Paid traffic redirect should preserve utm_medium'
+  );
+  assert.equal(
+    redirectedUrl.searchParams.get('utm_campaign'),
+    'smoke_paid',
+    'Paid traffic redirect should preserve utm_campaign'
+  );
+}
+
 async function main() {
   const preferredBrowser = process.env.PLAYWRIGHT_BROWSER?.toLowerCase();
   const browserFactories = [
@@ -265,6 +295,7 @@ async function main() {
       'buyer'
     );
     await assertLegacyRedirect(paidPage);
+    await assertPaidTrafficRedirect(paidPage);
 
     await paidContext.close();
     console.log(`Verified paid LP shell + redirect checks against ${BASE_URL}`);

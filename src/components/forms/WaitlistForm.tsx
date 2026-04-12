@@ -630,16 +630,17 @@ export function WaitlistForm({
                 <span className="h-2 w-2 rounded-full bg-[#C9A87C]" />
                 {t('socialProofBadge')}
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="grid gap-2 sm:grid-cols-3">
                 {trustPills.map((pill) => (
-                  <span
+                  <div
                     key={pill}
-                    className={cn(
-                      'inline-flex items-center rounded-full border border-[#2B2B31] bg-[#17171A] px-2.5 py-1 text-xs text-[#CFCFD4] sm:px-3 sm:py-1.5 sm:text-sm'
-                    )}
+                    className="rounded-2xl border border-[#3A3226] bg-[#17120C] px-3 py-3 text-sm font-semibold text-[#F1DFC2] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
                   >
-                    {pill}
-                  </span>
+                    <span className="flex items-center gap-2">
+                      <span className="h-2 w-2 rounded-full bg-[#C9A87C]" />
+                      {pill}
+                    </span>
+                  </div>
                 ))}
               </div>
               <h3
