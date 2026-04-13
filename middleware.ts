@@ -101,6 +101,26 @@ export default function middleware(request: NextRequest) {
   }
 
   if (pathname === '/en' || pathname.startsWith('/en/')) {
+    // Redirect Arabic-speaking paid traffic from /en/ to /ar/
+    const searchParams = request.nextUrl.searchParams;
+    const hasPaidSignal =
+      searchParams.has('fbclid') ||
+      searchParams.has('gclid') ||
+      searchParams.has('utm_source') ||
+      searchParams.has('utm_medium') ||
+      searchParams.has('utm_campaign');
+
+    if (hasPaidSignal) {
+      const acceptLanguage = request.headers.get('accept-language') ?? '';
+      const preferredLocale = getLocaleFromAcceptLanguage(acceptLanguage);
+
+      if (preferredLocale === 'ar') {
+        const redirectUrl = request.nextUrl.clone();
+        redirectUrl.pathname = pathname.replace(/^\/en(\/|$)/, '/ar$1');
+        return NextResponse.redirect(redirectUrl, 307);
+      }
+    }
+
     return handleI18nRouting(request);
   }
 

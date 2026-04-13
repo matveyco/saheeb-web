@@ -8,6 +8,7 @@ import { DriveWaitlistPitch } from '@/components/sections/drive/DriveWaitlistPit
 import { DriveFaqSection } from '@/components/sections/drive/DriveFaqSection';
 import { DriveWaitlistCounter } from '@/components/sections/drive/DriveWaitlistCounter';
 import { DriveInlineCta } from '@/components/sections/drive/DriveInlineCta';
+import { DriveHeroInlineForm } from '@/components/sections/drive/DriveHeroInlineForm';
 import type { DriveIntentContent } from '@/components/sections/drive/types';
 import type { DriveIntent } from '@/lib/drive-search-params';
 import type { PageVariant } from '@/lib/page-variant';
@@ -119,6 +120,11 @@ export function DriveLandingContent({
                 <p className="mt-3 text-xs font-medium uppercase tracking-[0.18em] text-[#8F8F96] sm:mt-5 sm:text-sm">
                   {hero.supportLine}
                 </p>
+
+                <DriveHeroInlineForm
+                  pageVariant={pageVariant}
+                  initialIntent={initialIntent}
+                />
 
                 <div className="mt-4 flex flex-wrap gap-2.5 sm:mt-6 sm:gap-3">
                   {hero.proofItems.map((item, index) => (

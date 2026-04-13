@@ -200,6 +200,18 @@
       "afterHowItWorks": "Reserve founder perks",
       "afterFaq": "Claim your spot"
     },
+    "heroForm": {
+      "title": "Reserve your founder spot",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "your@email.com",
+      "submit": "Reserve my spot",
+      "submitting": "Joining...",
+      "privacy": "No spam, ever. We'll only message you when Drive is ready.",
+      "error": "Something went wrong. Please try again.",
+      "successTitle": "You're in — #{position} on the list!",
+      "successFallback": "You're on the list!",
+      "successBody": "We'll reach out before the Oman launch."
+    },
     "hero": {
       "badge": "Founder Perks · Oman Launch Q3 2026",
       "title": "Buy with Clarity.",
@@ -237,9 +249,7 @@
       ]
     },
     "stickyCta": {
-      "title": "Founder perks",
-      "buy": "Reserve · Buying",
-      "sell": "Reserve · Selling"
+      "cta": "Reserve my spot — {remaining} left"
     },
     "howItWorks": {
       "title": "How It Works",
@@ -707,6 +717,7 @@
     "phone": "Enter a real phone number, including the country code if needed",
     "minLength": "Must be at least {min} characters",
     "maxLength": "Must be no more than {max} characters",
-    "consent": "You must agree to continue"
+    "consent": "You must agree to continue",
+    "emailOrPhone": "Please provide your email or phone number"
   }
 }

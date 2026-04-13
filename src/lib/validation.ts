@@ -97,7 +97,7 @@ export const contactSubmissionSchema = z
 export const waitlistSubmissionSchema = z
   .object({
     name: nameSchema,
-    email: emailSchema,
+    email: z.union([emailSchema, z.literal('')]).optional(),
     phone: z.union([phoneSchema, z.literal('')]).optional(),
     userType: waitlistUserTypeSchema,
     consent: z.union([z.literal(true), z.undefined()]).optional(),
@@ -115,9 +115,15 @@ export const waitlistSubmissionSchema = z
     intentSource: optionalTrimmedString(120),
     consentTimestamp: consentTimestampSchema,
   })
+  .refine(
+    (value) =>
+      (value.email && value.email.length > 0) ||
+      (value.phone && value.phone.length > 0),
+    { message: 'Email or phone is required', path: ['email'] }
+  )
   .transform((value) => ({
     name: value.name,
-    email: value.email,
+    email: value.email && value.email.length > 0 ? value.email : null,
     phone: value.phone && value.phone.length > 0 ? value.phone : null,
     userType: value.userType,
     city: 'muscat',

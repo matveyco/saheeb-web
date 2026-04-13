@@ -57,11 +57,57 @@ export async function POST(request: NextRequest) {
 
     const db = getDb();
 
-    const [existingEntry] = await db
-      .select({ id: waitlistEntries.id })
-      .from(waitlistEntries)
-      .where(sql`lower(${waitlistEntries.email}) = lower(${waitlistData.email})`)
-      .limit(1);
+    // Track form_submit_attempt server-side (client-side batch races with fetch)
+    void writeFunnelEvent({
+      eventName: 'form_submit_attempt',
+      path: '/projects/saheeb-drive',
+      pageGroup: 'saheeb_drive',
+      project: 'saheeb_drive',
+      siteLocale: waitlistData.locale,
+      userType: waitlistData.userType,
+      formName: 'saheeb_drive_waitlist',
+      errorStage: null,
+      ctaLocation: null,
+      destinationPath: null,
+      anonymousId: waitlistData.anonymousId,
+      sessionId: waitlistData.sessionId,
+      pageVariant: waitlistData.pageVariant,
+      eventId: `submit_${eventId}`,
+      intentSource: waitlistData.intentSource,
+      utmSource: waitlistData.utmSource,
+      utmMedium: waitlistData.utmMedium,
+      utmCampaign: waitlistData.utmCampaign,
+      utmContent: waitlistData.utmContent,
+      referrer: waitlistData.referrer,
+      landingPath: waitlistData.landingPath,
+      countryCode,
+      payload: {
+        form_name: 'saheeb_drive_waitlist',
+        page_variant: waitlistData.pageVariant,
+      },
+    });
+
+    // Duplicate check: try email first, then phone
+    const dedupConditions = [];
+    if (waitlistData.email) {
+      dedupConditions.push(
+        sql`lower(${waitlistEntries.email}) = lower(${waitlistData.email})`
+      );
+    }
+    if (waitlistData.phone) {
+      const phoneDigits = waitlistData.phone.replace(/\D/g, '');
+      dedupConditions.push(
+        sql`regexp_replace(coalesce(${waitlistEntries.phone}, ''), '\\D', '', 'g') = ${phoneDigits}`
+      );
+    }
+
+    const [existingEntry] = dedupConditions.length > 0
+      ? await db
+          .select({ id: waitlistEntries.id })
+          .from(waitlistEntries)
+          .where(sql.join(dedupConditions, sql` OR `))
+          .limit(1)
+      : [];
 
     if (existingEntry) {
       void writeFunnelEvent({

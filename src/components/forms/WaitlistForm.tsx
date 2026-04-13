@@ -109,7 +109,7 @@ export function WaitlistForm({
           return trimmedValue ? undefined : tValidation('required');
         case 'email':
           if (!trimmedValue) {
-            return tValidation('required');
+            return undefined;
           }
 
           return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedValue)
@@ -328,6 +328,11 @@ export function WaitlistForm({
     nextErrors.name = resolveFieldError('name', formData.name);
     nextErrors.email = resolveFieldError('email', formData.email);
     nextErrors.phone = resolveFieldError('phone', formData.phone);
+
+    // Require at least one of email or phone
+    if (!formData.email.trim() && !formData.phone.trim()) {
+      nextErrors.email = tValidation('emailOrPhone');
+    }
 
     setErrors(nextErrors);
 
