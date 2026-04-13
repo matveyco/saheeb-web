@@ -6,6 +6,8 @@ import { DriveStickyWaitlistBar } from '@/components/sections/drive/DriveStickyW
 import { DriveTrustSection } from '@/components/sections/drive/DriveTrustSection';
 import { DriveWaitlistPitch } from '@/components/sections/drive/DriveWaitlistPitch';
 import { DriveFaqSection } from '@/components/sections/drive/DriveFaqSection';
+import { DriveWaitlistCounter } from '@/components/sections/drive/DriveWaitlistCounter';
+import { DriveInlineCta } from '@/components/sections/drive/DriveInlineCta';
 import type { DriveIntentContent } from '@/components/sections/drive/types';
 import type { DriveIntent } from '@/lib/drive-search-params';
 import type { PageVariant } from '@/lib/page-variant';
@@ -46,6 +48,11 @@ interface DriveLandingContentProps {
     steps: HowItWorksStep[];
   };
   faqTitle: string;
+  inlineCta: {
+    afterTrust: string;
+    afterHowItWorks: string;
+    afterFaq: string;
+  };
   buyerContent: DriveIntentContent;
   sellerContent: DriveIntentContent;
 }
@@ -60,6 +67,7 @@ export function DriveLandingContent({
   waitlist,
   howItWorks,
   faqTitle,
+  inlineCta,
   buyerContent,
   sellerContent,
 }: DriveLandingContentProps) {
@@ -85,6 +93,7 @@ export function DriveLandingContent({
           <Container className="relative z-10">
             <div className="grid items-start gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-14">
               <div className="relative z-20 max-w-3xl">
+                <DriveWaitlistCounter variant="hero" className="mb-3" />
                 <Badge variant="accent" className="mb-4">
                   {hero.badge}
                 </Badge>
@@ -183,6 +192,15 @@ export function DriveLandingContent({
           initialIntent={initialIntent}
         />
 
+        <Container>
+          <DriveInlineCta
+            label={inlineCta.afterTrust}
+            ctaLocation="saheeb_drive_inline_after_trust"
+            pageVariant={pageVariant}
+            initialIntent={initialIntent}
+          />
+        </Container>
+
         <section className="border-b border-[#1A1A1D] bg-[#09090B] py-12 lg:py-20">
           <Container>
             <div className="max-w-2xl">
@@ -215,12 +233,30 @@ export function DriveLandingContent({
           </Container>
         </section>
 
+        <Container>
+          <DriveInlineCta
+            label={inlineCta.afterHowItWorks}
+            ctaLocation="saheeb_drive_inline_after_how_it_works"
+            pageVariant={pageVariant}
+            initialIntent={initialIntent}
+          />
+        </Container>
+
         <DriveFaqSection
           title={faqTitle}
           buyerContent={buyerContent}
           sellerContent={sellerContent}
           initialIntent={initialIntent}
         />
+
+        <Container>
+          <DriveInlineCta
+            label={inlineCta.afterFaq}
+            ctaLocation="saheeb_drive_inline_after_faq"
+            pageVariant={pageVariant}
+            initialIntent={initialIntent}
+          />
+        </Container>
       </main>
 
       <DriveStickyWaitlistBar pageVariant={pageVariant} />

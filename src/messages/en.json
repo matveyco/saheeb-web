@@ -190,6 +190,16 @@
     }
   },
   "saheebDrive": {
+    "scarcity": {
+      "heroBadge": "Only {remaining} of {cap} founder spots left",
+      "formBadge": "{remaining} founder spots remaining",
+      "stickyBadge": "{remaining} spots left"
+    },
+    "inlineCta": {
+      "afterTrust": "Save my spot",
+      "afterHowItWorks": "Reserve founder perks",
+      "afterFaq": "Claim your spot"
+    },
     "hero": {
       "badge": "Founder Perks · Oman Launch Q3 2026",
       "title": "Buy with Clarity.",
@@ -228,8 +238,8 @@
     },
     "stickyCta": {
       "title": "Founder perks",
-      "buy": "Buying",
-      "sell": "Selling"
+      "buy": "Reserve · Buying",
+      "sell": "Reserve · Selling"
     },
     "howItWorks": {
       "title": "How It Works",
@@ -299,11 +309,12 @@
       "submit": "Reserve founder perks",
       "submitting": "Joining...",
       "success": {
-        "title": "You're on the list.",
-        "message": "We've saved your request for founder access before the public Oman launch.",
+        "title": "You're in. #{position} on the list.",
+        "titleFallback": "You're on the list.",
+        "message": "We've locked your founder perks. When Drive launches in Muscat, you'll be among the first.",
         "launchNote": "Your founder perks include 1 month of Saheeb Drive Premium free at launch plus first invites to private Saheeb events and giveaways.",
-        "shareText": "Saheeb Drive is launching in Oman. Join the waitlist:",
-        "copyLink": "Copy link",
+        "shareText": "Saheeb Drive is launching in Oman — a smarter car marketplace with verified sellers, AI search, and accident history. I just reserved founder perks. Join me:",
+        "copyLink": "Copy your invite link",
         "copied": "Copied"
       },
       "error": {

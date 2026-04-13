@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { DriveIntentButton } from '@/components/sections/drive/DriveIntentButton';
+import { DriveWaitlistCounter } from '@/components/sections/drive/DriveWaitlistCounter';
 import type { PageVariant } from '@/lib/page-variant';
 
 interface DriveStickyWaitlistBarProps {
@@ -67,9 +68,9 @@ export function DriveStickyWaitlistBar({
       data-testid="drive-sticky-bar"
       className="fixed inset-x-0 bottom-0 z-40 border-t border-[#222225] bg-[#09090B]/96 px-4 py-3 shadow-[0_-10px_30px_rgba(0,0,0,0.35)] backdrop-blur lg:hidden"
     >
-      <p className="mb-2 text-center text-xs font-medium uppercase tracking-[0.18em] text-[#8F8F96]">
-        {t('stickyCta.title')}
-      </p>
+      <div className="mb-2 flex items-center justify-center">
+        <DriveWaitlistCounter variant="sticky" className="text-center text-xs font-semibold uppercase tracking-[0.12em] text-amber-400" />
+      </div>
       <div className="grid grid-cols-2 gap-2">
         <DriveIntentButton
           intent="buyer"

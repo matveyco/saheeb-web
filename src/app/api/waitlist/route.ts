@@ -113,6 +113,18 @@ export async function POST(request: NextRequest) {
       eventId,
     });
 
+    // Get position for the new entry
+    const positionResult = await db.execute(sql<{ count: number }>`
+      select count(*)::int as count from waitlist_entries
+      where not (
+        lower(coalesce(email, '')) like '%@example.com'
+        or lower(coalesce(email, '')) like '%prod-smoke%'
+        or lower(coalesce(name, '')) like '%prod-smoke%'
+        or lower(coalesce(name, '')) like '%codex-smoke%'
+      )
+    `);
+    const position = positionResult.rows[0]?.count ?? 0;
+
     void writeFunnelEvent({
       eventName: 'waitlist_submit_success',
       path: '/projects/saheeb-drive',
@@ -164,6 +176,7 @@ export async function POST(request: NextRequest) {
       {
         success: true,
         eventId,
+        position,
         message: 'Successfully added to waitlist',
       },
       { status: 201 }

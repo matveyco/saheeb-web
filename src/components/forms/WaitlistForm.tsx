@@ -18,6 +18,7 @@ import {
   DRIVE_WAITLIST_EVENT,
   type DriveWaitlistEventDetail,
 } from '@/components/sections/drive/events';
+import { DriveWaitlistCounter } from '@/components/sections/drive/DriveWaitlistCounter';
 import type { DriveIntent } from '@/lib/drive-search-params';
 import { cn } from '@/lib/utils';
 
@@ -84,6 +85,7 @@ export function WaitlistForm({
   const [errors, setErrors] = useState<WaitlistFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [position, setPosition] = useState<number | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isCopied, setIsCopied] = useState(false);
 
@@ -440,6 +442,7 @@ export function WaitlistForm({
             error?: string;
             duplicate?: boolean;
             eventId?: string;
+            position?: number;
             message?: string;
           }
         | null;
@@ -493,6 +496,9 @@ export function WaitlistForm({
         });
       }
 
+      if (typeof payload?.position === 'number') {
+        setPosition(payload.position);
+      }
       setIsSuccess(true);
     } catch {
       recordFunnelEvent({
@@ -539,7 +545,9 @@ export function WaitlistForm({
             </svg>
           </div>
           <h3 className="text-2xl font-bold text-[#EDEDEF]">
-            {t('success.title')}
+            {position
+              ? t('success.title', { position: String(position) })
+              : t('success.titleFallback')}
           </h3>
           <p className="mt-3 text-[#8F8F96]">{t('success.message')}</p>
           <p className="mt-2 text-sm text-[#C9A87C]">
@@ -566,6 +574,7 @@ export function WaitlistForm({
             data-testid="drive-waitlist-card"
           >
             <div className="space-y-2">
+              <DriveWaitlistCounter variant="form" className="mb-1" />
               <h3
                 data-testid="drive-waitlist-title"
                 className="text-[1.85rem] font-bold tracking-tight text-[#EDEDEF] sm:text-[2.15rem]"

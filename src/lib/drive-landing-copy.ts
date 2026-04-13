@@ -36,6 +36,11 @@ export async function getDriveLandingCopy(locale: string) {
       steps: t.raw('howItWorks.steps') as HowItWorksStep[],
     },
     faqTitle: t('faq.title'),
+    inlineCta: {
+      afterTrust: t('inlineCta.afterTrust'),
+      afterHowItWorks: t('inlineCta.afterHowItWorks'),
+      afterFaq: t('inlineCta.afterFaq'),
+    },
     buyerContent: t.raw('intentContent.buyer') as DriveIntentContent,
     sellerContent: t.raw('intentContent.seller') as DriveIntentContent,
   };
