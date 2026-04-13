@@ -46,7 +46,7 @@ export function DriveWaitlistCounter({
   const label =
     variant === 'hero'
       ? t('heroBadge', { remaining: String(remaining), cap: String(FOUNDER_SPOTS_CAP) })
-      : t('formBadge', { remaining: String(remaining) });
+      : t('formBadge', { remaining: String(remaining), cap: String(FOUNDER_SPOTS_CAP) });
 
   return (
     <div className={className} data-testid="drive-waitlist-counter">

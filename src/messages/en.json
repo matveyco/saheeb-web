@@ -192,7 +192,7 @@
   "saheebDrive": {
     "scarcity": {
       "heroBadge": "{remaining} founding spots left — once they're gone, they're gone",
-      "formBadge": "Only {remaining} left of {cap}",
+      "formBadge": "Only {remaining} of {cap} spots left",
       "stickyBadge": "{remaining} spots left"
     },
     "inlineCta": {
@@ -276,16 +276,16 @@
     "waitlist": {
       "sectionEyebrow": "Founding members",
       "sectionTitle": "Why the first 1,000 members matter",
-      "sectionSubtitle": "Founding members get permanent status, first access before the public launch, and a free Premium month with features others will pay for.",
+      "sectionSubtitle": "Permanent status. First access. Free Premium. The first 1,000 get benefits that won't be offered again.",
       "benefits": [
         "Permanent founding member badge — visible to sellers and buyers.",
         "First in line when Drive goes live in Muscat. No public waitlist queue.",
         "Free Premium month — see accident history, verified status, and pricing insights others pay for."
       ],
-      "footnote": "We only ask for what we need to reach you. Phone is optional — your buyer or seller choice helps us send the right updates.",
+      "footnote": "Phone is optional. We only ask what we need to reach you.",
       "eyebrow": "Takes 10 seconds",
       "title": "Become a founding member",
-      "subtitle": "Permanent founding status, first access before anyone else, and a free Premium month when Drive launches in Oman.",
+      "subtitle": "Permanent status. First access. Free Premium month.",
       "socialProofBadge": "Founding member benefits",
       "socialProofFallback": "Founding members only",
       "trustPills": [
@@ -316,14 +316,14 @@
       "privacyNote": "We only use this information for launch access and product updates.",
       "privacyLinePrefix": "By joining, you agree to launch updates under our",
       "privacyLineSuffix": ". No spam, ever.",
-      "reassurance": "Takes 10 seconds. Your founding member spot is locked the moment you join.",
+      "reassurance": "10 seconds. Your spot locks instantly.",
       "submit": "Claim my founding member spot",
       "submitting": "Joining...",
       "success": {
         "title": "You're founding member #{position}.",
         "titleFallback": "You're a founding member.",
         "message": "Your spot is locked. We'll reach out before anyone else when Drive goes live in Muscat.",
-        "launchNote": "Your founding member status is permanent. You also get a free Premium month at launch — accident history, verified sellers, pricing insights.",
+        "launchNote": "Permanent founding status + free Premium month at launch.",
         "shareText": "I just locked my founding member spot on Saheeb Drive — a new car marketplace launching in Oman with verified sellers and AI search. Only 1,000 spots:",
         "copyLink": "Copy your invite link",
         "copied": "Copied"
