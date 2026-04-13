@@ -15,6 +15,7 @@ export async function getDriveLandingCopy(locale: string) {
       badge: t('hero.badge'),
       title: t('hero.title'),
       titleHighlight: t('hero.titleHighlight'),
+      painPoint: t('hero.painPoint'),
       subtitle: t('hero.subtitle'),
       supportLine: t('hero.supportLine'),
       primaryCta: t('hero.primaryCta'),

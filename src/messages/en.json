@@ -191,34 +191,35 @@
   },
   "saheebDrive": {
     "scarcity": {
-      "heroBadge": "Only {remaining} of {cap} founder spots left",
-      "formBadge": "{remaining} founder spots remaining",
+      "heroBadge": "{remaining} founding spots left — once they're gone, they're gone",
+      "formBadge": "Only {remaining} left of {cap}",
       "stickyBadge": "{remaining} spots left"
     },
     "inlineCta": {
-      "afterTrust": "Save my spot",
-      "afterHowItWorks": "Reserve founder perks",
-      "afterFaq": "Claim your spot"
+      "afterTrust": "I want in",
+      "afterHowItWorks": "Get early access",
+      "afterFaq": "Join before it's full"
     },
     "heroForm": {
-      "title": "Reserve your founder spot",
+      "title": "Become a founding member",
       "namePlaceholder": "Your name",
       "emailPlaceholder": "your@email.com",
-      "submit": "Reserve my spot",
+      "submit": "Join free — spots are filling up",
       "submitting": "Joining...",
-      "privacy": "No spam, ever. We'll only message you when Drive is ready.",
+      "privacy": "We'll only message you when Drive is ready. No spam. Unsubscribe anytime.",
       "error": "Something went wrong. Please try again.",
-      "successTitle": "You're in — #{position} on the list!",
-      "successFallback": "You're on the list!",
-      "successBody": "We'll reach out before the Oman launch."
+      "successTitle": "You're founding member #{position}.",
+      "successFallback": "You're a founding member.",
+      "successBody": "Your spot is locked. We'll reach out before anyone else when Drive goes live."
     },
     "hero": {
-      "badge": "Founder Perks · Oman Launch Q3 2026",
+      "badge": "Launching in Oman · Only 1,000 founding spots",
       "title": "Buy with Clarity.",
       "titleHighlight": "Sell with Confidence.",
+      "painPoint": "Tired of fake listings, hidden damage, and wasting weekends on the wrong car?",
       "subtitle": "Saheeb Drive is a smart car marketplace that helps buyers and sellers make more confident decisions through verification, deeper car insights, and a personal AI assistant.",
-      "supportLine": "Public Oman launch is planned for Q3 2026. Founder perks are limited.",
-      "primaryCta": "Reserve founder perks",
+      "supportLine": "Launching Q3 2026 in Muscat. Founding member spots close when the first 1,000 are taken.",
+      "primaryCta": "Get early access",
       "intentLabel": "Choose buyer or seller",
       "buyCta": "Buyer",
       "sellCta": "Seller",
@@ -249,7 +250,7 @@
       ]
     },
     "stickyCta": {
-      "cta": "Reserve my spot — {remaining} left"
+      "cta": "Join now — only {remaining} spots left"
     },
     "howItWorks": {
       "title": "How It Works",
@@ -273,24 +274,24 @@
       ]
     },
     "waitlist": {
-      "sectionEyebrow": "Founder perks",
-      "sectionTitle": "What founder access gives you",
-      "sectionSubtitle": "Lock in launch benefits now: a free Premium month, private Saheeb invites, giveaway priority, and earlier access before the public Oman rollout.",
+      "sectionEyebrow": "Founding members",
+      "sectionTitle": "Why the first 1,000 members matter",
+      "sectionSubtitle": "Founding members get permanent status, first access before the public launch, and a free Premium month with features others will pay for.",
       "benefits": [
-        "1 month of Saheeb Drive Premium free at launch.",
-        "First invites to private Saheeb events and giveaways.",
-        "Priority access as Oman rollout begins, with first waves starting in Muscat."
+        "Permanent founding member badge — visible to sellers and buyers.",
+        "First in line when Drive goes live in Muscat. No public waitlist queue.",
+        "Free Premium month — see accident history, verified status, and pricing insights others pay for."
       ],
-      "footnote": "We only ask for what we need to reach you fast. Phone is optional, and your buyer or seller choice helps us send the right launch updates.",
-      "eyebrow": "Register now in under 30 seconds",
-      "title": "Reserve founder access",
-      "subtitle": "Free Premium at launch, private Saheeb event invites, and giveaway priority before public rollout in Oman.",
-      "socialProofBadge": "Founder launch perks",
-      "socialProofFallback": "Founder perks included",
+      "footnote": "We only ask for what we need to reach you. Phone is optional — your buyer or seller choice helps us send the right updates.",
+      "eyebrow": "Takes 10 seconds",
+      "title": "Become a founding member",
+      "subtitle": "Permanent founding status, first access before anyone else, and a free Premium month when Drive launches in Oman.",
+      "socialProofBadge": "Founding member benefits",
+      "socialProofFallback": "Founding members only",
       "trustPills": [
-        "1 month Premium free",
-        "Private event invites",
-        "Giveaway priority"
+        "Founding member status — permanent",
+        "First access before public launch",
+        "Free Premium month at launch"
       ],
       "nameLabel": "Name",
       "emailLabel": "Email",
@@ -304,10 +305,10 @@
       "buy": "Buyer",
       "sell": "Seller",
       "changeIntent": "Change",
-      "selectedBuyer": "Buyer perks selected",
-      "selectedSeller": "Seller perks selected",
-      "selectedBuyerPerk": "Guaranteed 1 month of Saheeb Drive Premium free at launch.",
-      "selectedSellerPerk": "Guaranteed 1 month of Saheeb Drive Premium free at launch.",
+      "selectedBuyer": "Buyer founding benefits active",
+      "selectedSeller": "Seller founding benefits active",
+      "selectedBuyerPerk": "Founding member status + free Premium month when Drive launches.",
+      "selectedSellerPerk": "Founding member status + free Premium month when Drive launches.",
       "switchToBuyer": "Switch to buyer instead",
       "switchToSeller": "Switch to seller instead",
       "consentPrefix": "I agree to receive Saheeb Drive updates according to the",
@@ -315,15 +316,15 @@
       "privacyNote": "We only use this information for launch access and product updates.",
       "privacyLinePrefix": "By joining, you agree to launch updates under our",
       "privacyLineSuffix": ". No spam, ever.",
-      "reassurance": "Takes under 30 seconds. Founder perks are reserved once you submit.",
-      "submit": "Reserve founder perks",
+      "reassurance": "Takes 10 seconds. Your founding member spot is locked the moment you join.",
+      "submit": "Claim my founding member spot",
       "submitting": "Joining...",
       "success": {
-        "title": "You're in. #{position} on the list.",
-        "titleFallback": "You're on the list.",
-        "message": "We've locked your founder perks. When Drive launches in Muscat, you'll be among the first.",
-        "launchNote": "Your founder perks include 1 month of Saheeb Drive Premium free at launch plus first invites to private Saheeb events and giveaways.",
-        "shareText": "Saheeb Drive is launching in Oman — a smarter car marketplace with verified sellers, AI search, and accident history. I just reserved founder perks. Join me:",
+        "title": "You're founding member #{position}.",
+        "titleFallback": "You're a founding member.",
+        "message": "Your spot is locked. We'll reach out before anyone else when Drive goes live in Muscat.",
+        "launchNote": "Your founding member status is permanent. You also get a free Premium month at launch — accident history, verified sellers, pricing insights.",
+        "shareText": "I just locked my founding member spot on Saheeb Drive — a new car marketplace launching in Oman with verified sellers and AI search. Only 1,000 spots:",
         "copyLink": "Copy your invite link",
         "copied": "Copied"
       },

@@ -28,6 +28,7 @@ interface DriveLandingContentProps {
     badge: string;
     title: string;
     titleHighlight: string;
+    painPoint: string;
     subtitle: string;
     supportLine: string;
     primaryCta: string;
@@ -113,7 +114,10 @@ export function DriveLandingContent({
                   sellLabel={hero.sellCta}
                 />
 
-                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#D0D0D5] sm:text-lg lg:mt-6 lg:text-xl">
+                <p className="mt-4 max-w-2xl text-base font-medium leading-relaxed text-[#E3C08B] sm:text-lg lg:mt-6 lg:text-xl">
+                  {hero.painPoint}
+                </p>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#D0D0D5] sm:text-base lg:text-lg">
                   {hero.subtitle}
                 </p>
 
