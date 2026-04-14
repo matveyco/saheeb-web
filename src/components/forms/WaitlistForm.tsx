@@ -591,6 +591,7 @@ export function WaitlistForm({
                 data-testid="drive-waitlist-email"
                 name="email"
                 type="email"
+                label={t('emailLabel')}
                 placeholder={t('emailPlaceholder')}
                 value={formData.email}
                 onChange={(event) => updateField('email', event.target.value)}
@@ -610,6 +611,7 @@ export function WaitlistForm({
                 data-testid="drive-waitlist-phone"
                 name="phone"
                 type="tel"
+                label={t('phoneLabel')}
                 placeholder={t('phonePlaceholder')}
                 value={formData.phone}
                 onChange={(event) => updateField('phone', event.target.value)}

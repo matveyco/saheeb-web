@@ -172,7 +172,7 @@ export function DriveHeroInlineForm({
     >
       <div className="flex gap-2">
         <Input
-          name="hero-email"
+          name="email"
           type="email"
           placeholder={t('emailPlaceholder')}
           value={email}
@@ -183,6 +183,7 @@ export function DriveHeroInlineForm({
           error={error}
           required
           autoComplete="email"
+          aria-label="Email"
           dir="ltr"
           className="flex-1 border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
         />
