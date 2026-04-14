@@ -96,24 +96,14 @@ export function DriveLandingContent({
             <div className="grid items-start gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-14">
               <div className="relative z-20 max-w-3xl">
                 <DriveWaitlistCounter variant="hero" className="mb-3" />
-                <Badge variant="accent" className="mb-4">
-                  {hero.badge}
-                </Badge>
                 <h1 className="text-4xl font-bold leading-[0.95] tracking-tight text-[#EDEDEF] sm:text-6xl lg:text-7xl">
                   {hero.title}
                 </h1>
                 <p className="mt-1 text-4xl font-bold leading-[0.95] tracking-tight text-[#C9A87C] sm:mt-2 sm:text-6xl lg:text-7xl">
                   {hero.titleHighlight}
                 </p>
-                <p className="mt-4 max-w-2xl text-base font-medium leading-relaxed text-[#E3C08B] sm:text-lg lg:mt-6 lg:text-xl">
+                <p className="mt-3 max-w-2xl text-base font-medium leading-relaxed text-[#E3C08B] sm:text-lg lg:mt-5 lg:text-xl">
                   {hero.painPoint}
-                </p>
-                <p className="mt-2 hidden max-w-2xl text-sm leading-relaxed text-[#D0D0D5] sm:block sm:text-base lg:text-lg">
-                  {hero.subtitle}
-                </p>
-
-                <p className="mt-2 text-xs font-medium uppercase tracking-[0.18em] text-[#8F8F96] sm:mt-4 sm:text-sm">
-                  {hero.supportLine}
                 </p>
 
                 <DriveHeroInlineForm
@@ -121,19 +111,9 @@ export function DriveLandingContent({
                   initialIntent={initialIntent}
                 />
 
-                <div className="mt-4 flex flex-wrap gap-2.5 sm:mt-6 sm:gap-3">
-                  {hero.proofItems.map((item, index) => (
-                    <div
-                      key={item}
-                      className={`items-center gap-2 rounded-full border border-[#2A2A2E] bg-[#111113]/80 px-3 py-2 text-sm text-[#EDEDEF] sm:px-4 ${
-                        index > 1 ? 'hidden sm:inline-flex' : 'inline-flex'
-                      }`}
-                    >
-                      <span className="h-2 w-2 rounded-full bg-[#C9A87C]" />
-                      {item}
-                    </div>
-                  ))}
-                </div>
+                <p className="mt-4 hidden max-w-2xl text-sm leading-relaxed text-[#9B9BA3] sm:block lg:text-base">
+                  {hero.subtitle}
+                </p>
               </div>
 
               <div className="relative z-0 hidden w-full max-w-[300px] self-end sm:max-w-[340px] lg:mx-auto lg:mt-0 lg:block lg:pt-4">

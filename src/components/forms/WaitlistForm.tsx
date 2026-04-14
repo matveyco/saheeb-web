@@ -578,69 +578,19 @@ export function WaitlistForm({
             className="scroll-mt-24 rounded-[2rem] border border-[#2B2B31] bg-[#111113] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8 lg:scroll-mt-32"
             data-testid="drive-waitlist-card"
           >
-            <div className="space-y-2">
-              <DriveWaitlistCounter variant="form" className="mb-1" />
-              <h3
-                data-testid="drive-waitlist-title"
-                className="text-[1.85rem] font-bold tracking-tight text-[#EDEDEF] sm:text-[2.15rem]"
-              >
-                {t('title')}
-              </h3>
-              <p className="max-w-xl text-sm leading-relaxed text-[#9B9BA3] sm:text-base">
-                {t('subtitle')}
-              </p>
-              <div data-testid="drive-waitlist-social-proof" className="flex flex-wrap gap-1.5">
-                {trustPills.map((pill) => (
-                  <div
-                    key={pill}
-                    className="inline-flex items-center gap-2 rounded-full border border-[#3A3226] bg-[#17120C] px-3.5 py-2 text-xs font-semibold text-[#F1DFC2] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] sm:text-sm"
-                  >
-                    <span className="h-2 w-2 rounded-full bg-[#C9A87C]" />
-                    {pill}
-                  </div>
-                ))}
-              </div>
-            </div>
+            <DriveWaitlistCounter variant="form" className="mb-3" />
+            <h3
+              data-testid="drive-waitlist-title"
+              className="mb-5 text-2xl font-bold tracking-tight text-[#EDEDEF] sm:text-[2rem]"
+            >
+              {t('title')}
+            </h3>
 
-            <div className="mt-4">
-              <div className="inline-grid w-full grid-cols-2 rounded-2xl border border-[#222225] bg-[#0D0D10] p-1 sm:w-auto">
-                <button
-                  type="button"
-                  data-testid="drive-form-intent-buyer"
-                  aria-pressed={formData.userType === 'buyer'}
-                  onClick={() => handleIntentSelection('buyer', 'form_toggle')}
-                  className={cn(
-                    'rounded-[0.9rem] px-4 py-3 text-sm font-semibold transition-colors',
-                    formData.userType === 'buyer'
-                      ? 'bg-[#C9A87C] text-[#09090B]'
-                      : 'text-[#8F8F96] hover:text-[#EDEDEF]'
-                  )}
-                >
-                  {t('buy')}
-                </button>
-                <button
-                  type="button"
-                  data-testid="drive-form-intent-seller"
-                  aria-pressed={formData.userType === 'seller'}
-                  onClick={() => handleIntentSelection('seller', 'form_toggle')}
-                  className={cn(
-                    'rounded-[0.9rem] px-4 py-3 text-sm font-semibold transition-colors',
-                    formData.userType === 'seller'
-                      ? 'bg-[#C9A87C] text-[#09090B]'
-                      : 'text-[#8F8F96] hover:text-[#EDEDEF]'
-                  )}
-                >
-                  {t('sell')}
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-5 grid gap-4">
+            <div className="grid gap-3 sm:grid-cols-2">
               <Input
                 data-testid="drive-waitlist-email"
                 name="email"
                 type="email"
-                label={t('emailLabel')}
                 placeholder={t('emailPlaceholder')}
                 value={formData.email}
                 onChange={(event) => updateField('email', event.target.value)}
@@ -660,7 +610,6 @@ export function WaitlistForm({
                 data-testid="drive-waitlist-phone"
                 name="phone"
                 type="tel"
-                label={t('phoneLabel')}
                 placeholder={t('phonePlaceholder')}
                 value={formData.phone}
                 onChange={(event) => updateField('phone', event.target.value)}
@@ -671,35 +620,19 @@ export function WaitlistForm({
                   }))
                 }
                 error={errors.phone}
-                hint={t('phoneHint')}
                 autoComplete="tel"
                 dir="ltr"
-                className="border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
-              />
-
-              <Input
-                data-testid="drive-waitlist-name"
-                name="name"
-                label={t('nameLabel')}
-                placeholder={t('namePlaceholder')}
-                value={formData.name}
-                onChange={(event) => updateField('name', event.target.value)}
-                hint={t('nameHint')}
-                autoComplete="name"
                 className="border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
               />
             </div>
 
             {submitError ? (
-              <div className="mt-5 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300">
+              <div className="mt-3 rounded-xl border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-300">
                 {submitError}
               </div>
             ) : null}
 
-            <div className="mt-6">
-              <p className="mb-3 text-sm font-medium leading-relaxed text-[#E3C08B]">
-                {t('reassurance')}
-              </p>
+            <div className="mt-4">
               <Button
                 type="submit"
                 variant="primary"
@@ -712,7 +645,7 @@ export function WaitlistForm({
               </Button>
               <p
                 data-testid="drive-waitlist-passive-privacy"
-                className="mt-4 text-center text-sm leading-relaxed text-[#7E7E85]"
+                className="mt-3 text-center text-xs text-[#7E7E85]"
               >
                 {t('privacyLinePrefix')}{' '}
                 <Link

@@ -299,7 +299,7 @@
       "phoneHint": "اختياري. مفيد إذا كنت تفضّل تحديثات الإطلاق هناك.",
       "namePlaceholder": "اسمك",
       "emailPlaceholder": "بريدك@email.com",
-      "phonePlaceholder": "+968",
+      "phonePlaceholder": "+968 (اختياري)",
       "buyOrSell": "أنت بأي جهة من السوق؟",
       "buy": "مشتري",
       "sell": "بائع",
@@ -316,7 +316,7 @@
       "privacyLinePrefix": "بانضمامك، أنت توافق على تحديثات الإطلاق حسب",
       "privacyLineSuffix": ". بدون إزعاج أبداً.",
       "reassurance": "مجاني. بدون بطاقة. 10 ثواني.",
-      "submit": "انضم مجاناً",
+      "submit": "احصل على وصول مبكر",
       "submitting": "جارٍ التسجيل...",
       "success": {
         "title": "أنت العضو المؤسس رقم {position}.",

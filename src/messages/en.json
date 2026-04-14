@@ -299,7 +299,7 @@
       "phoneHint": "Optional. Helpful if you prefer launch updates there.",
       "namePlaceholder": "Your name",
       "emailPlaceholder": "your@email.com",
-      "phonePlaceholder": "+968",
+      "phonePlaceholder": "+968 (optional)",
       "buyOrSell": "Which side of the market are you on?",
       "buy": "Buyer",
       "sell": "Seller",
@@ -316,7 +316,7 @@
       "privacyLinePrefix": "By joining, you agree to launch updates under our",
       "privacyLineSuffix": ". No spam, ever.",
       "reassurance": "Free. No credit card. Takes 10 seconds.",
-      "submit": "Join free",
+      "submit": "Get early access",
       "submitting": "Joining...",
       "success": {
         "title": "You're founding member #{position}.",
