@@ -105,23 +105,14 @@ export function DriveLandingContent({
                 <p className="mt-1 text-4xl font-bold leading-[0.95] tracking-tight text-[#C9A87C] sm:mt-2 sm:text-6xl lg:text-7xl">
                   {hero.titleHighlight}
                 </p>
-                <DriveHeroPrimaryCta
-                  initialIntent={initialIntent}
-                  pageVariant={pageVariant}
-                  primaryCta={hero.primaryCta}
-                  intentLabel={hero.intentLabel}
-                  buyLabel={hero.buyCta}
-                  sellLabel={hero.sellCta}
-                />
-
                 <p className="mt-4 max-w-2xl text-base font-medium leading-relaxed text-[#E3C08B] sm:text-lg lg:mt-6 lg:text-xl">
                   {hero.painPoint}
                 </p>
-                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#D0D0D5] sm:text-base lg:text-lg">
+                <p className="mt-2 hidden max-w-2xl text-sm leading-relaxed text-[#D0D0D5] sm:block sm:text-base lg:text-lg">
                   {hero.subtitle}
                 </p>
 
-                <p className="mt-3 text-xs font-medium uppercase tracking-[0.18em] text-[#8F8F96] sm:mt-5 sm:text-sm">
+                <p className="mt-2 text-xs font-medium uppercase tracking-[0.18em] text-[#8F8F96] sm:mt-4 sm:text-sm">
                   {hero.supportLine}
                 </p>
 
