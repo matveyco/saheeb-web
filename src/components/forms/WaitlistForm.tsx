@@ -106,7 +106,7 @@ export function WaitlistForm({
 
       switch (field) {
         case 'name':
-          return trimmedValue ? undefined : tValidation('required');
+          return undefined;
         case 'email':
           if (!trimmedValue) {
             return undefined;
@@ -637,25 +637,6 @@ export function WaitlistForm({
 
             <div className="mt-5 grid gap-4">
               <Input
-                data-testid="drive-waitlist-name"
-                name="name"
-                label={t('nameLabel')}
-                placeholder={t('namePlaceholder')}
-                value={formData.name}
-                onChange={(event) => updateField('name', event.target.value)}
-                onBlur={(event) =>
-                  setErrors((current) => ({
-                    ...current,
-                    name: resolveFieldError('name', event.target.value),
-                  }))
-                }
-                error={errors.name}
-                required
-                autoComplete="name"
-                className="border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
-              />
-
-              <Input
                 data-testid="drive-waitlist-email"
                 name="email"
                 type="email"
@@ -670,7 +651,6 @@ export function WaitlistForm({
                   }))
                 }
                 error={errors.email}
-                required
                 autoComplete="email"
                 dir="ltr"
                 className="border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
@@ -694,6 +674,18 @@ export function WaitlistForm({
                 hint={t('phoneHint')}
                 autoComplete="tel"
                 dir="ltr"
+                className="border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
+              />
+
+              <Input
+                data-testid="drive-waitlist-name"
+                name="name"
+                label={t('nameLabel')}
+                placeholder={t('namePlaceholder')}
+                value={formData.name}
+                onChange={(event) => updateField('name', event.target.value)}
+                hint={t('nameHint')}
+                autoComplete="name"
                 className="border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
               />
             </div>

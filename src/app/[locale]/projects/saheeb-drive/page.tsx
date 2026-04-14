@@ -64,10 +64,8 @@ export default async function SaheebDrivePage({
 }: SaheebDrivePageProps) {
   const { locale } = await params;
   const resolvedSearchParams = await searchParams;
-  if (shouldRedirectPaidTrafficToLp(resolvedSearchParams)) {
-    const query = toQueryString(resolvedSearchParams);
-    redirect(`/${locale}/projects/saheeb-drive/lp${query ? `?${query}` : ''}`);
-  }
+  // LP redirect disabled — organic page with hero form outperforms LP
+  // (LP: 91% bounce, 8% engagement vs organic: 71% bounce, 26% engagement)
 
   const driveSearchState = resolveDriveSearchState(resolvedSearchParams);
   setRequestLocale(locale);

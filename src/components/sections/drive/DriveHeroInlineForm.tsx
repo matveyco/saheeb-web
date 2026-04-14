@@ -30,9 +30,8 @@ export function DriveHeroInlineForm({
   const locale = useLocale();
   const { intent } = useDriveIntent(initialIntent);
 
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
+  const [error, setError] = useState<string | undefined>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [position, setPosition] = useState<number | null>(null);
@@ -69,22 +68,20 @@ export function DriveHeroInlineForm({
     });
   }, [locale, intent, resolvedPageVariant]);
 
-  const validate = () => {
-    const next: { name?: string; email?: string } = {};
-    if (!name.trim()) next.name = tValidation('required');
-    if (!email.trim()) {
-      next.email = tValidation('required');
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      next.email = tValidation('email');
-    }
-    setErrors(next);
-    return !next.name && !next.email;
-  };
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!validate()) return;
+    const trimmed = email.trim();
 
+    if (!trimmed) {
+      setError(tValidation('required'));
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setError(tValidation('email'));
+      return;
+    }
+
+    setError(undefined);
     setIsSubmitting(true);
     setSubmitError(null);
 
@@ -97,8 +94,8 @@ export function DriveHeroInlineForm({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: name.trim(),
-          email: email.trim(),
+          name: '',
+          email: trimmed,
           phone: '',
           userType: intent,
           consent: true,
@@ -171,27 +168,9 @@ export function DriveHeroInlineForm({
       onSubmit={handleSubmit}
       onFocusCapture={trackFormStart}
       noValidate
-      className="mt-6 rounded-2xl border border-[#2B2B31] bg-[#111113]/90 p-4 shadow-[0_16px_40px_rgba(0,0,0,0.24)] backdrop-blur"
+      className="mt-6 max-w-lg"
     >
-      <p className="mb-3 text-sm font-semibold text-[#EDEDEF]">
-        {t('title')}
-      </p>
-      <div className="grid gap-2.5 sm:grid-cols-[1fr_1fr_auto] sm:items-start">
-        <Input
-          name="hero-name"
-          placeholder={t('namePlaceholder')}
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-            if (errors.name && e.target.value.trim()) {
-              setErrors((prev) => ({ ...prev, name: undefined }));
-            }
-          }}
-          error={errors.name}
-          required
-          autoComplete="name"
-          className="border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
-        />
+      <div className="flex gap-2">
         <Input
           name="hero-email"
           type="email"
@@ -199,22 +178,20 @@ export function DriveHeroInlineForm({
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
-            if (errors.email && e.target.value.trim()) {
-              setErrors((prev) => ({ ...prev, email: undefined }));
-            }
+            if (error) setError(undefined);
           }}
-          error={errors.email}
+          error={error}
           required
           autoComplete="email"
           dir="ltr"
-          className="border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
+          className="flex-1 border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
         />
         <Button
           type="submit"
           variant="primary"
           size="md"
           disabled={isSubmitting}
-          className="w-full sm:w-auto sm:whitespace-nowrap"
+          className="shrink-0 whitespace-nowrap"
         >
           {isSubmitting ? t('submitting') : t('submit')}
         </Button>
@@ -224,7 +201,7 @@ export function DriveHeroInlineForm({
         <p className="mt-2 text-xs text-red-400">{submitError}</p>
       )}
 
-      <p className="mt-2.5 text-xs text-[#7E7E85]">{t('privacy')}</p>
+      <p className="mt-2 text-xs text-[#7E7E85]">{t('privacy')}</p>
     </form>
   );
 }

@@ -201,16 +201,14 @@
       "afterFaq": "Join before it's full"
     },
     "heroForm": {
-      "title": "Become a founding member",
-      "namePlaceholder": "Your name",
       "emailPlaceholder": "your@email.com",
-      "submit": "Join free — spots are filling up",
+      "submit": "Get early access",
       "submitting": "Joining...",
-      "privacy": "We'll only message you when Drive is ready. No spam. Unsubscribe anytime.",
-      "error": "Something went wrong. Please try again.",
+      "privacy": "Free. No spam. Unsubscribe anytime.",
+      "error": "Something went wrong. Try again.",
       "successTitle": "You're founding member #{position}.",
       "successFallback": "You're a founding member.",
-      "successBody": "Your spot is locked. We'll reach out before anyone else when Drive goes live."
+      "successBody": "We'll reach out before anyone else when Drive goes live."
     },
     "hero": {
       "badge": "Launching in Oman · Only 1,000 founding spots",
@@ -294,6 +292,7 @@
         "Free Premium month at launch"
       ],
       "nameLabel": "Name",
+      "nameHint": "Optional — helps us personalize",
       "emailLabel": "Email",
       "phoneLabel": "Phone / WhatsApp",
       "phoneOptional": "Optional",
@@ -316,8 +315,8 @@
       "privacyNote": "We only use this information for launch access and product updates.",
       "privacyLinePrefix": "By joining, you agree to launch updates under our",
       "privacyLineSuffix": ". No spam, ever.",
-      "reassurance": "10 seconds. Your spot locks instantly.",
-      "submit": "Claim my founding member spot",
+      "reassurance": "Free. No credit card. Takes 10 seconds.",
+      "submit": "Join free",
       "submitting": "Joining...",
       "success": {
         "title": "You're founding member #{position}.",

@@ -96,7 +96,7 @@ export const contactSubmissionSchema = z
 
 export const waitlistSubmissionSchema = z
   .object({
-    name: nameSchema,
+    name: z.union([nameSchema, z.literal('')]).optional(),
     email: z.union([emailSchema, z.literal('')]).optional(),
     phone: z.union([phoneSchema, z.literal('')]).optional(),
     userType: waitlistUserTypeSchema,
@@ -122,7 +122,7 @@ export const waitlistSubmissionSchema = z
     { message: 'Email or phone is required', path: ['email'] }
   )
   .transform((value) => ({
-    name: value.name,
+    name: value.name && value.name.length > 0 ? value.name : 'Member',
     email: value.email && value.email.length > 0 ? value.email : null,
     phone: value.phone && value.phone.length > 0 ? value.phone : null,
     userType: value.userType,
