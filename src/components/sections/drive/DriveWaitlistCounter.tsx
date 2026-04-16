@@ -27,8 +27,10 @@ export function DriveWaitlistCounter({
   const t = useTranslations('saheebDrive.scarcity');
   const count = useWaitlistCount();
 
+  // Render nothing until count loads — suppressHydrationWarning prevents
+  // React error #418 when SSR output (null) differs from client (content)
   if (count === null) {
-    return null;
+    return <div className={className} suppressHydrationWarning />;
   }
 
   const taken = Math.max(count, VISUAL_FLOOR);
