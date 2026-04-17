@@ -64,9 +64,10 @@ export default async function SaheebDrivePage({
 }: SaheebDrivePageProps) {
   const { locale } = await params;
   const resolvedSearchParams = await searchParams;
-  // LP redirect re-enabled: after hero form changes, LP now outperforms organic
-  // (LP: 76% bounce, 24% engagement vs organic: 93% bounce, 7% engagement)
-  if (shouldRedirectPaidTrafficToLp(resolvedSearchParams)) {
+  // AR: skip redirect — AR organic converts 2.3x better than AR LP
+  //   (AR organic 16% engagement vs AR LP 7% engagement)
+  // EN: keep redirect, organic/LP gap narrower and LP less noisy
+  if (locale !== 'ar' && shouldRedirectPaidTrafficToLp(resolvedSearchParams)) {
     const query = toQueryString(resolvedSearchParams);
     redirect(`/${locale}/projects/saheeb-drive/lp${query ? `?${query}` : ''}`);
   }

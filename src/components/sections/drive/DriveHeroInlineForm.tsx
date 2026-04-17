@@ -191,7 +191,7 @@ export function DriveHeroInlineForm({
           type="submit"
           variant="primary"
           size="md"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !email.trim()}
           className="shrink-0 whitespace-nowrap"
         >
           {isSubmitting ? t('submitting') : t('submit')}

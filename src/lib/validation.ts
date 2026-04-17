@@ -16,6 +16,8 @@ const funnelEventNameSchema = z.enum([
   'privacy_click',
   'language_switch',
   'nav_exit',
+  'scroll_depth',
+  'page_timing',
 ]);
 
 const phoneRegex = /^\+?[0-9\s\-()]{8,20}$/;

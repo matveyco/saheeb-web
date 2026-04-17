@@ -639,7 +639,10 @@ export function WaitlistForm({
                 type="submit"
                 variant="primary"
                 size="lg"
-                disabled={isSubmitting}
+                disabled={
+                  isSubmitting ||
+                  (!formData.email.trim() && !formData.phone.trim())
+                }
                 data-testid="drive-waitlist-submit"
                 className="w-full text-base sm:text-lg"
               >
