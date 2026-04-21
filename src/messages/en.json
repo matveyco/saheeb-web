@@ -190,6 +190,10 @@
     }
   },
   "saheebDrive": {
+    "inAppBanner": {
+      "message": "For the best experience, open in your browser.",
+      "dismiss": "Dismiss"
+    },
     "scarcity": {
       "heroBadge": "{remaining} founding spots left — once they're gone, they're gone",
       "formBadge": "Only {remaining} of {cap} spots left",

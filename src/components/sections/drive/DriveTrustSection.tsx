@@ -2,6 +2,7 @@
 
 import { Container } from '@/components/ui';
 import { useDriveIntent } from '@/components/sections/drive/useDriveIntent';
+import { dispatchDriveWaitlistEvent } from '@/components/sections/drive/events';
 import type { DriveIntentContent } from '@/components/sections/drive/types';
 import type { DriveIntent } from '@/lib/drive-search-params';
 
@@ -33,17 +34,22 @@ export function DriveTrustSection({
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {content.trustCards.map((card) => (
-            <article
+            <button
               key={card.title}
-              className="rounded-[1.75rem] border border-[#222225] bg-[#111113] p-6"
+              type="button"
+              onClick={() =>
+                dispatchDriveWaitlistEvent({ intent, source: 'trust_card' })
+              }
+              className="group rounded-[1.75rem] border border-[#222225] bg-[#111113] p-6 text-start transition-colors hover:border-[#C9A87C]/40 hover:bg-[#141418]"
+              aria-label={card.title}
             >
-              <h3 className="text-xl font-semibold text-[#EDEDEF]">
+              <h3 className="text-xl font-semibold text-[#EDEDEF] transition-colors group-hover:text-[#C9A87C]">
                 {card.title}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-[#8F8F96]">
                 {card.description}
               </p>
-            </article>
+            </button>
           ))}
         </div>
       </Container>

@@ -11,6 +11,7 @@ import { DriveInlineCta } from '@/components/sections/drive/DriveInlineCta';
 import { DriveHeroInlineForm } from '@/components/sections/drive/DriveHeroInlineForm';
 import { DriveScrollTracker } from '@/components/sections/drive/DriveScrollTracker';
 import { DriveTimingTracker } from '@/components/sections/drive/DriveTimingTracker';
+import { DriveInAppBrowserBanner } from '@/components/sections/drive/DriveInAppBrowserBanner';
 import type { DriveIntentContent } from '@/components/sections/drive/types';
 import type { DriveIntent } from '@/lib/drive-search-params';
 import type { PageVariant } from '@/lib/page-variant';
@@ -245,6 +246,7 @@ export function DriveLandingContent({
       <DriveStickyWaitlistBar pageVariant={pageVariant} />
       <DriveScrollTracker pageVariant={pageVariant} />
       <DriveTimingTracker pageVariant={pageVariant} />
+      <DriveInAppBrowserBanner />
     </>
   );
 }

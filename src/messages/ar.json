@@ -190,6 +190,10 @@
     }
   },
   "saheebDrive": {
+    "inAppBanner": {
+      "message": "افتح في المتصفح لتجربة أفضل.",
+      "dismiss": "إغلاق"
+    },
     "scarcity": {
       "heroBadge": "باقي {remaining} مكان مؤسس — لما تخلص، خلصت",
       "formBadge": "باقي {remaining} من {cap} مكان",
