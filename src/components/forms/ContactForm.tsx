@@ -233,7 +233,7 @@ export function ContactForm() {
             name="consent"
             checked={formData.consent}
             onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-            className="mt-0.5 w-5 h-5 rounded border-[#2A2633] bg-[#151317] text-[#316BE9] focus:ring-[#316BE9]/50 focus:ring-offset-0"
+            className="mt-0.5 w-5 h-5 rounded border-[#2A2633] bg-[#0F1013] text-[#316BE9] focus:ring-[#316BE9]/50 focus:ring-offset-0"
           />
           <span className="text-sm text-[#5C5C63]">
             {isArabic ? (

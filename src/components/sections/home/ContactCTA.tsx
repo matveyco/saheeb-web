@@ -13,7 +13,7 @@ export function ContactCTA() {
   const isArabic = locale === 'ar';
 
   return (
-    <section className="py-24 lg:py-32 bg-[#211C28] relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-[#0A0A0D] relative overflow-hidden">
       {/* Sultan Qaboos Mosque background */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
         <Image
@@ -24,7 +24,7 @@ export function ContactCTA() {
           sizes="100vw"
         />
         {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#211C28]/70 via-[#211C28]/40 to-[#211C28]/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0D]/70 via-[#0A0A0D]/40 to-[#0A0A0D]/70" />
       </div>
 
       <Container size="md" className="relative z-10">

@@ -41,7 +41,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           id={inputId}
           className={cn(
             'w-full px-4 py-3.5 rounded-xl transition-colors duration-200 min-h-[44px]',
-            'bg-[#151317] border border-[#2A2633]',
+            'bg-[#0F1013] border border-[#2A2633]',
             'text-[#FFFFFF]',
             'focus:outline-none focus:border-[#316BE9]/50 focus:ring-1 focus:ring-[#316BE9]/20',
             error ? 'border-red-400' : 'hover:border-[#333338]',

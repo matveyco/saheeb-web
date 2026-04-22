@@ -12,7 +12,7 @@ export function SaheebDriveCard() {
   const tCommon = useTranslations('common');
 
   return (
-    <section className="py-24 lg:py-32 bg-[#211C28] relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-[#0A0A0D] relative overflow-hidden">
       <Container className="relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -33,7 +33,7 @@ export function SaheebDriveCard() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="max-w-5xl mx-auto"
         >
-          <div className="relative rounded-3xl overflow-hidden bg-[#151317] border border-[#2A2633]">
+          <div className="relative rounded-3xl overflow-hidden bg-[#0F1013] border border-[#2A2633]">
             <div className="grid md:grid-cols-2">
               {/* Content Side */}
               <div className="p-8 lg:p-12 flex flex-col justify-center">
@@ -82,7 +82,7 @@ export function SaheebDriveCard() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 {/* Gradient overlay for seamless blend */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#151317]/40 via-transparent to-transparent md:bg-gradient-to-l md:from-transparent md:via-transparent md:to-[#151317]/30" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0F1013]/40 via-transparent to-transparent md:bg-gradient-to-l md:from-transparent md:via-transparent md:to-[#0F1013]/30" />
 
                 {/* AI sparkle badge */}
                 <div className="absolute top-6 end-6 w-14 h-14 bg-[#1D1A22] border border-[#2A2633] rounded-2xl flex items-center justify-center">
@@ -92,7 +92,7 @@ export function SaheebDriveCard() {
                 </div>
 
                 {/* Bottom gradient for text contrast on mobile */}
-                <div className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-[#151317]/60 to-transparent md:hidden" />
+                <div className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-[#0F1013]/60 to-transparent md:hidden" />
               </div>
             </div>
           </div>

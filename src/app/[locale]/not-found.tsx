@@ -9,7 +9,7 @@ export default function NotFoundPage() {
   return (
     <>
       <Header />
-      <main className="pt-20 lg:pt-24 min-h-[80vh] flex items-center bg-[#211C28]">
+      <main className="pt-20 lg:pt-24 min-h-[80vh] flex items-center bg-[#0A0A0D]">
         <Container size="sm" className="relative z-10">
           <div className="text-center py-20">
             <h1 className="text-8xl lg:text-9xl font-black text-[#316BE9] mb-6">

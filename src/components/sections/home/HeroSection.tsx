@@ -11,7 +11,7 @@ export function HeroSection() {
   const t = useTranslations('home.hero');
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#211C28]">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0A0A0D]">
       {/* Muscat background image */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
         <Image
@@ -23,7 +23,7 @@ export function HeroSection() {
           priority
         />
         {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#211C28] via-[#211C28]/70 to-[#211C28]/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0D] via-[#0A0A0D]/70 to-[#0A0A0D]/30" />
       </div>
 
       <Container className="relative z-10 pt-20 lg:pt-28">

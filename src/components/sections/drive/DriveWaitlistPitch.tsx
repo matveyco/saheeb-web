@@ -34,7 +34,7 @@ export function DriveWaitlistPitch({
         {content.waitlistSectionSubtitle}
       </p>
 
-      <div className="mt-6 rounded-[1.5rem] border border-[#2A2633] bg-[#151317]/78 px-4 sm:px-5">
+      <div className="mt-6 rounded-[1.5rem] border border-[#2A2633] bg-[#0F1013]/78 px-4 sm:px-5">
         {content.waitlistBenefits.map((benefit, index) => (
           <div
             key={benefit}

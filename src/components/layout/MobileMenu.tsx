@@ -80,7 +80,7 @@ export function MobileMenu() {
       <div
         id="mobile-menu"
         className={cn(
-          'fixed top-0 end-0 h-full w-[300px] bg-[#211C28] border-s border-[#2A2633] z-50 lg:hidden transform transition-transform duration-300 ease-out',
+          'fixed top-0 end-0 h-full w-[300px] bg-[#0A0A0D] border-s border-[#2A2633] z-50 lg:hidden transform transition-transform duration-300 ease-out',
           isOpen
             ? 'translate-x-0 rtl:-translate-x-0'
             : 'translate-x-full rtl:-translate-x-full'

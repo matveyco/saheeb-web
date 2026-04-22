@@ -22,7 +22,7 @@ export function DriveFaqSection({
   const content = intent === 'seller' ? sellerContent : buyerContent;
 
   return (
-    <section className="bg-[#211C28] py-12 lg:py-20">
+    <section className="bg-[#0A0A0D] py-12 lg:py-20">
       <Container size="md">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-[#FFFFFF] lg:text-4xl">
@@ -35,7 +35,7 @@ export function DriveFaqSection({
           {content.faqItems.map((item) => (
             <details
               key={item.question}
-              className="group overflow-hidden rounded-2xl border border-[#2A2633] bg-[#151317]"
+              className="group overflow-hidden rounded-2xl border border-[#2A2633] bg-[#0F1013]"
             >
               <summary className="flex items-center justify-between gap-4 px-5 py-4 text-start text-[#FFFFFF] transition-colors hover:bg-[#16161A]">
                 <span className="font-medium">{item.question}</span>

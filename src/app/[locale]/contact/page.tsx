@@ -18,7 +18,7 @@ export default function ContactPage() {
       <Header />
       <main className="pt-16 md:pt-20 lg:pt-24">
         {/* Contact Section - Hero + Form combined */}
-        <section className="py-20 lg:py-28 bg-[#211C28] relative overflow-hidden">
+        <section className="py-20 lg:py-28 bg-[#0A0A0D] relative overflow-hidden">
           {/* Layer 1: Background image at opacity-20 */}
           <div className="absolute inset-0 z-0" aria-hidden="true">
             <Image
@@ -36,7 +36,7 @@ export default function ContactPage() {
             className="absolute inset-0 z-[1]"
             style={{
               background:
-                'linear-gradient(to bottom, rgba(33, 28, 40,0.4), rgba(33, 28, 40,0.2), rgba(33, 28, 40,0.9))',
+                'linear-gradient(to bottom, rgba(10, 10, 13,0.4), rgba(10, 10, 13,0.2), rgba(10, 10, 13,0.9))',
             }}
             aria-hidden="true"
           />
@@ -61,7 +61,7 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Info Section - Simple inline */}
-        <section className="py-16 bg-[#211C28] border-t border-[#2A2633]">
+        <section className="py-16 bg-[#0A0A0D] border-t border-[#2A2633]">
           <Container size="sm">
             <motion.div
               initial={{ opacity: 0, y: 12 }}

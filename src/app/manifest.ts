@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'AI-native technology solutions for Oman',
     start_url: '/',
     display: 'standalone',
-    background_color: '#211C28',
+    background_color: '#0A0A0D',
     theme_color: '#316BE9',
     orientation: 'portrait-primary',
     categories: ['business', 'technology'],

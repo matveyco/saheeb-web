@@ -73,7 +73,7 @@ export function DriveStickyWaitlistBar({
   return (
     <div
       data-testid="drive-sticky-bar"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-[#2A2633] bg-[#211C28]/96 px-4 py-3 shadow-[0_-10px_30px_rgba(0,0,0,0.35)] backdrop-blur lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-[#2A2633] bg-[#0A0A0D]/96 px-4 py-3 shadow-[0_-10px_30px_rgba(0,0,0,0.35)] backdrop-blur lg:hidden"
     >
       <DriveIntentButton
         intent="buyer"

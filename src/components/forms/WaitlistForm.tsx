@@ -535,7 +535,7 @@ export function WaitlistForm({
       className={cn('scroll-mt-24 lg:scroll-mt-32', className)}
     >
       {isSuccess ? (
-        <div className="rounded-[2rem] border border-emerald-500/20 bg-[#151317] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8">
+        <div className="rounded-[2rem] border border-emerald-500/20 bg-[#0F1013] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8">
           <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-400">
             <svg
               width="28"
@@ -577,7 +577,7 @@ export function WaitlistForm({
           <div
             ref={cardRef}
             id="join-now"
-            className="scroll-mt-24 rounded-[2rem] border border-[#413E49] bg-[#151317] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8 lg:scroll-mt-32"
+            className="scroll-mt-24 rounded-[2rem] border border-[#413E49] bg-[#0F1013] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8 lg:scroll-mt-32"
             data-testid="drive-waitlist-card"
           >
             <DriveWaitlistCounter variant="form" className="mb-3" />

@@ -29,11 +29,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-semibold rounded-xl transition-colors duration-200 ease-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#316BE9] focus-visible:ring-offset-2 focus-visible:ring-offset-[#211C28] disabled:opacity-50 disabled:cursor-not-allowed';
+      'inline-flex items-center justify-center font-semibold rounded-xl transition-colors duration-200 ease-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#316BE9] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0D] disabled:opacity-50 disabled:cursor-not-allowed';
 
     const variants = {
       primary: [
-        'bg-[#316BE9] text-[#211C28]',
+        'bg-[#316BE9] text-[#0A0A0D]',
         'shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.15)]',
         'hover:bg-[#4A82F5] hover:shadow-[0_2px_8px_rgba(49, 107, 233,0.25)]',
         'active:bg-[#BF9D71] active:shadow-none active:translate-y-[0.5px]',
@@ -42,7 +42,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         'bg-transparent',
         'border border-[#333338] text-[#FFFFFF]',
         'hover:bg-[#1D1A22] hover:border-[#444]',
-        'active:bg-[#151317] active:border-[#333338]',
+        'active:bg-[#0F1013] active:border-[#333338]',
       ].join(' '),
       ghost: [
         'text-[#8F859C]',

@@ -67,7 +67,7 @@ export function Vision2040Section() {
 
   return (
     <section
-      className="py-24 lg:py-32 bg-[#211C28] relative overflow-hidden"
+      className="py-24 lg:py-32 bg-[#0A0A0D] relative overflow-hidden"
       id="vision-2040"
     >
       {/* Futuristic Muscat skyline background */}
@@ -80,7 +80,7 @@ export function Vision2040Section() {
           sizes="100vw"
         />
         {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#211C28] via-[#211C28]/60 to-[#211C28]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0D] via-[#0A0A0D]/60 to-[#0A0A0D]" />
       </div>
 
       <Container className="relative z-10">
@@ -91,7 +91,7 @@ export function Vision2040Section() {
           transition={{ duration: 0.4 }}
           className="text-center mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#151317] border border-[#2A2633] text-[#316BE9] text-sm font-semibold mb-6">
+          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#0F1013] border border-[#2A2633] text-[#316BE9] text-sm font-semibold mb-6">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
             </svg>
@@ -117,7 +117,7 @@ export function Vision2040Section() {
               <div
                 className="
                   relative p-8 rounded-2xl
-                  bg-[#151317]
+                  bg-[#0F1013]
                   border border-[#2A2633]
                   hover:border-[#333338]
                   transition-colors duration-300

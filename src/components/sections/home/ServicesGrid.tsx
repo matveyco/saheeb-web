@@ -87,7 +87,7 @@ export function ServicesGrid() {
   };
 
   return (
-    <section className="py-24 lg:py-32 bg-[#211C28] relative overflow-hidden" id="services">
+    <section className="py-24 lg:py-32 bg-[#0A0A0D] relative overflow-hidden" id="services">
       <Container className="relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -118,7 +118,7 @@ export function ServicesGrid() {
                 <Card
                   variant="outline"
                   padding="lg"
-                  className="group h-full bg-[#151317] border-[#2A2633] hover:border-[#333338] transition-colors duration-300"
+                  className="group h-full bg-[#0F1013] border-[#2A2633] hover:border-[#333338] transition-colors duration-300"
                 >
                   <div className="inline-flex items-center justify-center w-14 h-14 bg-[#1D1A22] text-[#316BE9] rounded-xl mb-5 border border-[#2A2633]">
                     {icons[service.icon]}

@@ -22,7 +22,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     const baseStyles = 'rounded-2xl transition-colors duration-200';
 
     const variants = {
-      default: 'bg-[#151317] border border-[#2A2633]',
+      default: 'bg-[#0F1013] border border-[#2A2633]',
       outline: 'bg-transparent border border-[#2A2633]',
     };
 

@@ -19,7 +19,7 @@ export default function ProjectsPage() {
       <Header />
       <main className="pt-20 lg:pt-24">
         {/* Hero Section - Saheeb Drive Focus */}
-        <section className="py-24 lg:py-32 bg-[#211C28] relative overflow-hidden">
+        <section className="py-24 lg:py-32 bg-[#0A0A0D] relative overflow-hidden">
           {/* Hero Background Image */}
           <div className="absolute inset-0 z-0" aria-hidden="true">
             <Image
@@ -29,7 +29,7 @@ export default function ProjectsPage() {
               className="object-cover object-center opacity-45"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#211C28]/40 via-[#211C28]/20 to-[#211C28]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0D]/40 via-[#0A0A0D]/20 to-[#0A0A0D]" />
           </div>
 
           <Container className="relative z-10">
@@ -63,7 +63,7 @@ export default function ProjectsPage() {
         </section>
 
         {/* Saheeb Drive Showcase */}
-        <section className="py-20 lg:py-28 bg-[#211C28] border-t border-[#2A2633]">
+        <section className="py-20 lg:py-28 bg-[#0A0A0D] border-t border-[#2A2633]">
           <Container>
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Content */}
@@ -81,7 +81,7 @@ export default function ProjectsPage() {
                       height="24"
                       viewBox="0 0 24 24"
                       fill="none"
-                      stroke="#211C28"
+                      stroke="#0A0A0D"
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -138,7 +138,7 @@ export default function ProjectsPage() {
                     className="object-cover opacity-90"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#211C28]/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0D]/60 to-transparent" />
                 </div>
               </motion.div>
             </div>
@@ -146,7 +146,7 @@ export default function ProjectsPage() {
         </section>
 
         {/* More Coming Soon */}
-        <section className="py-20 lg:py-28 bg-[#151317]">
+        <section className="py-20 lg:py-28 bg-[#0F1013]">
           <Container size="md">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -180,7 +180,7 @@ export default function ProjectsPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 lg:py-32 bg-[#211C28] border-t border-[#2A2633]">
+        <section className="py-24 lg:py-32 bg-[#0A0A0D] border-t border-[#2A2633]">
           <Container size="md" className="relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 12 }}

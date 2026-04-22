@@ -33,7 +33,7 @@ export default function ServicesPage() {
       <Header />
       <main className="pt-20 lg:pt-24">
         {/* Hero Section */}
-        <section className="py-20 lg:py-28 bg-[#211C28] relative overflow-hidden">
+        <section className="py-20 lg:py-28 bg-[#0A0A0D] relative overflow-hidden">
           {/* Hero Background Image */}
           <div className="absolute inset-0 z-0" aria-hidden="true">
             <Image
@@ -43,7 +43,7 @@ export default function ServicesPage() {
               className="object-cover object-center opacity-50"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#211C28]/50 via-[#211C28]/30 to-[#211C28]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0D]/50 via-[#0A0A0D]/30 to-[#0A0A0D]" />
           </div>
 
           <Container className="relative z-10">
@@ -64,7 +64,7 @@ export default function ServicesPage() {
         </section>
 
         {/* Services List */}
-        <section className="py-16 lg:py-24 bg-[#211C28]">
+        <section className="py-16 lg:py-24 bg-[#0A0A0D]">
           <Container>
             <div className="space-y-16 lg:space-y-24">
               {SERVICES.map((service, index) => {
@@ -146,7 +146,7 @@ export default function ServicesPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 lg:py-32 bg-[#211C28] border-t border-[#2A2633]">
+        <section className="py-24 lg:py-32 bg-[#0A0A0D] border-t border-[#2A2633]">
           <Container size="md" className="relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 12 }}

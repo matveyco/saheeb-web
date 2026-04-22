@@ -49,12 +49,12 @@ export default async function SaheebDrivePaidLandingPage({
     <>
       <header
         data-testid="drive-paid-header"
-        className="fixed inset-x-0 top-0 z-50 border-b border-[#2A2633] bg-[#211C28]/95 backdrop-blur-md"
+        className="fixed inset-x-0 top-0 z-50 border-b border-[#2A2633] bg-[#0A0A0D]/95 backdrop-blur-md"
       >
         <Container>
           <div className="flex min-h-[72px] items-center gap-3">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#316BE9] text-lg font-bold text-[#211C28]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#316BE9] text-lg font-bold text-[#0A0A0D]">
                 S
               </div>
               <div>
@@ -76,7 +76,7 @@ export default async function SaheebDrivePaidLandingPage({
         {...copy}
       />
 
-      <footer className="border-t border-[#2A2633] bg-[#211C28] py-6 text-[#8F859C]">
+      <footer className="border-t border-[#2A2633] bg-[#0A0A0D] py-6 text-[#8F859C]">
         <Container>
           <div className="flex flex-wrap items-center gap-4 text-sm">
             <Link

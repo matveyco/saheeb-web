@@ -54,7 +54,7 @@ export default function StyleGuidePage() {
       <Header />
       <main className="pt-16 md:pt-20 lg:pt-24">
         {/* Hero */}
-        <section className="py-16 lg:py-20 bg-[#211C28] border-b border-[#2A2633]">
+        <section className="py-16 lg:py-20 bg-[#0A0A0D] border-b border-[#2A2633]">
           <Container>
             <Badge variant="accent" className="mb-4">Design System</Badge>
             <h1 className="text-4xl lg:text-5xl font-bold text-[#FFFFFF] mb-4">
@@ -68,7 +68,7 @@ export default function StyleGuidePage() {
         </section>
 
         {/* Product Brief */}
-        <section className="py-16 bg-[#151317]">
+        <section className="py-16 bg-[#0F1013]">
           <Container>
             <SectionHeader
               title="1. Product Brief"
@@ -122,7 +122,7 @@ export default function StyleGuidePage() {
         </section>
 
         {/* Color Palette */}
-        <section className="py-16 bg-[#211C28]">
+        <section className="py-16 bg-[#0A0A0D]">
           <Container>
             <SectionHeader
               title="2. Color Palette"
@@ -132,8 +132,8 @@ export default function StyleGuidePage() {
             {/* Background Colors */}
             <h3 className="text-lg font-semibold text-[#FFFFFF] mb-4">Backgrounds</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-              <ColorSwatch name="Primary" hex="#211C28" cssVar="--bg-primary" usage="Main background" />
-              <ColorSwatch name="Surface" hex="#151317" cssVar="--bg-surface" usage="Cards, elevated elements" />
+              <ColorSwatch name="Primary" hex="#0A0A0D" cssVar="--bg-primary" usage="Main background" />
+              <ColorSwatch name="Surface" hex="#0F1013" cssVar="--bg-surface" usage="Cards, elevated elements" />
               <ColorSwatch name="Elevated" hex="#1D1A22" cssVar="--bg-elevated" usage="Hover states, active elements" />
               <ColorSwatch name="Subtle" hex="#2A2633" cssVar="--bg-subtle" usage="Secondary surfaces" />
             </div>
@@ -172,11 +172,11 @@ export default function StyleGuidePage() {
             {/* Surface Examples */}
             <h3 className="text-lg font-semibold text-[#FFFFFF] mb-4">Surface Examples</h3>
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="p-6 rounded-2xl bg-[#151317] border border-[#2A2633]">
+              <div className="p-6 rounded-2xl bg-[#0F1013] border border-[#2A2633]">
                 <p className="text-sm font-medium text-[#FFFFFF] mb-2">Default Card</p>
-                <code className="text-xs text-[#316BE9] font-mono">bg-[#151317] border-[#2A2633]</code>
+                <code className="text-xs text-[#316BE9] font-mono">bg-[#0F1013] border-[#2A2633]</code>
               </div>
-              <div className="p-6 rounded-2xl bg-[#151317] border border-[#333338]">
+              <div className="p-6 rounded-2xl bg-[#0F1013] border border-[#333338]">
                 <p className="text-sm font-medium text-[#FFFFFF] mb-2">Hovered Card</p>
                 <code className="text-xs text-[#316BE9] font-mono">hover:border-[#333338]</code>
               </div>
@@ -189,7 +189,7 @@ export default function StyleGuidePage() {
         </section>
 
         {/* Typography */}
-        <section className="py-16 bg-[#151317]">
+        <section className="py-16 bg-[#0F1013]">
           <Container>
             <SectionHeader
               title="3. Typography"
@@ -234,7 +234,7 @@ export default function StyleGuidePage() {
             </div>
 
             <h3 className="text-lg font-semibold text-[#FFFFFF] mb-4">Type Scale</h3>
-            <div className="space-y-4 p-6 bg-[#211C28] rounded-2xl border border-[#2A2633]">
+            <div className="space-y-4 p-6 bg-[#0A0A0D] rounded-2xl border border-[#2A2633]">
               <div className="flex items-baseline gap-4">
                 <code className="text-xs text-[#316BE9] font-mono w-24 shrink-0">text-5xl</code>
                 <p className="text-5xl font-bold text-[#FFFFFF]">Heading 1</p>
@@ -264,7 +264,7 @@ export default function StyleGuidePage() {
         </section>
 
         {/* Components */}
-        <section className="py-16 bg-[#211C28]">
+        <section className="py-16 bg-[#0A0A0D]">
           <Container>
             <SectionHeader
               title="4. Component Library"
@@ -273,7 +273,7 @@ export default function StyleGuidePage() {
 
             {/* Buttons */}
             <h3 className="text-lg font-semibold text-[#FFFFFF] mb-4">Buttons</h3>
-            <div className="p-6 bg-[#151317] rounded-2xl border border-[#2A2633] mb-8">
+            <div className="p-6 bg-[#0F1013] rounded-2xl border border-[#2A2633] mb-8">
               <p className="text-xs text-[#5C5C63] mb-4">Variants</p>
               <div className="flex flex-wrap gap-4 mb-6">
                 <Button variant="primary">Primary (Accent)</Button>
@@ -295,7 +295,7 @@ export default function StyleGuidePage() {
 
             {/* Badges */}
             <h3 className="text-lg font-semibold text-[#FFFFFF] mb-4">Badges</h3>
-            <div className="p-6 bg-[#151317] rounded-2xl border border-[#2A2633] mb-8">
+            <div className="p-6 bg-[#0F1013] rounded-2xl border border-[#2A2633] mb-8">
               <div className="flex flex-wrap gap-4">
                 <Badge variant="default">Default</Badge>
                 <Badge variant="accent">Accent</Badge>
@@ -308,7 +308,7 @@ export default function StyleGuidePage() {
             <div className="grid md:grid-cols-2 gap-4 mb-8">
               <Card variant="default" padding="md">
                 <p className="text-sm font-medium text-[#FFFFFF]">Default</p>
-                <p className="text-xs text-[#5C5C63] mt-1">variant=&quot;default&quot; — bg-[#151317] border-[#2A2633]</p>
+                <p className="text-xs text-[#5C5C63] mt-1">variant=&quot;default&quot; — bg-[#0F1013] border-[#2A2633]</p>
               </Card>
               <Card variant="outline" padding="md">
                 <p className="text-sm font-medium text-[#FFFFFF]">Outline</p>
@@ -318,7 +318,7 @@ export default function StyleGuidePage() {
 
             {/* Inputs */}
             <h3 className="text-lg font-semibold text-[#FFFFFF] mb-4">Form Inputs</h3>
-            <div className="grid md:grid-cols-2 gap-6 p-6 bg-[#151317] rounded-2xl border border-[#2A2633]">
+            <div className="grid md:grid-cols-2 gap-6 p-6 bg-[#0F1013] rounded-2xl border border-[#2A2633]">
               <div className="space-y-4">
                 <Input placeholder="Default input" />
                 <Input placeholder="With error" error="This field is required" />
@@ -332,7 +332,7 @@ export default function StyleGuidePage() {
         </section>
 
         {/* Mobile Guidelines */}
-        <section className="py-16 bg-[#151317]">
+        <section className="py-16 bg-[#0F1013]">
           <Container>
             <SectionHeader
               title="5. Mobile App Guidelines"
@@ -402,7 +402,7 @@ export default function StyleGuidePage() {
         </section>
 
         {/* Car Marketplace Components */}
-        <section className="py-16 bg-[#211C28]">
+        <section className="py-16 bg-[#0A0A0D]">
           <Container>
             <SectionHeader
               title="6. Car Marketplace Components"
@@ -474,7 +474,7 @@ export default function StyleGuidePage() {
         </section>
 
         {/* Iconography */}
-        <section className="py-16 bg-[#151317] border-b border-[#2A2633]">
+        <section className="py-16 bg-[#0F1013] border-b border-[#2A2633]">
           <Container>
             <SectionHeader
               title="7. Iconography"
@@ -539,7 +539,7 @@ export default function StyleGuidePage() {
         </section>
 
         {/* Design Principles */}
-        <section className="py-16 bg-[#211C28]">
+        <section className="py-16 bg-[#0A0A0D]">
           <Container>
             <SectionHeader
               title="8. Design Principles"

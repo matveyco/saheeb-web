@@ -98,7 +98,7 @@ function BreakdownTable({
   items: BreakdownItem[];
 }) {
   return (
-    <div className="rounded-2xl border border-[#2A2633] bg-[#151317] p-5">
+    <div className="rounded-2xl border border-[#2A2633] bg-[#0F1013] p-5">
       <div className="mb-4 flex items-center justify-between gap-3">
         <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-[#FFFFFF]">
           {title}
@@ -162,7 +162,7 @@ function ReconciliationTable({
   rows: AnalyticsWindow['reconciliation'];
 }) {
   return (
-    <div className="rounded-2xl border border-[#2A2633] bg-[#151317] p-5">
+    <div className="rounded-2xl border border-[#2A2633] bg-[#0F1013] p-5">
       <div className="mb-4">
         <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-[#FFFFFF]">
           Submit vs Lead Reconciliation
@@ -259,7 +259,7 @@ export default function AdminWaitlistPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#211C28] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0A0A0D] flex items-center justify-center">
         <div className="text-[#8F859C]">Loading...</div>
       </div>
     );
@@ -267,14 +267,14 @@ export default function AdminWaitlistPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#211C28] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0A0A0D] flex items-center justify-center">
         <div className="text-red-400">{error}</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#211C28] p-8">
+    <div className="min-h-screen bg-[#0A0A0D] p-8">
       <div className="mx-auto max-w-7xl">
         <h1 className="mb-2 text-3xl font-bold text-white">
           Waitlist Entries
@@ -334,7 +334,7 @@ export default function AdminWaitlistPage() {
                   ].map(([label, value]) => (
                     <div
                       key={label}
-                      className="rounded-2xl border border-[#2A2633] bg-[#151317] p-4"
+                      className="rounded-2xl border border-[#2A2633] bg-[#0F1013] p-4"
                     >
                       <p className="text-xs font-medium uppercase tracking-[0.14em] text-[#5C5C63]">
                         {label}
@@ -369,7 +369,7 @@ export default function AdminWaitlistPage() {
                   ].map(([label, value]) => (
                     <div
                       key={label}
-                      className="rounded-2xl border border-[#2A2633] bg-[#151317] p-4"
+                      className="rounded-2xl border border-[#2A2633] bg-[#0F1013] p-4"
                     >
                       <p className="text-xs font-medium uppercase tracking-[0.14em] text-[#5C5C63]">
                         {label}

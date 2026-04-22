@@ -31,7 +31,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-[#211C28] border-t border-[#2A2633] text-[#8F859C]">
+    <footer className="bg-[#0A0A0D] border-t border-[#2A2633] text-[#8F859C]">
       <Container>
         <div className="py-16 lg:py-20">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">

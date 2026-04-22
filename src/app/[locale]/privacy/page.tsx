@@ -58,7 +58,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
       <Header />
       <main className="pt-20 lg:pt-24">
         {/* Hero Section */}
-        <section className="py-16 lg:py-20 bg-[#211C28] relative overflow-hidden">
+        <section className="py-16 lg:py-20 bg-[#0A0A0D] relative overflow-hidden">
           {/* Decorative glow */}
           <div
             className="hidden md:block absolute top-1/2 -translate-y-1/2 end-[10%] w-[300px] h-[300px] rounded-full"
@@ -83,7 +83,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
         </section>
 
         {/* Content */}
-        <section className="py-12 lg:py-16 bg-[#151317]">
+        <section className="py-12 lg:py-16 bg-[#0F1013]">
           <Container size="md">
             <div className="space-y-12">
               {sections.map((section, index) => (

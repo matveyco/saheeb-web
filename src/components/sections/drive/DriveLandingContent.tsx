@@ -78,10 +78,10 @@ export function DriveLandingContent({
 }: DriveLandingContentProps) {
   return (
     <>
-      <main className="bg-[#211C28] pt-20 lg:pt-24">
+      <main className="bg-[#0A0A0D] pt-20 lg:pt-24">
         <section
           id="drive-hero"
-          className="relative overflow-hidden border-b border-[#2A2633] bg-[#211C28] py-6 lg:py-24"
+          className="relative overflow-hidden border-b border-[#2A2633] bg-[#0A0A0D] py-6 lg:py-24"
         >
           <div className="absolute inset-0" aria-hidden="true">
             <Image
@@ -92,7 +92,7 @@ export function DriveLandingContent({
               sizes="100vw"
               priority
             />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(49, 107, 233,0.2),transparent_30%),linear-gradient(to_bottom,rgba(33, 28, 40,0.35),rgba(33, 28, 40,0.82),#211C28)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(49, 107, 233,0.2),transparent_30%),linear-gradient(to_bottom,rgba(10, 10, 13,0.35),rgba(10, 10, 13,0.82),#0A0A0D)]" />
           </div>
 
           <Container className="relative z-10">
@@ -120,8 +120,8 @@ export function DriveLandingContent({
               </div>
 
               <div className="relative z-0 hidden w-full max-w-[300px] self-end sm:max-w-[340px] lg:mx-auto lg:mt-0 lg:block lg:pt-4">
-                <div className="pointer-events-none rounded-[2rem] border border-[#2A2A2E] bg-[#151317]/85 p-4 shadow-[0_30px_100px_rgba(0,0,0,0.35)] backdrop-blur">
-                  <div className="mb-4 rounded-2xl border border-[#2A2633] bg-[#211C28] px-4 py-3">
+                <div className="pointer-events-none rounded-[2rem] border border-[#2A2A2E] bg-[#0F1013]/85 p-4 shadow-[0_30px_100px_rgba(0,0,0,0.35)] backdrop-blur">
+                  <div className="mb-4 rounded-2xl border border-[#2A2633] bg-[#0A0A0D] px-4 py-3">
                     <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#8F859C]">
                       {hero.visualEyebrow}
                     </p>
@@ -129,7 +129,7 @@ export function DriveLandingContent({
                       {hero.visualBody}
                     </p>
                   </div>
-                  <div className="relative aspect-[9/19] overflow-hidden rounded-[1.5rem] border border-[#2A2633] bg-[#211C28]">
+                  <div className="relative aspect-[9/19] overflow-hidden rounded-[1.5rem] border border-[#2A2633] bg-[#0A0A0D]">
                     <Image
                       src="/images/saheeb-drive-app-chat.jpg"
                       alt="Saheeb Drive app preview"
@@ -144,7 +144,7 @@ export function DriveLandingContent({
           </Container>
         </section>
 
-        <section className="border-b border-[#2A2633] bg-[#211C28] py-12 lg:py-18">
+        <section className="border-b border-[#2A2633] bg-[#0A0A0D] py-12 lg:py-18">
           <Container>
             <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
               <div className="order-2 lg:order-2">
@@ -185,7 +185,7 @@ export function DriveLandingContent({
           />
         </Container>
 
-        <section className="border-b border-[#2A2633] bg-[#211C28] py-12 lg:py-20">
+        <section className="border-b border-[#2A2633] bg-[#0A0A0D] py-12 lg:py-20">
           <Container>
             <div className="max-w-2xl">
               <h2 className="text-3xl font-bold text-[#FFFFFF] lg:text-4xl">
@@ -200,9 +200,9 @@ export function DriveLandingContent({
               {howItWorks.steps.map((step) => (
                 <article
                   key={step.number}
-                  className="rounded-[1.75rem] border border-[#2A2633] bg-[#151317] p-6"
+                  className="rounded-[1.75rem] border border-[#2A2633] bg-[#0F1013] p-6"
                 >
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#316BE9] text-lg font-bold text-[#211C28]">
+                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#316BE9] text-lg font-bold text-[#0A0A0D]">
                     {step.number}
                   </div>
                   <h3 className="mt-5 text-xl font-semibold text-[#FFFFFF]">

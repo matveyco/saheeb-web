@@ -89,7 +89,7 @@ export function AboutSection() {
 
   return (
     <section
-      className="py-24 lg:py-32 bg-[#211C28] relative overflow-hidden"
+      className="py-24 lg:py-32 bg-[#0A0A0D] relative overflow-hidden"
       id="about"
     >
       {/* Omani geometric pattern - subtle centered background */}
@@ -105,7 +105,7 @@ export function AboutSection() {
         <div
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 0%, #211C28 80%)'
+            background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 0%, #0A0A0D 80%)'
           }}
         />
       </div>
@@ -118,7 +118,7 @@ export function AboutSection() {
           transition={{ duration: 0.4 }}
           className="max-w-3xl mx-auto text-center mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#151317] border border-[#2A2633] text-[#8F859C] text-sm font-medium mb-6">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0F1013] border border-[#2A2633] text-[#8F859C] text-sm font-medium mb-6">
             {t('subtitle')}
           </span>
           <h2 className="text-4xl lg:text-5xl font-bold text-[#FFFFFF] mb-6">
@@ -143,7 +143,7 @@ export function AboutSection() {
               <Card
                 variant="outline"
                 padding="lg"
-                className="text-center h-full group bg-[#151317] border-[#2A2633] hover:border-[#333338] transition-colors duration-300"
+                className="text-center h-full group bg-[#0F1013] border-[#2A2633] hover:border-[#333338] transition-colors duration-300"
               >
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1D1A22] text-[#316BE9] rounded-2xl mb-6 border border-[#2A2633]">
                   {value.icon}
