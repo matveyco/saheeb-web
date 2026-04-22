@@ -6,6 +6,7 @@ import { Container } from '@/components/ui';
 import { SITE_CONFIG } from '@/lib/constants';
 import { TrackedLink } from '@/components/analytics/TrackedLink';
 import { usePathname } from '@/i18n/navigation';
+import { BrandMark } from './Logo';
 
 export function Footer() {
   const t = useTranslations('footer');
@@ -36,27 +37,12 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
             {/* Brand Column */}
             <div className="lg:col-span-1">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 bg-[#316BE9] rounded-xl flex items-center justify-center">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 32 32"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M8 16C8 11.5817 11.5817 8 16 8C20.4183 8 24 11.5817 24 16"
-                      stroke="#211C28"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                    />
-                    <circle cx="16" cy="20" r="4" fill="#211C28" />
-                  </svg>
-                </div>
-                <span className="font-bold text-xl text-[#FFFFFF]">
-                  {isArabic ? 'صاحب' : 'Saheeb'}
+              <div className="flex items-center gap-2 mb-5 text-[#FFFFFF]">
+                <BrandMark className="w-8 h-8 shrink-0" />
+                <span className="font-semibold text-xl">
+                  {isArabic
+                    ? (isDrivePage ? <>صاحب<span className="font-normal">درايف</span></> : 'صاحب')
+                    : (isDrivePage ? <>Saheeb<span className="font-normal">Drive</span></> : 'Saheeb')}
                 </span>
               </div>
               <p className="text-sm text-[#5C5C63] mb-6 leading-relaxed">{t('tagline')}</p>

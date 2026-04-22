@@ -3,14 +3,21 @@ import { Link } from '@/i18n/navigation';
 
 interface LogoProps {
   className?: string;
+  /**
+   * variant="drive": render "SaheebDrive" wordmark (on Drive product pages).
+   * variant="saheeb": render just "Saheeb" (parent brand pages).
+   * Icon is the same designer's steering-wheel mark either way — brand consistency.
+   */
   variant?: 'saheeb' | 'drive';
+  /** Render without text link — icon only. For use in footers or compact spaces. */
+  asLink?: boolean;
 }
 
 /**
- * Drive mark — actual steering-wheel icon paths extracted from the
+ * Saheeb brand mark — actual steering-wheel icon paths extracted from the
  * Figma Saheeb_Drive_logo_ENG component (file RHMKF89wn8Ft9z6CR46M90).
  */
-function DriveMark({ className }: { className?: string }) {
+export function BrandMark({ className }: { className?: string }) {
   return (
     <svg
       viewBox="70.4 187.4 113.1 113.1"
@@ -31,23 +38,6 @@ function DriveMark({ className }: { className?: string }) {
   );
 }
 
-/**
- * Saheeb parent-brand sparkle mark — 4-point star.
- * From Figma Saheeb_logo component.
- */
-function SaheebMark({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 64 64"
-      fill="currentColor"
-      aria-hidden="true"
-      className={className}
-    >
-      <path d="M32 4 L36.2 27.8 L60 32 L36.2 36.2 L32 60 L27.8 36.2 L4 32 L27.8 27.8 Z" />
-    </svg>
-  );
-}
-
 export function Logo({ className, variant = 'saheeb' }: LogoProps) {
   const locale = useLocale();
   const isArabic = locale === 'ar';
@@ -59,11 +49,7 @@ export function Logo({ className, variant = 'saheeb' }: LogoProps) {
       className={`flex items-center gap-2 font-semibold text-xl text-[#FFFFFF] hover:text-[#316BE9] transition-colors duration-200 ${className ?? ''}`}
       aria-label={isDrive ? 'Saheeb Drive' : 'Saheeb'}
     >
-      {isDrive ? (
-        <DriveMark className="w-8 h-8 shrink-0" />
-      ) : (
-        <SaheebMark className="w-7 h-7 shrink-0" />
-      )}
+      <BrandMark className="w-8 h-8 shrink-0" />
       <span className={isDrive ? 'tracking-tight' : ''}>
         {isDrive
           ? isArabic
