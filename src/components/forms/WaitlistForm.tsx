@@ -535,7 +535,7 @@ export function WaitlistForm({
       className={cn('scroll-mt-24 lg:scroll-mt-32', className)}
     >
       {isSuccess ? (
-        <div className="rounded-[2rem] border border-emerald-500/20 bg-[#111113] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8">
+        <div className="rounded-[2rem] border border-emerald-500/20 bg-[#151317] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8">
           <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-400">
             <svg
               width="28"
@@ -551,13 +551,13 @@ export function WaitlistForm({
               <polyline points="20 6 9 17 4 12" />
             </svg>
           </div>
-          <h3 className="text-2xl font-bold text-[#EDEDEF]">
+          <h3 className="text-2xl font-bold text-[#FFFFFF]">
             {position
               ? t('success.title', { position: String(position) })
               : t('success.titleFallback')}
           </h3>
-          <p className="mt-3 text-[#8F8F96]">{t('success.message')}</p>
-          <p className="mt-2 text-sm text-[#C9A87C]">
+          <p className="mt-3 text-[#8F859C]">{t('success.message')}</p>
+          <p className="mt-2 text-sm text-[#316BE9]">
             {t('success.launchNote')}
           </p>
 
@@ -577,13 +577,13 @@ export function WaitlistForm({
           <div
             ref={cardRef}
             id="join-now"
-            className="scroll-mt-24 rounded-[2rem] border border-[#2B2B31] bg-[#111113] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8 lg:scroll-mt-32"
+            className="scroll-mt-24 rounded-[2rem] border border-[#413E49] bg-[#151317] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8 lg:scroll-mt-32"
             data-testid="drive-waitlist-card"
           >
             <DriveWaitlistCounter variant="form" className="mb-3" />
             <h3
               data-testid="drive-waitlist-title"
-              className="mb-5 text-2xl font-bold tracking-tight text-[#EDEDEF] sm:text-[2rem]"
+              className="mb-5 text-2xl font-bold tracking-tight text-[#FFFFFF] sm:text-[2rem]"
             >
               {t('title')}
             </h3>
@@ -606,7 +606,7 @@ export function WaitlistForm({
                 error={errors.email}
                 autoComplete="email"
                 dir="ltr"
-                className="border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
+                className="border-[#3A3A3F] focus:border-[#316BE9] focus:ring-[#316BE9]/25"
               />
 
               <Input
@@ -626,7 +626,7 @@ export function WaitlistForm({
                 error={errors.phone}
                 autoComplete="tel"
                 dir="ltr"
-                className="border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
+                className="border-[#3A3A3F] focus:border-[#316BE9] focus:ring-[#316BE9]/25"
               />
             </div>
 
@@ -666,7 +666,7 @@ export function WaitlistForm({
                       intentSource,
                     });
                   }}
-                  className="text-[#C9A87C] transition-colors hover:text-[#EDEDEF]"
+                  className="text-[#316BE9] transition-colors hover:text-[#FFFFFF]"
                 >
                   {t('privacy')}
                 </Link>

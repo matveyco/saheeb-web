@@ -17,7 +17,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-sm font-medium mb-1.5 text-[#8F8F96]"
+            className="block text-sm font-medium mb-1.5 text-[#8F859C]"
           >
             {label}
             {props.required && (
@@ -32,9 +32,9 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={inputId}
           className={cn(
             'w-full px-4 py-3.5 rounded-xl transition-colors duration-200 min-h-[44px]',
-            'bg-[#111113] border border-[#222225]',
-            'text-[#EDEDEF] placeholder:text-[#5C5C63]',
-            'focus:outline-none focus:border-[#C9A87C]/50 focus:ring-1 focus:ring-[#C9A87C]/20',
+            'bg-[#151317] border border-[#2A2633]',
+            'text-[#FFFFFF] placeholder:text-[#5C5C63]',
+            'focus:outline-none focus:border-[#316BE9]/50 focus:ring-1 focus:ring-[#316BE9]/20',
             'min-h-[100px] resize-y',
             error ? 'border-red-400' : 'hover:border-[#333338]',
             className

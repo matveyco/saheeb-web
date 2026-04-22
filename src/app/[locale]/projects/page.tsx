@@ -19,7 +19,7 @@ export default function ProjectsPage() {
       <Header />
       <main className="pt-20 lg:pt-24">
         {/* Hero Section - Saheeb Drive Focus */}
-        <section className="py-24 lg:py-32 bg-[#09090B] relative overflow-hidden">
+        <section className="py-24 lg:py-32 bg-[#211C28] relative overflow-hidden">
           {/* Hero Background Image */}
           <div className="absolute inset-0 z-0" aria-hidden="true">
             <Image
@@ -29,7 +29,7 @@ export default function ProjectsPage() {
               className="object-cover object-center opacity-45"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#09090B]/40 via-[#09090B]/20 to-[#09090B]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#211C28]/40 via-[#211C28]/20 to-[#211C28]" />
           </div>
 
           <Container className="relative z-10">
@@ -42,10 +42,10 @@ export default function ProjectsPage() {
               <Badge variant="accent" className="mb-6">
                 {t('saheebDrive.status')}
               </Badge>
-              <h1 className="text-4xl lg:text-6xl font-bold text-[#EDEDEF] mb-4">
+              <h1 className="text-4xl lg:text-6xl font-bold text-[#FFFFFF] mb-4">
                 {t('title')}
               </h1>
-              <p className="text-xl lg:text-2xl text-[#C9A87C] font-semibold mb-8">
+              <p className="text-xl lg:text-2xl text-[#316BE9] font-semibold mb-8">
                 {t('subtitle')}
               </p>
               <Button asChild variant="primary" size="lg">
@@ -63,7 +63,7 @@ export default function ProjectsPage() {
         </section>
 
         {/* Saheeb Drive Showcase */}
-        <section className="py-20 lg:py-28 bg-[#09090B] border-t border-[#1A1A1D]">
+        <section className="py-20 lg:py-28 bg-[#211C28] border-t border-[#2A2633]">
           <Container>
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Content */}
@@ -75,13 +75,13 @@ export default function ProjectsPage() {
               >
                 <div className="flex items-center gap-3 mb-4">
                   {/* Car icon */}
-                  <div className="w-12 h-12 bg-[#C9A87C] rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-[#316BE9] rounded-xl flex items-center justify-center">
                     <svg
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
                       fill="none"
-                      stroke="#09090B"
+                      stroke="#211C28"
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -91,16 +91,16 @@ export default function ProjectsPage() {
                       <circle cx="16.5" cy="16.5" r="2.5" />
                     </svg>
                   </div>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-[#EDEDEF]">
+                  <h2 className="text-3xl lg:text-4xl font-bold text-[#FFFFFF]">
                     {t('saheebDrive.title')}
                   </h2>
                 </div>
 
-                <p className="text-xl lg:text-2xl text-[#C9A87C] font-semibold mb-4">
+                <p className="text-xl lg:text-2xl text-[#316BE9] font-semibold mb-4">
                   {t('saheebDrive.heroTagline')}
                 </p>
 
-                <p className="text-lg text-[#8F8F96] mb-8 leading-relaxed">
+                <p className="text-lg text-[#8F859C] mb-8 leading-relaxed">
                   {t('saheebDrive.heroDescription')}
                 </p>
 
@@ -130,7 +130,7 @@ export default function ProjectsPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.1 }}
               >
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[#222225]">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[#2A2633]">
                   <Image
                     src="/images/saheeb-drive-hero.jpg"
                     alt={t('saheebDrive.title')}
@@ -138,7 +138,7 @@ export default function ProjectsPage() {
                     className="object-cover opacity-90"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#09090B]/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#211C28]/60 to-transparent" />
                 </div>
               </motion.div>
             </div>
@@ -146,7 +146,7 @@ export default function ProjectsPage() {
         </section>
 
         {/* More Coming Soon */}
-        <section className="py-20 lg:py-28 bg-[#111113]">
+        <section className="py-20 lg:py-28 bg-[#151317]">
           <Container size="md">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -155,7 +155,7 @@ export default function ProjectsPage() {
               transition={{ duration: 0.4 }}
               className="text-center"
             >
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#19191B] border border-[#222225] flex items-center justify-center">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#1D1A22] border border-[#2A2633] flex items-center justify-center">
                 <svg
                   width="28"
                   height="28"
@@ -169,7 +169,7 @@ export default function ProjectsPage() {
                   <path d="M12 6v6l4 2" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-[#8F8F96] mb-3">
+              <h3 className="text-2xl font-bold text-[#8F859C] mb-3">
                 {t('moreComing.title')}
               </h3>
               <p className="text-[#5C5C63] max-w-md mx-auto">
@@ -180,7 +180,7 @@ export default function ProjectsPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 lg:py-32 bg-[#09090B] border-t border-[#1A1A1D]">
+        <section className="py-24 lg:py-32 bg-[#211C28] border-t border-[#2A2633]">
           <Container size="md" className="relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -189,12 +189,12 @@ export default function ProjectsPage() {
               transition={{ duration: 0.4 }}
               className="text-center"
             >
-              <h2 className="text-4xl lg:text-5xl font-bold text-[#EDEDEF] mb-6">
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#FFFFFF] mb-6">
                 {isArabic
                   ? 'انضم لقائمة انتظار صاحب درايف'
                   : 'Join the Saheeb Drive Waitlist'}
               </h2>
-              <p className="text-xl text-[#8F8F96] max-w-xl mx-auto mb-10">
+              <p className="text-xl text-[#8F859C] max-w-xl mx-auto mb-10">
                 {isArabic
                   ? 'منتجنا الأولوي الآن. سجّل مبكراً إذا كنت تنوي الشراء أو البيع في عُمان.'
                   : 'Saheeb Drive is our priority launch right now. Join early if you plan to buy or sell anywhere in Oman.'}

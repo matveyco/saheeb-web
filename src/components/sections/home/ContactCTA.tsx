@@ -13,7 +13,7 @@ export function ContactCTA() {
   const isArabic = locale === 'ar';
 
   return (
-    <section className="py-24 lg:py-32 bg-[#09090B] relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-[#211C28] relative overflow-hidden">
       {/* Sultan Qaboos Mosque background */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
         <Image
@@ -24,7 +24,7 @@ export function ContactCTA() {
           sizes="100vw"
         />
         {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#09090B]/70 via-[#09090B]/40 to-[#09090B]/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#211C28]/70 via-[#211C28]/40 to-[#211C28]/70" />
       </div>
 
       <Container size="md" className="relative z-10">
@@ -40,7 +40,7 @@ export function ContactCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[#EDEDEF] mb-6 leading-tight"
+            className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[#FFFFFF] mb-6 leading-tight"
           >
             {t('title')}
           </motion.h2>
@@ -50,7 +50,7 @@ export function ContactCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="text-xl text-[#8F8F96] max-w-xl mx-auto mb-10"
+            className="text-xl text-[#8F859C] max-w-xl mx-auto mb-10"
           >
             {t('subtitle')}
           </motion.p>
@@ -84,7 +84,7 @@ export function ContactCTA() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.4 }}
-            className="mt-16 pt-10 border-t border-[#1A1A1D]"
+            className="mt-16 pt-10 border-t border-[#2A2633]"
           >
             <div className="flex flex-wrap items-center justify-center gap-8 text-[#5C5C63]">
               <div className="flex items-center gap-2">

@@ -22,8 +22,8 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             type="checkbox"
             className={cn(
               'h-4 w-4 rounded transition-colors duration-200 cursor-pointer',
-              'border-[#222225] bg-[#111113]',
-              'text-[#C9A87C] focus:ring-[#C9A87C]/50 focus:ring-offset-0',
+              'border-[#2A2633] bg-[#151317]',
+              'text-[#316BE9] focus:ring-[#316BE9]/50 focus:ring-offset-0',
               error ? 'border-red-400' : '',
               'disabled:cursor-not-allowed disabled:opacity-50',
               className

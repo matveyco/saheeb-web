@@ -165,10 +165,10 @@ export function ContactForm() {
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
-        <h3 className="text-xl font-bold text-[#EDEDEF] mb-2">
+        <h3 className="text-xl font-bold text-[#FFFFFF] mb-2">
           {t('success.title')}
         </h3>
-        <p className="text-[#8F8F96]">{t('success.message')}</p>
+        <p className="text-[#8F859C]">{t('success.message')}</p>
       </div>
     );
   }
@@ -233,20 +233,20 @@ export function ContactForm() {
             name="consent"
             checked={formData.consent}
             onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-            className="mt-0.5 w-5 h-5 rounded border-[#222225] bg-[#111113] text-[#C9A87C] focus:ring-[#C9A87C]/50 focus:ring-offset-0"
+            className="mt-0.5 w-5 h-5 rounded border-[#2A2633] bg-[#151317] text-[#316BE9] focus:ring-[#316BE9]/50 focus:ring-offset-0"
           />
           <span className="text-sm text-[#5C5C63]">
             {isArabic ? (
               <>
                 أوافق على معالجة بياناتي وفقًا لـ{' '}
-                <Link href="/privacy" className="text-[#C9A87C] hover:text-[#EDEDEF] transition-colors">
+                <Link href="/privacy" className="text-[#316BE9] hover:text-[#FFFFFF] transition-colors">
                   سياسة الخصوصية
                 </Link>
               </>
             ) : (
               <>
                 I agree to the{' '}
-                <Link href="/privacy" className="text-[#C9A87C] hover:text-[#EDEDEF] transition-colors">
+                <Link href="/privacy" className="text-[#316BE9] hover:text-[#FFFFFF] transition-colors">
                   Privacy Policy
                 </Link>
               </>

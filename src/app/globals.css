@@ -1,29 +1,29 @@
 @import 'tailwindcss';
 
 :root {
-  /* Backgrounds */
-  --bg-primary: #09090B;
-  --bg-surface: #111113;
-  --bg-elevated: #19191B;
-  --bg-subtle: #222225;
+  /* Backgrounds — new deep navy-ink palette from Figma design system */
+  --bg-primary: #211C28;
+  --bg-surface: #151317;
+  --bg-elevated: #1D1A22;
+  --bg-subtle: #2A2633;
 
   /* Borders */
-  --border-default: #222225;
-  --border-subtle: #1A1A1D;
-  --border-hover: #333338;
+  --border-default: #413E49;
+  --border-subtle: #2A2633;
+  --border-hover: #5A5562;
 
   /* Text */
-  --text-primary: #EDEDEF;
-  --text-secondary: #8F8F96;
-  --text-tertiary: #5C5C63;
+  --text-primary: #FFFFFF;
+  --text-secondary: #8F859C;
+  --text-tertiary: #736783;
 
-  /* Accent — warm sand, used sparingly */
-  --accent: #C9A87C;
-  --accent-hover: #D4B78E;
-  --accent-muted: rgba(201, 168, 124, 0.15);
+  /* Accent — electric blue, new primary CTA */
+  --accent: #316BE9;
+  --accent-hover: #4A82F5;
+  --accent-muted: rgba(49, 107, 233, 0.15);
 
   /* Typography */
-  --font-sans: var(--font-plus-jakarta), var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-geist), var(--font-plus-jakarta), var(--font-inter), system-ui, -apple-system, sans-serif;
   --font-arabic: var(--font-ibm-plex-arabic), system-ui, sans-serif;
 }
 

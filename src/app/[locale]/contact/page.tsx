@@ -18,7 +18,7 @@ export default function ContactPage() {
       <Header />
       <main className="pt-16 md:pt-20 lg:pt-24">
         {/* Contact Section - Hero + Form combined */}
-        <section className="py-20 lg:py-28 bg-[#09090B] relative overflow-hidden">
+        <section className="py-20 lg:py-28 bg-[#211C28] relative overflow-hidden">
           {/* Layer 1: Background image at opacity-20 */}
           <div className="absolute inset-0 z-0" aria-hidden="true">
             <Image
@@ -36,7 +36,7 @@ export default function ContactPage() {
             className="absolute inset-0 z-[1]"
             style={{
               background:
-                'linear-gradient(to bottom, rgba(9,9,11,0.4), rgba(9,9,11,0.2), rgba(9,9,11,0.9))',
+                'linear-gradient(to bottom, rgba(33, 28, 40,0.4), rgba(33, 28, 40,0.2), rgba(33, 28, 40,0.9))',
             }}
             aria-hidden="true"
           />
@@ -48,10 +48,10 @@ export default function ContactPage() {
               transition={{ duration: 0.4 }}
               className="text-center"
             >
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#EDEDEF] mb-3">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#FFFFFF] mb-3">
                 {t('title')}
               </h1>
-              <p className="text-lg text-[#8F8F96] mb-10">{t('subtitle')}</p>
+              <p className="text-lg text-[#8F859C] mb-10">{t('subtitle')}</p>
 
               <div className="max-w-md mx-auto">
                 <ContactForm />
@@ -61,7 +61,7 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Info Section - Simple inline */}
-        <section className="py-16 bg-[#09090B] border-t border-[#1A1A1D]">
+        <section className="py-16 bg-[#211C28] border-t border-[#2A2633]">
           <Container size="sm">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -73,7 +73,7 @@ export default function ContactPage() {
                 {/* Email */}
                 <a
                   href={`mailto:${SITE_CONFIG.email}`}
-                  className="text-[#C9A87C] hover:text-[#EDEDEF] transition-colors"
+                  className="text-[#316BE9] hover:text-[#FFFFFF] transition-colors"
                 >
                   {t('info.email.value')}
                 </a>
@@ -81,7 +81,7 @@ export default function ContactPage() {
                 <span className="hidden md:block text-[#333338]">|</span>
 
                 {/* Operational location */}
-                <span className="flex items-center gap-2 text-[#8F8F96]">
+                <span className="flex items-center gap-2 text-[#8F859C]">
                   <svg
                     width="14"
                     height="14"

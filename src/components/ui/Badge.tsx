@@ -12,8 +12,8 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       'inline-flex items-center font-semibold rounded-full transition-colors duration-200';
 
     const variants = {
-      default: 'bg-[#19191B] text-[#8F8F96] border border-[#222225]',
-      accent: 'bg-[#C9A87C]/10 text-[#C9A87C] border border-[#C9A87C]/20',
+      default: 'bg-[#1D1A22] text-[#8F859C] border border-[#2A2633]',
+      accent: 'bg-[#316BE9]/10 text-[#316BE9] border border-[#316BE9]/20',
       success: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
     };
 

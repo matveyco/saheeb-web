@@ -87,7 +87,7 @@ export function ServicesGrid() {
   };
 
   return (
-    <section className="py-24 lg:py-32 bg-[#09090B] relative overflow-hidden" id="services">
+    <section className="py-24 lg:py-32 bg-[#211C28] relative overflow-hidden" id="services">
       <Container className="relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -96,10 +96,10 @@ export function ServicesGrid() {
           transition={{ duration: 0.4 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#EDEDEF] mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#FFFFFF] mb-4">
             {t('title')}
           </h2>
-          <p className="text-lg text-[#8F8F96] max-w-2xl mx-auto">
+          <p className="text-lg text-[#8F859C] max-w-2xl mx-auto">
             {t('subtitle')}
           </p>
         </motion.div>
@@ -118,15 +118,15 @@ export function ServicesGrid() {
                 <Card
                   variant="outline"
                   padding="lg"
-                  className="group h-full bg-[#111113] border-[#222225] hover:border-[#333338] transition-colors duration-300"
+                  className="group h-full bg-[#151317] border-[#2A2633] hover:border-[#333338] transition-colors duration-300"
                 >
-                  <div className="inline-flex items-center justify-center w-14 h-14 bg-[#19191B] text-[#C9A87C] rounded-xl mb-5 border border-[#222225]">
+                  <div className="inline-flex items-center justify-center w-14 h-14 bg-[#1D1A22] text-[#316BE9] rounded-xl mb-5 border border-[#2A2633]">
                     {icons[service.icon]}
                   </div>
-                  <h3 className="text-xl font-bold text-[#EDEDEF] mb-3">
+                  <h3 className="text-xl font-bold text-[#FFFFFF] mb-3">
                     {tServices(`${key}.title`)}
                   </h3>
-                  <p className="text-[#8F8F96] leading-relaxed">
+                  <p className="text-[#8F859C] leading-relaxed">
                     {tServices(`${key}.shortDescription`)}
                   </p>
                 </Card>

@@ -98,9 +98,9 @@ function BreakdownTable({
   items: BreakdownItem[];
 }) {
   return (
-    <div className="rounded-2xl border border-[#222225] bg-[#111113] p-5">
+    <div className="rounded-2xl border border-[#2A2633] bg-[#151317] p-5">
       <div className="mb-4 flex items-center justify-between gap-3">
-        <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-[#EDEDEF]">
+        <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-[#FFFFFF]">
           {title}
         </h3>
         <span className="text-xs text-[#5C5C63]">Top {items.length}</span>
@@ -112,7 +112,7 @@ function BreakdownTable({
         <div className="overflow-x-auto">
           <table className="w-full min-w-[520px]">
             <thead>
-              <tr className="border-b border-[#1A1A1D]">
+              <tr className="border-b border-[#2A2633]">
                 <th className="py-2 pe-4 text-left text-xs font-medium uppercase tracking-[0.12em] text-[#5C5C63]">
                   Label
                 </th>
@@ -132,7 +132,7 @@ function BreakdownTable({
             </thead>
             <tbody>
               {items.map((item) => (
-                <tr key={item.label} className="border-b border-[#1A1A1D]/60">
+                <tr key={item.label} className="border-b border-[#2A2633]/60">
                   <td className="py-3 pe-4 text-sm text-white">{item.label}</td>
                   <td className="py-3 pe-4 text-sm text-[#D0D0D5]">
                     {item.leads}
@@ -162,9 +162,9 @@ function ReconciliationTable({
   rows: AnalyticsWindow['reconciliation'];
 }) {
   return (
-    <div className="rounded-2xl border border-[#222225] bg-[#111113] p-5">
+    <div className="rounded-2xl border border-[#2A2633] bg-[#151317] p-5">
       <div className="mb-4">
-        <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-[#EDEDEF]">
+        <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-[#FFFFFF]">
           Submit vs Lead Reconciliation
         </h3>
         <p className="mt-1 text-sm text-[#5C5C63]">
@@ -175,7 +175,7 @@ function ReconciliationTable({
       <div className="overflow-x-auto">
         <table className="w-full min-w-[420px]">
           <thead>
-            <tr className="border-b border-[#1A1A1D]">
+            <tr className="border-b border-[#2A2633]">
               <th className="py-2 pe-4 text-left text-xs font-medium uppercase tracking-[0.12em] text-[#5C5C63]">
                 Date
               </th>
@@ -195,7 +195,7 @@ function ReconciliationTable({
           </thead>
           <tbody>
             {rows.map((row) => (
-              <tr key={row.date} className="border-b border-[#1A1A1D]/60">
+              <tr key={row.date} className="border-b border-[#2A2633]/60">
                 <td className="py-3 pe-4 text-sm text-white">{row.date}</td>
                 <td className="py-3 pe-4 text-sm text-[#D0D0D5]">{row.leads}</td>
                 <td className="py-3 pe-4 text-sm text-[#D0D0D5]">
@@ -259,27 +259,27 @@ export default function AdminWaitlistPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#09090B] flex items-center justify-center">
-        <div className="text-[#8F8F96]">Loading...</div>
+      <div className="min-h-screen bg-[#211C28] flex items-center justify-center">
+        <div className="text-[#8F859C]">Loading...</div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#09090B] flex items-center justify-center">
+      <div className="min-h-screen bg-[#211C28] flex items-center justify-center">
         <div className="text-red-400">{error}</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#09090B] p-8">
+    <div className="min-h-screen bg-[#211C28] p-8">
       <div className="mx-auto max-w-7xl">
         <h1 className="mb-2 text-3xl font-bold text-white">
           Waitlist Entries
         </h1>
-        <p className="mb-2 text-[#8F8F96]">
+        <p className="mb-2 text-[#8F859C]">
           Total entries: {entries.length}
         </p>
         {analytics?.ga4.configured ? (
@@ -305,14 +305,14 @@ export default function AdminWaitlistPage() {
             {analytics.windows.map((window) => (
               <section
                 key={window.days}
-                className="rounded-[2rem] border border-[#222225] bg-[#0D0D10] p-6"
+                className="rounded-[2rem] border border-[#2A2633] bg-[#0D0D10] p-6"
               >
                 <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                   <div>
                     <h2 className="text-2xl font-semibold text-white">
                       Last {window.days} Days
                     </h2>
-                    <p className="text-sm text-[#8F8F96]">
+                    <p className="text-sm text-[#8F859C]">
                       First-party funnel summary across views, starts, submits,
                       duplicates, and lead creation.
                     </p>
@@ -334,7 +334,7 @@ export default function AdminWaitlistPage() {
                   ].map(([label, value]) => (
                     <div
                       key={label}
-                      className="rounded-2xl border border-[#1A1A1D] bg-[#111113] p-4"
+                      className="rounded-2xl border border-[#2A2633] bg-[#151317] p-4"
                     >
                       <p className="text-xs font-medium uppercase tracking-[0.14em] text-[#5C5C63]">
                         {label}
@@ -369,7 +369,7 @@ export default function AdminWaitlistPage() {
                   ].map(([label, value]) => (
                     <div
                       key={label}
-                      className="rounded-2xl border border-[#1A1A1D] bg-[#111113] p-4"
+                      className="rounded-2xl border border-[#2A2633] bg-[#151317] p-4"
                     >
                       <p className="text-xs font-medium uppercase tracking-[0.14em] text-[#5C5C63]">
                         {label}
@@ -418,31 +418,31 @@ export default function AdminWaitlistPage() {
         ) : null}
 
         {entries.length === 0 ? (
-          <div className="rounded-xl bg-[#19191B] p-8 text-center">
-            <p className="text-[#8F8F96]">No waitlist entries yet.</p>
+          <div className="rounded-xl bg-[#1D1A22] p-8 text-center">
+            <p className="text-[#8F859C]">No waitlist entries yet.</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[980px]">
               <thead>
-                <tr className="border-b border-[#222225]">
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F8F96]">ID</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F8F96]">Name</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F8F96]">Email</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F8F96]">Phone</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F8F96]">Type</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F8F96]">Variant</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F8F96]">Attribution</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F8F96]">Country</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F8F96]">Locale</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F8F96]">Created</th>
+                <tr className="border-b border-[#2A2633]">
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F859C]">ID</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F859C]">Name</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F859C]">Email</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F859C]">Phone</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F859C]">Type</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F859C]">Variant</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F859C]">Attribution</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F859C]">Country</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F859C]">Locale</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8F859C]">Created</th>
                 </tr>
               </thead>
               <tbody>
                 {entries.map((entry) => (
                   <tr
                     key={entry.id}
-                    className="border-b border-[#1A1A1D] transition-colors hover:bg-[#19191B]"
+                    className="border-b border-[#2A2633] transition-colors hover:bg-[#1D1A22]"
                   >
                     <td className="px-4 py-3 text-sm text-[#5C5C63]">{entry.id}</td>
                     <td className="px-4 py-3 text-white">{entry.name}</td>
@@ -481,8 +481,8 @@ export default function AdminWaitlistPage() {
                     <td className="px-4 py-3 text-white/80">
                       {entry.countryCode || '-'}
                     </td>
-                    <td className="px-4 py-3 text-[#8F8F96]">{entry.locale}</td>
-                    <td className="px-4 py-3 text-sm text-[#8F8F96]">
+                    <td className="px-4 py-3 text-[#8F859C]">{entry.locale}</td>
+                    <td className="px-4 py-3 text-sm text-[#8F859C]">
                       {new Date(entry.createdAt).toLocaleString()}
                     </td>
                   </tr>

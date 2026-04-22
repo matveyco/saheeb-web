@@ -158,7 +158,7 @@ export function DriveHeroInlineForm({
             ? t('successTitle', { position: String(position) })
             : t('successFallback')}
         </p>
-        <p className="mt-1 text-xs text-[#8F8F96]">{t('successBody')}</p>
+        <p className="mt-1 text-xs text-[#8F859C]">{t('successBody')}</p>
       </div>
     );
   }
@@ -185,7 +185,7 @@ export function DriveHeroInlineForm({
           autoComplete="email"
           aria-label="Email"
           dir="ltr"
-          className="flex-1 border-[#3A3A3F] focus:border-[#C9A87C] focus:ring-[#C9A87C]/25"
+          className="flex-1 border-[#3A3A3F] focus:border-[#316BE9] focus:ring-[#316BE9]/25"
         />
         <Button
           type="submit"

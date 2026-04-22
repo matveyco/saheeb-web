@@ -12,7 +12,7 @@ export function SaheebDriveCard() {
   const tCommon = useTranslations('common');
 
   return (
-    <section className="py-24 lg:py-32 bg-[#09090B] relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-[#211C28] relative overflow-hidden">
       <Container className="relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -21,7 +21,7 @@ export function SaheebDriveCard() {
           transition={{ duration: 0.4 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#EDEDEF]">
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#FFFFFF]">
             {t('title')}
           </h2>
         </motion.div>
@@ -33,7 +33,7 @@ export function SaheebDriveCard() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="max-w-5xl mx-auto"
         >
-          <div className="relative rounded-3xl overflow-hidden bg-[#111113] border border-[#222225]">
+          <div className="relative rounded-3xl overflow-hidden bg-[#151317] border border-[#2A2633]">
             <div className="grid md:grid-cols-2">
               {/* Content Side */}
               <div className="p-8 lg:p-12 flex flex-col justify-center">
@@ -41,15 +41,15 @@ export function SaheebDriveCard() {
                   {t('saheebDrive.badge')}
                 </Badge>
 
-                <h3 className="text-3xl lg:text-4xl font-bold text-[#EDEDEF] mb-3">
+                <h3 className="text-3xl lg:text-4xl font-bold text-[#FFFFFF] mb-3">
                   {t('saheebDrive.title')}
                 </h3>
 
-                <p className="text-xl text-[#C9A87C] font-medium mb-4">
+                <p className="text-xl text-[#316BE9] font-medium mb-4">
                   {t('saheebDrive.subtitle')}
                 </p>
 
-                <p className="text-[#8F8F96] mb-8 leading-relaxed text-lg">
+                <p className="text-[#8F859C] mb-8 leading-relaxed text-lg">
                   {t('saheebDrive.description')}
                 </p>
 
@@ -82,17 +82,17 @@ export function SaheebDriveCard() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 {/* Gradient overlay for seamless blend */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#111113]/40 via-transparent to-transparent md:bg-gradient-to-l md:from-transparent md:via-transparent md:to-[#111113]/30" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#151317]/40 via-transparent to-transparent md:bg-gradient-to-l md:from-transparent md:via-transparent md:to-[#151317]/30" />
 
                 {/* AI sparkle badge */}
-                <div className="absolute top-6 end-6 w-14 h-14 bg-[#19191B] border border-[#222225] rounded-2xl flex items-center justify-center">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="#C9A87C">
+                <div className="absolute top-6 end-6 w-14 h-14 bg-[#1D1A22] border border-[#2A2633] rounded-2xl flex items-center justify-center">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="#316BE9">
                     <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
                   </svg>
                 </div>
 
                 {/* Bottom gradient for text contrast on mobile */}
-                <div className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-[#111113]/60 to-transparent md:hidden" />
+                <div className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-[#151317]/60 to-transparent md:hidden" />
               </div>
             </div>
           </div>

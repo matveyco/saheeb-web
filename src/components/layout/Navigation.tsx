@@ -52,8 +52,8 @@ export function Navigation({
           'px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-200',
           vertical ? 'w-full' : '',
           isActive
-            ? 'text-[#EDEDEF] bg-[#19191B]'
-            : 'text-[#8F8F96] hover:text-[#EDEDEF] hover:bg-[#19191B]'
+            ? 'text-[#FFFFFF] bg-[#1D1A22]'
+            : 'text-[#8F859C] hover:text-[#FFFFFF] hover:bg-[#1D1A22]'
         );
 
         if (isDrivePage) {

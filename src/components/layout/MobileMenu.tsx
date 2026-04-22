@@ -37,7 +37,7 @@ export function MobileMenu() {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden p-3 -me-3 text-[#8F8F96] hover:text-[#EDEDEF] hover:bg-[#19191B] rounded-xl transition-colors duration-200"
+        className="lg:hidden p-3 -me-3 text-[#8F859C] hover:text-[#FFFFFF] hover:bg-[#1D1A22] rounded-xl transition-colors duration-200"
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
         aria-label={isOpen ? t('close') : 'Menu'}
@@ -80,18 +80,18 @@ export function MobileMenu() {
       <div
         id="mobile-menu"
         className={cn(
-          'fixed top-0 end-0 h-full w-[300px] bg-[#09090B] border-s border-[#1A1A1D] z-50 lg:hidden transform transition-transform duration-300 ease-out',
+          'fixed top-0 end-0 h-full w-[300px] bg-[#211C28] border-s border-[#2A2633] z-50 lg:hidden transform transition-transform duration-300 ease-out',
           isOpen
             ? 'translate-x-0 rtl:-translate-x-0'
             : 'translate-x-full rtl:-translate-x-full'
         )}
       >
         <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between p-5 border-b border-[#1A1A1D]">
-            <span className="font-semibold text-[#EDEDEF]">{isArabic ? 'القائمة' : 'Menu'}</span>
+          <div className="flex items-center justify-between p-5 border-b border-[#2A2633]">
+            <span className="font-semibold text-[#FFFFFF]">{isArabic ? 'القائمة' : 'Menu'}</span>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-3 -me-3 text-[#8F8F96] hover:text-[#EDEDEF] hover:bg-[#19191B] rounded-xl transition-colors duration-200"
+              className="p-3 -me-3 text-[#8F859C] hover:text-[#FFFFFF] hover:bg-[#1D1A22] rounded-xl transition-colors duration-200"
               aria-label={t('close')}
             >
               <svg
@@ -113,7 +113,7 @@ export function MobileMenu() {
 
           <div className="flex-1 overflow-y-auto p-5">
             <Navigation vertical onItemClick={() => setIsOpen(false)} />
-            <div className="mt-5 border-t border-[#1A1A1D] pt-5">
+            <div className="mt-5 border-t border-[#2A2633] pt-5">
               <Button asChild className="w-full">
                 <TrackedLink
                   href="/projects/saheeb-drive?focus=waitlist#join-now"
@@ -128,7 +128,7 @@ export function MobileMenu() {
             </div>
           </div>
 
-          <div className="p-5 border-t border-[#1A1A1D]">
+          <div className="p-5 border-t border-[#2A2633]">
             <LanguageSwitcher />
           </div>
         </div>

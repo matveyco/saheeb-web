@@ -78,10 +78,10 @@ export function DriveLandingContent({
 }: DriveLandingContentProps) {
   return (
     <>
-      <main className="bg-[#09090B] pt-20 lg:pt-24">
+      <main className="bg-[#211C28] pt-20 lg:pt-24">
         <section
           id="drive-hero"
-          className="relative overflow-hidden border-b border-[#1A1A1D] bg-[#09090B] py-6 lg:py-24"
+          className="relative overflow-hidden border-b border-[#2A2633] bg-[#211C28] py-6 lg:py-24"
         >
           <div className="absolute inset-0" aria-hidden="true">
             <Image
@@ -92,20 +92,20 @@ export function DriveLandingContent({
               sizes="100vw"
               priority
             />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(201,168,124,0.2),transparent_30%),linear-gradient(to_bottom,rgba(9,9,11,0.35),rgba(9,9,11,0.82),#09090B)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(49, 107, 233,0.2),transparent_30%),linear-gradient(to_bottom,rgba(33, 28, 40,0.35),rgba(33, 28, 40,0.82),#211C28)]" />
           </div>
 
           <Container className="relative z-10">
             <div className="grid items-start gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-14">
               <div className="relative z-20 max-w-3xl">
                 <DriveWaitlistCounter variant="hero" className="mb-3" />
-                <h1 className="text-4xl font-bold leading-[0.95] tracking-tight text-[#EDEDEF] sm:text-6xl lg:text-7xl">
+                <h1 className="text-4xl font-bold leading-[0.95] tracking-tight text-[#FFFFFF] sm:text-6xl lg:text-7xl">
                   {hero.title}
                 </h1>
-                <p className="mt-1 text-4xl font-bold leading-[0.95] tracking-tight text-[#C9A87C] sm:mt-2 sm:text-6xl lg:text-7xl">
+                <p className="mt-1 text-4xl font-bold leading-[0.95] tracking-tight text-[#316BE9] sm:mt-2 sm:text-6xl lg:text-7xl">
                   {hero.titleHighlight}
                 </p>
-                <p className="mt-3 max-w-2xl text-base font-medium leading-relaxed text-[#E3C08B] sm:text-lg lg:mt-5 lg:text-xl">
+                <p className="mt-3 max-w-2xl text-base font-medium leading-relaxed text-[#FFFFFF] sm:text-lg lg:mt-5 lg:text-xl">
                   {hero.painPoint}
                 </p>
 
@@ -120,16 +120,16 @@ export function DriveLandingContent({
               </div>
 
               <div className="relative z-0 hidden w-full max-w-[300px] self-end sm:max-w-[340px] lg:mx-auto lg:mt-0 lg:block lg:pt-4">
-                <div className="pointer-events-none rounded-[2rem] border border-[#2A2A2E] bg-[#111113]/85 p-4 shadow-[0_30px_100px_rgba(0,0,0,0.35)] backdrop-blur">
-                  <div className="mb-4 rounded-2xl border border-[#222225] bg-[#09090B] px-4 py-3">
-                    <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#8F8F96]">
+                <div className="pointer-events-none rounded-[2rem] border border-[#2A2A2E] bg-[#151317]/85 p-4 shadow-[0_30px_100px_rgba(0,0,0,0.35)] backdrop-blur">
+                  <div className="mb-4 rounded-2xl border border-[#2A2633] bg-[#211C28] px-4 py-3">
+                    <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#8F859C]">
                       {hero.visualEyebrow}
                     </p>
-                    <p className="mt-2 text-sm leading-relaxed text-[#EDEDEF]">
+                    <p className="mt-2 text-sm leading-relaxed text-[#FFFFFF]">
                       {hero.visualBody}
                     </p>
                   </div>
-                  <div className="relative aspect-[9/19] overflow-hidden rounded-[1.5rem] border border-[#222225] bg-[#09090B]">
+                  <div className="relative aspect-[9/19] overflow-hidden rounded-[1.5rem] border border-[#2A2633] bg-[#211C28]">
                     <Image
                       src="/images/saheeb-drive-app-chat.jpg"
                       alt="Saheeb Drive app preview"
@@ -144,7 +144,7 @@ export function DriveLandingContent({
           </Container>
         </section>
 
-        <section className="border-b border-[#1A1A1D] bg-[#09090B] py-12 lg:py-18">
+        <section className="border-b border-[#2A2633] bg-[#211C28] py-12 lg:py-18">
           <Container>
             <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
               <div className="order-2 lg:order-2">
@@ -185,13 +185,13 @@ export function DriveLandingContent({
           />
         </Container>
 
-        <section className="border-b border-[#1A1A1D] bg-[#09090B] py-12 lg:py-20">
+        <section className="border-b border-[#2A2633] bg-[#211C28] py-12 lg:py-20">
           <Container>
             <div className="max-w-2xl">
-              <h2 className="text-3xl font-bold text-[#EDEDEF] lg:text-4xl">
+              <h2 className="text-3xl font-bold text-[#FFFFFF] lg:text-4xl">
                 {howItWorks.title}
               </h2>
-              <p className="mt-4 text-lg text-[#8F8F96]">
+              <p className="mt-4 text-lg text-[#8F859C]">
                 {howItWorks.subtitle}
               </p>
             </div>
@@ -200,15 +200,15 @@ export function DriveLandingContent({
               {howItWorks.steps.map((step) => (
                 <article
                   key={step.number}
-                  className="rounded-[1.75rem] border border-[#222225] bg-[#111113] p-6"
+                  className="rounded-[1.75rem] border border-[#2A2633] bg-[#151317] p-6"
                 >
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#C9A87C] text-lg font-bold text-[#09090B]">
+                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#316BE9] text-lg font-bold text-[#211C28]">
                     {step.number}
                   </div>
-                  <h3 className="mt-5 text-xl font-semibold text-[#EDEDEF]">
+                  <h3 className="mt-5 text-xl font-semibold text-[#FFFFFF]">
                     {step.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[#8F8F96]">
+                  <p className="mt-3 text-sm leading-relaxed text-[#8F859C]">
                     {step.description}
                   </p>
                 </article>

@@ -22,8 +22,8 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     const baseStyles = 'rounded-2xl transition-colors duration-200';
 
     const variants = {
-      default: 'bg-[#111113] border border-[#222225]',
-      outline: 'bg-transparent border border-[#222225]',
+      default: 'bg-[#151317] border border-[#2A2633]',
+      outline: 'bg-transparent border border-[#2A2633]',
     };
 
     const paddings = {
@@ -82,7 +82,7 @@ const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
   ({ className, as: Tag = 'h3', children, ...props }, ref) => (
     <Tag
       ref={ref}
-      className={cn('text-xl font-bold text-[#EDEDEF]', className)}
+      className={cn('text-xl font-bold text-[#FFFFFF]', className)}
       {...props}
     >
       {children}
@@ -98,7 +98,7 @@ const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
   ({ className, children, ...props }, ref) => (
     <p
       ref={ref}
-      className={cn('text-[#8F8F96] mt-2 leading-relaxed', className)}
+      className={cn('text-[#8F859C] mt-2 leading-relaxed', className)}
       {...props}
     >
       {children}

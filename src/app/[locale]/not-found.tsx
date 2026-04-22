@@ -9,16 +9,16 @@ export default function NotFoundPage() {
   return (
     <>
       <Header />
-      <main className="pt-20 lg:pt-24 min-h-[80vh] flex items-center bg-[#09090B]">
+      <main className="pt-20 lg:pt-24 min-h-[80vh] flex items-center bg-[#211C28]">
         <Container size="sm" className="relative z-10">
           <div className="text-center py-20">
-            <h1 className="text-8xl lg:text-9xl font-black text-[#C9A87C] mb-6">
+            <h1 className="text-8xl lg:text-9xl font-black text-[#316BE9] mb-6">
               404
             </h1>
-            <h2 className="text-2xl lg:text-3xl font-bold text-[#EDEDEF] mb-4">
+            <h2 className="text-2xl lg:text-3xl font-bold text-[#FFFFFF] mb-4">
               {t('title')}
             </h2>
-            <p className="text-lg text-[#8F8F96] mb-10 max-w-md mx-auto">
+            <p className="text-lg text-[#8F859C] mb-10 max-w-md mx-auto">
               {t('description')}
             </p>
             <Button asChild variant="primary" size="lg">

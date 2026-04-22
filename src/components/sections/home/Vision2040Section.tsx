@@ -67,7 +67,7 @@ export function Vision2040Section() {
 
   return (
     <section
-      className="py-24 lg:py-32 bg-[#09090B] relative overflow-hidden"
+      className="py-24 lg:py-32 bg-[#211C28] relative overflow-hidden"
       id="vision-2040"
     >
       {/* Futuristic Muscat skyline background */}
@@ -80,7 +80,7 @@ export function Vision2040Section() {
           sizes="100vw"
         />
         {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#09090B] via-[#09090B]/60 to-[#09090B]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#211C28] via-[#211C28]/60 to-[#211C28]" />
       </div>
 
       <Container className="relative z-10">
@@ -91,16 +91,16 @@ export function Vision2040Section() {
           transition={{ duration: 0.4 }}
           className="text-center mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#111113] border border-[#222225] text-[#C9A87C] text-sm font-semibold mb-6">
+          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#151317] border border-[#2A2633] text-[#316BE9] text-sm font-semibold mb-6">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
             </svg>
             Oman Vision 2040
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#EDEDEF] mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#FFFFFF] mb-4">
             {t('title')}
           </h2>
-          <p className="text-lg text-[#8F8F96] max-w-2xl mx-auto">
+          <p className="text-lg text-[#8F859C] max-w-2xl mx-auto">
             {t('subtitle')}
           </p>
         </motion.div>
@@ -117,20 +117,20 @@ export function Vision2040Section() {
               <div
                 className="
                   relative p-8 rounded-2xl
-                  bg-[#111113]
-                  border border-[#222225]
+                  bg-[#151317]
+                  border border-[#2A2633]
                   hover:border-[#333338]
                   transition-colors duration-300
                   group
                 "
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 bg-[#19191B] border border-[#222225] text-[#C9A87C]">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 bg-[#1D1A22] border border-[#2A2633] text-[#316BE9]">
                   {pillarIcons[pillar]}
                 </div>
-                <h3 className="text-xl font-bold text-[#EDEDEF] mb-3">
+                <h3 className="text-xl font-bold text-[#FFFFFF] mb-3">
                   {t(`pillars.${pillar}.title`)}
                 </h3>
-                <p className="text-[#8F8F96] leading-relaxed">
+                <p className="text-[#8F859C] leading-relaxed">
                   {t(`pillars.${pillar}.description`)}
                 </p>
               </div>

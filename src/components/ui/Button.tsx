@@ -29,24 +29,24 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-semibold rounded-xl transition-colors duration-200 ease-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A87C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#09090B] disabled:opacity-50 disabled:cursor-not-allowed';
+      'inline-flex items-center justify-center font-semibold rounded-xl transition-colors duration-200 ease-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#316BE9] focus-visible:ring-offset-2 focus-visible:ring-offset-[#211C28] disabled:opacity-50 disabled:cursor-not-allowed';
 
     const variants = {
       primary: [
-        'bg-[#C9A87C] text-[#09090B]',
+        'bg-[#316BE9] text-[#211C28]',
         'shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.15)]',
-        'hover:bg-[#D4B78E] hover:shadow-[0_2px_8px_rgba(201,168,124,0.25)]',
+        'hover:bg-[#4A82F5] hover:shadow-[0_2px_8px_rgba(49, 107, 233,0.25)]',
         'active:bg-[#BF9D71] active:shadow-none active:translate-y-[0.5px]',
       ].join(' '),
       secondary: [
         'bg-transparent',
-        'border border-[#333338] text-[#EDEDEF]',
-        'hover:bg-[#19191B] hover:border-[#444]',
-        'active:bg-[#111113] active:border-[#333338]',
+        'border border-[#333338] text-[#FFFFFF]',
+        'hover:bg-[#1D1A22] hover:border-[#444]',
+        'active:bg-[#151317] active:border-[#333338]',
       ].join(' '),
       ghost: [
-        'text-[#8F8F96]',
-        'hover:text-[#EDEDEF] hover:bg-[#19191B]',
+        'text-[#8F859C]',
+        'hover:text-[#FFFFFF] hover:bg-[#1D1A22]',
       ].join(' '),
     };
 

@@ -36,12 +36,12 @@ export function DriveHeroPrimaryCta({
 
   return (
     <div className="mt-6 sm:mt-8 sm:max-w-xl">
-      <p className="mb-3 text-xs font-medium uppercase tracking-[0.16em] text-[#8F8F96]">
+      <p className="mb-3 text-xs font-medium uppercase tracking-[0.16em] text-[#8F859C]">
         {intentLabel}
       </p>
 
       <div className="grid gap-3 sm:grid-cols-[auto_1fr] sm:items-center">
-        <div className="grid grid-cols-2 gap-2 rounded-2xl border border-[#222225] bg-[#111113]/90 p-1.5 shadow-[0_16px_40px_rgba(0,0,0,0.24)] backdrop-blur">
+        <div className="grid grid-cols-2 gap-2 rounded-2xl border border-[#2A2633] bg-[#151317]/90 p-1.5 shadow-[0_16px_40px_rgba(0,0,0,0.24)] backdrop-blur">
           <button
             type="button"
             data-testid="drive-hero-intent-buyer"
@@ -50,8 +50,8 @@ export function DriveHeroPrimaryCta({
             className={cn(
               'rounded-xl px-4 py-3 text-sm font-semibold transition-colors sm:min-w-[112px]',
               intent === 'buyer'
-                ? 'bg-[#C9A87C] text-[#09090B]'
-                : 'text-[#8F8F96] hover:text-[#EDEDEF]'
+                ? 'bg-[#316BE9] text-[#211C28]'
+                : 'text-[#8F859C] hover:text-[#FFFFFF]'
             )}
           >
             {buyLabel}
@@ -64,8 +64,8 @@ export function DriveHeroPrimaryCta({
             className={cn(
               'rounded-xl px-4 py-3 text-sm font-semibold transition-colors sm:min-w-[112px]',
               intent === 'seller'
-                ? 'bg-[#C9A87C] text-[#09090B]'
-                : 'text-[#8F8F96] hover:text-[#EDEDEF]'
+                ? 'bg-[#316BE9] text-[#211C28]'
+                : 'text-[#8F859C] hover:text-[#FFFFFF]'
             )}
           >
             {sellLabel}

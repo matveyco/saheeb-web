@@ -60,7 +60,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
       <Header />
       <main className="pt-20 lg:pt-24">
         {/* Hero Section */}
-        <section className="py-16 lg:py-20 bg-[#09090B] relative overflow-hidden">
+        <section className="py-16 lg:py-20 bg-[#211C28] relative overflow-hidden">
           {/* Decorative glow */}
           <div
             className="hidden md:block absolute top-1/2 -translate-y-1/2 end-[10%] w-[300px] h-[300px] rounded-full"
@@ -75,35 +75,35 @@ export default async function TermsPage({ params }: TermsPageProps) {
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
               {t('title')}
             </h1>
-            <p className="text-[#8F8F96]">
+            <p className="text-[#8F859C]">
               {t('lastUpdated')}: {lastUpdated}
             </p>
-            <p className="text-[#8F8F96] mt-4 text-lg max-w-2xl">
+            <p className="text-[#8F859C] mt-4 text-lg max-w-2xl">
               {t('subtitle')}
             </p>
           </Container>
         </section>
 
         {/* Important Notice */}
-        <section className="py-6 bg-[#C9A87C]/10 border-y border-[#C9A87C]/20">
+        <section className="py-6 bg-[#316BE9]/10 border-y border-[#316BE9]/20">
           <Container size="md">
-            <p className="text-[#C9A87C] font-medium text-center">
+            <p className="text-[#316BE9] font-medium text-center">
               {t('importantNotice')}
             </p>
           </Container>
         </section>
 
         {/* Content */}
-        <section className="py-12 lg:py-16 bg-[#111113]">
+        <section className="py-12 lg:py-16 bg-[#151317]">
           <Container size="md">
             <div className="space-y-12">
               {sections.map((section, index) => (
                 <div
                   key={section}
-                  className="pb-10 border-b border-[#222225] last:border-b-0"
+                  className="pb-10 border-b border-[#2A2633] last:border-b-0"
                 >
                   <div className="flex items-start gap-4 mb-4">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#C9A87C]/10 flex items-center justify-center text-[#C9A87C] text-sm font-semibold">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#316BE9]/10 flex items-center justify-center text-[#316BE9] text-sm font-semibold">
                       {index + 1}
                     </span>
                     <h2 className="text-2xl font-bold text-white">
@@ -111,7 +111,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
                     </h2>
                   </div>
                   <div className="ps-12">
-                    <div className="text-[#8F8F96] leading-relaxed whitespace-pre-line">
+                    <div className="text-[#8F859C] leading-relaxed whitespace-pre-line">
                       {t(`sections.${section}.content`)}
                     </div>
                   </div>
@@ -120,11 +120,11 @@ export default async function TermsPage({ params }: TermsPageProps) {
             </div>
 
             {/* Saheeb Drive Terms */}
-            <div className="mt-16 pt-8 border-t border-[#222225]">
-              <h2 className="text-3xl font-bold text-[#C9A87C] mb-8">
+            <div className="mt-16 pt-8 border-t border-[#2A2633]">
+              <h2 className="text-3xl font-bold text-[#316BE9] mb-8">
                 {t('saheebDrive.title')}
               </h2>
-              <p className="text-[#8F8F96] mb-8">{t('saheebDrive.intro')}</p>
+              <p className="text-[#8F859C] mb-8">{t('saheebDrive.intro')}</p>
 
               {[
                 'platformDescription',
@@ -137,7 +137,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
               ].map((driveSection, index) => (
                 <div key={driveSection} className="mb-10">
                   <div className="flex items-start gap-4 mb-4">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#C9A87C]/20 flex items-center justify-center text-[#C9A87C] text-sm font-semibold">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#316BE9]/20 flex items-center justify-center text-[#316BE9] text-sm font-semibold">
                       {String.fromCharCode(65 + index)}
                     </span>
                     <h3 className="text-xl font-bold text-white">
@@ -145,7 +145,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
                     </h3>
                   </div>
                   <div className="ps-12">
-                    <div className="text-[#8F8F96] leading-relaxed whitespace-pre-line">
+                    <div className="text-[#8F859C] leading-relaxed whitespace-pre-line">
                       {t(`saheebDrive.sections.${driveSection}.content`)}
                     </div>
                   </div>
@@ -154,24 +154,24 @@ export default async function TermsPage({ params }: TermsPageProps) {
             </div>
 
             {/* B2B Disclaimer */}
-            <div className="mt-16 pt-8 border-t border-[#222225]">
-              <div className="bg-[#19191B] rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-[#C9A87C] mb-4">
+            <div className="mt-16 pt-8 border-t border-[#2A2633]">
+              <div className="bg-[#1D1A22] rounded-xl p-6">
+                <h3 className="text-lg font-semibold text-[#316BE9] mb-4">
                   {t('b2bDisclaimer.title')}
                 </h3>
-                <div className="text-[#8F8F96] leading-relaxed whitespace-pre-line">
+                <div className="text-[#8F859C] leading-relaxed whitespace-pre-line">
                   {t('b2bDisclaimer.content')}
                 </div>
               </div>
             </div>
 
             {/* Company Info Footer */}
-            <div className="mt-16 pt-8 border-t border-[#222225]">
-              <div className="bg-[#19191B] rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-[#C9A87C] mb-4">
+            <div className="mt-16 pt-8 border-t border-[#2A2633]">
+              <div className="bg-[#1D1A22] rounded-xl p-6">
+                <h3 className="text-lg font-semibold text-[#316BE9] mb-4">
                   {t('legalContact.title')}
                 </h3>
-                <div className="text-[#8F8F96] space-y-2">
+                <div className="text-[#8F859C] space-y-2">
                   <p>
                     <strong className="text-white">{t('legalContact.name')}</strong>
                   </p>
@@ -180,7 +180,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
                     {t('legalContact.emailLabel')}:{' '}
                     <a
                       href="mailto:legal@saheeb.com"
-                      className="text-[#C9A87C] hover:text-[#C9A87C] transition-colors"
+                      className="text-[#316BE9] hover:text-[#316BE9] transition-colors"
                     >
                       legal@saheeb.com
                     </a>

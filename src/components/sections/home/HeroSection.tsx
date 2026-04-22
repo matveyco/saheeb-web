@@ -11,7 +11,7 @@ export function HeroSection() {
   const t = useTranslations('home.hero');
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#09090B]">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#211C28]">
       {/* Muscat background image */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
         <Image
@@ -23,7 +23,7 @@ export function HeroSection() {
           priority
         />
         {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#09090B] via-[#09090B]/70 to-[#09090B]/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#211C28] via-[#211C28]/70 to-[#211C28]/30" />
       </div>
 
       <Container className="relative z-10 pt-20 lg:pt-28">
@@ -33,10 +33,10 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-[#EDEDEF] leading-[1.2] mb-8 tracking-tight"
+            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-[#FFFFFF] leading-[1.2] mb-8 tracking-tight"
           >
             <span className="block">{t('titleLine1') || 'Building the'}</span>
-            <span className="block text-[#C9A87C]">
+            <span className="block text-[#316BE9]">
               {t('titleHighlight') || 'Digital Economy'}
             </span>
           </motion.h1>
@@ -46,7 +46,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="text-lg sm:text-xl lg:text-2xl text-[#8F8F96] max-w-3xl mx-auto mb-12 leading-relaxed"
+            className="text-lg sm:text-xl lg:text-2xl text-[#8F859C] max-w-3xl mx-auto mb-12 leading-relaxed"
           >
             {t('subtitle')}
           </motion.p>

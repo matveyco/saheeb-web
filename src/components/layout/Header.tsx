@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { Container } from '@/components/ui';
 import { Logo } from './Logo';
 import { Navigation } from './Navigation';
@@ -14,6 +15,8 @@ import { cn } from '@/lib/utils';
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const tNavigation = useTranslations('navigation');
+  const pathname = usePathname();
+  const isDrive = pathname?.includes('/projects/saheeb-drive') ?? false;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,13 +32,13 @@ export function Header() {
       className={cn(
         'fixed top-0 start-0 end-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'bg-[#09090B]/95 backdrop-blur-md border-b border-[#1A1A1D]'
+          ? 'bg-[#211C28]/95 backdrop-blur-md border-b border-[#2A2633]'
           : 'bg-transparent'
       )}
     >
       <Container>
         <div className="flex items-center justify-between h-18 lg:h-22">
-          <Logo />
+          <Logo variant={isDrive ? 'drive' : 'saheeb'} />
 
           <div className="hidden lg:flex items-center gap-3">
             <Navigation />
@@ -49,7 +52,7 @@ export function Header() {
                 {tNavigation('joinWaitlist')}
               </TrackedLink>
             </Button>
-            <div className="w-px h-5 bg-[#222225] mx-2" aria-hidden="true" />
+            <div className="w-px h-5 bg-[#2A2633] mx-2" aria-hidden="true" />
             <LanguageSwitcher />
           </div>
 

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Plus_Jakarta_Sans, IBM_Plex_Sans_Arabic } from 'next/font/google';
+import { Geist, Inter, Plus_Jakarta_Sans, IBM_Plex_Sans_Arabic } from 'next/font/google';
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
@@ -7,6 +7,13 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { AnalyticsProvider } from '@/components/analytics/AnalyticsProvider';
 import { routing } from '@/i18n/routing';
 import '../globals.css';
+
+const geist = Geist({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-geist',
+  display: 'swap',
+});
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -207,7 +214,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={direction}
-      className={`${plusJakarta.variable} ${inter.variable} ${ibmPlexArabic.variable}`}
+      className={`${geist.variable} ${plusJakarta.variable} ${inter.variable} ${ibmPlexArabic.variable}`}
     >
       <head>
         <script

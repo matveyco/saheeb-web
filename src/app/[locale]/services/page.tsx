@@ -33,7 +33,7 @@ export default function ServicesPage() {
       <Header />
       <main className="pt-20 lg:pt-24">
         {/* Hero Section */}
-        <section className="py-20 lg:py-28 bg-[#09090B] relative overflow-hidden">
+        <section className="py-20 lg:py-28 bg-[#211C28] relative overflow-hidden">
           {/* Hero Background Image */}
           <div className="absolute inset-0 z-0" aria-hidden="true">
             <Image
@@ -43,7 +43,7 @@ export default function ServicesPage() {
               className="object-cover object-center opacity-50"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#09090B]/50 via-[#09090B]/30 to-[#09090B]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#211C28]/50 via-[#211C28]/30 to-[#211C28]" />
           </div>
 
           <Container className="relative z-10">
@@ -53,10 +53,10 @@ export default function ServicesPage() {
               transition={{ duration: 0.4 }}
               className="max-w-3xl mx-auto text-center"
             >
-              <h1 className="text-4xl lg:text-6xl font-bold text-[#EDEDEF] mb-6">
+              <h1 className="text-4xl lg:text-6xl font-bold text-[#FFFFFF] mb-6">
                 {t('title')}
               </h1>
-              <p className="text-2xl lg:text-3xl text-[#C9A87C] font-semibold">
+              <p className="text-2xl lg:text-3xl text-[#316BE9] font-semibold">
                 {t('subtitle')}
               </p>
             </motion.div>
@@ -64,7 +64,7 @@ export default function ServicesPage() {
         </section>
 
         {/* Services List */}
-        <section className="py-16 lg:py-24 bg-[#09090B]">
+        <section className="py-16 lg:py-24 bg-[#211C28]">
           <Container>
             <div className="space-y-16 lg:space-y-24">
               {SERVICES.map((service, index) => {
@@ -84,15 +84,15 @@ export default function ServicesPage() {
                     {/* Content */}
                     <div className={!isEven ? 'lg:order-2' : ''}>
                       {/* Tagline */}
-                      <p className="text-sm font-semibold uppercase tracking-wider mb-3 text-[#C9A87C]">
+                      <p className="text-sm font-semibold uppercase tracking-wider mb-3 text-[#316BE9]">
                         {t(`list.${key}.tagline`)}
                       </p>
 
-                      <h2 className="text-3xl lg:text-4xl font-bold text-[#EDEDEF] mb-4">
+                      <h2 className="text-3xl lg:text-4xl font-bold text-[#FFFFFF] mb-4">
                         {t(`list.${key}.title`)}
                       </h2>
 
-                      <p className="text-lg text-[#8F8F96] mb-8 leading-relaxed">
+                      <p className="text-lg text-[#8F859C] mb-8 leading-relaxed">
                         {t(`list.${key}.description`)}
                       </p>
 
@@ -102,10 +102,10 @@ export default function ServicesPage() {
                           (point: string, i: number) => (
                             <li
                               key={i}
-                              className="flex items-center gap-3 text-[#EDEDEF]/80"
+                              className="flex items-center gap-3 text-[#FFFFFF]/80"
                             >
                               <svg
-                                className="w-5 h-5 shrink-0 text-[#C9A87C]"
+                                className="w-5 h-5 shrink-0 text-[#316BE9]"
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="currentColor"
@@ -128,7 +128,7 @@ export default function ServicesPage() {
 
                     {/* Visual - Image */}
                     <div className={`${!isEven ? 'lg:order-1' : ''}`}>
-                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[#222225]">
+                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[#2A2633]">
                         <Image
                           src={imageUrl}
                           alt={t(`list.${key}.title`)}
@@ -146,7 +146,7 @@ export default function ServicesPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 lg:py-32 bg-[#09090B] border-t border-[#1A1A1D]">
+        <section className="py-24 lg:py-32 bg-[#211C28] border-t border-[#2A2633]">
           <Container size="md" className="relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -155,10 +155,10 @@ export default function ServicesPage() {
               transition={{ duration: 0.4 }}
               className="text-center"
             >
-              <h2 className="text-4xl lg:text-5xl font-bold text-[#EDEDEF] mb-6">
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#FFFFFF] mb-6">
                 {isArabic ? 'مستعد للبدء؟' : 'Ready to Get Started?'}
               </h2>
-              <p className="text-xl text-[#8F8F96] max-w-xl mx-auto mb-10">
+              <p className="text-xl text-[#8F859C] max-w-xl mx-auto mb-10">
                 {isArabic
                   ? 'تواصل معنا لمناقشة مشروعك واحتياجاتك.'
                   : "Let's discuss your project and requirements."}
