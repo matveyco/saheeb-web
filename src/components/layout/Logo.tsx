@@ -7,10 +7,47 @@ interface LogoProps {
 }
 
 /**
- * Logo — steering-wheel mark + brand wordmark.
- * variant="saheeb" (default): sparkle mark + "Saheeb" — parent brand.
- * variant="drive": steering-wheel mark + "SaheebDrive" — Drive product.
+ * Drive mark — actual steering-wheel icon paths extracted from the
+ * Figma Saheeb_Drive_logo_ENG component (file RHMKF89wn8Ft9z6CR46M90).
  */
+function DriveMark({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="70.4 187.4 113.1 113.1"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M153.245 270.245C152.463 271.028 151.652 271.767 150.82 272.465L142.416 264.047C133.857 255.471 119.963 255.472 111.404 264.048L103.002 272.466C102.17 271.767 101.358 271.029 100.575 270.246C99.7922 269.463 99.0541 268.652 98.3556 267.819L106.773 259.417C115.349 250.858 115.349 236.963 106.773 228.404L98.3556 220.001C99.0541 219.169 99.7922 218.357 100.575 217.575C101.358 216.792 102.17 216.053 103.002 215.355L111.404 223.773C119.963 232.349 133.858 232.349 142.417 223.773L150.82 215.355C151.652 216.054 152.463 216.793 153.245 217.575C154.028 218.358 154.767 219.169 155.466 220.002L147.047 228.404C138.472 236.963 138.472 250.857 147.047 259.416L155.466 267.819C154.767 268.651 154.028 269.462 153.245 270.245ZM131.558 248.558C134.124 245.991 134.124 241.83 131.558 239.263C128.991 236.696 124.83 236.697 122.263 239.263C119.697 241.83 119.696 245.992 122.263 248.558C124.829 251.125 128.991 251.124 131.558 248.558Z"
+      />
+      <path d="M98.3546 220.002C86.7738 233.802 86.7738 254.018 98.3546 267.818L92.9145 273.258C78.3623 256.437 78.3616 231.383 92.9138 214.562L98.3546 220.002Z" />
+      <path d="M156.259 277.906C139.437 292.459 114.383 292.458 97.5619 277.906L103.002 272.466C116.802 284.047 137.018 284.046 150.818 272.465L156.259 277.906Z" />
+      <path d="M150.818 215.354C137.019 203.773 116.802 203.774 103.002 215.355L97.5612 209.914C114.382 195.362 139.437 195.362 156.259 209.914L150.818 215.354Z" />
+      <path d="M160.906 214.562C175.458 231.383 175.458 256.438 160.906 273.259L155.465 267.818C167.046 254.018 167.047 233.802 155.466 220.002L160.906 214.562Z" />
+    </svg>
+  );
+}
+
+/**
+ * Saheeb parent-brand sparkle mark — 4-point star.
+ * From Figma Saheeb_logo component.
+ */
+function SaheebMark({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 64 64"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M32 4 L36.2 27.8 L60 32 L36.2 36.2 L32 60 L27.8 36.2 L4 32 L27.8 27.8 Z" />
+    </svg>
+  );
+}
+
 export function Logo({ className, variant = 'saheeb' }: LogoProps) {
   const locale = useLocale();
   const isArabic = locale === 'ar';
@@ -23,32 +60,9 @@ export function Logo({ className, variant = 'saheeb' }: LogoProps) {
       aria-label={isDrive ? 'Saheeb Drive' : 'Saheeb'}
     >
       {isDrive ? (
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 64 64"
-          fill="none"
-          aria-hidden="true"
-          className="shrink-0"
-        >
-          <circle cx="32" cy="32" r="20" fill="none" stroke="currentColor" strokeWidth="4.5" strokeDasharray="22 9" strokeDashoffset="11" />
-          <circle cx="32" cy="32" r="4" fill="currentColor" />
-          <g stroke="currentColor" strokeWidth="4.5" strokeLinecap="round">
-            <line x1="32" y1="32" x2="32" y2="14" />
-            <line x1="32" y1="32" x2="32" y2="50" />
-            <line x1="32" y1="32" x2="14" y2="32" />
-            <line x1="32" y1="32" x2="50" y2="32" />
-          </g>
-        </svg>
+        <DriveMark className="w-8 h-8 shrink-0" />
       ) : (
-        <div className="w-9 h-9 bg-[#316BE9] rounded-xl flex items-center justify-center">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="M12 2l2.2 6.8H21l-5.4 4 2.1 6.8L12 15.6l-5.7 4 2.1-6.8L3 8.8h6.8L12 2z"
-              fill="#FFFFFF"
-            />
-          </svg>
-        </div>
+        <SaheebMark className="w-7 h-7 shrink-0" />
       )}
       <span className={isDrive ? 'tracking-tight' : ''}>
         {isDrive
