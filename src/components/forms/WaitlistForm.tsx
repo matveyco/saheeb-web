@@ -171,7 +171,9 @@ export function WaitlistForm({
   const openWaitlist = useCallback((intent?: WaitlistUserType, source?: string) => {
     if (intent) {
       setFormData((current) => ({ ...current, userType: intent }));
-      setIntentSource(source ?? 'query_param');
+    }
+    if (source) {
+      setIntentSource(source);
     }
 
     const alignWaitlistViewport = () => {
