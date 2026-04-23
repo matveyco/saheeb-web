@@ -68,19 +68,28 @@ export function DriveHeroInlineForm({
     });
   }, [locale, intent, resolvedPageVariant]);
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const trimmed = email.trim();
+
+    // Read from the live DOM rather than React state. On mobile Safari/Chrome,
+    // autofill populates the input but doesn't always fire React's onChange,
+    // so state lags and we were rejecting valid submissions client-side.
+    const domEmail =
+      (event.currentTarget.elements.namedItem('email') as HTMLInputElement | null)?.value ?? email;
+    const trimmed = domEmail.trim();
+
+    if (trimmed !== email) {
+      setEmail(trimmed);
+    }
 
     if (!trimmed) {
       setError(tValidation('required'));
       return;
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
-      setError(tValidation('email'));
-      return;
-    }
 
+    // Let the server do format validation — its Zod schema is the source of
+    // truth. The old client-side regex was rejecting valid inputs (see
+    // retrospective 2026-04-23).
     setError(undefined);
     setIsSubmitting(true);
     setSubmitError(null);

@@ -47,7 +47,6 @@ interface WaitlistFormProps {
 }
 
 const FORM_NAME = 'saheeb_drive_waitlist';
-const PHONE_REGEX = /^\+?[0-9\s\-()]{8,20}$/;
 
 function getResolvedPageVariant(pageVariant?: PageVariant) {
   if (pageVariant) {
@@ -97,39 +96,6 @@ export function WaitlistForm({
   const resolvedPageVariant = getResolvedPageVariant(pageVariant);
   const trustPills = (t.raw('trustPills') as string[]) ?? [];
 
-  const resolveFieldError = useCallback(
-    (
-      field: keyof Pick<WaitlistFormData, 'name' | 'email' | 'phone'>,
-      value: string
-    ) => {
-      const trimmedValue = value.trim();
-
-      switch (field) {
-        case 'name':
-          return undefined;
-        case 'email':
-          if (!trimmedValue) {
-            return undefined;
-          }
-
-          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedValue)
-            ? undefined
-            : tValidation('email');
-        case 'phone':
-          if (!trimmedValue) {
-            return undefined;
-          }
-
-          return PHONE_REGEX.test(trimmedValue)
-            ? undefined
-            : tValidation('phone');
-        default:
-          return undefined;
-      }
-    },
-    [tValidation]
-  );
-
   const updateField = (field: keyof WaitlistFormData, value: string | boolean) => {
     setFormData((current) => ({
       ...current,
@@ -144,11 +110,7 @@ export function WaitlistForm({
 
       return {
         ...current,
-        [errorField]:
-          typeof value === 'string' &&
-          (errorField === 'name' || errorField === 'email' || errorField === 'phone')
-            ? resolveFieldError(errorField, value)
-            : undefined,
+        [errorField]: undefined,
       };
     });
   };
@@ -325,14 +287,14 @@ export function WaitlistForm({
     });
   };
 
-  const validateForm = () => {
+  const validateForm = (values: { email: string; phone: string }) => {
     const nextErrors: WaitlistFormErrors = {};
-    nextErrors.name = resolveFieldError('name', formData.name);
-    nextErrors.email = resolveFieldError('email', formData.email);
-    nextErrors.phone = resolveFieldError('phone', formData.phone);
 
-    // Require at least one of email or phone
-    if (!formData.email.trim() && !formData.phone.trim()) {
+    // Require at least one of email or phone. Format validation happens on
+    // the server — its Zod schema is the source of truth. The old strict
+    // client regex was silently rejecting valid submits (see retrospective
+    // 2026-04-23).
+    if (!values.email.trim() && !values.phone.trim()) {
       nextErrors.email = tValidation('emailOrPhone');
     }
 
@@ -392,7 +354,31 @@ export function WaitlistForm({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!validateForm()) {
+    // Read from the live DOM rather than React state. Mobile browsers can
+    // populate fields via autofill without firing React onChange, so state
+    // lags — the old code was rejecting valid submissions as empty.
+    const form = event.currentTarget;
+    const domEmail =
+      (form.elements.namedItem('email') as HTMLInputElement | null)?.value ?? formData.email;
+    const domPhone =
+      (form.elements.namedItem('phone') as HTMLInputElement | null)?.value ?? formData.phone;
+    const domName =
+      (form.elements.namedItem('name') as HTMLInputElement | null)?.value ?? formData.name;
+
+    if (
+      domEmail !== formData.email ||
+      domPhone !== formData.phone ||
+      domName !== formData.name
+    ) {
+      setFormData((current) => ({
+        ...current,
+        email: domEmail,
+        phone: domPhone,
+        name: domName,
+      }));
+    }
+
+    if (!validateForm({ email: domEmail, phone: domPhone })) {
       return;
     }
 
@@ -427,6 +413,9 @@ export function WaitlistForm({
         },
         body: JSON.stringify({
           ...formData,
+          email: domEmail,
+          phone: domPhone,
+          name: domName,
           consent: true,
           locale,
           anonymousId: analyticsIdentity.anonymousId ?? '',
@@ -597,12 +586,6 @@ export function WaitlistForm({
                 placeholder={t('emailPlaceholder')}
                 value={formData.email}
                 onChange={(event) => updateField('email', event.target.value)}
-                onBlur={(event) =>
-                  setErrors((current) => ({
-                    ...current,
-                    email: resolveFieldError('email', event.target.value),
-                  }))
-                }
                 error={errors.email}
                 autoComplete="email"
                 dir="ltr"
@@ -617,12 +600,6 @@ export function WaitlistForm({
                 placeholder={t('phonePlaceholder')}
                 value={formData.phone}
                 onChange={(event) => updateField('phone', event.target.value)}
-                onBlur={(event) =>
-                  setErrors((current) => ({
-                    ...current,
-                    phone: resolveFieldError('phone', event.target.value),
-                  }))
-                }
                 error={errors.phone}
                 autoComplete="tel"
                 dir="ltr"
