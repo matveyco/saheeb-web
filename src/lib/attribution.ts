@@ -127,10 +127,51 @@ function buildNormalizedLandingPath(
   return query ? `${pathname}?${query}` : pathname;
 }
 
+const FBC_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 90;
+const FBCLID_VALUE_MAX_LENGTH = 512;
+
+function readCookie(name: string) {
+  if (typeof document === 'undefined') {
+    return null;
+  }
+
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const match = document.cookie.match(
+    new RegExp(`(?:^|;\\s*)${escaped}=([^;]+)`)
+  );
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+function writeFbcCookieIfMissing(searchParams: URLSearchParams) {
+  if (typeof document === 'undefined') {
+    return;
+  }
+
+  const fbclidRaw = searchParams.get('fbclid');
+  if (!fbclidRaw) {
+    return;
+  }
+
+  const fbclid = fbclidRaw.trim().slice(0, FBCLID_VALUE_MAX_LENGTH);
+  if (!fbclid || readCookie('_fbc')) {
+    return;
+  }
+
+  const secureFlag = window.location.protocol === 'https:' ? '; Secure' : '';
+  document.cookie =
+    `_fbc=fb.1.${Date.now()}.${fbclid}; path=/; max-age=${FBC_COOKIE_MAX_AGE_SECONDS}` +
+    `; SameSite=Lax${secureFlag}`;
+}
+
 function stripNoiseParamsFromCurrentUrl(searchParams: URLSearchParams) {
   if (typeof window === 'undefined') {
     return;
   }
+
+  // Belt-and-suspenders: middleware sets _fbc on first request, but if a route
+  // somehow bypasses it (prefetch, edge cache), capture the click ID here
+  // before the URL is rewritten.
+  writeFbcCookieIfMissing(searchParams);
 
   let hasNoiseParams = false;
   const nextParams = new URLSearchParams(searchParams);

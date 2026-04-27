@@ -7,6 +7,37 @@ const CANONICAL_HOST = 'saheeb.com';
 const CANONICAL_HOSTS = new Set([CANONICAL_HOST, `www.${CANONICAL_HOST}`]);
 const INTERNAL_PREFIXES = ['/api', '/_next', '/_vercel'];
 const PUBLIC_FILE = /\.[^/]+$/;
+const FBC_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 90;
+const FBCLID_VALUE_MAX_LENGTH = 512;
+
+function applyFbcCookieFromFbclid(
+  request: NextRequest,
+  response: NextResponse
+): NextResponse {
+  const fbclidRaw = request.nextUrl.searchParams.get('fbclid');
+  if (!fbclidRaw) {
+    return response;
+  }
+
+  const fbclid = fbclidRaw.trim().slice(0, FBCLID_VALUE_MAX_LENGTH);
+  if (!fbclid) {
+    return response;
+  }
+
+  if (request.cookies.get('_fbc')?.value) {
+    return response;
+  }
+
+  response.cookies.set('_fbc', `fb.1.${Date.now()}.${fbclid}`, {
+    path: '/',
+    maxAge: FBC_COOKIE_MAX_AGE_SECONDS,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: false,
+  });
+
+  return response;
+}
 
 function isSupportedLocale(locale: string | undefined): locale is 'ar' | 'en' {
   return routing.locales.includes(locale as 'ar' | 'en');
@@ -75,6 +106,10 @@ function redirectToCanonicalUrl(request: NextRequest) {
 }
 
 export default function middleware(request: NextRequest) {
+  return applyFbcCookieFromFbclid(request, handleRequest(request));
+}
+
+function handleRequest(request: NextRequest): NextResponse {
   const canonicalResponse = redirectToCanonicalUrl(request);
   if (canonicalResponse) {
     return canonicalResponse;

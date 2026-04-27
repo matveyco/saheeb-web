@@ -216,6 +216,8 @@ export async function POST(request: NextRequest) {
       countryCode,
       clientIp: clientIP,
       userAgent,
+      fbc: request.cookies.get('_fbc')?.value ?? null,
+      fbp: request.cookies.get('_fbp')?.value ?? null,
     });
 
     return NextResponse.json(

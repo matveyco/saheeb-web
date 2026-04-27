@@ -16,6 +16,8 @@ interface WaitlistLeadEventInput {
   countryCode: string | null;
   clientIp: string | null;
   userAgent: string | null;
+  fbc?: string | null;
+  fbp?: string | null;
 }
 
 function normalizeHashValue(value: string | null | undefined) {
@@ -74,6 +76,8 @@ export async function sendMetaWaitlistLeadEvent({
   countryCode,
   clientIp,
   userAgent,
+  fbc,
+  fbp,
 }: WaitlistLeadEventInput) {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim();
   const { META_CAPI_ACCESS_TOKEN, META_CAPI_TEST_EVENT_CODE } = getServerEnv();
@@ -94,6 +98,8 @@ export async function sendMetaWaitlistLeadEvent({
           em: sha256(normalizeHashValue(email)),
           ph: sha256(normalizePhoneValue(phone)),
           fn: sha256(normalizeHashValue(name)),
+          fbc: fbc ?? undefined,
+          fbp: fbp ?? undefined,
           client_ip_address: clientIp ?? undefined,
           client_user_agent: userAgent ?? undefined,
           country: sha256(normalizeHashValue(countryCode)),
