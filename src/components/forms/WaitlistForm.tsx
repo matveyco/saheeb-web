@@ -92,6 +92,7 @@ export function WaitlistForm({
   const cardRef = useRef<HTMLDivElement>(null);
   const hasTrackedFormStart = useRef(false);
   const hasTrackedWaitlistView = useRef(false);
+  const blurredFieldsRef = useRef<Set<string>>(new Set());
 
   const resolvedPageVariant = getResolvedPageVariant(pageVariant);
   const trustPills = (t.raw('trustPills') as string[]) ?? [];
@@ -282,6 +283,46 @@ export function WaitlistForm({
         form_name: FORM_NAME,
         page_variant: resolvedPageVariant,
         project: 'saheeb_drive',
+        site_locale: locale,
+      },
+    });
+  };
+
+  // Diagnostic: where in the form do users abandon? Fires once per
+  // (field, session). Never sends the raw value — only length + has_value.
+  const handleFieldBlur = (
+    fieldName: 'email' | 'phone' | 'name'
+  ): React.FocusEventHandler<HTMLInputElement> => (event) => {
+    if (blurredFieldsRef.current.has(fieldName)) {
+      return;
+    }
+    blurredFieldsRef.current.add(fieldName);
+
+    const rawValue = event.currentTarget.value ?? '';
+    const trimmed = rawValue.trim();
+
+    recordFunnelEvent({
+      eventName: 'field_blur',
+      siteLocale: locale,
+      userType: formData.userType,
+      formName: FORM_NAME,
+      pageVariant: resolvedPageVariant,
+      intentSource,
+      analyticsEventName: 'field_blur',
+      analyticsParams: {
+        form_name: FORM_NAME,
+        field_name: fieldName,
+        has_value: trimmed.length > 0,
+        value_length: trimmed.length,
+        page_variant: resolvedPageVariant,
+        site_locale: locale,
+      },
+      payload: {
+        form_name: FORM_NAME,
+        field_name: fieldName,
+        has_value: trimmed.length > 0,
+        value_length: trimmed.length,
+        page_variant: resolvedPageVariant,
         site_locale: locale,
       },
     });
@@ -586,6 +627,7 @@ export function WaitlistForm({
                 placeholder={t('emailPlaceholder')}
                 value={formData.email}
                 onChange={(event) => updateField('email', event.target.value)}
+                onBlur={handleFieldBlur('email')}
                 error={errors.email}
                 autoComplete="email"
                 dir="ltr"
@@ -600,6 +642,7 @@ export function WaitlistForm({
                 placeholder={t('phonePlaceholder')}
                 value={formData.phone}
                 onChange={(event) => updateField('phone', event.target.value)}
+                onBlur={handleFieldBlur('phone')}
                 error={errors.phone}
                 autoComplete="tel"
                 dir="ltr"

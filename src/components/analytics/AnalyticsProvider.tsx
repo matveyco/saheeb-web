@@ -20,6 +20,7 @@ import { captureAttribution, readAttributionSnapshot } from '@/lib/attribution';
 import { ensureAnalyticsIdentity } from '@/lib/analytics-identity';
 import { recordFunnelEvent } from '@/lib/funnel';
 import { getPageVariant } from '@/lib/page-variant';
+import { installGlobalErrorCapture } from '@/lib/global-error-capture';
 
 interface AnalyticsConsentContextValue {
   consent: 'accepted';
@@ -64,6 +65,7 @@ export function AnalyticsProvider({
     }
 
     initializeAnalytics(pathname);
+    installGlobalErrorCapture();
   }, [isAvailable, pathname]);
 
   useEffect(() => {

@@ -27,7 +27,9 @@ export type FunnelEventName =
   | 'language_switch'
   | 'nav_exit'
   | 'scroll_depth'
-  | 'page_timing';
+  | 'page_timing'
+  | 'field_blur'
+  | 'client_error';
 
 type FunnelPayloadValue = string | number | boolean | null;
 type FunnelPayload = Record<string, FunnelPayloadValue>;
