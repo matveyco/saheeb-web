@@ -266,7 +266,14 @@ export default async function LocaleLayout({
               id="meta-pixel-src"
               src="https://connect.facebook.net/en_US/fbevents.js"
               strategy="afterInteractive"
-              crossOrigin="anonymous"
+              // NOTE: do NOT add crossOrigin="anonymous" here. Facebook's
+              // CDN does not return Access-Control-Allow-Origin on
+              // fbevents.js, and the browser will block the script under
+              // CORS policy if crossOrigin is set, breaking the pixel
+              // entirely (no _fbp, no PageView, no Lead). Verified live
+              // 2026-04-27 (CORS error in console + missing _fbp).
+              // Errors from the Meta pixel will continue to surface as
+              // opaque "Script error." — that's an accepted trade.
             />
             <Script
               id="meta-pixel-init"

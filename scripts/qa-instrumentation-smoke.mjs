@@ -360,8 +360,24 @@ async function main() {
       console.log('   (skipped: third-party scripts only render on production hosts)');
     } else {
       checkScript('ga4', scriptInfo.ga4);
-      checkScript('meta-pixel', scriptInfo.meta);
       checkScript('clarity', scriptInfo.clarity);
+
+      // Meta pixel intentionally has NO crossOrigin attribute. Facebook's
+      // CDN (connect.facebook.net) does not return Access-Control-Allow-Origin
+      // on fbevents.js, so setting crossOrigin would CORS-block the script
+      // and kill the pixel (no _fbp, no PageView). Verified 2026-04-27.
+      record(
+        '6. meta-pixel script present',
+        Boolean(scriptInfo.meta),
+        scriptInfo.meta ? scriptInfo.meta.src : 'NOT FOUND'
+      );
+      if (scriptInfo.meta) {
+        record(
+          '6. meta-pixel crossOrigin is NOT set (CORS would block)',
+          !scriptInfo.meta.crossOrigin || scriptInfo.meta.crossOrigin === '',
+          `crossOrigin="${scriptInfo.meta.crossOrigin}" — must be empty`
+        );
+      }
     }
 
     await page.close();
