@@ -307,6 +307,67 @@ async function main() {
   }
   }
 
+  // ---- TEST 6: third-party scripts loaded with crossorigin=anonymous ----
+  // Without this, the browser strips error details from cross-origin scripts
+  // (GA4, Meta pixel, Clarity), reporting them only as "Script error." with
+  // no message/stack. Clarity reported 74 of 77 errors (96.10%) as
+  // "Script error." on 2026-04-25–27 — this attribute is the fix.
+  console.log('\nTEST 6: GA4/Meta/Clarity script tags load with crossorigin=anonymous');
+  {
+    const ctx = await browser.newContext({
+      ...devices['iPhone 13'],
+      locale: 'ar-SA',
+    });
+    const page = await ctx.newPage();
+    await page.goto(`${BASE}/ar/projects/saheeb-drive`, {
+      waitUntil: 'load',
+    });
+    await page.waitForTimeout(2000);
+
+    const scriptInfo = await page.evaluate(() => {
+      const out = {};
+      const all = Array.from(document.scripts);
+      const find = (predicate) => all.find(predicate);
+      const ga4 = find((s) =>
+        (s.src || '').includes('googletagmanager.com/gtag/js')
+      );
+      const meta = find((s) =>
+        (s.src || '').includes('connect.facebook.net') &&
+        (s.src || '').includes('fbevents.js')
+      );
+      const clarity = find((s) => (s.src || '').includes('clarity.ms/tag/'));
+      out.ga4 = ga4 ? { src: ga4.src.slice(0, 80), crossOrigin: ga4.crossOrigin } : null;
+      out.meta = meta ? { src: meta.src.slice(0, 80), crossOrigin: meta.crossOrigin } : null;
+      out.clarity = clarity ? { src: clarity.src.slice(0, 80), crossOrigin: clarity.crossOrigin } : null;
+      return out;
+    });
+
+    const checkScript = (label, info) => {
+      record(
+        `6. ${label} script present`,
+        Boolean(info),
+        info ? info.src : 'NOT FOUND'
+      );
+      if (info) {
+        record(
+          `6. ${label} crossOrigin = anonymous`,
+          info.crossOrigin === 'anonymous',
+          `got "${info.crossOrigin}"`
+        );
+      }
+    };
+    if (IS_LOCAL) {
+      console.log('   (skipped: third-party scripts only render on production hosts)');
+    } else {
+      checkScript('ga4', scriptInfo.ga4);
+      checkScript('meta-pixel', scriptInfo.meta);
+      checkScript('clarity', scriptInfo.clarity);
+    }
+
+    await page.close();
+    await ctx.close();
+  }
+
   await browser.close();
 
   const passed = results.filter((r) => r.ok).length;

@@ -235,6 +235,7 @@ export default async function LocaleLayout({
               id="ga4-src"
               src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
               strategy="afterInteractive"
+              crossOrigin="anonymous"
             />
             <Script
               id="ga4-init"
@@ -265,6 +266,7 @@ export default async function LocaleLayout({
               id="meta-pixel-src"
               src="https://connect.facebook.net/en_US/fbevents.js"
               strategy="afterInteractive"
+              crossOrigin="anonymous"
             />
             <Script
               id="meta-pixel-init"
@@ -299,6 +301,7 @@ export default async function LocaleLayout({
                 (function(c,l,a,r,i,t,y){
                   c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
                   t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  t.crossOrigin="anonymous";
                   t.setAttribute('data-saheeb-clarity','true');
                   y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
                 })(window, document, "clarity", "script", "${clarityProjectId}");
