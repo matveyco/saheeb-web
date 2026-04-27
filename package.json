@@ -8,7 +8,8 @@
     "start": "next start -p 3333",
     "lint": "eslint",
     "check:assets": "node scripts/check-asset-sizes.mjs",
-    "smoke:drive": "node scripts/drive-funnel-smoke.mjs"
+    "smoke:drive": "node scripts/drive-funnel-smoke.mjs",
+    "report:performance": "node --env-file=.env.local scripts/pull-performance-report.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

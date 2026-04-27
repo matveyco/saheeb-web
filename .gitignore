@@ -41,6 +41,14 @@ yarn-error.log*
 .env.production.local
 !.env.example
 
+# Service-account credentials (never commit)
+saheeb-*.json
+*-service-account*.json
+google-credentials*.json
+
+# Performance report cache
+reports/.cache/
+
 # vercel
 .vercel
 
