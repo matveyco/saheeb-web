@@ -81,6 +81,49 @@ Same as 2.1: not implemented yet, say the word.
 ### 3.2 Re-test the AR /lp redirect with current data
 [src/app/[locale]/projects/saheeb-drive/page.tsx:67-72](src/app/[locale]/projects/saheeb-drive/page.tsx#L67-L72) explicitly opts AR out of the paid→/lp redirect with the comment "AR organic 16% engagement vs AR LP 7% engagement". That decision was made on pre-Apr-23 data when validation errors were also masking the real signal. Worth re-testing now that the funnel is clean — but a real A/B test, not a flip. Not for me to change unilaterally.
 
+## Update — 2026-04-27 16:55 (Clarity dashboard CSVs received)
+
+Three new datasets from the user's Clarity export (window 04/25–04/27):
+
+**Performance overview (saheeb.com aggregate):**
+- Score 75.6 / 100
+- LCP **3.036s** (needs improvement, threshold 2.5s)
+- INP **268ms** (poor, threshold 200ms — anything above is failing Core Web Vitals)
+- CLS **0.137** (needs improvement, threshold 0.1)
+
+**Per-URL Web Vitals:**
+| URL | Score | LCP | INP | CLS |
+|---|---:|---:|---:|---:|
+| `/ar` | 82 | 2.91s | 128ms | 0.123 |
+| `/en/projects/saheeb-drive/lp` | 76.8 | 3.38s | 248ms | 0.138 |
+| `/ar/projects/saheeb-drive` | 73.6 | 2.91s | **392ms** | 0.13 |
+
+The Arabic Drive landing has the worst INP at 392ms — combined with the earlier finding that AR engagement is 3.2s vs 23.9s on EN, this suggests the AR page is interaction-laggy enough that users bounce before the form is interactive. Likely root cause: same DOM as EN but RTL layout flip + Arabic font swap = more reflow during the first interaction.
+
+**Insights (3-day):**
+- Rage clicks: 3 (0.21%)
+- Dead clicks: 52 (3.61%)
+- Quick back clicks: 14 (0.97%)
+- Excessive scrolling: 0
+
+**JavaScript errors (3-day): 77 total**
+- `script error.` — **74 (96.10%)** ← cross-origin script error message stripping
+- `undefined is not an object (evaluating 'window.webkit.messagehandlers')` — 2 (2.60%)
+- `error invoking postmessage: java object is gone` — 1 (1.30%)
+
+The two non-opaque errors are Mobile Safari (`webkit.messagehandlers` — internal iOS WebView API) and Android (`java object is gone` — Android WebView host bridge releasing). Both are WebView-host bugs we can't fix from web code. Safe to ignore.
+
+The 74 opaque "script error." values are the high-leverage target.
+
+### Action shipped (b4f37e0 + 3fa5e5d + f94c055)
+- Added `crossOrigin="anonymous"` to GA4 (`googletagmanager.com`) and Clarity (`clarity.ms`) `<Script>` tags. Both servers return `Access-Control-Allow-Origin: *`, so future errors from inside those scripts will surface with full message + stack via our new `client_error` capture instead of the opaque "Script error." string.
+- **Reverted the same change on the Meta pixel** after live verification caught a regression: Facebook's CDN does NOT return Allow-Origin headers on `fbevents.js`, so `crossOrigin="anonymous"` got the entire script CORS-blocked, killing `_fbp`/PageView. The smoke now hard-asserts the Meta pixel script tag has NO crossOrigin attribute (TEST 6 in `qa-instrumentation-smoke.mjs`), preventing future regression. This learning is also saved to memory.
+- Tradeoff: errors from inside `fbevents.js` will continue to land as opaque "script error." in our capture, but we don't lose attribution. Net win is still significant since most "script error." instances are GA4 or Clarity internal, not Meta.
+
+### Action NOT taken (yet — needs explicit go-ahead)
+- **INP=392ms on `/ar/projects/saheeb-drive`**: this is the highest-impact perf bottleneck and the most likely product reason AR converts at 0.27% vs EN 0.57%. Fixing it requires either deferring some hydration on the AR landing or reducing the JS bundle size for the route. **High-impact, but not zero-risk** — touches the actual landing experience. Want me to investigate which interaction is slow (likely the form mount, given the engagement gap) and propose a targeted fix?
+- **CLS=0.137**: the most common cause is the `DriveWaitlistCounter` placeholder shifting when the live count loads. Worth checking but not urgent.
+
 ## Things explicitly NOT broken (so don't touch them)
 
 - **Validation errors:** were ~150/day, now ~0/day. The autofill fix solved this entirely. Don't add more validation logic.
