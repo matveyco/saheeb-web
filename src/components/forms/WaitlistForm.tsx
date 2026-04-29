@@ -139,15 +139,15 @@ export function WaitlistForm({
       setIntentSource(source);
     }
 
-    const alignWaitlistViewport = () => {
-      scrollWaitlistIntoView();
-    };
-
+    // Scroll once immediately, then once after layout settles. The previous
+    // implementation fired six scrolls (now + 5 setTimeouts at 120-640ms)
+    // to defeat layout shifts from late-loading fonts/images, but each
+    // scroll forced reflow. A single rAF-deferred follow-up handles the
+    // common case (font swap completing during the same animation tick)
+    // and avoids the long-task cost.
     scrollWaitlistIntoView();
-    alignWaitlistViewport();
-
-    [120, 240, 360, 480, 640].forEach((delay) => {
-      window.setTimeout(alignWaitlistViewport, delay);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(scrollWaitlistIntoView);
     });
   }, [scrollWaitlistIntoView]);
 

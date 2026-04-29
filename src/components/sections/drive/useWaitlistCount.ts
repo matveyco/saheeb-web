@@ -29,11 +29,14 @@ function fetchCount(): Promise<number | null> {
 }
 
 export function useWaitlistCount() {
-  const [count, setCount] = useState<number | null>(cachedCount);
+  // Lazy initializer reads the module-level cache once on mount, so we
+  // don't need a synchronous setState inside the effect (which causes
+  // cascading renders — flagged by react-hooks/set-state-in-effect).
+  const [count, setCount] = useState<number | null>(() => cachedCount);
 
   useEffect(() => {
     if (cachedCount !== null) {
-      setCount(cachedCount);
+      // Already covered by the lazy initializer above.
       return;
     }
 

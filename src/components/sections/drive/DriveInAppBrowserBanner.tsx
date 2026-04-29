@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { useTranslations } from 'next-intl';
 
 const STORAGE_KEY = 'saheeb_iab_banner_dismissed';
@@ -16,21 +16,32 @@ function isInAppBrowser(ua: string): boolean {
   return false;
 }
 
+function getInitialShow(): boolean {
+  if (typeof window === 'undefined') return false;
+  if (window.localStorage?.getItem(STORAGE_KEY) === '1') return false;
+  return isInAppBrowser(navigator.userAgent);
+}
+
+const noopSubscribe = () => () => {};
+
 export function DriveInAppBrowserBanner() {
   const t = useTranslations('saheebDrive.inAppBanner');
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    if (window.localStorage?.getItem(STORAGE_KEY) === '1') return;
-    if (!isInAppBrowser(navigator.userAgent)) return;
-    setShow(true);
-  }, []);
+  // useSyncExternalStore gives us hydration-safe access to a client-only
+  // value (window/navigator) WITHOUT a setState-in-effect render cascade.
+  // Server snapshot is always false; client snapshot is computed once
+  // post-hydration and never mutates externally.
+  const initialShow = useSyncExternalStore(
+    noopSubscribe,
+    getInitialShow,
+    () => false
+  );
+  const [dismissed, setDismissed] = useState(false);
+  const show = initialShow && !dismissed;
 
   if (!show) return null;
 
   const dismiss = () => {
-    setShow(false);
+    setDismissed(true);
     try {
       window.localStorage?.setItem(STORAGE_KEY, '1');
     } catch {}
